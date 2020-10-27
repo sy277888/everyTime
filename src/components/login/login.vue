@@ -38,20 +38,23 @@ export default {
     return {
       username: "",
       password: "",
+      type:1,
     };
   },
   methods: {
     onLogin() {
       this.$Net
         .login({
-          parasm: {
-            login_ip: this.username,
-            name: this.password,
-          },
+            mobile:this.username,
+            password:this.password,
+            type:this.type
         })
         .then((res) => {
-
-          localStorage.token = res.data.data.token;
+          console.log(res);
+          // localStorage.token = res.data.token;
+          var token=res.data.token;
+          localStorage.setItem("token",token);
+          localStorage.setItem("username",this.username)
           this.$router.push({ path: "/wode" });
         })
         .catch((err) => {
@@ -66,9 +69,6 @@ export default {
     },
   },
   mounted() {
-    this.$Net.tu().then((res) => {
-      console.log(res);
-    });
   },
 };
 </script>

@@ -1,9 +1,11 @@
 import  {request} from './core'
-import  {Method,Path} from './config'
+import  API from './config'
 
 const Net = {
     // 抛出方法
-  
+  login(params){
+    return request(API.Method.Post,API.Path.LOGIN,params)
+  }
   }
   
   //抛出Net

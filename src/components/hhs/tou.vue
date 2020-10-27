@@ -4,11 +4,14 @@
     <div class="sy_top">
       <div class="sy_top1">
         <p class="sy_img">
-          <img src="../../assets/头像.png" alt="" /><span
+          <img v-show="username.length<=0" src="../../assets/头像.png" alt="" />
+          <img v-show="username.length>0" src="../../assets/头.jpg" alt="" @click="ge"><span
+          v-show="username.length<=0"
             class="s1"
             @click="denglv"
             >登录/注册</span
           >
+          <span v-show="username.length>0" class="s1" @click="ge">{{username}}</span>
         </p>
         <button class="sy_bu">去约课</button>
       </div>
@@ -18,10 +21,24 @@
 
 <script>
 export default {
+  data() {
+    return {
+      username:[],
+    }
+  },
   methods: {
     denglv() {
       this.$router.push({ path: "/login" });
     },
+    ge(){
+      this.$router.push({path:"/ge"})
+    }
+  },
+  mounted() {
+    var user=localStorage.getItem("username");
+    if(user){
+      this.username=user
+    }
   },
 };
 </script>
@@ -52,6 +69,7 @@ export default {
 .sy_img img {
   width: 4.5rem;
   height: 4.5rem;
+  border-radius:50%;
 }
 .sy_img .s1 {
   position: relative;

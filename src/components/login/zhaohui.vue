@@ -49,6 +49,9 @@ export default {
     methods: {
         onClickLeft(){
             this.$router.go("-1")
+        },
+        onLogin(){
+          console.log(1111);
         }
     },
  

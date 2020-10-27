@@ -1,23 +1,23 @@
 import axios from 'axios'
 //引入封装接口
-import {Method} from '../api/config'
+import API from './config'
 
 //axios 实例
 const instance  = axios.create({
-    baseURL:'',
+    baseURL:'http://120.53.31.103:84',
     timeout:6000 //设置超时时间
 })
 //判断Post 还是Get 请求
-export function request(method,url,parasm){
+export function request(method,url,params){
     switch(method){
-        case Method.Get:
-        return Get(url,parasm)
-        case Method.Post:
-        return Post(url,parasm)
+        case API.Method.Get:
+        return Get(url,params)
+        case API.Method.Post:
+        return Post(url,params)
     }
 }
-function Get(url,parasm){
-    return instance.get(url,parasm)
+function Get(url,params){
+    return instance.get(url,params)
 }
 
 function Post(url,params){
