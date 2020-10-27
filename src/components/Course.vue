@@ -73,7 +73,8 @@
             <p class="hmwP2"><img :src="item.teachers_list[0].teacher_avatar" alt=""><span>{{ item.teachers_list[0].teacher_name }}</span></p>
             <div class="hmwListBottom">
               <span>{{item.brows_num }}人已报名</span>
-              <strong>{{ item.price==0?'免费':item.price/100+'.00' }}</strong>
+              <strong v-if="item.price==0">免费</strong>
+              <strong v-if="item.price!=0" style="color:orange;display:flex;align-items: center;"><van-icon name="gold-coin" />&emsp;<span>{{item.price/100+'.00' }}</span></strong>
             </div>
           </li>
         </van-list>
@@ -438,6 +439,7 @@ padding-right: 2.66667vw;
 .hmwListBottom>strong{
 color: #44a426;
     font-size: 4.26667vw;
+    font-weight: none;
 }
 
 </style>
