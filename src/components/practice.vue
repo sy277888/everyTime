@@ -35,7 +35,7 @@
     <div class="item-type-area-two">
       <div class="item-exam">近期模考</div>
       <div class="item-time">
-        <span @click="show = true" :class="show == true ? 'active' : ''"
+        <span  @click="show = true" :class="show == true ? 'active' : ''"
           >默认排序</span
         >
         <span @click="change" :class="show == false ? 'active' : ''" >

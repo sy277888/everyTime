@@ -20,9 +20,7 @@ export default {
     },
     methods:{
         onClickLeft(){
-            this.$router.push({
-                path:"/"
-            })
+          this.$router.go("-1")
         },
         onClickRight(){
             this.$router.push({
