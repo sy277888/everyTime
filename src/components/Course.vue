@@ -4,9 +4,12 @@
     <div class="hmw-top"></div>
     <!-- 这里才是我要做的部分 -->
     <div class="hmw-center">
+      <!-- 可滑动 -->
       <van-list>
+        <!-- 导航 -->
          <div class="hmw-nav">
         <van-dropdown-menu>
+          <!-- 分类 -->
           <van-dropdown-item title="分类" ref="item" style="height:100%;">
             <van-cell style="height:100%;">
               <ul class="hmwNavLeft">
@@ -27,6 +30,7 @@
               </ul>
             </van-cell>
           </van-dropdown-item>
+          <!-- 排序 -->
           <van-dropdown-item title="排序" ref="item">
             <van-cell class="hmwCenterNav" center>
               <li
@@ -38,6 +42,7 @@
               </li>
             </van-cell>
           </van-dropdown-item>
+          <!-- 筛选 -->
           <van-dropdown-item title="筛选" ref="item">
             <van-cell class="hmwChoose" style="padding-top:20px;">
               <van-row gutter="20">
@@ -54,6 +59,7 @@
         </van-dropdown-menu>
       </div>
       <div class="hmw-main">
+        <!-- 主体部分列表渲染 -->
         <van-list>
           <li :key="index" v-for="(item, index) in hmwList">
             <h2>{{ item.title }}</h2>
@@ -95,6 +101,7 @@ export default {
       switch2: false,
       //   综合排序
       hmwSort: ["综合排序", "最新", "罪人", "价格从低到高", "价格从低到高"],
+      // 筛选
       hmwChoose: [
         "全部",
         "大可版",
@@ -108,6 +115,7 @@ export default {
         "大可版",
         "小可版",
       ],
+      // 主题列表
       hmwList: [
         {
           title: "李老师16号到22号地理大课堂开课了",
@@ -196,13 +204,13 @@ export default {
     },
     // 接受导航数据
     hmwGetNav() {
-      // this.$Net.courseNav().then((res) => {
-      //   console.log(res);
-      // });
+      this.$Net.courseNav().then((res) => {
+        console.log(res);
+      });
     },
   },
   mounted() {
-    // this.hmwGetNav();
+    this.hmwGetNav();
   },
 };
 </script>
@@ -211,6 +219,7 @@ export default {
 li {
   list-style: none;
 }
+/* 大体布局----------------------------------------------------------- */
 .hmw-box {
   display: flex;
   height: 100%;
@@ -227,7 +236,7 @@ li {
   flex: 1;
   overflow: scroll;
 }
-/* 左边导航拓展样式 */
+/* 左边导航拓展样式 --------------------------------------------------------------*/
 .hmwNavLeft p {
   padding-top: 0.4rem;
   font-size: 0.23rem;
@@ -274,7 +283,7 @@ color: #eb6100;
   height: 2rem;
   margin-top: 1rem;
 }
-/* 中间排序部分 */
+/* 中间排序部分 --------------------------------------------------------------------------*/
 .hmwCenterNav li {
   text-align: center;
   height: 13.6vw;
@@ -285,6 +294,7 @@ color: #eb6100;
   color: #595959;
   border-bottom: 1px solid #f5f5f5;
 }
+/* 点击的活动页面 */
 .hmwCenterNav .hmwsortActive {
   border: none;
   margin-bottom: 0;
@@ -317,7 +327,7 @@ color: #eb6100;
   padding: 1rem;
   margin-top: 1rem;
 }
-/* 图片部分卡片布局 */
+/* 图片部分卡片布局 -------------------------------------------------------------------------------*/
 .hmw-main > .van-list > li>h2{
   font-size: 4.26667vw;
     font-weight: 400;
