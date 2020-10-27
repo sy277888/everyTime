@@ -196,13 +196,13 @@ export default {
     },
     // 接受导航数据
     hmwGetNav() {
-      this.$Net.courseNav().then((res) => {
-        console.log(res);
-      });
+      // this.$Net.courseNav().then((res) => {
+      //   console.log(res);
+      // });
     },
   },
   mounted() {
-    this.hmwGetNav();
+    // this.hmwGetNav();
   },
 };
 </script>
