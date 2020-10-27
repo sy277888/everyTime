@@ -1,0 +1,54 @@
+<template>
+  <div>
+    <router-view/>
+    <!-- 传入 -->
+    <Tabber :items="items"/>
+  </div>
+</template>
+<script>
+//引入底部导航栏
+import Tabber from '../src/components/Tabber/Tabber'
+export default {
+  components:{
+   Tabber 
+  },
+  data(){
+    return{
+      items:[
+        {
+          title:"首页",
+          path:"/",
+          img:require('../src/assets/img/shouye.png'),
+          imgs:require('../src/assets/img/shouye_1.png')
+        },
+        {
+          title:"课程",
+          path:"/about",
+          img:require('../src/assets/img/kecheng.png'),
+          imgs:require('../src/assets/img/kecheng_1.png')
+        },
+        {
+          title:"约课记录",
+          path:"/make",
+          img:require('../src/assets/img/yuekejilu.png'),
+          imgs:require('../src/assets/img/yuekejilu_1.png')
+        },
+        {
+          title:"练习",
+          path:"/practice",
+          img:require('../src/assets/img/practice.png'),
+          imgs:require('../src/assets/img/practice_1.png')
+        },
+        {
+          title:"我的",
+          path:"/wode",
+          img:require('../src/assets/img/wode.png'),
+          imgs:require('../src/assets/img/wode_1.png')
+        }
+      ]
+    }
+  }
+}
+</script>
+<style>
+</style>
