@@ -5,5 +5,6 @@ export const Method = {
 }
 //定义请求地址
 export const Path = {
-   HMWFL:'/api/app/courseClassify'
+   HMWFL:'/api/app/courseClassify',
+   HMWLIST:'/api/app/courseBasis?page=1&limit=10&'
 }

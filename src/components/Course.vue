@@ -1,23 +1,22 @@
 <template>
   <div class="hmw-box">
     <!-- 顶部 -->
-    <div class="hmw-top"></div>
-    <!-- 这里才是我要做的部分 -->
-    <div class="hmw-center">
-      <!-- 可滑动 -->
-      <van-list>
-        <!-- 导航 -->
+    <div class="hmw-top">
+      <van-sticky>
+        <!-- 这个是用来占个位子 -->
+        <div class="hmw-top"></div>
+              <!-- 导航 -->
          <div class="hmw-nav">
         <van-dropdown-menu>
           <!-- 分类 -->
           <van-dropdown-item title="分类" ref="item" style="height:100%;">
             <van-cell style="height:100%;">
               <ul class="hmwNavLeft">
-                <li :key="item" v-for="item in 2">
-                  <p>年级</p>
+                <li :key="index" v-for="(item,index) in hmwFl">
+                  <p>{{item.name}}</p>
                   <div class="hmw-nav-tag">
                     <van-row gutter="20">
-                      <van-col :key="i" v-for="i in 5" :class="hmwActiveNum1==i?'hmwSpanActive':''" span="6" @click="hmwActiveNum1=i"><span>出一</span></van-col>
+                      <van-col :key="i.id" v-for="i in item.child" :class="hmwActiveNum1==i.id?'hmwSpanActive':''" span="6" @click="hmwActiveNum1=i.id"><span>{{i.name}}</span></van-col>
                     </van-row>
                   </div>
                 </li>
@@ -51,13 +50,19 @@
                   v-for="(item, index) in hmwChoose"
                   span="6"
                   :class="hmwActiveNum3==index?'hmwSpanActive':''" @click="hmwActiveNum3=index"
-                  ><span>{{ item }}</span></van-col
+                  ><span>{{ item.name }}</span></van-col
                 >
               </van-row>
             </van-cell>
           </van-dropdown-item>
         </van-dropdown-menu>
       </div>
+</van-sticky>
+    </div>
+    <!-- 这里才是我要做的部分 -->
+    <div class="hmw-center">
+      <!-- 可滑动 -->
+      <van-list>
       <div class="hmw-main">
         <!-- 主体部分列表渲染 -->
         <van-list>
@@ -99,22 +104,78 @@ export default {
       value: 0,
       switch1: false,
       switch2: false,
+      // 分类
+      hmwFl:[
+            {
+                "id":1,
+                "name":"年级",
+                "parent_id":0,
+                "child":[
+                    {
+                        "id":1,
+                        "name":"初一"
+                    },
+                    {
+                        "id":2,
+                        "name":"初二"
+                    },
+                    {
+                        "id":3,
+                        "name":"初三"
+                    },
+                    {
+                        "id":4,
+                        "name":"高一"
+                    },
+                    {
+                        "id":5,
+                        "name":"高二"
+                    }
+                ]
+            },
+            {
+                "id":2,
+                "name":"学科",
+                "parent_id":0,
+                "child":[
+                    {
+                        "id":7,
+                        "name":"语文"
+                    },
+                    {
+                        "id":8,
+                        "name":"数学"
+                    },
+                    {
+                        "id":9,
+                        "name":"英语"
+                    },
+                    {
+                        "id":12,
+                        "name":"物理"
+                    },
+                    {
+                        "id":13,
+                        "name":"化学"
+                    }
+                ]
+            }
+        ],
       //   综合排序
-      hmwSort: ["综合排序", "最新", "罪人", "价格从低到高", "价格从低到高"],
+      hmwSort: ["综合排序", "最新", "最热", "价格从低到高", "价格从低到高"],
       // 筛选
-      hmwChoose: [
-        "全部",
-        "大可版",
-        "小可版",
-        "大可版",
-        "小可版",
-        "大可版",
-        "小可版",
-        "大可版",
-        "小可版",
-        "大可版",
-        "小可版",
-      ],
+      hmwChoose : [
+    // { type: 0, value: "全部" },
+    // { type: 2, value: "大班课" },
+    // { type: 3, value: "小班课" },
+    // { type: 4, value: "公开课" },
+    // { type: 5, value: "点播课" },
+    // { type: 7, value: "面授课" },
+    // { type: 8, value: "音频课" },
+    // { type: 9, value: "系统课" },
+    // { type: 10, value: "图文课" },
+    // { type: 11, value: "会员课" }
+],
       // 主题列表
       hmwList: [
         {
@@ -203,10 +264,11 @@ export default {
       console.log(this.$refs);
     },
     // 接受导航数据
-    hmwGetNav() {
-      this.$Net.courseNav().then((res) => {
-        console.log(res);
-      });
+    async hmwGetNav() {
+      let {data} =await this.$Net.courseNav()
+      let {data:list} =await this.$Net.courseList()
+      console.log(list.data.list)
+      this.hmwChoose=data.data.appCourseType
     },
   },
   mounted() {
@@ -235,6 +297,7 @@ li {
 .hmw-center {
   flex: 1;
   overflow: scroll;
+ padding-top: 3rem;
 }
 /* 左边导航拓展样式 --------------------------------------------------------------*/
 .hmwNavLeft p {
