@@ -3,7 +3,7 @@
     <!-- 顶部 -->
     <div class="hmw-top">
       <van-sticky>
-        <!-- 这个是用来占个位子 -->
+        <!-- 这个是用来占个位子1 -->
         <div class="hmw-top"></div>
               <!-- 导航 -->
          <div class="hmw-nav">
