@@ -6,7 +6,8 @@ const API = {
     },
     //定义请求地址
     Path: {
-        HMWFL: '/api/app/courseClassify'
+        HMWFL: '/api/app/courseClassify',
+        LOGIN:'/api/app/login'
     }
 }
 export default API
