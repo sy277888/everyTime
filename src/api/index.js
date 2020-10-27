@@ -7,11 +7,11 @@ const Net = {
     return request(API.Method.Post, API.Path.LOGIN, params)
   },
   courseNav(params){
-      return request(Method.Get,Path.HMWFL,params)
+      return request(API.Method.Get,API.Path.HMWFL,params)
     },
     // 获取课程列表的方法
     courseList(params){
-      return request(Method.Get,Path.HMWLIST,params)
+      return request(API.Method.Get,API.Path.HMWLIST,params)
     }
 }
 

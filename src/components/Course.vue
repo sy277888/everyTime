@@ -66,13 +66,14 @@
       <div class="hmw-main">
         <!-- 主体部分列表渲染 -->
         <van-list>
-          <li :key="index" v-for="(item, index) in hmwList">
+          <!-- 这里必须要用v-for 当这个未定义时不渲染，这样才不会爆0的错！！！ -->
+          <li v-if="item.teachers_list" :key="index" v-for="(item, index) in hmwList">
             <h2>{{ item.title }}</h2>
-            <p class="hmwP1"><van-icon name="clock-o" /><span>{{ item.date+'共'+item.course+'课时' }}</span></p>
-            <p class="hmwP2"><img :src="item.img" alt=""><span>{{ item.name }}</span></p>
+            <p class="hmwP1"><van-icon name="clock-o" /><span>{{ item.start_play_date|timefn}}~{{item.end_play_date|timefn}}&emsp;&emsp;|共{{item.total_periods+'课时' }}</span></p>
+            <p class="hmwP2"><img :src="item.teachers_list[0].teacher_avatar" alt=""><span>{{ item.teachers_list[0].teacher_name }}</span></p>
             <div class="hmwListBottom">
-              <span>{{ item.number }}人已报名</span>
-              <strong>{{ item.price==0?'免费':item.price+'.00' }}</strong>
+              <span>{{item.brows_num }}人已报名</span>
+              <strong>{{ item.price==0?'免费':item.price/100+'.00' }}</strong>
             </div>
           </li>
         </van-list>
@@ -269,6 +270,7 @@ export default {
       let {data:list} =await this.$Net.courseList()
       console.log(list.data.list)
       this.hmwChoose=data.data.appCourseType
+      this.hmwList = list.data.list
     },
   },
   mounted() {
@@ -419,7 +421,9 @@ color: #eb6100;
 }
 .hmw-main > .van-list > li>.hmwP2>img{
   width: 2rem;
+  height: 2rem;
   margin-right: 0.5rem;
+  border-radius: 1rem;
 }
 .hmwListBottom{
   display: flex;
