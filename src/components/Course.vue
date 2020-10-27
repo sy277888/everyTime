@@ -22,34 +22,35 @@
                 </li>
                 <div>
                   <van-button style="border:1px solid #ccc;" plain
+                  @click="hmwRefresh"
                     >重置</van-button
                   >
-                  <van-button color="#eb6100">确定</van-button>
+                  <van-button color="#eb6100" @click="onConfirm">确定</van-button>
                 </div>
               </ul>
             </van-cell>
           </van-dropdown-item>
           <!-- 排序 -->
-          <van-dropdown-item title="排序" ref="item">
+          <van-dropdown-item title="排序" ref="item1">
             <van-cell class="hmwCenterNav" center>
               <li
                 :class="[index == hmwSort.length - 1 ? 'hmwsortActive' : '',hmwActiveNum2==index?'hmwSpanActive':'']"
                 v-for="(item, index) in hmwSort"
-                :key="index" @click="hmwActiveNum2=index"
+                :key="index" @click="HmwSort(index)"
               >
                 {{ item }}
               </li>
             </van-cell>
           </van-dropdown-item>
           <!-- 筛选 -->
-          <van-dropdown-item title="筛选" ref="item">
+          <van-dropdown-item title="筛选" ref="item2">
             <van-cell class="hmwChoose" style="padding-top:20px;">
               <van-row gutter="20">
                 <van-col
                   :key="index"
                   v-for="(item, index) in hmwChoose"
                   span="6"
-                  :class="hmwActiveNum3==index?'hmwSpanActive':''" @click="hmwActiveNum3=index"
+                  :class="hmwActiveNum3==index?'hmwSpanActive':''" @click="HmwChoose(index)"
                   ><span>{{ item.name }}</span></van-col
                 >
               </van-row>
@@ -261,9 +262,15 @@ export default {
   watch: {},
   // 组件方法
   methods: {
+    // 下拉框的显示隐藏
     onConfirm() {
       this.$refs.item.toggle();
-      console.log(this.$refs);
+    },
+    onConfirm1() {
+      this.$refs.item1.toggle();
+    },
+    onConfirm2() {
+      this.$refs.item2.toggle();
     },
     // 接受导航数据
     async hmwGetNav() {
@@ -273,6 +280,26 @@ export default {
       this.hmwChoose=data.data.appCourseType
       this.hmwList = list.data.list
     },
+    // 点击重置
+    hmwRefresh(){
+      this.hmwActiveNum1 = this.hmwFl[0].child
+      // 关闭窗口
+      this.onConfirm()
+    },
+    // 排序的点击事件
+    HmwSort(i){
+      // 点击变色
+      this.hmwActiveNum2=i
+      // 关闭窗口
+      this.onConfirm1()
+    },
+    // 筛选的点击事件
+    HmwChoose(i){
+ // 点击变色
+      this.hmwActiveNum3=i
+      // 关闭窗口
+      this.onConfirm2()
+    }
   },
   mounted() {
     this.hmwGetNav();
