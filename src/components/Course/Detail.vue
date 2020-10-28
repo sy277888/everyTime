@@ -136,7 +136,7 @@ export default {
     //   nav的点击事件
     hmwDian(i,id){
       console.log(this.$el)
-      let anchor = this.$el.querySelector(selector);
+      // let anchor = this.$el.querySelector(selector);
         // document.getElementById(i).scrollIntoView();
         // 相当于锚点
         document.documentElement.scrollTop =i
@@ -146,6 +146,7 @@ export default {
     // 立即学习点击事件
     hmwStudyJump(){
         this.$router.push('/study')
+         document.documentElement.scrollTop =0
     }
   },
   mounted() {
