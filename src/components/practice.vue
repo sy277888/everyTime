@@ -120,7 +120,7 @@ export default {
 <style scoped>
 .item-body {
   background: #eee;
-  height: 100vh;
+  height: 97vh;
 }
 /* 头部样式 */
 .item-nav-bar {
