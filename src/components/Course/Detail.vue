@@ -15,7 +15,7 @@
       <div class="hmwNav" v-show="hmwFlag">
           <span :class="hmwIndex==0?'hmwActiveTop':''" @click="hmwDian(310,0)" id="hmwKc">课程介绍</span>
           <span :class="hmwIndex==1?'hmwActiveTop':''" @click="hmwDian(394,1)" id="hmwDg">课程大纲</span>
-          <span :class="hmwIndex==2?'hmwActiveTop':''" @click="hmwDian(1125,2)" id="hmwPj">课程评价</span>
+          <span :class="hmwIndex==2?'hmwActiveTop':''" @click="hmwDian(1100,2)" id="hmwPj">课程评价</span>
       </div>
       <van-icon name="cluster-o" @click="showPopup" />
     </div>
