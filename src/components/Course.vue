@@ -4,7 +4,7 @@
     <div class="hmw-top">
       <van-sticky>
         <!-- 这个是用来占个位子1 -->
-        <!-- <div class="hmw-top"></div> -->
+        <div class="hmw-top"></div>
               <!-- 导航 -->
          <div class="hmw-nav">
         <van-dropdown-menu>
