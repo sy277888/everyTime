@@ -17,8 +17,8 @@ const Net = {
   courseList(params) {
     return request(API.Method.Get, API.Path.HMWLIST, params)
   },
-  //获取我的学习
-  xue(params){
+  //获取个人信息
+  xuue(params){
     return request(API.Method.Get,API.Path.XUE,params)
   },
   //特色课获取

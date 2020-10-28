@@ -154,7 +154,6 @@ const routes = [
     component: () => import('../components/Course/Detail.vue')
 
   },
-<<<<<<< HEAD
   //我的特色课
   {
     path:"/xue",
@@ -227,7 +226,6 @@ const routes = [
     name:"Yi",
     component: () => import('../components/fuwu/yijian.vue')
   },
-=======
   //立即页面
   {
     path:"/study",
@@ -235,7 +233,6 @@ const routes = [
     component: () => import('../components/Course/Study.vue')
 
   }
->>>>>>> 2ce514b5fec5777ee4b1ae0096d99f58e94317b4
 ]
 
 const router = new VueRouter({
