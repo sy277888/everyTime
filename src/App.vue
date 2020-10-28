@@ -58,6 +58,8 @@ export default {
     $route(to, from) {
       if (to.path === "/login") {
         this.isShow = false;
+      } else if(to.path==='/detail'){
+        this.isShow = false;
       }
     },
   },
