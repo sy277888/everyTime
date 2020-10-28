@@ -11,7 +11,9 @@ const API = {
         HMWFL: '/api/app/courseClassify',
         HMWLIST: '/api/app/courseBasis?page=1&limit=10&',
         //首页列表
-        List: '/api/app/recommend/appIndex'
+        List: '/api/app/recommend/appIndex',
+        //学习
+        Xue:"/api/app/myStudy/2"
     }
 }
 //定义请求地址

@@ -33,11 +33,11 @@ export default {
             "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=875245118,278486602&fm=26&gp=0.jpg",
           name: "在线客服",
         },
-           {
+        {
           icon:
             "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=875245118,278486602&fm=26&gp=0.jpg",
-          name: "设置",
-          path:"/she"
+            name: "设置",
+            path: "/she",
         },
       ],
     };
