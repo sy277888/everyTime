@@ -16,7 +16,8 @@
                   <p>{{item.name}}</p>
                   <div class="hmw-nav-tag">
                     <van-row gutter="20">
-                      <van-col :key="i.id" v-for="i in item.child" :class="hmwActiveNum1==i.id?'hmwSpanActive':''" span="6" @click="hmwActiveNum1=i.id"><span>{{i.name}}</span></van-col>
+                      <!-- 点击的时候改变样式并保存到本地 -->
+                      <van-col :key="i.id" v-for="i in item.child" :class="hmwActiveNum1==i.id?'hmwSpanActive':''" span="6" @click="hmwFlD(i)"><span>{{i.name}}</span></van-col>
                     </van-row>
                   </div>
                 </li>
@@ -25,7 +26,7 @@
                   @click="hmwRefresh"
                     >重置</van-button
                   >
-                  <van-button color="#eb6100" @click="onConfirm">确定</van-button>
+                  <van-button color="#eb6100" @click="hmwOk()">确定</van-button>
                 </div>
               </ul>
             </van-cell>
@@ -100,7 +101,7 @@ export default {
   data() {
     return {
       // 用来保存下标来做点击时样式
-      hmwActiveNum1:0,
+      hmwActiveNum1:0||sessionStorage.getItem("hmwFlIndex"),
       hmwActiveNum2:0,
       hmwActiveNum3:0,
       //    下拉菜单导航所需
@@ -272,28 +273,46 @@ export default {
     onConfirm2() {
       this.$refs.item2.toggle();
     },
-    // 接受导航数据
-    async hmwGetNav() {
-      let {data} =await this.$Net.courseNav()
-      let {data:list} =await this.$Net.courseList()
-      console.log(list.data.list)
+    // 接受导航数据,列表数据
+    async hmwGetNav(navCan='',listCan='') {
+      let {data} =await this.$Net.courseNav(navCan)
+      let {data:list} =await this.$Net.courseList(listCan)
+      console.log(data.data.appCourseType)
+      // 筛选
       this.hmwChoose=data.data.appCourseType
+      // 主体列表
       this.hmwList = list.data.list
     },
-    // 点击重置
-    hmwRefresh(){
-      this.hmwActiveNum1 = this.hmwFl[0].child
+    // 分类每一小项的点击事件-------------------------------------------
+    hmwFlD(i){
+      // 点击变色
+    this.hmwActiveNum1=i.id
+    // 重新请求渲染页面
+    // this.hmwGetNav('attr_val_id='+i.id)
+    // 保存一下，页面刷新不改变样式
+    sessionStorage.setItem("hmwFlIndex",i.id)
+    },
+     // 点击确认-----------------------------------------------------------
+    hmwOk(){
       // 关闭窗口
       this.onConfirm()
     },
-    // 排序的点击事件
+    // 点击重置-----------------------------------------------------------
+    hmwRefresh(){
+      this.hmwActiveNum1 = this.hmwFl[0].child
+      sessionStorage.removeItem("hmwFlIndex")
+      // 关闭窗口
+      this.onConfirm()
+    },
+    // 排序的点击事件----------------------------------------------------------------
     HmwSort(i){
       // 点击变色
       this.hmwActiveNum2=i
       // 关闭窗口
       this.onConfirm1()
     },
-    // 筛选的点击事件
+    // 筛选的点击事件---------------------------------------------------------
+    // 这个应该可以有效果了,还是不行
     HmwChoose(i){
  // 点击变色
       this.hmwActiveNum3=i
@@ -307,7 +326,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 li {
   list-style: none;
 }
