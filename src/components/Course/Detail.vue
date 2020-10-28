@@ -1,7 +1,14 @@
 <template>
 <div class="box">
     <!-- 这里是详情页面 -->
-    <div class="hmw-top"></div>
+    <div class="hmw-top">
+        <!-- 滚动导航 -->
+        <van-tabs v-model="active" scrollspy sticky>
+  <van-tab :key="index" v-for="index in 2" :title="'选项 ' + index">
+    内容 {{ index }}
+  </van-tab>
+</van-tabs>
+    </div>
     <div class="hmw-center"></div>
     <div class="hmw-foot"></div>
 </div>
@@ -36,7 +43,7 @@ export default {
 .hmw-foot {
   background: steelblue;
   width: 100%;
-  height: 3rem;
+  height: 4rem;
   flex-shrink: none;
 }
 .hmw-center {
