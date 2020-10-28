@@ -1,10 +1,16 @@
 <template>
-<div class="box">
+  <div class="hmw-box">
     <!-- 这里是详情页面 -->
-    <div class="hmw-top"></div>
-    <div class="hmw-center"></div>
+    <div class="hmw-top">
+      <!-- 滚动导航 -->
+      <van-tabs v-model="active" scrollspy sticky>
+        <van-tab :key="index" v-for="index in 2" :title="'选项 ' + index">
+          内容 {{ index }}
+        </van-tab>
+      </van-tabs>
+    </div>
     <div class="hmw-foot"></div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -14,34 +20,41 @@ export default {
   // 局部注册的组件
   components: {},
   // 组件状态值
-  data () {
-   return {}
+  data() {
+    return {
+      //    导航要求的--选中哪一个
+      active: 2,
+    };
   },
   // 计算属性
   computed: {},
   // 侦听器
   watch: {},
   // 组件方法
-  methods: {},
-}
-</script> 
+  methods: {
+    //  scrollHandle: function(e) {
+    //     var top = e.srcElement.scrollingElement.scrollTop;    // 获取页面滚动高度
+    //     if (top > 0) {
+    //      this.flog =true
+    //      this.fll=false
+    //     } else{
+    //       this.flog = false
+    //       this.fll=true
+    //     }
+    //   },
+  },
+  mounted() {
+    // window.addEventListener('scroll', this.scrollHandle);  // 绑定页面的滚动事
+  },
+};
+</script>
 <style scoped>
+html,
+body,
+body > div {
+  height: 100% !important;
+}
 /* 大体布局----------------------------------------------------------- */
 .hmw-box {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-}
-.hmw-top,
-.hmw-foot {
-  background: steelblue;
-  width: 100%;
-  height: 4rem;
-  flex-shrink: none;
-}
-.hmw-center {
-  flex: 1;
-  /* overflow: scroll; */
- padding-top: 3rem;
 }
 </style>

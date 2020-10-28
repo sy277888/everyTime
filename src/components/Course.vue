@@ -4,88 +4,126 @@
     <div class="hmw-top">
       <van-sticky>
         <!-- 这个是用来占个位子1 -->
-        <!-- <div class="hmw-top"></div> -->
-              <!-- 导航 -->
-         <div class="hmw-nav">
-        <van-dropdown-menu>
-          <!-- 分类 -->
-          <van-dropdown-item title="分类" ref="item" style="height:100%;">
-            <van-cell style="height:100%;">
-              <ul class="hmwNavLeft">
-                <li :key="index" v-for="(item,index) in hmwFl">
-                  <p>{{item.name}}</p>
-                  <div class="hmw-nav-tag">
-                    <van-row gutter="20">
-                      <!-- 点击的时候改变样式并保存到本地 -->
-                      <van-col :key="i.id" v-for="i in item.child" :class="hmwActiveNum1==i.id?'hmwSpanActive':''" span="6" @click="hmwFlD(i)"><span>{{i.name}}</span></van-col>
-                    </van-row>
+        <van-nav-bar title="课程" />
+        <!-- 导航 -->
+        <div class="hmw-nav">
+          <van-dropdown-menu>
+            <!-- 分类 -->
+            <van-dropdown-item title="分类" ref="item" style="height: 100%">
+              <van-cell style="height: 100%">
+                <ul class="hmwNavLeft">
+                  <li :key="index" v-for="(item, index) in hmwFl">
+                    <p>{{ item.name }}</p>
+                    <div class="hmw-nav-tag">
+                      <van-row gutter="20">
+                        <!-- 点击的时候改变样式并保存到本地 -->
+                        <van-col
+                          :key="i.id"
+                          v-for="i in item.child"
+                          :class="
+                            hmwActiveNum1 == i.id || hmwActiveNum4 == i.id
+                              ? 'hmwSpanActive'
+                              : ''
+                          "
+                          span="6"
+                          @click="hmwFlD(i, item.id)"
+                          ><span>{{ i.name }}</span></van-col
+                        >
+                      </van-row>
+                    </div>
+                  </li>
+                  <div>
+                    <van-button
+                      style="border: 1px solid #ccc"
+                      plain
+                      @click="hmwRefresh"
+                      >重置</van-button
+                    >
+                    <van-button color="#eb6100" @click="hmwOk()"
+                      >确定</van-button
+                    >
                   </div>
-                </li>
-                <div>
-                  <van-button style="border:1px solid #ccc;" plain
-                  @click="hmwRefresh"
-                    >重置</van-button
-                  >
-                  <van-button color="#eb6100" @click="hmwOk()">确定</van-button>
-                </div>
-              </ul>
-            </van-cell>
-          </van-dropdown-item>
-          <!-- 排序 -->
-          <van-dropdown-item title="排序" ref="item1">
-            <van-cell class="hmwCenterNav" center>
-              <li
-                :class="[index == hmwSort.length - 1 ? 'hmwsortActive' : '',hmwActiveNum2==index?'hmwSpanActive':'']"
-                v-for="(item, index) in hmwSort"
-                :key="index" @click="HmwSort(index)"
-              >
-                {{ item }}
-              </li>
-            </van-cell>
-          </van-dropdown-item>
-          <!-- 筛选 -->
-          <van-dropdown-item title="筛选" ref="item2">
-            <van-cell class="hmwChoose" style="padding-top:20px;">
-              <van-row gutter="20">
-                <van-col
+                </ul>
+              </van-cell>
+            </van-dropdown-item>
+            <!-- 排序 -->
+            <van-dropdown-item title="排序" ref="item1">
+              <van-cell class="hmwCenterNav" center>
+                <li
+                  :class="[
+                    index == hmwSort.length - 1 ? 'hmwsortActive' : '',
+                    hmwActiveNum2 == index ? 'hmwSpanActive' : '',
+                  ]"
+                  v-for="(item, index) in hmwSort"
                   :key="index"
-                  v-for="(item, index) in hmwChoose"
-                  span="6"
-                  :class="hmwActiveNum3==index?'hmwSpanActive':''" @click="HmwChoose(index)"
-                  ><span>{{ item.name }}</span></van-col
+                  @click="HmwSort(index)"
                 >
-              </van-row>
-            </van-cell>
-          </van-dropdown-item>
-        </van-dropdown-menu>
-      </div>
-</van-sticky>
+                  {{ item }}
+                </li>
+              </van-cell>
+            </van-dropdown-item>
+            <!-- 筛选 -->
+            <van-dropdown-item title="筛选" ref="item2">
+              <van-cell class="hmwChoose" style="padding-top: 20px">
+                <van-row gutter="20">
+                  <van-col
+                    :key="index"
+                    v-for="(item, index) in hmwChoose"
+                    span="6"
+                    :class="hmwActiveNum3 == index ? 'hmwSpanActive' : ''"
+                    @click="HmwChoose(index)"
+                    ><span>{{ item.name }}</span></van-col
+                  >
+                </van-row>
+              </van-cell>
+            </van-dropdown-item>
+          </van-dropdown-menu>
+        </div>
+      </van-sticky>
     </div>
     <!-- 这里才是我要做的部分 -->
     <div class="hmw-center">
       <!-- 可滑动 -->
       <van-list>
-      <div class="hmw-main">
-        <!-- 主体部分列表渲染 -->
-        <van-list>
-          <!-- 这里必须要用v-for 当这个未定义时不渲染，这样才不会爆0的错！！！ -->
-          <li v-if="item.teachers_list" :key="index" v-for="(item, index) in hmwList">
-            <h2>{{ item.title }}</h2>
-            <p class="hmwP1"><van-icon name="clock-o" /><span>{{ item.start_play_date|timefn}}~{{item.end_play_date|timefn}}&emsp;&emsp;|共{{item.total_periods+'课时' }}</span></p>
-            <p class="hmwP2"><img :src="item.teachers_list[0].teacher_avatar" alt=""><span>{{ item.teachers_list[0].teacher_name }}</span></p>
-            <div class="hmwListBottom">
-              <span>{{item.brows_num }}人已报名</span>
-              <strong v-if="item.price==0">免费</strong>
-              <strong v-if="item.price!=0" style="color:orange;display:flex;align-items: center;"><van-icon name="gold-coin" />&emsp;<span>{{item.price/100+'.00' }}</span></strong>
-            </div>
-          </li>
-        </van-list>
-      </div>
-</van-list>
-
+        <div class="hmw-main">
+          <!-- 主体部分列表渲染 -->
+          <van-list>
+            <!-- 这里必须要用v-for 当这个未定义时不渲染，这样才不会爆0的错！！！ -->
+            <li
+              v-if="item.teachers_list"
+              :key="index"
+              v-for="(item, index) in hmwList"
+            >
+              <h2>{{ item.title }}</h2>
+              <p class="hmwP1">
+                <van-icon name="clock-o" /><span
+                  >{{ item.start_play_date | timefn }}~{{
+                    item.end_play_date | timefn
+                  }}&emsp;&emsp;|共{{ item.total_periods + "课时" }}</span
+                >
+              </p>
+              <p class="hmwP2">
+                <img :src="item.teachers_list[0].teacher_avatar" alt="" /><span
+                  >{{ item.teachers_list[0].teacher_name }}</span
+                >
+              </p>
+              <div class="hmwListBottom">
+                <span>{{ item.brows_num }}人已报名</span>
+                <strong v-if="item.price == 0">免费</strong>
+                <strong
+                  v-if="item.price != 0"
+                  style="color: orange; display: flex; align-items: center"
+                  ><van-icon name="gold-coin" />&emsp;<span>{{
+                    item.price / 100 + ".00"
+                  }}</span></strong
+                >
+              </div>
+            </li>
+          </van-list>
+        </div>
+      </van-list>
     </div>
-    <!-- 底部 -->
-    <div class="hmw-foot">2</div>
+    <div class="hmw-foot"></div>
   </div>
 </template>
 
@@ -101,85 +139,90 @@ export default {
   data() {
     return {
       // 用来保存下标来做点击时样式
-      hmwActiveNum1:0||sessionStorage.getItem("hmwFlIndex"),
-      hmwActiveNum2:0,
-      hmwActiveNum3:0,
+      // 分类下标
+      hmwActiveNum1: 0 || sessionStorage.getItem("hmwFlIndex1"),
+      // 分类下标2--有两个不同的下标
+      hmwActiveNum4: 0 || sessionStorage.getItem("hmwFlIndex2"),
+      // 排序下标
+      hmwActiveNum2: 0,
+      // 筛选下标
+      hmwActiveNum3: 0,
       //    下拉菜单导航所需
       value: 0,
       switch1: false,
       switch2: false,
       // 分类
-      hmwFl:[
+      hmwFl: [
+        {
+          id: 1,
+          name: "年级",
+          parent_id: 0,
+          child: [
             {
-                "id":1,
-                "name":"年级",
-                "parent_id":0,
-                "child":[
-                    {
-                        "id":1,
-                        "name":"初一"
-                    },
-                    {
-                        "id":2,
-                        "name":"初二"
-                    },
-                    {
-                        "id":3,
-                        "name":"初三"
-                    },
-                    {
-                        "id":4,
-                        "name":"高一"
-                    },
-                    {
-                        "id":5,
-                        "name":"高二"
-                    }
-                ]
+              id: 1,
+              name: "初一",
             },
             {
-                "id":2,
-                "name":"学科",
-                "parent_id":0,
-                "child":[
-                    {
-                        "id":7,
-                        "name":"语文"
-                    },
-                    {
-                        "id":8,
-                        "name":"数学"
-                    },
-                    {
-                        "id":9,
-                        "name":"英语"
-                    },
-                    {
-                        "id":12,
-                        "name":"物理"
-                    },
-                    {
-                        "id":13,
-                        "name":"化学"
-                    }
-                ]
-            }
-        ],
+              id: 2,
+              name: "初二",
+            },
+            {
+              id: 3,
+              name: "初三",
+            },
+            {
+              id: 4,
+              name: "高一",
+            },
+            {
+              id: 5,
+              name: "高二",
+            },
+          ],
+        },
+        {
+          id: 2,
+          name: "学科",
+          parent_id: 0,
+          child: [
+            {
+              id: 7,
+              name: "语文",
+            },
+            {
+              id: 8,
+              name: "数学",
+            },
+            {
+              id: 9,
+              name: "英语",
+            },
+            {
+              id: 12,
+              name: "物理",
+            },
+            {
+              id: 13,
+              name: "化学",
+            },
+          ],
+        },
+      ],
       //   综合排序
       hmwSort: ["综合排序", "最新", "最热", "价格从低到高", "价格从低到高"],
       // 筛选
-      hmwChoose : [
-    // { type: 0, value: "全部" },
-    // { type: 2, value: "大班课" },
-    // { type: 3, value: "小班课" },
-    // { type: 4, value: "公开课" },
-    // { type: 5, value: "点播课" },
-    // { type: 7, value: "面授课" },
-    // { type: 8, value: "音频课" },
-    // { type: 9, value: "系统课" },
-    // { type: 10, value: "图文课" },
-    // { type: 11, value: "会员课" }
-],
+      hmwChoose: [
+        // { type: 0, value: "全部" },
+        // { type: 2, value: "大班课" },
+        // { type: 3, value: "小班课" },
+        // { type: 4, value: "公开课" },
+        // { type: 5, value: "点播课" },
+        // { type: 7, value: "面授课" },
+        // { type: 8, value: "音频课" },
+        // { type: 9, value: "系统课" },
+        // { type: 10, value: "图文课" },
+        // { type: 11, value: "会员课" }
+      ],
       // 主题列表
       hmwList: [
         {
@@ -189,7 +232,8 @@ export default {
           number: 134,
           price: 0,
           course: 5,
-          img:'http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg'
+          img:
+            "http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg",
         },
         {
           title: "李老师啦啦啦啦啦开课啦！",
@@ -198,7 +242,8 @@ export default {
           number: 134,
           price: 0,
           course: 5,
-          img:'http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg'
+          img:
+            "http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg",
         },
         {
           title: "李老师啦啦啦啦啦开课啦！",
@@ -207,7 +252,8 @@ export default {
           number: 134,
           price: 0,
           course: 5,
-          img:'http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg'
+          img:
+            "http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg",
         },
         {
           title: "李老师啦啦啦啦啦开课啦！",
@@ -216,7 +262,8 @@ export default {
           number: 134,
           price: 0,
           course: 5,
-          img:'http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg'
+          img:
+            "http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg",
         },
         {
           title: "李老师啦啦啦啦啦开课啦！",
@@ -225,7 +272,8 @@ export default {
           number: 134,
           price: 0,
           course: 5,
-          img:'http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg'
+          img:
+            "http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg",
         },
         {
           title: "李老师啦啦啦啦啦开课啦！",
@@ -234,7 +282,8 @@ export default {
           number: 134,
           price: 0,
           course: 5,
-          img:'http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg'
+          img:
+            "http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg",
         },
         {
           title: "李老师啦啦啦啦啦开课啦！",
@@ -243,7 +292,8 @@ export default {
           number: 134,
           price: 0,
           course: 5,
-          img:'http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg'
+          img:
+            "http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg",
         },
         {
           title: "李老师啦啦啦啦啦开课啦！",
@@ -252,7 +302,8 @@ export default {
           number: 134,
           price: 0,
           course: 5,
-          img:'http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg'
+          img:
+            "http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg",
         },
       ],
     };
@@ -274,51 +325,63 @@ export default {
       this.$refs.item2.toggle();
     },
     // 接受导航数据,列表数据
-    async hmwGetNav(navCan='',listCan='') {
-      let {data} =await this.$Net.courseNav(navCan)
-      let {data:list} =await this.$Net.courseList(listCan)
-      console.log(data.data.appCourseType)
+    async hmwGetNav(navCan = "", listCan = "") {
+      let { data } = await this.$Net.courseNav(navCan);
+      let { data: list } = await this.$Net.courseList(listCan);
+      console.log(data.data.appCourseType);
       // 筛选
-      this.hmwChoose=data.data.appCourseType
+      this.hmwChoose = data.data.appCourseType;
       // 主体列表
-      this.hmwList = list.data.list
+      this.hmwList = list.data.list;
     },
     // 分类每一小项的点击事件-------------------------------------------
-    hmwFlD(i){
-      // 点击变色
-    this.hmwActiveNum1=i.id
-    // 重新请求渲染页面
-    // this.hmwGetNav('attr_val_id='+i.id)
-    // 保存一下，页面刷新不改变样式
-    sessionStorage.setItem("hmwFlIndex",i.id)
+    // 当前的id和父级的id
+    hmwFlD(i, fuI) {
+      console.log(i, fuI);
+      // 根据父级判断一下
+      if (fuI == 1) {
+        // 点击变色
+        this.hmwActiveNum1 = i.id;
+        sessionStorage.setItem("hmwFlIndex1", i.id);
+      } else {
+        this.hmwActiveNum4 = i.id;
+        sessionStorage.setItem("hmwFlIndex2", i.id);
+      }
+
+      // 重新请求渲染页面
+      // this.hmwGetNav('attr_val_id='+i.id)
+      // 保存一下，页面刷新不改变样式
     },
-     // 点击确认-----------------------------------------------------------
-    hmwOk(){
+    // 点击确认-----------------------------------------------------------
+    hmwOk() {
       // 关闭窗口
-      this.onConfirm()
+      this.onConfirm();
     },
     // 点击重置-----------------------------------------------------------
-    hmwRefresh(){
-      this.hmwActiveNum1 = this.hmwFl[0].child
-      sessionStorage.removeItem("hmwFlIndex")
+    hmwRefresh() {
+      this.hmwActiveNum1 = 0;
+      this.hmwActiveNum4 = 0;
+      // this.hmwActiveNum4 = this.hmwFl[0].child
+      sessionStorage.removeItem("hmwFlIndex1");
+      sessionStorage.removeItem("hmwFlIndex2");
       // 关闭窗口
-      this.onConfirm()
+      this.onConfirm();
     },
     // 排序的点击事件----------------------------------------------------------------
-    HmwSort(i){
+    HmwSort(i) {
       // 点击变色
-      this.hmwActiveNum2=i
+      this.hmwActiveNum2 = i;
       // 关闭窗口
-      this.onConfirm1()
+      this.onConfirm1();
     },
     // 筛选的点击事件---------------------------------------------------------
     // 这个应该可以有效果了,还是不行
-    HmwChoose(i){
- // 点击变色
-      this.hmwActiveNum3=i
+    HmwChoose(i) {
+      // 点击变色
+      this.hmwActiveNum3 = i;
       // 关闭窗口
-      this.onConfirm2()
-    }
+      this.onConfirm2();
+    },
   },
   mounted() {
     this.hmwGetNav();
@@ -346,7 +409,7 @@ li {
 .hmw-center {
   flex: 1;
   overflow: scroll;
- padding-top: 3rem;
+  padding-top: 3rem;
 }
 /* 左边导航拓展样式 --------------------------------------------------------------*/
 .hmwNavLeft p {
@@ -381,9 +444,10 @@ li {
   font-weight: 400;
   color: #646464;
 }
-.hmw-nav-tag .hmwSpanActive span,.hmwChoose .hmwSpanActive span{
-color: #eb6100;
-    background: #ebeefe;
+.hmw-nav-tag .hmwSpanActive span,
+.hmwChoose .hmwSpanActive span {
+  color: #eb6100;
+  background: #ebeefe;
 }
 /* 按钮部分 */
 .hmwNavLeft > div {
@@ -412,8 +476,8 @@ color: #eb6100;
   margin-bottom: 0;
   padding-bottom: 0;
 }
-.hmwCenterNav .hmwSpanActive{
-      color: #eb6100;
+.hmwCenterNav .hmwSpanActive {
+  color: #eb6100;
 }
 /* 最右边部分 */
 .hmwChoose {
@@ -440,12 +504,12 @@ color: #eb6100;
   margin-top: 1rem;
 }
 /* 图片部分卡片布局 -------------------------------------------------------------------------------*/
-.hmw-main > .van-list > li>h2{
+.hmw-main > .van-list > li > h2 {
   font-size: 4.26667vw;
-    font-weight: 400;
-    color: #333;
+  font-weight: 400;
+  color: #333;
 }
-.hmw-main > .van-list > li>.hmwP1{
+.hmw-main > .van-list > li > .hmwP1 {
   font-size: 0.8rem;
   margin-top: 0.2rem;
   color: #333;
@@ -453,39 +517,38 @@ color: #eb6100;
   display: flex;
   align-items: center;
 }
-.hmw-main > .van-list > li>.hmwP1>.van-icon{
+.hmw-main > .van-list > li > .hmwP1 > .van-icon {
   color: #646464;
   margin-right: 0.3rem;
 }
-.hmw-main > .van-list > li>.hmwP2{
- font-size: 3.2vw;
-    font-weight: 400;
-    color: rgba(0,0,0,.45);
-    padding: 1rem 0;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    align-items: center;
+.hmw-main > .van-list > li > .hmwP2 {
+  font-size: 3.2vw;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.45);
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
 }
-.hmw-main > .van-list > li>.hmwP2>img{
+.hmw-main > .van-list > li > .hmwP2 > img {
   width: 2rem;
   height: 2rem;
   margin-right: 0.5rem;
   border-radius: 1rem;
 }
-.hmwListBottom{
+.hmwListBottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 1rem;
 }
-.hmwListBottom>span{
-padding-right: 2.66667vw;
-    color: rgba(0,0,0,.45);
+.hmwListBottom > span {
+  padding-right: 2.66667vw;
+  color: rgba(0, 0, 0, 0.45);
 }
-.hmwListBottom>strong{
-color: #44a426;
-    font-size: 4.26667vw;
-    font-weight: none;
+.hmwListBottom > strong {
+  color: #44a426;
+  font-size: 4.26667vw;
+  font-weight: none;
 }
-
 </style>

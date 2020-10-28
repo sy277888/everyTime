@@ -77,7 +77,7 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: () => import('../components/login/login.vue')
+    component: () => import('../components/login/login.vue'),
   },
   //找回密码
   {
@@ -102,6 +102,13 @@ const routes = [
     path:"/ge",
     name:"Ge",
     component: () => import('../components/geren/geren.vue')
+
+  },
+  //课程详情页面
+  {
+    path:"/detail",
+    name:"Detail",
+    component: () => import('../components/Course/Detail.vue')
 
   }
 ]

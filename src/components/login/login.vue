@@ -60,7 +60,7 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-    },
+    },  
     zhao() {
       this.$router.push({ path: "/mima" });
     },
@@ -69,6 +69,7 @@ export default {
     },
   },
   mounted() {
+    
   },
 };
 </script>
