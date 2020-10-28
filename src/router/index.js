@@ -103,6 +103,13 @@ const routes = [
     name:"Ge",
     component: () => import('../components/geren/geren.vue')
 
+  },
+  //课程详情页面
+  {
+    path:"/detail",
+    name:"Detail",
+    component: () => import('../components/Course/Detail.vue')
+
   }
 ]
 
