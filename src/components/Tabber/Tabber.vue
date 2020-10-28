@@ -55,11 +55,11 @@ export default {
   background: #fff;
 }
 .Tab_title {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 400;
 }
 .title {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: red;
 }

@@ -25,7 +25,7 @@
     <div class="Home_overall">
       <!-- 主页推荐 -->
       <ul class="Home_advice">
-        <li>
+        <li @click="OngoA">
           <img src="../assets/1.png" alt="" class="img" />
           <p>特色课</p>
         </li>
@@ -33,7 +33,7 @@
           <img src="../assets/2.png" alt="" class="img" />
           <p>一对一辅导</p>
         </li>
-        <li>
+        <li @click="OngoB">
           <img src="../assets/3.png" alt="" class="img" />
           <p>学习日历</p>
         </li>
@@ -96,12 +96,11 @@
       </div>
       <!-- 明星讲师 -->
       <p><span class="Home_probably_P"></span>明星讲师</p>
-      <div v-for="(item, index) in teacher.slice(1, 6)" :key="index + 'd'">
+        <div v-for="(item, index) in probably.slice(1, 3)" :key="index " @click="Onclick(item)">
         <div class="Home_teacher">
           <ul>
             <li>
               <img :src="item.teacher_avatar" alt="" />
-              <!-- <span class="Home_title">M{{item.introduction}}</span> -->
               <p class="Home_teacher_title">{{ item.teacher_name }}</p>
               <p class="Home_teacher_p">{{ item.introduction }}</p>
             </li>
@@ -109,6 +108,13 @@
         </div>
       </div>
     </div>
+    <!-- 如果没有token显示内容 -->
+    <van-popup v-model="show" closeable class="Home_Prpup" >
+      <img src="https://wap.365msmk.com/img/feiji.decaf161.png" alt="" width="100%">
+      <p class="Home_Prpup_title">赶紧登录一下吧</p>
+      <p class="Home_Prpup_titles">立即预约一对一辅导，浏览更多视频教程~</p>
+      <van-button round type="info" color="rgb(235, 97, 0)" class="Home_Prpup_but" @click="Onpath">立即登录</van-button>
+    </van-popup>
   </div>
 </template>
 <script>
@@ -121,6 +127,7 @@ export default {
       courses: [], //推荐课程
       coursesImg: [], //推荐课程老师照片
       teacher: [], //明星讲师
+      show:false
     };
   },
   mounted() {
@@ -137,9 +144,32 @@ export default {
   },
   methods:{
     Onclick(item){
-   this.$router.push({
-     path:"/"
-   })
+      var token = localStorage.getItem('token')
+      if(token=!token){
+       this.show= true
+      }else if(token=!token){
+         this.$router.push({
+           path:"/homelist",
+           query:{
+             id : item.teacher_id
+           }
+         })
+       }
+    },
+    Onpath(){
+          this.$router.push({
+           path:"/login",
+          })
+    },
+    OngoA(){
+        this.$router.push({
+           path:"/about",
+          })
+    },
+    OngoB(){
+         this.$router.push({
+           path:"/calendar ",
+          })
     }
   }
 };
@@ -147,7 +177,7 @@ export default {
 <style  scoped>
 .Home_overall {
   width: 100%;
-  height: 145rem;
+  height: 130rem;
   background: rgb(240, 242, 245);
 }
 .Home_advice {
@@ -233,5 +263,26 @@ export default {
 .img {
   margin-top: 0.5rem;
   width: 3rem;
+}
+.Home_Prpup{
+  width: 18rem;
+  height: 20rem;
+  border-radius: 1rem;
+  text-align: center;
+}
+.Home_Prpup img {
+  width: 100%;
+  height: 10rem;
+}
+.Home_Prpup_title{
+  font-size: 0.9rem;
+}
+.Home_Prpup_titles{
+  font-size: 0.7rem;
+  color: gray;
+}
+.Home_Prpup_but{
+  margin-top: 1rem;
+  width: 80%;
 }
 </style>

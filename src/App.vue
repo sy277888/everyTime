@@ -45,7 +45,7 @@ export default {
         },
         {
           title: "我的",
-          path: "/Mime",
+          path: "/mime",
           img: require("../src/assets/img/bottomBar5.png"),
           imgs: require("../src/assets/img/bottom5.png"),
         },
@@ -56,9 +56,24 @@ export default {
   watch: {
     //利用监听属性判断全局路由
     $route(to, from) {
-      if (to.path === "/login") {
+      var token = localStorage.getItem("token");
+      if (to.path == "/login") {
+        if (token == null) {
+          this.isShow = false;
+        }
+      } else if (to.path == "/detail") {
         this.isShow = false;
-      } else if(to.path==='/detail'){
+      } else if (to.path == "/homelist") {
+        this.isShow = false;
+      } else if (to.path == "/mime") {
+        this.isShow = true;
+      } else if (to.path == "/") {
+        this.isShow = true;
+      } else if (to.path == "/homedata") {
+        this.isShow = false;
+      }else if (to.path == "/about") {
+        this.isShow = true;
+      }else if (to.path == "/calendar") {
         this.isShow = false;
       }
     },

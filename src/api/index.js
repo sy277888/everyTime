@@ -20,6 +20,10 @@ const Net = {
   //获取我的学习
   xue(){
     return request(API.Method.Get,API.Path.Xue)
+  },
+  //首页推荐老师列表详情页内容
+  HomeLIST(params){
+    return request(API.Method.Get,API.Path.HomeLIST,params)
   }
 }
 

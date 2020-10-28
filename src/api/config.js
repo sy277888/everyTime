@@ -13,7 +13,9 @@ const API = {
         //首页列表
         List: '/api/app/recommend/appIndex',
         //学习
-        Xue:"/api/app/myStudy/2"
+        Xue:"/api/app/myStudy/2",
+        //首页推荐老师列表
+        HomeLIST:'/api/app/teacher/info/id'
     }
 }
 //定义请求地址
