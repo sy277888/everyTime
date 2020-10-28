@@ -36,7 +36,7 @@ export default {
 .hmw-foot {
   background: steelblue;
   width: 100%;
-  height: 3rem;
+  height: 4rem;
   flex-shrink: none;
 }
 .hmw-center {
