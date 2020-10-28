@@ -72,6 +72,37 @@ const routes = [
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue')
+  },
+  //登录
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import('../components/login/login.vue')
+  },
+  //找回密码
+  {
+    path: "/mima",
+    name: "Mima",
+    component: () => import('../components/login/zhaohui.vue')
+  },
+  //注册
+  {
+    path: "/zhu",
+    name: "Zhu",
+    component: () => import('../components/login/zhuce.vue')
+  },
+  //设置
+  {
+    path: "/she",
+    name: "She",
+    component: () => import('../components/hhs/shezhi.vue')
+  },
+  //个人信息
+  {
+    path:"/ge",
+    name:"Ge",
+    component: () => import('../components/geren/geren.vue')
+
   }
 ]
 
