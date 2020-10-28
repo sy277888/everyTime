@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="sy_yao">
+    <div class="sy_yao" @click="huoDong">
       <ul class="sy_uu">
         <li><img src="../../assets/xin.png" alt="" /></li>
         <li>
@@ -8,16 +8,50 @@
           <p>限时特惠，多邀多得</p>
         </li>
       </ul>
-      <span class="s2">></span>
+      <span class="s2"><img src="../../assets/icon/右白.png" alt="" /></span>
     </div>
+    <van-overlay :show="show" @click="huoDong">
+      <div class="wrapper">
+        <div class="block">
+          <img src="../../assets/icon/活动.png" alt="">
+        </div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      show: false,
+    };
+  },
+  methods: {
+    huoDong() {
+      this.show = !this.show;
+    },
+  },
+};
 </script>
 
 <style scoped>
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .block {
+    width: 20rem;
+    height: 35rem;
+    background-color: #fff;
+  }
+  .block img{
+    width: 100%;
+    height: 100%;
+  }
 .sy_yao {
   width: 95%;
   height: 2.7rem;
@@ -39,9 +73,12 @@ export default {};
 }
 .s2 {
   float: right;
-  font-size: 1rem;
-  margin-top: 0.7rem;
-  margin-bottom: 1.5rem;
+  margin-top: 0.6rem;
+  margin-right: 0.7rem;
   color: white;
+}
+.s2 img {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 </style>

@@ -56,10 +56,11 @@ export default {
   watch: {
     //利用监听属性判断全局路由
     $route(to, from) {
+      
       var token = localStorage.getItem("token");
       if (to.path == "/login") {
         if (token == null) {
-          this.isShow = false;
+          this.isShow = true;
         }
       } else if (to.path == "/detail") {
         this.isShow = false;
@@ -71,9 +72,9 @@ export default {
         this.isShow = true;
       } else if (to.path == "/homedata") {
         this.isShow = false;
-      }else if (to.path == "/about") {
+      } else if (to.path == "/about") {
         this.isShow = true;
-      }else if (to.path == "/calendar") {
+      } else if (to.path == "/calendar") {
         this.isShow = false;
       }
     },

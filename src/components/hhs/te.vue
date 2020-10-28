@@ -1,18 +1,18 @@
 <template>
   <div>
          <div class="sy_te">
-      <ul>
+      <ul @click="xuexi">
         <li class="zu">0</li>
         <li class="te">我的特色课</li>
         <li class="li">已购买特色课程的学习</li>
       </ul>
       <ul>
-        <li class="zu">0</li>
+        <li class="zu" @click="tese">0</li>
         <li class="te">一对一辅导</li>
         <li class="li">我的一对一老师辅导</li>
       </ul>
       <ul>
-        <li class="zu">0</li>
+        <li class="zu" @click="yu">0</li>
         <li class="te">剩余学习币</li>
         <li class="li">查看剩余学习币</li>
       </ul>
@@ -22,7 +22,22 @@
 
 <script>
 export default {
-
+data() {
+  return {
+    
+  }
+},
+methods: {
+  xuexi(){
+    this.$router.push({path:"/xue"})
+  },
+  tese(){
+    this.$router.push({path:"/make"})
+  },
+  yu(){
+this.$router.push({path:"/yuer"})
+  }
+},
 }
 </script>
 

@@ -23,16 +23,19 @@ export default {
           icon:
             "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1299864914,3418867127&fm=26&gp=0.jpg",
           name: "优惠券",
+          path:"/you"
         },
         {
           icon:
             "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2874328332,686638447&fm=26&gp=0.jpg",
           name: "学习卡",
+          path:"/xu"
         },
         {
           icon:
             "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=999043577,1932903934&fm=26&gp=0.jpg",
           name: "会员",
+          path:"/hu"
         },
       ],
     };
