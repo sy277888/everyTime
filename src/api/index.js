@@ -18,8 +18,19 @@ const Net = {
     return request(API.Method.Get, API.Path.HMWLIST, params)
   },
   //获取我的学习
-  xue(){
-    return request(API.Method.Get,API.Path.Xue)
+  xue(params){
+    return request(API.Method.Get,API.Path.XUE,params)
+  },
+  //特色课获取
+  te(){
+    return request(API.Method.Get,API.Path.TE)
+  },
+  //我的关注
+  guan(){
+    return request(API.Method.Get,API.Path.GUAN)
+  },
+  ke(){
+    return request(API.Method.Get,API.Path.KE)
   }
 }
 

@@ -45,7 +45,7 @@ export default {
         },
         {
           title: "我的",
-          path: "/Mime",
+          path: "/mime",
           img: require("../src/assets/img/bottomBar5.png"),
           imgs: require("../src/assets/img/bottom5.png"),
         },
@@ -57,7 +57,7 @@ export default {
     //利用监听属性判断全局路由
     $route(to, from) {
       if (to.path === "/login") {
-        this.isShow = false;
+        this.isShow = true;
       }
     },
   },

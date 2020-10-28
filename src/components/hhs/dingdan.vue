@@ -23,16 +23,19 @@ export default {
           icon:
             "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=875245118,278486602&fm=26&gp=0.jpg",
           name: "课程订单",
+          path:"/ke"
         },
         {
           icon:
             "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=875245118,278486602&fm=26&gp=0.jpg",
           name: "会员订单",
+          path:"/huiyuan"
         },
         {
           icon:
             "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=875245118,278486602&fm=26&gp=0.jpg",
           name: "约课订单",
+          path:"/yueke"
         },
       ],
     };

@@ -110,7 +110,79 @@ const routes = [
     name:"Detail",
     component: () => import('../components/Course/Detail.vue')
 
-  }
+  },
+  //我的特色课
+  {
+    path:"/xue",
+    name:"Xue",
+    component: () => import('../components/geren/xuexi.vue')
+  },
+  //剩余学习币
+  {
+    path:"/yuer",
+    name:"Yuer",
+    component: () => import('../components/geren/yuer.vue')
+  },
+  //我的关注
+  {
+    path:"/guan",
+    name:"Guan",
+    component: () => import('../components/geren/guuanzhu.vue')
+  },
+  //我的收藏
+  {
+    path:"/shou",
+    name:"Shou",
+    component: () => import('../components/geren/shou.vue')
+  },
+    //课程订单
+    {
+      path:"/ke",
+      name:"Ke",
+      component: () => import('../components/geren/kecheng.vue')
+    },
+  //会员订单
+  {
+    path:"/huiyuan",
+    name:"Huiyuan",
+    component: () => import('../components/geren/huiyuan.vue')
+  },
+  //约课订单
+  {
+    path:"/yueke",
+    name:"Yueke",
+    component: () => import('../components/geren/yueke.vue')
+  },
+  //优惠券
+  {
+    path:"/you",
+    name:"You",
+    component: () => import('../components/zhanghu/youhui.vue')
+  },
+  //我的学习卡
+  {
+    path:"/xu",
+    name:"Xu",
+    component: () => import('../components/zhanghu/xuexi.vue')
+  },
+  //开通会员
+  {
+    path:"/hu",
+    name:"Hu",
+    component: () => import('../components/zhanghu/hu.vue')
+  },
+  //我的消息
+  {
+    path:"/xiao",
+    name:"Xiao",
+    component: () => import('../components/fuwu/xiaoxi.vue')
+  },
+  //意见反馈
+  {
+    path:"/yi",
+    name:"Yi",
+    component: () => import('../components/fuwu/yijian.vue')
+  },
 ]
 
 const router = new VueRouter({
