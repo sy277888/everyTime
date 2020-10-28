@@ -410,7 +410,6 @@ li {
 .hmw-center {
   flex: 1;
   overflow: scroll;
-  padding-top: 3rem;
 }
 /* 左边导航拓展样式 --------------------------------------------------------------*/
 .hmwNavLeft p {
