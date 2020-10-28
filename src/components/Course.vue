@@ -93,6 +93,7 @@
               v-if="item.teachers_list"
               :key="index"
               v-for="(item, index) in hmwList"
+              @click="hmwJump(item)"
             >
               <h2>{{ item.title }}</h2>
               <p class="hmwP1">
@@ -382,6 +383,12 @@ export default {
       // 关闭窗口
       this.onConfirm2();
     },
+    // 跳转到详情页面
+    hmwJump(item){
+      // 保存数据到本地
+      sessionStorage.setItem('hmwXQ',JSON.stringify(item))
+      this.$router.push('/detail')
+    }
   },
   mounted() {
     this.hmwGetNav();
@@ -399,17 +406,10 @@ li {
   height: 100%;
   flex-direction: column;
 }
-.hmw-top,
-.hmw-foot {
-  background: steelblue;
-  width: 100%;
-  height: 3rem;
-  flex-shrink: none;
-}
+
 .hmw-center {
   flex: 1;
   overflow: scroll;
-  padding-top: 3rem;
 }
 /* 左边导航拓展样式 --------------------------------------------------------------*/
 .hmwNavLeft p {

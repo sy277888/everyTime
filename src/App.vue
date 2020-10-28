@@ -56,12 +56,34 @@ export default {
   watch: {
     //利用监听属性判断全局路由
     $route(to, from) {
+<<<<<<< HEAD
       if (to.path === "/login") {
         this.isShow = true;
+=======
+      var token = localStorage.getItem("token");
+      if (to.path == "/login") {
+        if (token == null) {
+          this.isShow = false;
+        }
+      } else if (to.path == "/detail") {
+        this.isShow = false;
+      } else if (to.path == "/homelist") {
+        this.isShow = false;
+      } else if (to.path == "/mime") {
+        this.isShow = true;
+      } else if (to.path == "/") {
+        this.isShow = true;
+      } else if (to.path == "/homedata") {
+        this.isShow = false;
+      }else if (to.path == "/about") {
+        this.isShow = true;
+      }else if (to.path == "/calendar") {
+        this.isShow = false;
+>>>>>>> 2ce514b5fec5777ee4b1ae0096d99f58e94317b4
       }
     },
   },
 };
 </script>
-<style>
+<style scoped>
 </style>
