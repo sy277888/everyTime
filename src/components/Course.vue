@@ -93,7 +93,7 @@
               v-if="item.teachers_list"
               :key="index"
               v-for="(item, index) in hmwList"
-              @click="hmwJump()"
+              @click="hmwJump(item)"
             >
               <h2>{{ item.title }}</h2>
               <p class="hmwP1">
@@ -384,7 +384,9 @@ export default {
       this.onConfirm2();
     },
     // 跳转到详情页面
-    hmwJump(){
+    hmwJump(item){
+      // 保存数据到本地
+      sessionStorage.setItem('hmwXQ',JSON.stringify(item))
       this.$router.push('/detail')
     }
   },
