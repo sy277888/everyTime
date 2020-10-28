@@ -32,31 +32,37 @@ const routes = [
     name: 'About',
     component: () => import('../views/About.vue')
   },
+  // 练习页面的考点路由
   {
     path: '/kaodian',
     name: 'kaodian',
     component: () => import('../views/grids/kaodian.vue')
   },
+  // 练习页面的套卷路由
   {
     path: '/taojuan',
     name: 'taojuan',
     component: () => import('../views/grids/taojuan.vue')
   },
+  // 练习页面的仿真练习
   {
     path: '/fangzhen',
     name: 'fangzhen',
     component: () => import('../views/grids/fangzhen.vue')
   },
+  // 练习页面的错题路由
   {
     path: '/cuoti',
     name: 'cuoti',
     component: () => import('../views/grids/cuoti.vue')
   },
+  // 练习页面的测评记录路由
   {
     path: '/ceping',
     name: 'ceping',
     component: () => import('../views/grids/ceping.vue')
   },
+  // 练习页面的习题收藏路由
   {
     path: '/xiti',
     name: 'xiti',
@@ -121,6 +127,26 @@ const routes = [
     component: () => import('../components/geren/geren.vue')
 
   },
+  // 拖拽点击跳转页面
+  {
+    path:"/drag",
+    name:"Drag",
+    component: () => import('../views/drage/Drag.vue')
+  },
+  // 练习页面击跳转第二页面
+  {
+    path:"/exect",
+    name:"Exect",
+    component: () => import('../views/grids/Exect.vue')
+  },
+  // 练习页面击跳转第二页面
+  {
+    path:"/exercise",
+    name:"Exercise",
+    component: () => import('../views/grids/Exercise.vue')
+  },
+  // 我的  个人信息修改页面
+
   //课程详情页面
   {
     path:"/detail",

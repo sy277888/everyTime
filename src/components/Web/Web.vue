@@ -99,7 +99,7 @@
             },
             liuyan() {
                 this.$router.push({
-                    path: "/msg",
+                    path: "/drag",
                 });
             },
         },
@@ -126,8 +126,8 @@
         align-items: center;
     }
     img {
-        width: 100%;
-        height: 100%;
-        border-radius: 2rem;
+        width: 90%;
+        height: 90%;
+        border-radius: 50%;
     }
 </style>
