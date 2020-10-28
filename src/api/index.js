@@ -4,7 +4,7 @@ import API from './config'
 const Net = {
   // 抛出方法
   List(params) {
-    return request(Method.Get, Path.List, params)
+    return request(API.Method.Get,API.Path.List, params)
   },
   // 抛出方法
   login(params) {
@@ -17,8 +17,6 @@ const Net = {
   courseList(params) {
     return request(API.Method.Get, API.Path.HMWLIST, params)
   }
-
-
 }
 
 //抛出Net
