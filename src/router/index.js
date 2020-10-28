@@ -62,9 +62,9 @@ const routes = [
   ,
   {
     //我的
-    path: '/wode',
-    name: 'Wode',
-    component: () => import('../views/wode.vue')
+    path: '/mime',
+    name: 'Mime',
+    component: () => import('../views/Mime.vue')
   }
   ,
   {

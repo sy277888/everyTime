@@ -60,12 +60,16 @@ export default {
   background: #fff;
 }
 .Tab_title {
-  font-size: 14px;
+  font-size: 0.7rem;
   font-weight: 400;
 }
 .title {
-  font-size: 14px;
+  font-size: 0.7rem;
   font-weight: 400;
-  color: gold;
+  color: red;
+}
+.Tab_box img {
+  width: 1.6rem;
+
 }
 </style>

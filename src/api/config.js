@@ -5,5 +5,6 @@ export const Method = {
 }
 //定义请求地址
 export const Path = {
-   
+    //首页列表
+   List:'/api/app/recommend/appIndex'
 }

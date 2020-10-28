@@ -4,7 +4,7 @@ import {Method} from '../api/config'
 
 //axios 实例
 const instance  = axios.create({
-    baseURL:'',
+    baseURL:'http://120.53.31.103:84',
     timeout:6000 //设置超时时间
 })
 //判断Post 还是Get 请求

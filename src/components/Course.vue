@@ -1,7 +1,7 @@
 <template>
   <div class="hmw-box">
     <!-- 顶部 -->
-    <div class="hmw-top"></div>
+ <van-nav-bar title="标题" />
     <!-- 这里才是我要做的部分 -->
     <div class="hmw-center">
       <van-list>

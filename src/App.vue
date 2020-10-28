@@ -3,47 +3,51 @@
     <router-view/>
     <!-- 传入 -->
     <Tabber :items="items"/>
+    <!-- 可拖拽小信封 -->
+    <Web/>
   </div>
 </template>
 <script>
 //引入底部导航栏
 import Tabber from '../src/components/Tabber/Tabber'
+import Web from '../src/components/Web/Web'
 export default {
   components:{
-   Tabber 
+   Tabber,
+   Web
   },
   data(){
-    return{
+    return{ 
       items:[
         {
           title:"首页",
           path:"/",
-          img:require('../src/assets/img/shouye.png'),
-          imgs:require('../src/assets/img/shouye_1.png')
+          img:require('../src/assets/img/bottomBar1.png'),
+          imgs:require('../src/assets/img/bottom1.png')
         },
         {
           title:"课程",
           path:"/about",
-          img:require('../src/assets/img/kecheng.png'),
-          imgs:require('../src/assets/img/kecheng_1.png')
+          img:require('../src/assets/img/bottomBar2.png'),
+          imgs:require('../src/assets/img/bottom2.png')
         },
         {
           title:"约课记录",
           path:"/make",
-          img:require('../src/assets/img/yuekejilu.png'),
-          imgs:require('../src/assets/img/yuekejilu_1.png')
+          img:require('../src/assets/img/bottomBar3.png'),
+          imgs:require('../src/assets/img/bottom3.png')
         },
         {
           title:"练习",
           path:"/practice",
-          img:require('../src/assets/img/practice.png'),
-          imgs:require('../src/assets/img/practice_1.png')
+          img:require('../src/assets/img/bottomBar4.png'),
+          imgs:require('../src/assets/img/bottom4.png')
         },
         {
           title:"我的",
-          path:"/wode",
-          img:require('../src/assets/img/wode.png'),
-          imgs:require('../src/assets/img/wode_1.png')
+          path:"/Mime",
+          img:require('../src/assets/img/bottomBar5.png'),
+          imgs:require('../src/assets/img/bottom5.png')
         }
       ]
     }
