@@ -10,6 +10,7 @@ const Net = {
   login(params) {
     return request(API.Method.Post, API.Path.LOGIN, params)
   },
+  // 课程导航
   courseNav(params) {
     return request(API.Method.Get, API.Path.HMWFL, params)
   },

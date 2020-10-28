@@ -1,7 +1,11 @@
 <template>
   <div class="hmw">
     <!-- 这里是详情页面 -->
-    
+    <!-- <van-loading color="#1989fa" /> -->
+    <van-popup v-model="show">
+      <p>分享</p>
+      <img src="../../assets/ewm.png" alt="">
+    </van-popup>
         <!-- 吸顶试试 -->
         <van-sticky>
             <div class="hmw-top">
@@ -13,7 +17,7 @@
           <span :class="hmwIndex==1?'hmwActiveTop':''" @click="hmwDian(394,1)" id="hmwDg">课程大纲</span>
           <span :class="hmwIndex==2?'hmwActiveTop':''" @click="hmwDian(1125,2)" id="hmwPj">课程评价</span>
       </div>
-      <van-icon name="cluster-o" />
+      <van-icon name="cluster-o" @click="showPopup" />
     </div>
 </van-sticky>
       
@@ -30,7 +34,9 @@
             <p class="hmwP3">开课时间：{{ hmwObj.start_play_date | timefnxq }} - {{
                     hmwObj.end_play_date | timefnxq
                   }}</p>
-            <van-icon name="star-o" />
+                  <!-- <van-rate v-model="hmwSc" :count="1"/> -->
+            <van-icon class="hmwNo" v-show="!hmwSc" name="star-o" @click="hmwYes"/>
+            <van-icon class="hmwYes" v-show="hmwSc" name="star" @click="hmwNo"/>
           </li>
           <!-- 教学团队 -->
           <li class="hmwTD">
@@ -72,7 +78,6 @@
                       :size="14"
                       void-color="#eee"
                       color="rgb(234, 122, 47)"
-                      v-model="value"
                       readonly
                     />
                   </p>
@@ -97,6 +102,7 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
 export default {
   // 组件参数 接收来自父组件的数据
   props: {},
@@ -116,6 +122,10 @@ export default {
     hmwObj:JSON.parse(sessionStorage.getItem('hmwXQ')),
     // 底部按钮状态（有没有登录）
     hmwBtnFlag:false,
+    // 弹出层是否显示
+    show: false,
+    // 是否收藏
+    hmwSc:false,
     };
   },
   // 计算属性
@@ -147,6 +157,20 @@ export default {
     hmwStudyJump(){
         this.$router.push('/study')
          document.documentElement.scrollTop =0
+    },
+    // 二维码弹出事件
+    showPopup() {
+      this.show = true;
+    },
+    // 点击收藏
+    hmwYes(){
+      this.hmwSc = true
+      Toast.success('收藏成功')
+    },
+    // 取消收藏
+    hmwNo(){
+      this.hmwSc = false
+      Toast('取消收藏')
     }
   },
   mounted() {
@@ -258,12 +282,20 @@ body > div,
 .hmw-center .hmwXQ {
   position: relative;
 }
-.hmwXQ .van-icon {
+.hmwXQ .hmwNo{
   position: absolute;
   top: 0.5rem;
-  right: 0.5rem;
+  right: 0.7rem;
   font-size: 1.2rem;
   color: #646464;
+  font-weight: bold;
+}
+.hmwXQ .hmwYes{
+  position: absolute;
+  top: 0.5rem;
+  right: 0.7rem;
+  font-size: 1.2rem;
+  color: #eb6100;
   font-weight: bold;
 }
 /* 教学团队 */
@@ -359,5 +391,21 @@ font-size: 3.2vw;
 }
 .van-tabbar{
     height: 2.8rem;
+}
+/* 二维码弹框的样式 */
+.van-popup{
+  padding: 0.8rem 2.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+.van-popup img{
+  width: 11.5rem;
+}
+.van-popup p{
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 </style>
