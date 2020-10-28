@@ -88,7 +88,8 @@
     <!-- 底部按钮 -->
     <van-tabbar>
   <div class="hmw-foot">
-      <van-button type="primary" block>立即报名</van-button>
+      <van-button v-if="!hmwBtnFlag" type="primary" block @click="hmwStudyJump()">立即报名</van-button>
+      <van-button v-if="hmwBtnFlag" type="primary" block @click="hmwStudyJump()">立即学习</van-button>
     </div>
 </van-tabbar>
     
@@ -112,7 +113,9 @@ export default {
     //   二维码是否出现
       hmwShow:false,
     //   页面渲染的主数据
-    hmwObj:JSON.parse(sessionStorage.getItem('hmwXQ'))
+    hmwObj:JSON.parse(sessionStorage.getItem('hmwXQ')),
+    // 底部按钮状态（有没有登录）
+    hmwBtnFlag:false,
     };
   },
   // 计算属性
@@ -137,6 +140,10 @@ export default {
         document.documentElement.scrollTop =i
         // 样式的改变
         this.hmwIndex = id
+    },
+    // 立即学习点击事件
+    hmwStudyJump(){
+        this.$router.push('/study')
     }
   },
   mounted() {
