@@ -18,7 +18,6 @@ const Net = {
     return request(API.Method.Get, API.Path.HMWLIST, params)
   },
   //获取我的学习
-<<<<<<< HEAD
   xue(params){
     return request(API.Method.Get,API.Path.XUE,params)
   },
@@ -32,14 +31,13 @@ const Net = {
   },
   ke(){
     return request(API.Method.Get,API.Path.KE)
-=======
+  },
   xue(){
     return request(API.Method.Get,API.Path.Xue)
   },
   //首页推荐老师列表详情页内容
   HomeLIST(params){
     return request(API.Method.Get,API.Path.HomeLIST,params)
->>>>>>> 2ce514b5fec5777ee4b1ae0096d99f58e94317b4
   }
 }
 

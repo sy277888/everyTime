@@ -12,20 +12,17 @@ const API = {
         HMWLIST: '/api/app/courseBasis?page=1&limit=10&',
         //首页列表
         List: '/api/app/recommend/appIndex',
-<<<<<<< HEAD
         //个人信息
         XUE: '/api/app/userInfo',
         //特色课
         TE:"/api/app/courseBasis?page=1&limit=10&",
         //我的关注
         GUAN:"/api/app/collect",
-        KE:"/api/app/courseInfo/basis_id=189"
-=======
+        KE:"/api/app/courseInfo/basis_id=189",
         //学习
         Xue:"/api/app/myStudy/2",
         //首页推荐老师列表
         HomeLIST:'/api/app/teacher/info/id'
->>>>>>> 2ce514b5fec5777ee4b1ae0096d99f58e94317b4
     }
 }
 
