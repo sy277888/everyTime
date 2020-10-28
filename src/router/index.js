@@ -77,7 +77,7 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: () => import('../components/login/login.vue')
+    component: () => import('../components/login/login.vue'),
   },
   //找回密码
   {
