@@ -55,7 +55,7 @@ export default {
           var token=res.data.token;
           localStorage.setItem("token",token);
           localStorage.setItem("username",this.username)
-          this.$router.push({ path: "/mime" });
+          this.$router.push({ path: "/Mime" });
         })
         .catch((err) => {
           console.log(err);
