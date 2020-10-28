@@ -126,6 +126,14 @@ const routes = [
     path:"/detail",
     name:"Detail",
     component: () => import('../components/Course/Detail.vue')
+
+  },
+  //立即页面
+  {
+    path:"/study",
+    name:"Study",
+    component: () => import('../components/Course/Study.vue')
+
   }
 ]
 
