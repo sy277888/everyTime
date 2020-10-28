@@ -55,12 +55,12 @@ export default {
           var token=res.data.token;
           localStorage.setItem("token",token);
           localStorage.setItem("username",this.username)
-          this.$router.push({ path: "/wode" });
+          this.$router.push({ path: "/mime" });
         })
         .catch((err) => {
           console.log(err);
         });
-    },
+    },  
     zhao() {
       this.$router.push({ path: "/mima" });
     },
@@ -69,6 +69,7 @@ export default {
     },
   },
   mounted() {
+    
   },
 };
 </script>
