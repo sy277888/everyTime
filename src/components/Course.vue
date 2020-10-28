@@ -1,67 +1,82 @@
 <template>
   <div class="hmw-box">
     <!-- 顶部 -->
- <van-nav-bar title="标题" />
-    <!-- 这里才是我要做的部分 -->
-    <div class="hmw-center">
-      <van-list>
+    <div class="hmw-top">
+      <van-sticky>
+        <!-- 这个是用来占个位子1 -->
+        <div class="hmw-top"></div>
+              <!-- 导航 -->
          <div class="hmw-nav">
         <van-dropdown-menu>
+          <!-- 分类 -->
           <van-dropdown-item title="分类" ref="item" style="height:100%;">
             <van-cell style="height:100%;">
               <ul class="hmwNavLeft">
-                <li :key="item" v-for="item in 2">
-                  <p>年级</p>
+                <li :key="index" v-for="(item,index) in hmwFl">
+                  <p>{{item.name}}</p>
                   <div class="hmw-nav-tag">
                     <van-row gutter="20">
-                      <van-col :key="i" v-for="i in 5" :class="hmwActiveNum1==i?'hmwSpanActive':''" span="6" @click="hmwActiveNum1=i"><span>出一</span></van-col>
+                      <!-- 点击的时候改变样式并保存到本地 -->
+                      <van-col :key="i.id" v-for="i in item.child" :class="hmwActiveNum1==i.id?'hmwSpanActive':''" span="6" @click="hmwFlD(i)"><span>{{i.name}}</span></van-col>
                     </van-row>
                   </div>
                 </li>
                 <div>
                   <van-button style="border:1px solid #ccc;" plain
+                  @click="hmwRefresh"
                     >重置</van-button
                   >
-                  <van-button color="#eb6100">确定</van-button>
+                  <van-button color="#eb6100" @click="hmwOk()">确定</van-button>
                 </div>
               </ul>
             </van-cell>
           </van-dropdown-item>
-          <van-dropdown-item title="排序" ref="item">
+          <!-- 排序 -->
+          <van-dropdown-item title="排序" ref="item1">
             <van-cell class="hmwCenterNav" center>
               <li
                 :class="[index == hmwSort.length - 1 ? 'hmwsortActive' : '',hmwActiveNum2==index?'hmwSpanActive':'']"
                 v-for="(item, index) in hmwSort"
-                :key="index" @click="hmwActiveNum2=index"
+                :key="index" @click="HmwSort(index)"
               >
                 {{ item }}
               </li>
             </van-cell>
           </van-dropdown-item>
-          <van-dropdown-item title="筛选" ref="item">
+          <!-- 筛选 -->
+          <van-dropdown-item title="筛选" ref="item2">
             <van-cell class="hmwChoose" style="padding-top:20px;">
               <van-row gutter="20">
                 <van-col
                   :key="index"
                   v-for="(item, index) in hmwChoose"
                   span="6"
-                  :class="hmwActiveNum3==index?'hmwSpanActive':''" @click="hmwActiveNum3=index"
-                  ><span>{{ item }}</span></van-col
+                  :class="hmwActiveNum3==index?'hmwSpanActive':''" @click="HmwChoose(index)"
+                  ><span>{{ item.name }}</span></van-col
                 >
               </van-row>
             </van-cell>
           </van-dropdown-item>
         </van-dropdown-menu>
       </div>
+</van-sticky>
+    </div>
+    <!-- 这里才是我要做的部分 -->
+    <div class="hmw-center">
+      <!-- 可滑动 -->
+      <van-list>
       <div class="hmw-main">
+        <!-- 主体部分列表渲染 -->
         <van-list>
-          <li :key="index" v-for="(item, index) in hmwList">
+          <!-- 这里必须要用v-for 当这个未定义时不渲染，这样才不会爆0的错！！！ -->
+          <li v-if="item.teachers_list" :key="index" v-for="(item, index) in hmwList">
             <h2>{{ item.title }}</h2>
-            <p class="hmwP1"><van-icon name="clock-o" /><span>{{ item.date+'共'+item.course+'课时' }}</span></p>
-            <p class="hmwP2"><img :src="item.img" alt=""><span>{{ item.name }}</span></p>
+            <p class="hmwP1"><van-icon name="clock-o" /><span>{{ item.start_play_date|timefn}}~{{item.end_play_date|timefn}}&emsp;&emsp;|共{{item.total_periods+'课时' }}</span></p>
+            <p class="hmwP2"><img :src="item.teachers_list[0].teacher_avatar" alt=""><span>{{ item.teachers_list[0].teacher_name }}</span></p>
             <div class="hmwListBottom">
-              <span>{{ item.number }}人已报名</span>
-              <strong>{{ item.price==0?'免费':item.price+'.00' }}</strong>
+              <span>{{item.brows_num }}人已报名</span>
+              <strong v-if="item.price==0">免费</strong>
+              <strong v-if="item.price!=0" style="color:orange;display:flex;align-items: center;"><van-icon name="gold-coin" />&emsp;<span>{{item.price/100+'.00' }}</span></strong>
             </div>
           </li>
         </van-list>
@@ -86,28 +101,86 @@ export default {
   data() {
     return {
       // 用来保存下标来做点击时样式
-      hmwActiveNum1:0,
+      hmwActiveNum1:0||sessionStorage.getItem("hmwFlIndex"),
       hmwActiveNum2:0,
       hmwActiveNum3:0,
       //    下拉菜单导航所需
       value: 0,
       switch1: false,
       switch2: false,
+      // 分类
+      hmwFl:[
+            {
+                "id":1,
+                "name":"年级",
+                "parent_id":0,
+                "child":[
+                    {
+                        "id":1,
+                        "name":"初一"
+                    },
+                    {
+                        "id":2,
+                        "name":"初二"
+                    },
+                    {
+                        "id":3,
+                        "name":"初三"
+                    },
+                    {
+                        "id":4,
+                        "name":"高一"
+                    },
+                    {
+                        "id":5,
+                        "name":"高二"
+                    }
+                ]
+            },
+            {
+                "id":2,
+                "name":"学科",
+                "parent_id":0,
+                "child":[
+                    {
+                        "id":7,
+                        "name":"语文"
+                    },
+                    {
+                        "id":8,
+                        "name":"数学"
+                    },
+                    {
+                        "id":9,
+                        "name":"英语"
+                    },
+                    {
+                        "id":12,
+                        "name":"物理"
+                    },
+                    {
+                        "id":13,
+                        "name":"化学"
+                    }
+                ]
+            }
+        ],
       //   综合排序
-      hmwSort: ["综合排序", "最新", "罪人", "价格从低到高", "价格从低到高"],
-      hmwChoose: [
-        "全部",
-        "大可版",
-        "小可版",
-        "大可版",
-        "小可版",
-        "大可版",
-        "小可版",
-        "大可版",
-        "小可版",
-        "大可版",
-        "小可版",
-      ],
+      hmwSort: ["综合排序", "最新", "最热", "价格从低到高", "价格从低到高"],
+      // 筛选
+      hmwChoose : [
+    // { type: 0, value: "全部" },
+    // { type: 2, value: "大班课" },
+    // { type: 3, value: "小班课" },
+    // { type: 4, value: "公开课" },
+    // { type: 5, value: "点播课" },
+    // { type: 7, value: "面授课" },
+    // { type: 8, value: "音频课" },
+    // { type: 9, value: "系统课" },
+    // { type: 10, value: "图文课" },
+    // { type: 11, value: "会员课" }
+],
+      // 主题列表
       hmwList: [
         {
           title: "李老师16号到22号地理大课堂开课了",
@@ -190,16 +263,62 @@ export default {
   watch: {},
   // 组件方法
   methods: {
+    // 下拉框的显示隐藏
     onConfirm() {
       this.$refs.item.toggle();
-      console.log(this.$refs);
     },
-    // 接受导航数据
-    hmwGetNav() {
-      this.$Net.courseNav().then((res) => {
-        console.log(res);
-      });
+    onConfirm1() {
+      this.$refs.item1.toggle();
     },
+    onConfirm2() {
+      this.$refs.item2.toggle();
+    },
+    // 接受导航数据,列表数据
+    async hmwGetNav(navCan='',listCan='') {
+      let {data} =await this.$Net.courseNav(navCan)
+      let {data:list} =await this.$Net.courseList(listCan)
+      console.log(data.data.appCourseType)
+      // 筛选
+      this.hmwChoose=data.data.appCourseType
+      // 主体列表
+      this.hmwList = list.data.list
+    },
+    // 分类每一小项的点击事件-------------------------------------------
+    hmwFlD(i){
+      // 点击变色
+    this.hmwActiveNum1=i.id
+    // 重新请求渲染页面
+    // this.hmwGetNav('attr_val_id='+i.id)
+    // 保存一下，页面刷新不改变样式
+    sessionStorage.setItem("hmwFlIndex",i.id)
+    },
+     // 点击确认-----------------------------------------------------------
+    hmwOk(){
+      // 关闭窗口
+      this.onConfirm()
+    },
+    // 点击重置-----------------------------------------------------------
+    hmwRefresh(){
+      this.hmwActiveNum1 = this.hmwFl[0].child
+      sessionStorage.removeItem("hmwFlIndex")
+      // 关闭窗口
+      this.onConfirm()
+    },
+    // 排序的点击事件----------------------------------------------------------------
+    HmwSort(i){
+      // 点击变色
+      this.hmwActiveNum2=i
+      // 关闭窗口
+      this.onConfirm1()
+    },
+    // 筛选的点击事件---------------------------------------------------------
+    // 这个应该可以有效果了,还是不行
+    HmwChoose(i){
+ // 点击变色
+      this.hmwActiveNum3=i
+      // 关闭窗口
+      this.onConfirm2()
+    }
   },
   mounted() {
     this.hmwGetNav();
@@ -207,10 +326,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 li {
   list-style: none;
 }
+/* 大体布局----------------------------------------------------------- */
 .hmw-box {
   display: flex;
   height: 100%;
@@ -226,8 +346,9 @@ li {
 .hmw-center {
   flex: 1;
   overflow: scroll;
+ padding-top: 3rem;
 }
-/* 左边导航拓展样式 */
+/* 左边导航拓展样式 --------------------------------------------------------------*/
 .hmwNavLeft p {
   padding-top: 0.4rem;
   font-size: 0.23rem;
@@ -274,7 +395,7 @@ color: #eb6100;
   height: 2rem;
   margin-top: 1rem;
 }
-/* 中间排序部分 */
+/* 中间排序部分 --------------------------------------------------------------------------*/
 .hmwCenterNav li {
   text-align: center;
   height: 13.6vw;
@@ -285,6 +406,7 @@ color: #eb6100;
   color: #595959;
   border-bottom: 1px solid #f5f5f5;
 }
+/* 点击的活动页面 */
 .hmwCenterNav .hmwsortActive {
   border: none;
   margin-bottom: 0;
@@ -317,7 +439,7 @@ color: #eb6100;
   padding: 1rem;
   margin-top: 1rem;
 }
-/* 图片部分卡片布局 */
+/* 图片部分卡片布局 -------------------------------------------------------------------------------*/
 .hmw-main > .van-list > li>h2{
   font-size: 4.26667vw;
     font-weight: 400;
@@ -346,7 +468,9 @@ color: #eb6100;
 }
 .hmw-main > .van-list > li>.hmwP2>img{
   width: 2rem;
+  height: 2rem;
   margin-right: 0.5rem;
+  border-radius: 1rem;
 }
 .hmwListBottom{
   display: flex;
@@ -361,6 +485,7 @@ padding-right: 2.66667vw;
 .hmwListBottom>strong{
 color: #44a426;
     font-size: 4.26667vw;
+    font-weight: none;
 }
 
 </style>

@@ -20,6 +20,19 @@ Vue.prototype.$Rem = Rem
 //全局引入Api
 import Net from './api/index'
 Vue.prototype.$Net = Net
+// 全局时间过滤器
+Vue.filter("timefn",function(originval){
+  const dt = new Date(originval)
+
+  const yy = dt.getFullYear()
+  const mm = (dt.getMonth() +1+'' ).padStart(2,0)
+  const dd = (dt.getDate() +'' ).padStart(2,0)
+  const hh = (dt.getHours() +'' ).padStart(2,0)
+  const ff = (dt.getMinutes() +'' ).padStart(2,0)
+  const ss = (dt.getSeconds() +'' ).padStart(2,0)
+
+  return `${mm}月${dd}日 ${hh}:${ff}`
+})
 new Vue({
   router,
   store,
