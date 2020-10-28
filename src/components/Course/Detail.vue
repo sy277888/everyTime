@@ -9,9 +9,9 @@
       <van-icon name="arrow-left" @click="$router.push('/about')" />
       <p v-show="!hmwFlag">课程详情</p>
       <div class="hmwNav" v-show="hmwFlag">
-          <span :class="hmwIndex==0?'hmwActiveTop':''" @click="hmwDian(290,0)" id="hmwKc">课程介绍</span>
-          <span :class="hmwIndex==1?'hmwActiveTop':''" @click="hmwDian(368,1)" id="hmwDg">课程大纲</span>
-          <span :class="hmwIndex==2?'hmwActiveTop':''" @click="hmwDian(1056,2)" id="hmwPj">课程评价</span>
+          <span :class="hmwIndex==0?'hmwActiveTop':''" @click="hmwDian(310,0)" id="hmwKc">课程介绍</span>
+          <span :class="hmwIndex==1?'hmwActiveTop':''" @click="hmwDian(394,1)" id="hmwDg">课程大纲</span>
+          <span :class="hmwIndex==2?'hmwActiveTop':''" @click="hmwDian(1125,2)" id="hmwPj">课程评价</span>
       </div>
       <van-icon name="cluster-o" />
     </div>
@@ -155,7 +155,7 @@ export default {
     window.addEventListener('scroll', this.scrollHandle);  // 绑定页面的滚动事
   },
   updated(){
-    document.documentElement.scrollTop =0
+    // document.documentElement.scrollTop =0
   }
 };
 </script>
