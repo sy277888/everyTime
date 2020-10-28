@@ -11,7 +11,11 @@ const API = {
         HMWFL: '/api/app/courseClassify',
         HMWLIST: '/api/app/courseBasis?page=1&limit=10&',
         //首页列表
-        List: '/api/app/recommend/appIndex'
+        List: '/api/app/recommend/appIndex',
+        //学习
+        Xue:"/api/app/myStudy/2",
+        //首页推荐老师列表
+        HomeLIST:'/api/app/teacher/info/id'
     }
 }
 //定义请求地址

@@ -10,6 +10,23 @@ const routes = [
     name: 'Home',
     component: Home
   },
+  { 
+    //首页推荐老师详情
+    path: '/homelist',
+    name: 'Homelist',
+    component: ()=>import('../views/Homelist.vue')
+  },{
+    //首页推荐老师详情预约页
+    path: '/homedata',
+    name: 'HomeData',
+    component: ()=>import('../views/HomeData.vue')
+  },
+  {
+    //学历日历
+    path: '/calendar',
+    name: 'Calendar',
+    component: ()=>import('../views/Calendar.vue')
+  },
   {
     path: '/about',
     name: 'About',
@@ -74,7 +91,7 @@ const routes = [
   }
   ,
   {
-    //我的
+    //课程
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue')
@@ -83,7 +100,7 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: () => import('../components/login/login.vue')
+    component: () => import('../components/login/login.vue'),
   },
   //找回密码
   {
@@ -130,6 +147,20 @@ const routes = [
   },
   // 我的  个人信息修改页面
 
+  //课程详情页面
+  {
+    path:"/detail",
+    name:"Detail",
+    component: () => import('../components/Course/Detail.vue')
+
+  },
+  //立即页面
+  {
+    path:"/study",
+    name:"Study",
+    component: () => import('../components/Course/Study.vue')
+
+  }
 ]
 
 const router = new VueRouter({
