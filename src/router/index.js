@@ -10,6 +10,23 @@ const routes = [
     name: 'Home',
     component: Home
   },
+  { 
+    //首页推荐老师详情
+    path: '/homelist',
+    name: 'Homelist',
+    component: ()=>import('../views/Homelist.vue')
+  },{
+    //首页推荐老师详情预约页
+    path: '/homedata',
+    name: 'HomeData',
+    component: ()=>import('../views/HomeData.vue')
+  },
+  {
+    //学历日历
+    path: '/calendar',
+    name: 'Calendar',
+    component: ()=>import('../views/Calendar.vue')
+  },
   {
     path: '/about',
     name: 'About',
@@ -68,7 +85,7 @@ const routes = [
   }
   ,
   {
-    //我的
+    //课程
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue')

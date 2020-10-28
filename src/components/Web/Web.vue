@@ -126,7 +126,8 @@
         align-items: center;
     }
     img {
-        width: 40%;
-        height: 40%;
+        width: 100%;
+        height: 100%;
+        border-radius: 2rem;
     }
 </style>

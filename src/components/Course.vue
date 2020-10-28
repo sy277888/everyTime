@@ -406,13 +406,7 @@ li {
   height: 100%;
   flex-direction: column;
 }
-.hmw-top,
-.hmw-foot {
-  background: steelblue;
-  width: 100%;
-  height: 3rem;
-  flex-shrink: none;
-}
+
 .hmw-center {
   flex: 1;
   overflow: scroll;
