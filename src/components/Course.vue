@@ -17,15 +17,18 @@
                     <div class="hmw-nav-tag">
                       <van-row gutter="20">
                         <!-- 点击的时候改变样式并保存到本地 -->
-                        <van-col :key="i.id" v-for="i in item.child" :class="hmwActiveNum1==i.id||hmwActiveNum4==i.id?'hmwSpanActive':''" span="6" @click="hmwFlD(i,item.id)"><span>{{i.name}}</span></van-col>
-                        <!-- <van-col
+                        <van-col
                           :key="i.id"
                           v-for="i in item.child"
-                          :class="hmwActiveNum1 == i.id ? 'hmwSpanActive' : ''"
+                          :class="
+                            hmwActiveNum1 == i.id || hmwActiveNum4 == i.id
+                              ? 'hmwSpanActive'
+                              : ''
+                          "
                           span="6"
-                          @click="hmwFlD(i)"
+                          @click="hmwFlD(i, item.id)"
                           ><span>{{ i.name }}</span></van-col
-                        > -->
+                        >
                       </van-row>
                     </div>
                   </li>
@@ -120,7 +123,7 @@
         </div>
       </van-list>
     </div>
-  
+    <div class="hmw-foot"></div>
   </div>
 </template>
 
@@ -137,13 +140,13 @@ export default {
     return {
       // 用来保存下标来做点击时样式
       // 分类下标
-      hmwActiveNum1:0||sessionStorage.getItem("hmwFlIndex1"),
+      hmwActiveNum1: 0 || sessionStorage.getItem("hmwFlIndex1"),
       // 分类下标2--有两个不同的下标
-      hmwActiveNum4:0||sessionStorage.getItem("hmwFlIndex2"),
+      hmwActiveNum4: 0 || sessionStorage.getItem("hmwFlIndex2"),
       // 排序下标
-      hmwActiveNum2:0,
+      hmwActiveNum2: 0,
       // 筛选下标
-      hmwActiveNum3:0,
+      hmwActiveNum3: 0,
       //    下拉菜单导航所需
       value: 0,
       switch1: false,
@@ -333,22 +336,21 @@ export default {
     },
     // 分类每一小项的点击事件-------------------------------------------
     // 当前的id和父级的id
-    hmwFlD(i,fuI){
-      console.log(i,fuI)
+    hmwFlD(i, fuI) {
+      console.log(i, fuI);
       // 根据父级判断一下
-      if(fuI==1){
-// 点击变色
-    this.hmwActiveNum1=i.id
-    sessionStorage.setItem("hmwFlIndex1",i.id)
-      }else{
-        this.hmwActiveNum4=i.id
-        sessionStorage.setItem("hmwFlIndex2",i.id)
+      if (fuI == 1) {
+        // 点击变色
+        this.hmwActiveNum1 = i.id;
+        sessionStorage.setItem("hmwFlIndex1", i.id);
+      } else {
+        this.hmwActiveNum4 = i.id;
+        sessionStorage.setItem("hmwFlIndex2", i.id);
       }
-      
-    // 重新请求渲染页面
-    // this.hmwGetNav('attr_val_id='+i.id)
-    // 保存一下，页面刷新不改变样式
-    
+
+      // 重新请求渲染页面
+      // this.hmwGetNav('attr_val_id='+i.id)
+      // 保存一下，页面刷新不改变样式
     },
     // 点击确认-----------------------------------------------------------
     hmwOk() {
@@ -356,12 +358,12 @@ export default {
       this.onConfirm();
     },
     // 点击重置-----------------------------------------------------------
-    hmwRefresh(){
-      this.hmwActiveNum1 = 0
-      this.hmwActiveNum4 = 0
+    hmwRefresh() {
+      this.hmwActiveNum1 = 0;
+      this.hmwActiveNum4 = 0;
       // this.hmwActiveNum4 = this.hmwFl[0].child
-      sessionStorage.removeItem("hmwFlIndex1")
-      sessionStorage.removeItem("hmwFlIndex2")
+      sessionStorage.removeItem("hmwFlIndex1");
+      sessionStorage.removeItem("hmwFlIndex2");
       // 关闭窗口
       this.onConfirm();
     },
