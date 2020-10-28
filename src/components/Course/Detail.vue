@@ -9,9 +9,9 @@
       <van-icon name="arrow-left" @click="$router.push('/about')" />
       <p v-show="!hmwFlag">课程详情</p>
       <div class="hmwNav" v-show="hmwFlag">
-          <span :class="hmwIndex==0?'hmwActiveTop':''" @click="hmwDian(300,0)" id="hmwKc">课程介绍</span>
-          <span :class="hmwIndex==1?'hmwActiveTop':''" @click="hmwDian(380,1)" id="hmwDg">课程大纲</span>
-          <span :class="hmwIndex==2?'hmwActiveTop':''" @click="hmwDian(1085,2)" id="hmwPj">课程评价</span>
+          <span :class="hmwIndex==0?'hmwActiveTop':''" @click="hmwDian(290,0)" id="hmwKc">课程介绍</span>
+          <span :class="hmwIndex==1?'hmwActiveTop':''" @click="hmwDian(368,1)" id="hmwDg">课程大纲</span>
+          <span :class="hmwIndex==2?'hmwActiveTop':''" @click="hmwDian(1056,2)" id="hmwPj">课程评价</span>
       </div>
       <van-icon name="cluster-o" />
     </div>
@@ -135,6 +135,8 @@ export default {
       },
     //   nav的点击事件
     hmwDian(i,id){
+      console.log(this.$el)
+      let anchor = this.$el.querySelector(selector);
         // document.getElementById(i).scrollIntoView();
         // 相当于锚点
         document.documentElement.scrollTop =i
@@ -148,10 +150,12 @@ export default {
   },
   mounted() {
       console.log(this.hmwObj)
-      
       document.documentElement.scrollTop =0
     window.addEventListener('scroll', this.scrollHandle);  // 绑定页面的滚动事
   },
+  updated(){
+    document.documentElement.scrollTop =0
+  }
 };
 </script>
 <style scoped>
