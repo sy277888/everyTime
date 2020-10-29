@@ -10,7 +10,7 @@
         <van-sticky>
             <div class="hmw-top">
             <!-- 原生的导航 -->
-      <van-icon name="arrow-left" @click="$router.push('/about')" />
+      <van-icon name="arrow-left" @click="$router.go(-1)" />
       <p v-show="!hmwFlag">课程详情</p>
       <div class="hmwNav" v-show="hmwFlag">
           <span :class="hmwIndex==0?'hmwActiveTop':''" @click="hmwDian(0)" id="hmwKc">课程介绍</span>
@@ -132,7 +132,9 @@ export default {
   // 计算属性
   computed: {},
   // 侦听器
-  watch: {},
+  watch: {
+   
+  },
   // 组件方法
   methods: {
     //   nav是否显示判断事件

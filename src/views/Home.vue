@@ -58,7 +58,7 @@
       </div>
       <!-- 精品课程 -->
       <p><span class="Home_probably_P"></span>精品课程</p>
-      <div class="hmwJP" v-for="(item, index) in course" :key="index + 'b'">
+      <div class="hmwJP" v-for="(item, index) in course" :key="index + 'b'" @click="hmwJumpXQ(item)">
         <div class="Home_course">
           <div class="Home_course_box">
             <p class="hmwTitleJP">
@@ -82,7 +82,7 @@
       </div>
       <!-- 推荐课程 -->
       <p><span class="Home_probably_P"></span>推荐课程</p>
-      <div v-for="(item, index) in courses" :key="index + 'c'">
+      <div v-for="(item, index) in courses" :key="index + 'c'" @click="hmwJumpXQ(item)">
         <div class="Home_course">
           <div class="Home_course_box">
             <p class="hmwTitleJP">
@@ -201,6 +201,14 @@ export default {
       this.$router.push({
         path: "/solo",
         name: "Solo",
+      });
+    },
+    // 跳转到详情页面
+    hmwJumpXQ(item){
+      console.log(item)
+      sessionStorage.setItem('hmwXQ',JSON.stringify(item))
+this.$router.push({
+        path: "/detail"
       });
     },
   },
