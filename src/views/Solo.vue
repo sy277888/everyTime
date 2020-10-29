@@ -6,7 +6,7 @@
         <span class="Solo_top_title">一对一辅导</span>
       </template>
       <template #left>
-        <van-icon name="arrow-left" size="30px" color="gray" />
+        <van-icon name="arrow-left" size="30px" color="gray"  @click="lefts"/>
       </template>
       <template #right>
         <van-icon name="search" size="25px" color="gray"  @click="search"/>
@@ -23,6 +23,9 @@ export default {
   methods: {
     search(){
       this.$router.push("/search")
+    },
+    lefts(){
+         this.$router.push("/")
     }
   },
 };
