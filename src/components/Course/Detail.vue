@@ -229,7 +229,7 @@ export default {
       })
       // 获取当前文档流的 scrollTop
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-      console.log(scrollTop)
+      // console.log(scrollTop)
       // 定义当前点亮的导航下标
       let navIndex = 0
       for (let n = 0; n < offsetTopArr.length; n++) {
@@ -237,30 +237,35 @@ export default {
         // 那么此时导航索引就应该是n了
         if (scrollTop >= offsetTopArr[n]-50) {
           navIndex = n
-          
         }
       }
       // 这里就是让导航样式随你的滚动而改变
       this.hmwIndex = navIndex
-      console.log(this.hmwIndex)
+      // console.log(this.hmwIndex)
       this.active = navIndex
     },
+  // 获取详情页的数据
+  async hnwGetList(){
+    let {data} = await this.$Net.courseXQList({ 
+        params:{
+        basis_id:this.hmwObj.teachers_list[0].id
+        }
+      });
+      console.log(data)
+  }
   },
   mounted() {
-    // 之前的
-    //   console.log(this.hmwObj)
       document.documentElement.scrollTop =0
     window.addEventListener('scroll', this.scrollHandle);  // 绑定页面的滚动事
      // 监听滚动事件
     window.addEventListener('scroll', this.onScroll, false)
+    // 获取一下数据
+    this.hnwGetList()
   },
   destroy() {
     // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
     window.removeEventListener('scroll', this.onScroll)
   },
-  updated(){
-    // document.documentElement.scrollTop =0
-  }
 };
 </script>
 <style scoped>
