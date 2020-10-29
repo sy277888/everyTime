@@ -6,10 +6,14 @@ const API = {
     },
     //定义请求地址
     Path: {
-        HMWFL: '/api/app/courseClassify',
+        // HMWFL: '/api/app/courseClassify',
         LOGIN: '/api/app/login',
+        // 课程导航
         HMWFL: '/api/app/courseClassify',
+        // 课程列表
         HMWLIST: '/api/app/courseBasis?page=1&limit=10&',
+        // 课程详情数据
+        HMWXQ: '/api/app/courseInfo/basis_id=109',
         //首页列表
         List: '/api/app/recommend/appIndex',
         //个人信息

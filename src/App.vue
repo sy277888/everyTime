@@ -74,7 +74,9 @@ export default {
         this.isShow = false;
       } else if (to.path == "/about") {
         this.isShow = true;
-      } else if (to.path == "/calendar") {
+      } else if (to.path == "/lenderData") {
+        this.isShow = false;
+      }else if (to.path == "/solo") {
         this.isShow = false;
       }
     },

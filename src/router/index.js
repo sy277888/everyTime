@@ -27,6 +27,17 @@ const routes = [
     name: 'Calendar',
     component: () => import('../views/Calendar.vue')
   },
+{
+    path: '/lenderData',
+    name: 'LenderData',
+    component: ()=>import('../views/LenderData.vue')
+  },
+  {
+  // 一对一辅导
+  path:'/solo',
+  name:'Solo',
+  component:()=>import('../views/Solo.vue')
+  },
   {
     path: '/about',
     name: 'About',
@@ -256,11 +267,16 @@ const routes = [
     path:"/shezhi",
     name:"Shezhi",
     component: () => import('../components/mimaxiu/xiumi.vue')
-
+  },
+  //一对一辅导的搜索页
+  {
+    path:"/search",
+    name:"Search",
+    component: () => import('../views/sousuo/Search.vue')
   }
 ]
 
-const router = new VueRouter({
+const router = new VueRouter({  
   mode: 'history',
   base: process.env.BASE_URL,
   routes

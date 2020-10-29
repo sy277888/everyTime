@@ -10,12 +10,17 @@ const Net = {
   login(params) {
     return request(API.Method.Post, API.Path.LOGIN, params)
   },
+  // 课程导航
   courseNav(params) {
     return request(API.Method.Get, API.Path.HMWFL, params)
   },
   // 获取课程列表的方法
   courseList(params) {
     return request(API.Method.Get, API.Path.HMWLIST, params)
+  },
+  // 获取详情页面数据
+  courseXQList(params) {
+    return request(API.Method.Get, API.Path.HMWXQ, params)
   },
   //获取个人信息
   xuue(){

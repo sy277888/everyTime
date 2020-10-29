@@ -1,3 +1,4 @@
+import { Tab } from 'vant';
 <template>
   <div class="hmw-box">
     <!-- 顶部 -->
@@ -71,7 +72,7 @@
                     v-for="(item, index) in hmwChoose"
                     span="6"
                     :class="hmwActiveNum3 == index ? 'hmwSpanActive' : ''"
-                    @click="HmwChoose(index)"
+                    @click="HmwChoose(item,index)"
                     ><span>{{ item.name }}</span></van-col
                   >
                 </van-row>
@@ -210,7 +211,7 @@ export default {
         },
       ],
       //   综合排序
-      hmwSort: ["综合排序", "最新", "最热", "价格从低到高", "价格从低到高"],
+      hmwSort: ["综合排序", "最新", "最热", "价格从低到高", "价格从高到低"],
       // 筛选
       hmwChoose: [
         // { type: 0, value: "全部" },
@@ -326,10 +327,16 @@ export default {
       this.$refs.item2.toggle();
     },
     // 接受导航数据,列表数据
-    async hmwGetNav(navCan = "", listCan = "") {
+    async hmwGetNav(navCan = "", listCan = 0) {
+      console.log(listCan)
       let { data } = await this.$Net.courseNav(navCan);
-      let { data: list } = await this.$Net.courseList(listCan);
-      console.log(data.data.appCourseType);
+      let { data: list } = await this.$Net.courseList({ 
+        params:{
+         order_by:listCan,
+         course_type:'',
+        }
+      });
+      console.log(list.data);
       // 筛选
       this.hmwChoose = data.data.appCourseType;
       // 主体列表
@@ -369,23 +376,34 @@ export default {
       this.onConfirm();
     },
     // 排序的点击事件----------------------------------------------------------------
-    HmwSort(i) {
+    async HmwSort(i) {
       // 点击变色
       this.hmwActiveNum2 = i;
+      this.hmwGetNav('',i)
+// let { data: list } = await this.$Net.courseList({order_by:i});
       // 关闭窗口
       this.onConfirm1();
     },
     // 筛选的点击事件---------------------------------------------------------
     // 这个应该可以有效果了,还是不行
-    HmwChoose(i) {
+    async HmwChoose(i,index) {
+      console.log(i)
       // 点击变色
-      this.hmwActiveNum3 = i;
+      this.hmwActiveNum3 = index;
       // 关闭窗口
       this.onConfirm2();
+      // 渲染
+      let { data: list } = await this.$Net.courseList({ 
+        params:{
+         course_type:i.id,
+        }
+      });
+      this.hmwList = list.data.list;
     },
     // 跳转到详情页面
     hmwJump(item){
       // 保存数据到本地
+      sessionStorage.setItem('hmwPath',JSON.stringify({path:'/about',name:'About'}))
       sessionStorage.setItem('hmwXQ',JSON.stringify(item))
       this.$router.push('/detail')
     }
