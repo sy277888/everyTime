@@ -48,11 +48,11 @@
             </div>
           </li>
           <!-- 课程介绍 -->
-          <li class="hmwJS">
+          <li class="hmwJS hmwSroll">
             <p class="hmwP1">课程介绍</p>
           </li>
           <!-- 课程大纲 -->
-          <li class="hmwDG" style="padding-bottom: 2px;">
+          <li class="hmwDG hmwSroll" style="padding-bottom: 2px;">
             <p class="hmwP1">课程大纲</p>
             <!-- 无序列表 -->
             <ul>
@@ -66,7 +66,7 @@
             </ul>
           </li>
           <!-- 课程评论 -->
-          <li class="hmwPL">
+          <li class="hmwPL hmwSroll">
             <p class="hmwP1">课程评论</p>
             <ul>
               <li :key="index" v-for="(item, index) in 10">
@@ -146,11 +146,9 @@ export default {
       },
     //   nav的点击事件
     hmwDian(index){
-      // 之前的
-        // // 相当于锚点
-        // document.documentElement.scrollTop =i
         // // 样式的改变
         this.hmwIndex = index
+        console.log(this.hmwIndex)
         // 获取目标的 offsetTop
       // css选择器是从 1 开始计数，我们是从 0 开始，所以要 +1
       const targetOffsetTop = document.querySelector(`.van-list>ol>li:nth-child(${index+3})`).offsetTop-50
@@ -177,6 +175,8 @@ export default {
           } else {
             scrollTop = targetOffsetTop
           }
+          // 这里应该是要跳到响应元素的位置
+          
           document.body.scrollTop = scrollTop
           document.documentElement.scrollTop = scrollTop
           // 关于 requestAnimationFrame 可以自己查一下，在这种场景下，相比 setInterval 性价比更高
@@ -220,8 +220,8 @@ export default {
      // 滚动监听器
     onScroll() {
       // 获取所有锚点元素
-      const navContents = document.querySelectorAll('.van-list>ol>li')
-      console.log(navContents)
+      const navContents = document.querySelectorAll('.hmwSroll')
+      // console.log(navContents)
       // 所有锚点元素的 offsetTop
       const offsetTopArr = []
       navContents.forEach(item => {
@@ -229,22 +229,27 @@ export default {
       })
       // 获取当前文档流的 scrollTop
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      console.log(scrollTop)
       // 定义当前点亮的导航下标
       let navIndex = 0
       for (let n = 0; n < offsetTopArr.length; n++) {
         // 如果 scrollTop 大于等于第n个元素的 offsetTop 则说明 n-1 的内容已经完全不可见
         // 那么此时导航索引就应该是n了
-        if (scrollTop >= offsetTopArr[n]) {
+        if (scrollTop >= offsetTopArr[n]-50) {
           navIndex = n
+          
         }
       }
+      // 这里就是让导航样式随你的滚动而改变
+      this.hmwIndex = navIndex
+      console.log(this.hmwIndex)
       this.active = navIndex
     },
   },
   mounted() {
     // 之前的
     //   console.log(this.hmwObj)
-    //   document.documentElement.scrollTop =0
+      document.documentElement.scrollTop =0
     window.addEventListener('scroll', this.scrollHandle);  // 绑定页面的滚动事
      // 监听滚动事件
     window.addEventListener('scroll', this.onScroll, false)

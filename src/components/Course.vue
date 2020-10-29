@@ -370,10 +370,11 @@ export default {
       this.onConfirm();
     },
     // 排序的点击事件----------------------------------------------------------------
-    HmwSort(i) {
+    async HmwSort(i) {
       // 点击变色
       this.hmwActiveNum2 = i;
-      this.hmwGetNav('',{order_by:i})
+      // this.hmwGetNav('',{order_by:i})
+let { data: list } = await this.$Net.courseList({order_by:i});
       // 关闭窗口
       this.onConfirm1();
     },
