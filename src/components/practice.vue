@@ -85,7 +85,7 @@ export default {
     },
     onclick1() {
       this.$router.push({
-        path: "/kaodian",
+        path: "/exercise",
       });
     },
     onclick2() {

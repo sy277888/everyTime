@@ -29,13 +29,20 @@
         </div>
         <!-- 列表部分 -->
         <ul>
-              <li :key="index" v-for="(item, index) in 10">
+            <div :key="index" v-for="(item, index) in 10">
+                <li>
                 <p>
-                  <span class="hmwS1" style="">回放</span
+                  <span class="hmwS1" style="">[回放]</span
                   ><span class="hmwS2">第二讲第一课时</span>
                 </p>
                 <p class="hmwP3"><span>李青</span><span>03月16日 18:30 - 19:30</span></p>
+                <p class="hmwJD">
+                    <van-progress inactive :percentage="0" />
+          <span>已观看0%</span>
+                </p>
               </li>
+            </div>
+              
             </ul>
       </van-list>
     </div>
@@ -143,20 +150,26 @@ body,
     width: 14rem;
 }
 /* 列表部分 */
-.hmw-center ul > li {
+.hmw-center ul  li {
   list-style: disc;
   color: #eb6100;
-  margin: 0 2rem;
-  margin-bottom: 1rem;
+  
+}
+.hmw-center ul>div{
+  margin: 0 1rem;
+margin-top: 1rem;
+  border: .53333vw solid #e9e9e9;
+    border-radius: 1.06667vw;
+    padding: 4vw 4vw 4vw 7vw;
+    /* width: 90%; */
 }
 /* span部分 */
 .hmwS1 {
-  padding: 0.2rem 0.4rem;
+  /* padding: 0.2rem 0.4rem; */
   font-size: 0.1rem;
-  background: #ea7a2f;
-  color: white;
+  color: #ea7a2f;
   border-radius: 0.2rem;
-  margin-right: 0.5rem;
+  margin-right: 0.4rem;
 }
 .hmwS2 {
   font-size: 3.2vw;
@@ -171,6 +184,16 @@ body,
   font-size: 4vw;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.45);
+}
+/* 主体的进度条部分 */
+.hmwJD{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.hmwJD span{
+    color: #8c8c8c;
+    font-size: 0.2rem;
 }
 /* 底部导航布局------------------------------------------------------------------------- */
 .hmw-foot p {

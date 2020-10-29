@@ -1,7 +1,11 @@
 <template>
   <div class="hmw">
     <!-- 这里是详情页面 -->
-    
+    <!-- <van-loading color="#1989fa" /> -->
+    <van-popup v-model="show">
+      <p>分享</p>
+      <img src="../../assets/ewm.png" alt="">
+    </van-popup>
         <!-- 吸顶试试 -->
         <van-sticky>
             <div class="hmw-top">
@@ -9,11 +13,11 @@
       <van-icon name="arrow-left" @click="$router.push('/about')" />
       <p v-show="!hmwFlag">课程详情</p>
       <div class="hmwNav" v-show="hmwFlag">
-          <span :class="hmwIndex==0?'hmwActiveTop':''" @click="hmwDian(300,0)" id="hmwKc">课程介绍</span>
-          <span :class="hmwIndex==1?'hmwActiveTop':''" @click="hmwDian(380,1)" id="hmwDg">课程大纲</span>
-          <span :class="hmwIndex==2?'hmwActiveTop':''" @click="hmwDian(1085,2)" id="hmwPj">课程评价</span>
+          <span :class="hmwIndex==0?'hmwActiveTop':''" @click="hmwDian(0)" id="hmwKc">课程介绍</span>
+          <span :class="hmwIndex==1?'hmwActiveTop':''" @click="hmwDian(1)" id="hmwDg">课程大纲</span>
+          <span :class="hmwIndex==2?'hmwActiveTop':''" @click="hmwDian(2)" id="hmwPj">课程评价</span>
       </div>
-      <van-icon name="cluster-o" />
+      <van-icon name="cluster-o" @click="showPopup" />
     </div>
 </van-sticky>
       
@@ -30,7 +34,9 @@
             <p class="hmwP3">开课时间：{{ hmwObj.start_play_date | timefnxq }} - {{
                     hmwObj.end_play_date | timefnxq
                   }}</p>
-            <van-icon name="star-o" />
+                  <!-- <van-rate v-model="hmwSc" :count="1"/> -->
+            <van-icon class="hmwNo" v-show="!hmwSc" name="star-o" @click="hmwYes"/>
+            <van-icon class="hmwYes" v-show="hmwSc" name="star" @click="hmwNo"/>
           </li>
           <!-- 教学团队 -->
           <li class="hmwTD">
@@ -72,7 +78,6 @@
                       :size="14"
                       void-color="#eee"
                       color="rgb(234, 122, 47)"
-                      v-model="value"
                       readonly
                     />
                   </p>
@@ -97,6 +102,7 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
 export default {
   // 组件参数 接收来自父组件的数据
   props: {},
@@ -109,6 +115,7 @@ export default {
       active: 2,
       //   显示导航
       hmwFlag: false,
+      // 导航选中了哪一个
       hmwIndex:0,
     //   二维码是否出现
       hmwShow:false,
@@ -116,6 +123,10 @@ export default {
     hmwObj:JSON.parse(sessionStorage.getItem('hmwXQ')),
     // 底部按钮状态（有没有登录）
     hmwBtnFlag:false,
+    // 弹出层是否显示
+    show: false,
+    // 是否收藏
+    hmwSc:false,
     };
   },
   // 计算属性
@@ -134,24 +145,117 @@ export default {
         }
       },
     //   nav的点击事件
-    hmwDian(i,id){
-        // document.getElementById(i).scrollIntoView();
-        // 相当于锚点
-        document.documentElement.scrollTop =i
-        // 样式的改变
-        this.hmwIndex = id
+    hmwDian(index){
+      // 之前的
+        // // 相当于锚点
+        // document.documentElement.scrollTop =i
+        // // 样式的改变
+        this.hmwIndex = index
+        // 获取目标的 offsetTop
+      // css选择器是从 1 开始计数，我们是从 0 开始，所以要 +1
+      const targetOffsetTop = document.querySelector(`.van-list>ol>li:nth-child(${index+3})`).offsetTop-50
+      // 获取当前 offsetTop
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      // 定义一次跳 50 个像素，数字越大跳得越快，但是会有掉帧得感觉，步子迈大了会扯到蛋
+      const STEP = 50
+      // 判断是往下滑还是往上滑
+      if (scrollTop > targetOffsetTop) {
+        // 往上滑
+        smoothUp()
+      } else {
+        // 往下滑
+        smoothDown()
+      }
+      // 定义往下滑函数
+      function smoothDown() {
+        // 如果当前 scrollTop 小于 targetOffsetTop 说明视口还没滑到指定位置
+        if (scrollTop < targetOffsetTop) {
+          // 如果和目标相差距离大于等于 STEP 就跳 STEP
+          // 否则直接跳到目标点，目标是为了防止跳过了。
+          if (targetOffsetTop - scrollTop >= STEP) {
+            scrollTop += STEP
+          } else {
+            scrollTop = targetOffsetTop
+          }
+          document.body.scrollTop = scrollTop
+          document.documentElement.scrollTop = scrollTop
+          // 关于 requestAnimationFrame 可以自己查一下，在这种场景下，相比 setInterval 性价比更高
+          requestAnimationFrame(smoothDown)
+        }
+      }
+      // 定义往上滑函数
+      function smoothUp() {
+        if (scrollTop > targetOffsetTop) {
+          if (scrollTop - targetOffsetTop >= STEP) {
+            scrollTop -= STEP
+          } else {
+            scrollTop = targetOffsetTop
+          }
+          document.body.scrollTop = scrollTop
+          document.documentElement.scrollTop = scrollTop
+          requestAnimationFrame(smoothUp)
+        }
+      
+    }
     },
     // 立即学习点击事件
     hmwStudyJump(){
         this.$router.push('/study')
-    }
+         document.documentElement.scrollTop =0
+    },
+    // 二维码弹出事件
+    showPopup() {
+      this.show = true;
+    },
+    // 点击收藏
+    hmwYes(){
+      this.hmwSc = true
+      Toast.success('收藏成功')
+    },
+    // 取消收藏
+    hmwNo(){
+      this.hmwSc = false
+      Toast('取消收藏')
+    },
+     // 滚动监听器
+    onScroll() {
+      // 获取所有锚点元素
+      const navContents = document.querySelectorAll('.van-list>ol>li')
+      console.log(navContents)
+      // 所有锚点元素的 offsetTop
+      const offsetTopArr = []
+      navContents.forEach(item => {
+        offsetTopArr.push(item.offsetTop)
+      })
+      // 获取当前文档流的 scrollTop
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      // 定义当前点亮的导航下标
+      let navIndex = 0
+      for (let n = 0; n < offsetTopArr.length; n++) {
+        // 如果 scrollTop 大于等于第n个元素的 offsetTop 则说明 n-1 的内容已经完全不可见
+        // 那么此时导航索引就应该是n了
+        if (scrollTop >= offsetTopArr[n]) {
+          navIndex = n
+        }
+      }
+      this.active = navIndex
+    },
   },
   mounted() {
-      console.log(this.hmwObj)
-      
-      document.documentElement.scrollTop =0
+    // 之前的
+    //   console.log(this.hmwObj)
+    //   document.documentElement.scrollTop =0
     window.addEventListener('scroll', this.scrollHandle);  // 绑定页面的滚动事
+     // 监听滚动事件
+    window.addEventListener('scroll', this.onScroll, false)
   },
+  destroy() {
+    // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
+    window.removeEventListener('scroll', this.onScroll)
+  },
+  updated(){
+    // document.documentElement.scrollTop =0
+  }
 };
 </script>
 <style scoped>
@@ -253,12 +357,20 @@ body > div,
 .hmw-center .hmwXQ {
   position: relative;
 }
-.hmwXQ .van-icon {
+.hmwXQ .hmwNo{
   position: absolute;
   top: 0.5rem;
-  right: 0.5rem;
+  right: 0.7rem;
   font-size: 1.2rem;
   color: #646464;
+  font-weight: bold;
+}
+.hmwXQ .hmwYes{
+  position: absolute;
+  top: 0.5rem;
+  right: 0.7rem;
+  font-size: 1.2rem;
+  color: #eb6100;
   font-weight: bold;
 }
 /* 教学团队 */
@@ -354,5 +466,21 @@ font-size: 3.2vw;
 }
 .van-tabbar{
     height: 2.8rem;
+}
+/* 二维码弹框的样式 */
+.van-popup{
+  padding: 0.8rem 2.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+.van-popup img{
+  width: 11.5rem;
+}
+.van-popup p{
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 </style>

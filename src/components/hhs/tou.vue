@@ -13,7 +13,7 @@
           >
           <span v-show="username.length>0" class="s1" @click="ge">{{username}}</span>
         </p>
-        <button class="sy_bu">去约课</button>
+        <button class="sy_bu" @click="quyue">去约课</button>
       </div>
     </div>
   </div>
@@ -32,6 +32,9 @@ export default {
     },
     ge(){
       this.$router.push({path:"/ge"})
+    },
+    quyue(){
+      this.$router.push({path:"/make"})
     }
   },
   mounted() {

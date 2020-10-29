@@ -37,6 +37,16 @@ export default {
   data() {
     return {};
   },
+  mounted() {
+  },
+  beforeRouteEnter (to, from, next) {
+    var token=localStorage.getItem("token")
+    if(token){
+      next()
+    }else{
+      next("/login")
+    }
+  }
 };
 </script>
 

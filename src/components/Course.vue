@@ -327,9 +327,10 @@ export default {
     },
     // 接受导航数据,列表数据
     async hmwGetNav(navCan = "", listCan = "") {
+      console.log(listCan)
       let { data } = await this.$Net.courseNav(navCan);
       let { data: list } = await this.$Net.courseList(listCan);
-      console.log(data.data.appCourseType);
+      console.log(list.data);
       // 筛选
       this.hmwChoose = data.data.appCourseType;
       // 主体列表
@@ -372,6 +373,7 @@ export default {
     HmwSort(i) {
       // 点击变色
       this.hmwActiveNum2 = i;
+      this.hmwGetNav('',{order_by:i})
       // 关闭窗口
       this.onConfirm1();
     },
@@ -410,7 +412,6 @@ li {
 .hmw-center {
   flex: 1;
   overflow: scroll;
-  padding-top: 3rem;
 }
 /* 左边导航拓展样式 --------------------------------------------------------------*/
 .hmwNavLeft p {
