@@ -60,7 +60,7 @@ export default {
       var token = localStorage.getItem("token");
       if (to.path == "/login") {
         if (token == null) {
-          this.isShow = true;
+          this.isShow = false;
         }
       } else if (to.path == "/detail") {
         this.isShow = false;
@@ -78,10 +78,18 @@ export default {
         this.isShow = false;
       }else if (to.path == "/solo") {
         this.isShow = false;
+      }else if (to.path == "/sololist") {
+        this.isShow = false;
+      }else if (to.path == "/solodata") {
+        this.isShow = false;
       }
     },
   },
 };
 </script>
 <style scoped>
+*{
+  margin: 0rem;
+  padding: 0rem;
+}
 </style>

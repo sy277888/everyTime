@@ -45,6 +45,11 @@ Vue.filter("timefnxq",function(originval){
 
   return `${yy}.${mm}.${dd} ${hh}:${ff}`
 })
+// 修复全局点击重复路由bug
+import Router from 'vue-router'
+const routerPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)}
 new Vue({
   router,
   store,

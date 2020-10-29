@@ -10,29 +10,41 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  { 
+  {
     //首页推荐老师详情
     path: '/homelist',
     name: 'Homelist',
-    component: ()=>import('../views/Homelist.vue')
-  },{
+    component: () => import('../views/Homelist.vue')
+  }, {
     //首页推荐老师详情预约页
     path: '/homedata',
     name: 'HomeData',
-    component: ()=>import('../views/HomeData.vue')
+    component: () => import('../views/HomeData.vue')
   },
   {
     //学历日历
     path: '/lenderData',
     name: 'LenderData',
-    component: ()=>import('../views/LenderData.vue')
+    component: () => import('../views/LenderData.vue')
   },
   {
-  // 一对一辅导
-  path:'/solo',
-  name:'Solo',
-  component:()=>import('../views/Solo.vue')
+    // 一对一辅导
+    path: '/solo',
+    name: 'Solo',
+    component: () => import('../views/Solo.vue')
+  }, {
+    // 一对一辅导预约页
+    path: '/sololist',
+    name: 'Sololist',
+    component: () => import('../views/Sololist.vue')
   },
+  {
+    // 一对一辅导详情页
+    path: '/solodata',
+    name: 'Solodata',
+    component: () => import('../views/Solodata.vue')
+  },
+
   {
     path: '/about',
     name: 'About',
@@ -128,120 +140,120 @@ const routes = [
   },
   //个人信息
   {
-    path:"/ge",
-    name:"Ge",
+    path: "/ge",
+    name: "Ge",
     component: () => import('../components/geren/geren.vue')
 
   },
   // 拖拽点击跳转页面
   {
-    path:"/drag",
-    name:"Drag",
+    path: "/drag",
+    name: "Drag",
     component: () => import('../views/drage/Drag.vue')
   },
   // 练习页面击跳转第二页面
   {
-    path:"/exect",
-    name:"Exect",
+    path: "/exect",
+    name: "Exect",
     component: () => import('../views/grids/Exect.vue')
   },
   // 练习页面击跳转第二页面
   {
-    path:"/exercise",
-    name:"Exercise",
+    path: "/exercise",
+    name: "Exercise",
     component: () => import('../views/grids/Exercise.vue')
   },
   // 我的  个人信息修改页面
 
   //课程详情页面
   {
-    path:"/detail",
-    name:"Detail",
+    path: "/detail",
+    name: "Detail",
     component: () => import('../components/Course/Detail.vue')
 
   },
   //我的特色课
   {
-    path:"/xue",
-    name:"Xue",
+    path: "/xue",
+    name: "Xue",
     component: () => import('../components/geren/xuexi.vue')
   },
   //剩余学习币
   {
-    path:"/yuer",
-    name:"Yuer",
+    path: "/yuer",
+    name: "Yuer",
     component: () => import('../components/geren/yuer.vue')
   },
   //我的关注
   {
-    path:"/guan",
-    name:"Guan",
+    path: "/guan",
+    name: "Guan",
     component: () => import('../components/geren/guuanzhu.vue')
   },
   //我的收藏
   {
-    path:"/shou",
-    name:"Shou",
+    path: "/shou",
+    name: "Shou",
     component: () => import('../components/geren/shou.vue')
   },
-    //课程订单
-    {
-      path:"/ke",
-      name:"Ke",
-      component: () => import('../components/geren/kecheng.vue')
-    },
+  //课程订单
+  {
+    path: "/ke",
+    name: "Ke",
+    component: () => import('../components/geren/kecheng.vue')
+  },
   //会员订单
   {
-    path:"/huiyuan",
-    name:"Huiyuan",
+    path: "/huiyuan",
+    name: "Huiyuan",
     component: () => import('../components/geren/huiyuan.vue')
   },
   //约课订单
   {
-    path:"/yueke",
-    name:"Yueke",
+    path: "/yueke",
+    name: "Yueke",
     component: () => import('../components/geren/yueke.vue')
   },
   //优惠券
   {
-    path:"/you",
-    name:"You",
+    path: "/you",
+    name: "You",
     component: () => import('../components/zhanghu/youhui.vue')
   },
   //我的学习卡
   {
-    path:"/xu",
-    name:"Xu",
+    path: "/xu",
+    name: "Xu",
     component: () => import('../components/zhanghu/xuexi.vue')
   },
   //开通会员
   {
-    path:"/hu",
-    name:"Hu",
+    path: "/hu",
+    name: "Hu",
     component: () => import('../components/zhanghu/hu.vue')
   },
   //我的消息
   {
-    path:"/xiao",
-    name:"Xiao",
+    path: "/xiao",
+    name: "Xiao",
     component: () => import('../components/fuwu/xiaoxi.vue')
   },
   //意见反馈
   {
-    path:"/yi",
-    name:"Yi",
+    path: "/yi",
+    name: "Yi",
     component: () => import('../components/fuwu/yijian.vue')
   },
   //立即页面
   {
-    path:"/study",
-    name:"Study",
+    path: "/study",
+    name: "Study",
     component: () => import('../components/Course/Study.vue')
 
   }
 ]
 
-const router = new VueRouter({  
+const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
