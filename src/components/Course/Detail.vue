@@ -13,9 +13,9 @@
       <van-icon name="arrow-left" @click="$router.push('/about')" />
       <p v-show="!hmwFlag">课程详情</p>
       <div class="hmwNav" v-show="hmwFlag">
-          <span :class="hmwIndex==0?'hmwActiveTop':''" @click="hmwDian(310,0)" id="hmwKc">课程介绍</span>
-          <span :class="hmwIndex==1?'hmwActiveTop':''" @click="hmwDian(394,1)" id="hmwDg">课程大纲</span>
-          <span :class="hmwIndex==2?'hmwActiveTop':''" @click="hmwDian(1100,2)" id="hmwPj">课程评价</span>
+          <span :class="hmwIndex==0?'hmwActiveTop':''" @click="hmwDian(0)" id="hmwKc">课程介绍</span>
+          <span :class="hmwIndex==1?'hmwActiveTop':''" @click="hmwDian(1)" id="hmwDg">课程大纲</span>
+          <span :class="hmwIndex==2?'hmwActiveTop':''" @click="hmwDian(2)" id="hmwPj">课程评价</span>
       </div>
       <van-icon name="cluster-o" @click="showPopup" />
     </div>
@@ -115,6 +115,7 @@ export default {
       active: 2,
       //   显示导航
       hmwFlag: false,
+      // 导航选中了哪一个
       hmwIndex:0,
     //   二维码是否出现
       hmwShow:false,
@@ -144,14 +145,58 @@ export default {
         }
       },
     //   nav的点击事件
-    hmwDian(i,id){
-      console.log(this.$el)
-      // let anchor = this.$el.querySelector(selector);
-        // document.getElementById(i).scrollIntoView();
-        // 相当于锚点
-        document.documentElement.scrollTop =i
-        // 样式的改变
-        this.hmwIndex = id
+    hmwDian(index){
+      // 之前的
+        // // 相当于锚点
+        // document.documentElement.scrollTop =i
+        // // 样式的改变
+        this.hmwIndex = index
+        // 获取目标的 offsetTop
+      // css选择器是从 1 开始计数，我们是从 0 开始，所以要 +1
+      const targetOffsetTop = document.querySelector(`.van-list>ol>li:nth-child(${index+3})`).offsetTop-50
+      // 获取当前 offsetTop
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      // 定义一次跳 50 个像素，数字越大跳得越快，但是会有掉帧得感觉，步子迈大了会扯到蛋
+      const STEP = 50
+      // 判断是往下滑还是往上滑
+      if (scrollTop > targetOffsetTop) {
+        // 往上滑
+        smoothUp()
+      } else {
+        // 往下滑
+        smoothDown()
+      }
+      // 定义往下滑函数
+      function smoothDown() {
+        // 如果当前 scrollTop 小于 targetOffsetTop 说明视口还没滑到指定位置
+        if (scrollTop < targetOffsetTop) {
+          // 如果和目标相差距离大于等于 STEP 就跳 STEP
+          // 否则直接跳到目标点，目标是为了防止跳过了。
+          if (targetOffsetTop - scrollTop >= STEP) {
+            scrollTop += STEP
+          } else {
+            scrollTop = targetOffsetTop
+          }
+          document.body.scrollTop = scrollTop
+          document.documentElement.scrollTop = scrollTop
+          // 关于 requestAnimationFrame 可以自己查一下，在这种场景下，相比 setInterval 性价比更高
+          requestAnimationFrame(smoothDown)
+        }
+      }
+      // 定义往上滑函数
+      function smoothUp() {
+        if (scrollTop > targetOffsetTop) {
+          if (scrollTop - targetOffsetTop >= STEP) {
+            scrollTop -= STEP
+          } else {
+            scrollTop = targetOffsetTop
+          }
+          document.body.scrollTop = scrollTop
+          document.documentElement.scrollTop = scrollTop
+          requestAnimationFrame(smoothUp)
+        }
+      
+    }
     },
     // 立即学习点击事件
     hmwStudyJump(){
@@ -171,12 +216,42 @@ export default {
     hmwNo(){
       this.hmwSc = false
       Toast('取消收藏')
-    }
+    },
+     // 滚动监听器
+    onScroll() {
+      // 获取所有锚点元素
+      const navContents = document.querySelectorAll('.van-list>ol>li')
+      console.log(navContents)
+      // 所有锚点元素的 offsetTop
+      const offsetTopArr = []
+      navContents.forEach(item => {
+        offsetTopArr.push(item.offsetTop)
+      })
+      // 获取当前文档流的 scrollTop
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      // 定义当前点亮的导航下标
+      let navIndex = 0
+      for (let n = 0; n < offsetTopArr.length; n++) {
+        // 如果 scrollTop 大于等于第n个元素的 offsetTop 则说明 n-1 的内容已经完全不可见
+        // 那么此时导航索引就应该是n了
+        if (scrollTop >= offsetTopArr[n]) {
+          navIndex = n
+        }
+      }
+      this.active = navIndex
+    },
   },
   mounted() {
-      console.log(this.hmwObj)
-      document.documentElement.scrollTop =0
+    // 之前的
+    //   console.log(this.hmwObj)
+    //   document.documentElement.scrollTop =0
     window.addEventListener('scroll', this.scrollHandle);  // 绑定页面的滚动事
+     // 监听滚动事件
+    window.addEventListener('scroll', this.onScroll, false)
+  },
+  destroy() {
+    // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
+    window.removeEventListener('scroll', this.onScroll)
   },
   updated(){
     // document.documentElement.scrollTop =0
