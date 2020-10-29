@@ -21,6 +21,7 @@ const routes = [
     name: 'HomeData',
     component: () => import('../views/HomeData.vue')
   },
+   //学历日历
 {
     path: '/lenderData',
     name: 'LenderData',

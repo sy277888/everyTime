@@ -20,6 +20,8 @@ export default {};
   height: 2rem;
   background: coral;
   color: white;
+  font-size: 0.5rem;
+
 }
 
 
