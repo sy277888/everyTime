@@ -23,9 +23,15 @@ const routes = [
   },
   {
     //学历日历
-    path: '/calendar',
-    name: 'Calendar',
-    component: ()=>import('../views/Calendar.vue')
+    path: '/lenderData',
+    name: 'LenderData',
+    component: ()=>import('../views/LenderData.vue')
+  },
+  {
+  // 一对一辅导
+  path:'/solo',
+  name:'Solo',
+  component:()=>import('../views/Solo.vue')
   },
   {
     path: '/about',

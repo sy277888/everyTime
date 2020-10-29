@@ -29,7 +29,7 @@
           <img src="../assets/1.png" alt="" class="img" />
           <p>特色课</p>
         </li>
-        <li>
+        <li @click="OngoC">
           <img src="../assets/2.png" alt="" class="img" />
           <p>一对一辅导</p>
         </li>
@@ -41,7 +41,11 @@
       <!-- 名师推荐 -->
       <div class="Hh"></div>
       <p><span class="Home_probably_P"></span>名师推荐</p>
-      <div v-for="(item, index) in probably.slice(1, 3)" :key="index + 'a'" @click="Onclick(item)">
+      <div
+        v-for="(item, index) in probably.slice(1, 3)"
+        :key="index + 'a'"
+        @click="Onclick(item)"
+      >
         <div class="Home_teacher">
           <ul>
             <li>
@@ -96,7 +100,11 @@
       </div>
       <!-- 明星讲师 -->
       <p><span class="Home_probably_P"></span>明星讲师</p>
-        <div v-for="(item, index) in probably.slice(1, 3)" :key="index " @click="Onclick(item)">
+      <div
+        v-for="(item, index) in probably.slice(1, 3)"
+        :key="index"
+        @click="Onclick(item)"
+      >
         <div class="Home_teacher">
           <ul>
             <li>
@@ -109,11 +117,22 @@
       </div>
     </div>
     <!-- 如果没有token显示内容 -->
-    <van-popup v-model="show" closeable class="Home_Prpup" >
-      <img src="https://wap.365msmk.com/img/feiji.decaf161.png" alt="" width="100%">
+    <van-popup v-model="show" closeable class="Home_Prpup">
+      <img
+        src="https://wap.365msmk.com/img/feiji.decaf161.png"
+        alt=""
+        width="100%"
+      />
       <p class="Home_Prpup_title">赶紧登录一下吧</p>
       <p class="Home_Prpup_titles">立即预约一对一辅导，浏览更多视频教程~</p>
-      <van-button round type="info" color="rgb(235, 97, 0)" class="Home_Prpup_but" @click="Onpath">立即登录</van-button>
+      <van-button
+        round
+        type="info"
+        color="rgb(235, 97, 0)"
+        class="Home_Prpup_but"
+        @click="Onpath"
+        >立即登录</van-button
+      >
     </van-popup>
   </div>
 </template>
@@ -127,7 +146,7 @@ export default {
       courses: [], //推荐课程
       coursesImg: [], //推荐课程老师照片
       teacher: [], //明星讲师
-      show:false
+      show: false,
     };
   },
   mounted() {
@@ -142,36 +161,43 @@ export default {
       console.log(this.teacher);
     });
   },
-  methods:{
-    Onclick(item){
-      var token = localStorage.getItem('token')
-      if(token=!token){
-       this.show= true
-      }else if(token=!token){
-         this.$router.push({
-           path:"/homelist",
-           query:{
-             id : item.teacher_id
-           }
-         })
-       }
-    },
-    Onpath(){
-          this.$router.push({
-           path:"/login",
-          })
-    },
-    OngoA(){
+  methods: {
+    Onclick(item) {
+      var token = localStorage.getItem("token");
+      if ((token = !token)) {
+        this.show = true;
+      } else if ((token = !token)) {
         this.$router.push({
-           path:"/about",
-          })
+          path: "/homelist",
+          query: {
+            id: item.teacher_id,
+          },
+        });
+      }
     },
-    OngoB(){
-         this.$router.push({
-           path:"/calendar ",
-          })
-    }
-  }
+    Onpath() {
+      this.$router.push({
+        path: "/login",
+      });
+    },
+    OngoA() {
+      this.$router.push({
+        path: "/about",
+      });
+    },
+    OngoB() {
+      this.$router.push({
+        path: "/lenderData",
+        name: "LenderData"
+      });
+    },
+    OngoC() {
+      this.$router.push({
+        path: "/solo",
+        name: "Solo",
+      });
+    },
+  },
 };
 </script>
 <style  scoped>
@@ -264,7 +290,7 @@ export default {
   margin-top: 0.5rem;
   width: 3rem;
 }
-.Home_Prpup{
+.Home_Prpup {
   width: 18rem;
   height: 20rem;
   border-radius: 1rem;
@@ -274,14 +300,14 @@ export default {
   width: 100%;
   height: 10rem;
 }
-.Home_Prpup_title{
+.Home_Prpup_title {
   font-size: 0.9rem;
 }
-.Home_Prpup_titles{
+.Home_Prpup_titles {
   font-size: 0.7rem;
   color: gray;
 }
-.Home_Prpup_but{
+.Home_Prpup_but {
   margin-top: 1rem;
   width: 80%;
 }

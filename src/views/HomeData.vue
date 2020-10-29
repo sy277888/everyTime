@@ -27,16 +27,20 @@
         <p>
           <span class="Home_center_icon"></span>
           <span class="Homedata_center_title">选择时间</span>
-          <span class="Homedata_center_titles">（北京时间）{{nowWeek}}</span>
+          <span class="Homedata_center_titles">（北京时间）{{ nowWeek }}</span>
         </p>
       </div>
       <!-- 底部选择时间 -->
-
+      <Sj />
     </div>
   </div>
 </template>
 <script>
+import Sj from "../components/sj";
 export default {
+  components: {
+    Sj,
+  },
   data() {
     return {
       HomedataImg: [], //老师照片
@@ -44,7 +48,7 @@ export default {
       timer: null,
       nowWeek: "", //星期几
       nowDate: "", //本地日期
-      active:1
+      active: 1,
     };
   },
   methods: {
