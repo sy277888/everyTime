@@ -13,7 +13,7 @@ const API = {
         // 课程列表
         HMWLIST: '/api/app/courseBasis?page=1&limit=10&',
         // 课程详情数据
-        HMWXQ: '/api/app/courseInfo/basis_id=189',
+        HMWXQ: '/api/app/courseInfo/basis_id=109',
         //首页列表
         List: '/api/app/recommend/appIndex',
         //个人信息

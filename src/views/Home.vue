@@ -207,6 +207,7 @@ export default {
     hmwJumpXQ(item){
       console.log(item)
       sessionStorage.setItem('hmwXQ',JSON.stringify(item))
+      sessionStorage.setItem('hmwPath',JSON.stringify({path:'/',name:'Home'}))
 this.$router.push({
         path: "/detail"
       });
