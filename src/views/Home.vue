@@ -27,15 +27,15 @@
       <ul class="Home_advice">
         <li @click="OngoA">
           <img src="../assets/1.png" alt="" class="img" />
-          <p>特色课</p>
+          <div>特色课</div>
         </li>
         <li @click="OngoC">
           <img src="../assets/2.png" alt="" class="img" />
-          <p>一对一辅导</p>
+          <div>一对一辅导</div>
         </li>
         <li @click="OngoB">
           <img src="../assets/3.png" alt="" class="img" />
-          <p>学习日历</p>
+          <div>学习日历</div>
         </li>
       </ul>
       <!-- 名师推荐 -->
@@ -58,15 +58,18 @@
       </div>
       <!-- 精品课程 -->
       <p><span class="Home_probably_P"></span>精品课程</p>
-      <div v-for="(item, index) in course" :key="index + 'b'">
+      <div class="hmwJP" v-for="(item, index) in course" :key="index + 'b'" @click="hmwJumpXQ(item)">
         <div class="Home_course">
           <div class="Home_course_box">
-            <p>
+            <p class="hmwTitleJP">
               每时每课特级教师-自主招生冲刺讲座知识点总结————{{ item.title }}
             </p>
-            <img :src="item.cover_img" alt="" class="Home_course_img" />
+            <div>
+              <img :src="item.cover_img" alt="" class="Home_course_img" />
             <p>{{ courseTitle }}</p>
-            <p>
+            </div>
+            
+            <p class="hmwJPfoot">
               <span class="Home_course_title"
                 >{{ item.sales_num }}人已报名
                 <span class="Home_course_p_title"
@@ -79,15 +82,18 @@
       </div>
       <!-- 推荐课程 -->
       <p><span class="Home_probably_P"></span>推荐课程</p>
-      <div v-for="(item, index) in courses" :key="index + 'c'">
+      <div v-for="(item, index) in courses" :key="index + 'c'" @click="hmwJumpXQ(item)">
         <div class="Home_course">
           <div class="Home_course_box">
-            <p>
+            <p class="hmwTitleJP">
               每时每课特级教师-自主招生冲刺讲座知识点总结————{{ item.title }}
             </p>
-            <img :src="coursesImg" alt="" class="Home_course_img" />
+            <div>
+              <img :src="coursesImg" alt="" class="Home_course_img" />
             <p>{{ courseTitle }}</p>
-            <p>
+            </div>
+            
+            <p class="hmwJPfoot">
               <span class="Home_course_title"
                 >{{ item.sales_num }}人已报名
                 <span class="Home_course_p_title"
@@ -197,6 +203,15 @@ export default {
         name: "Solo",
       });
     },
+    // 跳转到详情页面
+    hmwJumpXQ(item){
+      console.log(item)
+      sessionStorage.setItem('hmwXQ',JSON.stringify(item))
+      sessionStorage.setItem('hmwPath',JSON.stringify({path:'/',name:'Home'}))
+this.$router.push({
+        path: "/detail"
+      });
+    },
   },
 };
 </script>
@@ -236,12 +251,16 @@ export default {
   float: left;
 }
 .Home_teacher {
-  width: 85%;
+  width: 90%;
   height: 5rem;
   margin-top: 1rem;
-  margin-left: 7%;
+  margin-left: 5%;
   background: #fff;
   border-radius: 0.6rem;
+  
+}
+.Home_teacher li{
+/* padding: 1rem; */
 }
 .Home_teacher ul li img {
   width: 3rem;
@@ -260,17 +279,20 @@ export default {
   margin-left: 4rem;
   font-size: 0.8rem;
 }
+/* 精品课程 */
 .Home_course {
-  width: 90%;
-  height: 13rem;
+  /* box-sizing: border-box; */
+  width: 81%;
+  height: 9.2rem;
   background: #fff;
   margin-left: 5%;
-  margin-top: 0.5rem;
-  border-radius: 0.6rem;
+  margin-top: 1rem;
+  border-radius: 0.3rem;
+  padding: 1rem;
 }
 .Home_course_img {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 5rem;
   margin-top: 1rem;
 }
@@ -287,8 +309,13 @@ export default {
   font-size: 0.6rem;
 }
 .img {
-  margin-top: 0.5rem;
-  width: 3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  width: 1.5rem;
+}
+.Home_advice li div{
+  color: gray;
+  font-size: 0.5rem;
 }
 .Home_Prpup {
   width: 18rem;
@@ -310,5 +337,31 @@ export default {
 .Home_Prpup_but {
   margin-top: 1rem;
   width: 80%;
+}
+/* 精品课程样式 */
+/* 标题 */
+.hmwTitleJP{
+  margin: 0.5rem 0;
+  font-size: 4.26667vw;
+  color: #333;
+}
+/* 图文部分 */
+.Home_course_box>div{
+  display: flex;
+  align-items: center;
+}
+.Home_course_box>div p{
+  margin: 0.8rem 0 0 0.5rem;
+font-size: 3.2vw;
+color:#b7b7b7;
+}
+.Home_course_box>div img{
+  /* margin: 0; */
+}
+/* 底下部分 */
+.hmwJPfoot{
+  margin: 1rem 0 0 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid #eee;
 }
 </style>

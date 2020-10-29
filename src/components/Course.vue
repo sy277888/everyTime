@@ -403,6 +403,7 @@ export default {
     // 跳转到详情页面
     hmwJump(item){
       // 保存数据到本地
+      sessionStorage.setItem('hmwPath',JSON.stringify({path:'/about',name:'About'}))
       sessionStorage.setItem('hmwXQ',JSON.stringify(item))
       this.$router.push('/detail')
     }

@@ -21,8 +21,8 @@ const routes = [
     name: 'HomeData',
     component: () => import('../views/HomeData.vue')
   },
-  {
-    //学历日历
+   //学历日历
+{
     path: '/lenderData',
     name: 'LenderData',
     component: () => import('../views/LenderData.vue')
@@ -142,7 +142,28 @@ const routes = [
   {
     path: "/ge",
     name: "Ge",
-    component: () => import('../components/geren/geren.vue')
+    component: () => import('../components/geren/geren.vue'),
+    path: "/per",
+    name: "Per",
+    component: () => import('../components/grenxinxi/PersonalInformation.vue')
+  },
+  //昵称修改
+  {
+    path: "/nickname",
+    name: "Nickname",
+    component: () => import('../components/grenxinxi/Nickname.vue')
+  },
+  //性别的修改
+  {
+    path: "/sex",
+    name: "Sex",
+    component: () => import('../components/grenxinxi/Sex.vue')
+  },
+  //学科的修改
+  {
+    path: "/subject",
+    name: "Subject",
+    component: () => import('../components/grenxinxi/Subject.vue')
 
   },
   // 拖拽点击跳转页面
@@ -163,7 +184,7 @@ const routes = [
     name: "Exercise",
     component: () => import('../views/grids/Exercise.vue')
   },
-  // 我的  个人信息修改页面
+
 
   //课程详情页面
   {
@@ -250,6 +271,18 @@ const routes = [
     name: "Study",
     component: () => import('../components/Course/Study.vue')
 
+  },
+  //设置密码
+  {
+    path:"/shezhi",
+    name:"Shezhi",
+    component: () => import('../components/mimaxiu/xiumi.vue')
+  },
+  //一对一辅导的搜索页
+  {
+    path:"/search",
+    name:"Search",
+    component: () => import('../views/sousuo/Search.vue')
   }
 ]
 

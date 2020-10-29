@@ -7,9 +7,10 @@
       </template>
       <template #left>
         <van-icon name="arrow-left" size="30px" color="gray" @click="Onback" />
+        <!-- <van-icon name="arrow-left" size="30px" color="gray"  @click="lefts"/> -->
       </template>
       <template #right>
-        <van-icon name="search" size="25px" color="gray" />
+        <van-icon name="search" size="25px" color="gray"  @click="search"/>
       </template>
     </van-nav-bar>
     <!-- 选择栏 -->
@@ -100,6 +101,14 @@ export default {
       this.order = res.data.data[4].list;
       console.log(this.order);
     });
+  },
+  methods: {
+    search(){
+      this.$router.push("/search")
+    },
+    lefts(){
+         this.$router.push("/")
+    }
   },
 };
 </script>

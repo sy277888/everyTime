@@ -6,12 +6,16 @@
     <div class="sy_input">
       <van-form>
         <van-field
+        @click="gao(1)"
+          :class="show == 1 ? 'van-field' : 'shi'"
           v-model="username"
           name="手机号"
           placeholder="请输入手机号"
           :rules="[{ required: true, message: '请填写手机号' }]"
         />
         <van-field
+        @click="gao(2)"
+          :class="show == 2 ? 'van-field' : 'shi'"
           v-model="password"
           type="password"
           name="密码"
@@ -39,6 +43,8 @@ export default {
       username: "",
       password: "",
       type:1,
+      num:0,
+      show:0,
     };
   },
   methods: {
@@ -53,14 +59,23 @@ export default {
           console.log(res);
           // localStorage.token = res.data.token;
           var token=res.data.data.remember_token;
+          var mobile=res.data.data.mobile
+          var sex=res.data.data.sex
           localStorage.setItem("token",token);
           localStorage.setItem("username",this.username)
+          localStorage.setItem("value","admin")
+          localStorage.setItem("mobile",mobile)
+          localStorage.setItem("sex",sex)
           this.$router.push({ path: "/mime" });
         })
         .catch((err) => {
           console.log(err);
+          alert('登录失败')
         });
     },  
+       gao(i) {
+      this.show = i;
+    },
     zhao() {
       this.$router.push({ path: "/mima" });
     },
@@ -84,7 +99,7 @@ export default {
 .sy_img img {
   width: 226.55px;
   height: 49.79px;
-  margin-left: 70px;
+  margin-left: 50px;
   margin-top: 50px;
 }
 .sy_input {
@@ -92,7 +107,7 @@ export default {
   margin-top: 60px;
 }
 .van-form {
-  margin-left: 33px;
+  margin-left: 20px;
 }
 .van-field {
   width: 259.2px;
@@ -104,6 +119,12 @@ export default {
   background-color: #ff9248;
   margin-top: 25px;
   color: white;
+}
+.van-field {
+  border-bottom: 0.01rem solid orangered;
+}
+.shi {
+  border-bottom: 0px;
 }
 .sy_zhao {
   width: 85%;

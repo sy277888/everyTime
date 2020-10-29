@@ -10,7 +10,7 @@
         <van-sticky>
             <div class="hmw-top">
             <!-- 原生的导航 -->
-      <van-icon name="arrow-left" @click="$router.push('/about')" />
+      <van-icon name="arrow-left" @click="hmwJumpTo" />
       <p v-show="!hmwFlag">课程详情</p>
       <div class="hmwNav" v-show="hmwFlag">
           <span :class="hmwIndex==0?'hmwActiveTop':''" @click="hmwDian(0)" id="hmwKc">课程介绍</span>
@@ -127,12 +127,16 @@ export default {
     show: false,
     // 是否收藏
     hmwSc:false,
+    // 上一个路由
+    hmwPathFrom:JSON.parse(sessionStorage.getItem("hmwPath"))
     };
   },
   // 计算属性
   computed: {},
   // 侦听器
-  watch: {},
+  watch: {
+
+  },
   // 组件方法
   methods: {
     //   nav是否显示判断事件
@@ -246,12 +250,17 @@ export default {
     },
   // 获取详情页的数据
   async hnwGetList(){
-    let {data} = await this.$Net.courseXQList({ 
-        params:{
-        basis_id:this.hmwObj.teachers_list[0].id
-        }
+    console.log(this.hmwObj.teachers_list[0].course_basis_id)
+    let {data} = await this.$Net.courseXQList();
+    console.log(data)
+  },
+  // 跳转到上一个页面
+  hmwJumpTo(){
+    console.log(this.hmwPathFrom)
+    this.$router.push({
+        path: this.hmwPathFrom.path,
+        name: this.hmwPathFrom.name
       });
-      console.log(data)
   }
   },
   mounted() {

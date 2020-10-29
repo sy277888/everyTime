@@ -2,7 +2,7 @@
 const API = {
     Method: {
         Get: 'get',
-        Post: 'post'
+        Post: 'post',
     },
     //定义请求地址
     Path: {
@@ -13,7 +13,7 @@ const API = {
         // 课程列表
         HMWLIST: '/api/app/courseBasis?page=1&limit=10&',
         // 课程详情数据
-        HMWXQ: '/api/app/courseInfo/basis_id=189',
+        HMWXQ: '/api/app/courseInfo/basis_id=109',
         //首页列表
         List: '/api/app/recommend/appIndex',
         //个人信息
@@ -26,7 +26,9 @@ const API = {
         //学习
         Xue:"/api/app/myStudy/2",
         //首页推荐老师列表
-        HomeLIST:'/api/app/teacher/info/id'
+        HomeLIST:'/api/app/teacher/info/id',
+        //验证码登录
+        YAN:"/api/app/login"
     }
 }
 

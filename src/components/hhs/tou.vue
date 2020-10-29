@@ -31,7 +31,13 @@ export default {
       this.$router.push({ path: "/login" });
     },
     ge(){
-      this.$router.push({path:"/ge"})
+      var token=localStorage.getItem("token")
+      if(token){
+this.$router.push({path:"/per"})
+      }else{
+        this.$router.push("/login")
+      }
+      
     },
     quyue(){
       this.$router.push({path:"/make"})
@@ -41,7 +47,16 @@ export default {
     var user=localStorage.getItem("username");
     if(user){
       this.username=user
-    }
+    };
+        this.$Net.xuue({
+          params:{
+          headers:{
+            Authorization:"Bearer"+localStorage.getItem("token")
+          }
+          }
+        }).then((res) => {
+      console.log(res);
+    });
   },
 };
 </script>

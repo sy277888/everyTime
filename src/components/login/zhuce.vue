@@ -1,17 +1,21 @@
 <template>
   <div>
-      <div class="sy_img">
+    <div class="sy_img">
       <img src="../../assets/login.png" alt="" />
     </div>
     <div class="sy_input">
       <van-form>
         <van-field
+          @click="gao(1)"
+          :class="show == 1 ? 'van-field' : 'shi'"
           v-model="username"
           name="手机号"
           placeholder="请输入手机号"
           :rules="[{ required: true, message: '请填写手机号' }]"
         />
-          <van-field
+        <van-field
+          @click="gao(2)"
+          :class="show == 2 ? 'van-field' : 'shi'"
           v-model="text"
           type="text"
           name="验证码"
@@ -29,25 +33,115 @@
         </div>
       </van-form>
     </div>
+    <p class="p-uu" @click="add" v-show="shaw">获取验证码</p>
+    <span v-show="!shaw" class="count">{{ count }}</span>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
+import { Toast } from "vant";
+Vue.use(Toast);
 export default {
-data() {
+  data() {
     return {
-      
-    }
-},
-methods: {
-    denglv(){
-        this.$router.push({path:"/login"})
-    }
-},
-}
+      username: "",
+      text: "",
+      show: 0,
+      shaw: true,
+      count: "",
+      timer: null,
+    };
+  },
+  methods: {
+    denglv() {
+      this.$router.push({ path: "/login" });
+    },
+    onLogin() {
+      this.$axios
+        .post("http://120.53.31.103:84/api/app/login", {
+          mobile: this.username,
+          sms_code: this.text,
+          client: 1,
+          type: 2,
+        })
+        .then((res) => {
+          // console.log(res);
+          var isnew = res.data.data.is_new;
+          localStorage.setItem("isnew", isnew);
+          var isnew = localStorage.getItem("isnew");
+          var token = res.data.data.remember_token;
+          localStorage.setItem("username", this.username);
+          localStorage.setItem("token", token);
+          if (isnew == 1) {
+            this.$router.push({
+              path: "/shezhi",
+            });
+          } else if (isnew == 2) {
+            this.$router.push({ path: "/" });
+          }
+        });
+    },
+    gao(i) {
+      this.show = i;
+    },
+    add() {
+      if (this.username == "") {
+        return alert("手机号必填");
+      }
+      var phone = /^[1]([3-9])[0-9]{9}$/;
+      if (!phone.test(this.username)) {
+        Toast.loading({
+          message: "手机号码格式不正确",
+          position:"center"
+        });
+        return
+      }else{
+      }
+      const TIME_COUNT=60;
+      if(!this.timer){
+        this.count=TIME_COUNT
+        this.shaw=false;
+      this.timer=setInterval(()=>{
+        if(this.count>0 && this.count<=TIME_COUNT){
+          this.count--
+        }else{
+          this.shaw=true;
+          clearInterval(this.timer);
+          this.timer=null;
+        }
+      },1000)
+      }
+      this.$axios
+        .post("http://120.53.31.103:84/api/app/smsCode", {
+          mobile: this.username,
+          sms_type: "login",
+        })
+        .then((res) => {
+          // console.log(res);
+        });
+    },
+  },
+  mounted() {
+    this.$axios
+      .post("http://120.53.31.103:84/api/app/smsCode", {
+        mobile: this.username,
+        sms_type: "login",
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  },
+};
 </script>
 
 <style scopde>
+.van-field {
+  border-bottom: 0.01rem solid orangered;
+}
+.shi {
+  border-bottom: 0px;
+}
 .sy_img {
   width: 100%;
 }
@@ -85,7 +179,19 @@ methods: {
   justify-content: space-between;
   color: grey;
 }
-.sp{
-    color: rgb(194, 194, 194);
+.sp {
+  color: rgb(194, 194, 194);
+}
+.p-uu {
+  font-size: 0.45rem;
+  color: orangered;
+  position: fixed;
+  right: 2rem;
+  top: 12rem;
+}
+.count{
+    position: fixed;
+  right: 2.7rem;
+  top: 12.5rem;
 }
 </style>
