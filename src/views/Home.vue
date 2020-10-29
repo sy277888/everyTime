@@ -27,15 +27,15 @@
       <ul class="Home_advice">
         <li @click="OngoA">
           <img src="../assets/1.png" alt="" class="img" />
-          <p>特色课</p>
+          <div>特色课</div>
         </li>
         <li @click="OngoC">
           <img src="../assets/2.png" alt="" class="img" />
-          <p>一对一辅导</p>
+          <div>一对一辅导</div>
         </li>
         <li @click="OngoB">
           <img src="../assets/3.png" alt="" class="img" />
-          <p>学习日历</p>
+          <div>学习日历</div>
         </li>
       </ul>
       <!-- 名师推荐 -->
@@ -287,8 +287,13 @@ export default {
   font-size: 0.6rem;
 }
 .img {
-  margin-top: 0.5rem;
-  width: 3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  width: 1.5rem;
+}
+.Home_advice li div{
+  color: gray;
+  font-size: 0.5rem;
 }
 .Home_Prpup {
   width: 18rem;
