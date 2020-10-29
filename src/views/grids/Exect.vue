@@ -31,7 +31,7 @@
                 left-arrow
                 @click-left="onClickLefts"/>
               <div class="zmx_div">
-                <span v-for="index in 8">{{index}}</span>
+                <span v-for="index in 8" :key="index">{{index}}</span>
                 </div
             ></van-popup>
           </van-icon>
