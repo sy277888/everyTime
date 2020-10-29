@@ -238,7 +238,13 @@ const routes = [
     name:"Study",
     component: () => import('../components/Course/Study.vue')
 
-  }
+  },
+  //一对一辅导的搜索页
+  // {
+  //   path:"/search",
+  //   name:"S earch",
+  //   component: () => import('../views/sousuo/Search.vue')
+  // }
 ]
 
 const router = new VueRouter({  

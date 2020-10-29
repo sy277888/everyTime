@@ -9,7 +9,7 @@
         <van-icon name="arrow-left" size="30px" color="gray" />
       </template>
       <template #right>
-        <van-icon name="search" size="25px" color="gray" />
+        <van-icon name="search" size="25px" color="gray"  @click="search"/>
       </template>
     </van-nav-bar>
     
@@ -19,6 +19,11 @@
 export default {
   data() {
     return {};
+  },
+  methods: {
+    search(){
+      this.$router.push("/search")
+    }
   },
 };
 </script>

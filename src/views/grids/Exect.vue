@@ -21,10 +21,12 @@
           <van-icon size="20" name="records" @click="item_right">
             <van-popup
               v-model="showsp"
-              position="top"
-              :style="{ height: '50%' }"
+              position="right"
+              :style="{ height: '100%' }"
               close-on-click-overlay="true"
-            />
+            >
+            <div class="zmx_div">
+              </div></van-popup>
           </van-icon>
           <van-icon
             class="icon"
@@ -168,6 +170,10 @@ export default {
   width: 100%;
   height: 2.5rem;
   color: gray;
+}
+.zmx_div{
+  height: 100vh;
+  width: 100vw;
 }
 .tubiao {
   display: flex;
