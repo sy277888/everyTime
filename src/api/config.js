@@ -2,7 +2,7 @@
 const API = {
     Method: {
         Get: 'get',
-        Post: 'post'
+        Post: 'post',
     },
     //定义请求地址
     Path: {
@@ -22,7 +22,9 @@ const API = {
         //学习
         Xue:"/api/app/myStudy/2",
         //首页推荐老师列表
-        HomeLIST:'/api/app/teacher/info/id'
+        HomeLIST:'/api/app/teacher/info/id',
+        //验证码登录
+        YAN:"/api/app/login"
     }
 }
 

@@ -18,8 +18,8 @@ const Net = {
     return request(API.Method.Get, API.Path.HMWLIST, params)
   },
   //获取个人信息
-  xuue(params){
-    return request(API.Method.Get,API.Path.XUE,params)
+  xuue(){
+    return request(API.Method.Get,API.Path.XUE)
   },
   //特色课获取
   te(){
@@ -38,6 +38,10 @@ const Net = {
   //首页推荐老师列表详情页内容
   HomeLIST(params){
     return request(API.Method.Get,API.Path.HomeLIST,params)
+  },
+  //验证码登录
+  yan(){
+    return request(API.Method.Post,API.Path.YAN)
   }
 }
 

@@ -38,6 +38,7 @@ export default {
     return {};
   },
   mounted() {
+   
   },
   beforeRouteEnter (to, from, next) {
     var token=localStorage.getItem("token")
