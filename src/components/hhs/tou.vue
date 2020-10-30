@@ -83,6 +83,7 @@ this.$router.push({path:"/per"})
 .sy_img {
   position: absolute;
   left: 1rem;
+  top:1rem
 }
 .sy_img img {
   width: 4.5rem;

@@ -143,7 +143,7 @@ const routes = [
     path: "/per",
     name: "Per",
     component: () => import('../components/grenxinxi/PersonalInformation.vue')
-  },
+  }, 
   //昵称修改
   {
     path: "/nickname",
@@ -284,7 +284,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
