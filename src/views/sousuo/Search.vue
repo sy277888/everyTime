@@ -24,7 +24,7 @@
     <div class="lishi_container">
       <div class="lishi_top">
         <span>搜索记录</span>
-        <span class="del" @click="del"><van-icon name="close" /></span>
+        <span class="del" @click="del"><van-icon name="delete" /></span>
       </div>
       <div>
         <!-- 搜索添加的每一类 -->
@@ -64,17 +64,20 @@ export default {
     },
     //删除按钮
     del() {
-      Dialog.confirm({
+      this.$dialog.confirm({
         title: "确认清空？",
-        message: "确认清空？",
+        message: "你确定要给你的搜索记录清空吗？？？",
       })
         .then(() => {
           // on confirm
+          console.log("确认清空");
           this.history = [];
           localStorage.removeItem("history");
         })
         .catch(() => {
           // on cancel
+          console.log("取消清空");
+
         });
     },
   },

@@ -4,7 +4,7 @@
       <template #image>
         <img src="../../assets/image/上课.png" alt="" />
       </template>
-      <van-button class="bottom-button"> 立即约课 </van-button>
+      <van-button class="bottom-button" @click="Ongo"> 立即约课 </van-button>
     </van-empty>
   </div>
 </template>
@@ -13,7 +13,6 @@
 export default {
   data(){
     return{
-
     }
   },
   methods:{
