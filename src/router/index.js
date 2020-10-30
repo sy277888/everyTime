@@ -23,17 +23,29 @@ const routes = [
     component: () => import('../views/HomeData.vue')
   },
   //学历日历
-{
+  {
     path: '/lenderData',
     name: 'LenderData',
-    component: ()=>import('../views/LenderData.vue')
+    component: () => import('../views/LenderData.vue')
   },
   {
-  // 一对一辅导
-  path:'/solo',
-  name:'Solo',
-  component:()=>import('../views/Solo.vue')
+    // 一对一辅导
+    path: '/solo',
+    name: 'Solo',
+    component: () => import('../views/Solo.vue')
+  }, {
+    // 一对一辅导预约页
+    path: '/sololist',
+    name: 'Sololist',
+    component: () => import('../views/Sololist.vue')
   },
+  {
+    // 一对一辅导详情页
+    path: '/solodata',
+    name: 'Solodata',
+    component: () => import('../views/Solodata.vue')
+  },
+
   {
     path: '/about',
     name: 'About',
@@ -74,8 +86,7 @@ const routes = [
     path: '/xiti',
     name: 'xiti',
     component: () => import('../views/grids/xiti.vue')
-  }
-  ,
+  },
   {
     //约课记录
     path: '/make',
@@ -127,7 +138,7 @@ const routes = [
     name: "She",
     component: () => import('../components/hhs/shezhi.vue')
   },
-  //个人信息
+  //个人信息 
   {
     path: "/per",
     name: "Per",
@@ -260,25 +271,21 @@ const routes = [
   },
   //设置密码
   {
-    path:"/shezhi",
-    name:"Shezhi",
+    path: "/shezhi",
+    name: "Shezhi",
     component: () => import('../components/mimaxiu/xiumi.vue')
   },
   //一对一辅导的搜索页
   {
-    path:"/search",
-    name:"Search",
+    path: "/search",
+    name: "Search",
     component: () => import('../views/sousuo/Search.vue')
   }
 ]
 
-const router = new VueRouter({  
+const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
-// router.beforeEach((to,from,next)=>{
-//   document.title=router.meta.title
-//   next()
-// })
 export default router

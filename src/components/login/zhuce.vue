@@ -34,7 +34,7 @@
       </van-form>
     </div>
     <p class="p-uu" @click="add" v-show="shaw">获取验证码</p>
-    <span v-show="!shaw" class="count">{{ count }}</span>
+    <span v-show="!shaw" class="count">获取验证码{{ count }}</span>
   </div>
 </template>
 
@@ -85,52 +85,47 @@ export default {
     gao(i) {
       this.show = i;
     },
-    add() {
-      if (this.username == "") {
-        return alert("手机号必填");
-      }
+    async add() {
       var phone = /^[1]([3-9])[0-9]{9}$/;
       if (!phone.test(this.username)) {
         Toast.loading({
           message: "手机号码格式不正确",
-          position:"center"
+          position: "center",
         });
-        return
-      }else{
-      }
-      const TIME_COUNT=60;
-      if(!this.timer){
-        this.count=TIME_COUNT
-        this.shaw=false;
-      this.timer=setInterval(()=>{
-        if(this.count>0 && this.count<=TIME_COUNT){
-          this.count--
-        }else{
-          this.shaw=true;
-          clearInterval(this.timer);
-          this.timer=null;
+        return;
+      } else {
+        let {data} = await this.$axios.post(
+          "http://120.53.31.103:84/api/app/smsCode",
+          {
+            mobile: this.username,
+            sms_type: "login",
+          }
+        );
+         console.log(data);
+        if (data.code == 200) {
+          this.$toast(data.msg)
         }
-      },1000)
+        if(data.code==201){
+          this.$toast(data.msg)
+        }
       }
-      this.$axios
-        .post("http://120.53.31.103:84/api/app/smsCode", {
-          mobile: this.username,
-          sms_type: "login",
-        })
-        .then((res) => {
-          // console.log(res);
-        });
+      const TIME_COUNT = 60;
+      if (!this.timer) {
+        this.count = TIME_COUNT;
+        this.shaw = false;
+        this.timer = setInterval(() => {
+          if (this.count > 0 && this.count <= TIME_COUNT) {
+            this.count--;
+          } else {
+            this.shaw = true;
+            clearInterval(this.timer);
+            this.timer = null;
+          }
+        }, 1000);
+      }
     },
   },
   mounted() {
-    this.$axios
-      .post("http://120.53.31.103:84/api/app/smsCode", {
-        mobile: this.username,
-        sms_type: "login",
-      })
-      .then((res) => {
-        console.log(res);
-      });
   },
 };
 </script>
@@ -189,9 +184,11 @@ export default {
   right: 2rem;
   top: 12rem;
 }
-.count{
-    position: fixed;
+.count {
+  position: fixed;
   right: 2.7rem;
   top: 12.5rem;
+  color: rgb(182, 181, 181);
+  font-size: 0.5rem;
 }
 </style>
