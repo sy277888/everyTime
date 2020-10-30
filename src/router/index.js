@@ -143,6 +143,7 @@ const routes = [
     path: "/ge",
     name: "Ge",
     component: () => import('../components/geren/geren.vue'),
+  }, {
     path: "/per",
     name: "Per",
     component: () => import('../components/grenxinxi/PersonalInformation.vue')
