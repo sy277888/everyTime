@@ -11,7 +11,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data(){
+    return{
+
+    }
+  },
+  methods:{
+    Ongo(){
+      this.$router.push('/solo')
+    }
+  }
+};
 </script>
 
  <style scoped>
@@ -22,6 +33,4 @@ export default {};
   color: white;
   font-size: 0.5rem;
 }
-
-
 </style> 

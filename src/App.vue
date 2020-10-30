@@ -82,6 +82,8 @@ export default {
         this.isShow = false;
       }else if (to.path == "/solodata") {
         this.isShow = false;
+      }else if (to.path == "/make") {
+        this.isShow = true;
       }
     },
   },
