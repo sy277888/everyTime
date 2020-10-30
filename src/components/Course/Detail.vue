@@ -446,7 +446,7 @@ font-size: 3.2vw;
 .hmwPL li{
     display: flex;
     justify-content: space-between;
-    padding-left: 1rem;
+    padding-left: 0.5rem;
     padding-bottom: 1rem;
 }
 .hmwPL-center .hmwCP1{
