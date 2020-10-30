@@ -29,11 +29,12 @@
                 title="退出"
                 left-text="返回"
                 left-arrow
-                @click-left="onClickLefts"/>
+                @click-left="onClickLefts"
+              />
               <div class="zmx_div">
-                <span v-for="index in 8">{{index}}</span>
-                </div
-            ></van-popup>
+                <span v-for="index in 8" :key="index">{{ index }}</span>
+              </div></van-popup
+            >
           </van-icon>
           <van-icon
             class="icon"
@@ -121,8 +122,8 @@ export default {
     onClickLeft() {
       window.history.back();
     },
-    onClickLefts(){
-this.$router.go("-1")
+    onClickLefts() {
+      this.$router.go("-1");
     },
     // 点击右边弹出
     item_right() {
@@ -185,17 +186,16 @@ this.$router.go("-1")
   height: 25vh;
   width: 100%;
   display: flex;
-flex-wrap: wrap;
-justify-content: space-around;
-border: 1px solid #000;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border: 1px solid #000;
 }
-.zmx_div   span{
-width: 4rem;
-height: 4rem;
-background: yellowgreen;
-border-radius: 50%;
-text-align: center;
-
+.zmx_div span {
+  width: 4rem;
+  height: 4rem;
+  background: yellowgreen;
+  border-radius: 50%;
+  text-align: center;
 }
 .tubiao {
   display: flex;

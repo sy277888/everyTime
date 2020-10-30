@@ -8,25 +8,21 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     //首页推荐老师详情
     path: '/homelist',
     name: 'Homelist',
-    component: () => import('../views/Homelist.vue')
+    component: () => import('../views/Homelist.vue'),
+
   }, {
     //首页推荐老师详情预约页
     path: '/homedata',
     name: 'HomeData',
     component: () => import('../views/HomeData.vue')
   },
-  {
-    //学历日历
-    path: '/calendar',
-    name: 'Calendar',
-    component: () => import('../views/Calendar.vue')
-  },
+  //学历日历
 {
     path: '/lenderData',
     name: 'LenderData',
@@ -84,7 +80,7 @@ const routes = [
     //约课记录
     path: '/make',
     name: 'Make',
-    component: () => import('../views/Make.vue')
+    component: () => import('../views/Make.vue'),
   }
   ,
   {
@@ -98,7 +94,7 @@ const routes = [
     //我的
     path: '/mime',
     name: 'Mime',
-    component: () => import('../views/Mime.vue')
+    component: () => import('../views/Mime.vue'),
   }
   ,
   {
@@ -281,5 +277,8 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
+// router.beforeEach((to,from,next)=>{
+//   document.title=router.meta.title
+//   next()
+// })
 export default router
