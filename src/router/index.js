@@ -137,14 +137,9 @@ const routes = [
     path: "/she",
     name: "She",
     component: () => import('../components/hhs/shezhi.vue')
-  },
+  }
   //个人信息
-  // {
-  //   path: "/ge",
-  //   name: "Ge",
-  //   component: () => import('../components/geren/geren.vue'),
-  // }, 
-  {
+  , {
     path: "/per",
     name: "Per",
     component: () => import('../components/grenxinxi/PersonalInformation.vue')
