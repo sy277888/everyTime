@@ -446,7 +446,7 @@ font-size: 3.2vw;
 .hmwPL li{
     display: flex;
     justify-content: space-between;
-    padding-left: 1rem;
+    padding-left: 0.7rem;
     padding-bottom: 1rem;
 }
 .hmwPL-center .hmwCP1{
@@ -470,6 +470,9 @@ font-size: 3.2vw;
     font-weight: 400;
     color: #999;
     text-align: right;
+}
+.hmwPL .hmwP1{
+  padding-bottom: 0.5rem;
 }
 /* 评分小图标样式 */
 .hmwPL .van-rate__item{

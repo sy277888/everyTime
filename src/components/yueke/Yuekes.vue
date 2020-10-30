@@ -1,16 +1,22 @@
 <template>
   <div>
     <van-empty description="还没有上课记录哦！" class="custom-image">
-            <template #image>
-                <img src="../../assets/image/上课.png" alt="" />
-              </template>
-            <van-button class="bottom-button"> 立即约课 </van-button>
-          </van-empty>
+      <template #image>
+        <img src="../../assets/image/上课.png" alt="" />
+      </template>
+      <van-button class="bottom-button" @click="Ongo"> 立即约课 </van-button>
+    </van-empty>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+    methods:{
+    Ongo(){
+      this.$router.push('/solo')
+    }
+  }
+};
 </script>
 
  <style scoped>
