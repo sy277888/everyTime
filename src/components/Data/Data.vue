@@ -32,9 +32,11 @@ export default {
   data() {
     return {
       activeName: "a",
-      iSshow: false,
     };
   },
   created() {},
+  computed: {
+    // 获取token 如果没有则显示登录页
+  },
 };
 </script>
