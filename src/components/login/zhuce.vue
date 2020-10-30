@@ -141,35 +141,35 @@ export default {
   width: 100%;
 }
 .sy_img img {
-  width: 226.55px;
-  height: 49.79px;
-  margin-left: 70px;
-  margin-top: 50px;
+  width: 16.5rem;
+  height: 4.3rem;
+  margin-left:3rem;
+  margin-top: 3rem;
 }
 .sy_input {
   width: 100%;
-  margin-top: 60px;
+   margin-top: 3rem;
 }
 .van-form {
-  margin-left: 33px;
+  margin-left: 1rem;
 }
 .van-field {
-  width: 259.2px;
-  height: 54.99px;
+  width: 16rem;
+  height: 4rem;
 }
 .van-button {
   width: 20rem;
   height: 3rem;
   background-color: #ff9248;
-  margin-top: 25px;
+    margin-top: 1.5rem;
   color: white;
 }
 .sy_zhao {
   width: 85%;
   /* border: 1px solid black; */
   font-size: 0.5rem;
-  margin-left: 15px;
-  margin-top: 10px;
+  margin-left: 1.25rem;
+  margin-top: 0.8rem;
   display: inline-flex;
   justify-content: space-between;
   color: grey;
@@ -181,13 +181,13 @@ export default {
   font-size: 0.45rem;
   color: orangered;
   position: fixed;
-  right: 2rem;
-  top: 12rem;
+  right: 2.6rem;
+  top: 11.5rem;
 }
 .count {
   position: fixed;
-  right: 2.7rem;
-  top: 12.5rem;
+  right: 2.6rem;
+  top: 11.5rem;
   color: rgb(182, 181, 181);
   font-size: 0.5rem;
 }

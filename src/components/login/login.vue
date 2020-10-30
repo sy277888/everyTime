@@ -97,27 +97,27 @@ export default {
   width: 100%;
 }
 .sy_img img {
-  width: 226.55px;
-  height: 49.79px;
-  margin-left: 50px;
-  margin-top: 50px;
+  width: 16.5rem;
+  height: 4.3rem;
+  margin-left:3rem;
+  margin-top: 3rem;
 }
 .sy_input {
   width: 100%;
-  margin-top: 60px;
+  margin-top: 3rem;
 }
 .van-form {
-  margin-left: 20px;
+  margin-left: 1rem;
 }
 .van-field {
-  width: 259.2px;
-  height: 54.99px;
+  width: 16rem;
+  height: 4rem;
 }
 .van-button {
   width: 20rem;
   height: 3rem;
   background-color: #ff9248;
-  margin-top: 25px;
+  margin-top: 1.5rem;
   color: white;
 }
 .van-field {
@@ -128,10 +128,9 @@ export default {
 }
 .sy_zhao {
   width: 85%;
-  /* border: 1px solid black; */
   font-size: 0.5rem;
-  margin-left: 15px;
-  margin-top: 10px;
+  margin-left: 1.25rem;
+  margin-top: 0.8rem;
   display: inline-flex;
   justify-content: space-between;
   color: grey;
