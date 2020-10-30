@@ -128,7 +128,6 @@ export default {
 }
 .sy_zhao {
   width: 85%;
-  /* border: 1px solid black; */
   font-size: 0.5rem;
   margin-left: 1.25rem;
   margin-top: 0.8rem;
