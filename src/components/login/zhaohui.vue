@@ -104,17 +104,17 @@ export default {
 <style scoped>
 .sy_top {
   width: 100%;
-  margin-top: 50px;
+  margin-top: 3rem;
 }
 .van-button {
-  width: 20rem;
+  width: 19rem;
   height: 3rem;
   background-color: #ff9248;
-  margin-top: 25px;
+  margin-top: 1rem;
   color: white;
 }
 .van-form {
-  margin-left: 30px;
+  margin-left: 1rem;
 }
 .p-uu {
   font-size: 0.45rem;

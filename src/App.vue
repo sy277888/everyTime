@@ -89,7 +89,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style>
 *{
   margin: 0rem;
   padding: 0rem;

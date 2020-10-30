@@ -8,13 +8,14 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     //首页推荐老师详情
     path: '/homelist',
     name: 'Homelist',
-    component: () => import('../views/Homelist.vue')
+    component: () => import('../views/Homelist.vue'),
+
   }, {
     //首页推荐老师详情预约页
     path: '/homedata',
@@ -85,13 +86,12 @@ const routes = [
     path: '/xiti',
     name: 'xiti',
     component: () => import('../views/grids/xiti.vue')
-  }
-  ,
+  },
   {
     //约课记录
     path: '/make',
     name: 'Make',
-    component: () => import('../views/Make.vue')
+    component: () => import('../views/Make.vue'),
   }
   ,
   {
@@ -105,7 +105,7 @@ const routes = [
     //我的
     path: '/mime',
     name: 'Mime',
-    component: () => import('../views/Mime.vue')
+    component: () => import('../views/Mime.vue'),
   }
   ,
   {
@@ -137,9 +137,9 @@ const routes = [
     path: "/she",
     name: "She",
     component: () => import('../components/hhs/shezhi.vue')
-  }
-  //个人信息
-  , {
+  },
+  //个人信息 
+  {
     path: "/per",
     name: "Per",
     component: () => import('../components/grenxinxi/PersonalInformation.vue')
@@ -288,5 +288,4 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
 export default router

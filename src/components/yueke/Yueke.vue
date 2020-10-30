@@ -11,15 +11,14 @@
 
 <script>
 export default {
-  data(){
-    return{
-    }
+  data() {
+    return {};
   },
-  methods:{
-    Ongo(){
-      this.$router.push('/solo')
-    }
-  }
+  methods: {
+    Ongo() {
+      this.$router.push("/solo");
+    },
+  },
 };
 </script>
 

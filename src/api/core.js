@@ -1,6 +1,8 @@
 import axios from 'axios'
 //引入封装接口
 import API from './config'
+import Vue from "vue"
+import {Toast} from "vant";
 
 //axios 实例
 const instance  = axios.create({
@@ -12,11 +14,12 @@ instance.interceptors.request.use(function(config){
     // 在发送请求之前做些什么
   //弹起loading控件
   //拦截请求config配置 动态添加或者删除配置
-//   var token=localStorage.getItem("token")
-//   console.log(token);
-//获取用户数据
-        //获取用户数据
-  //获取用户数据
+  Toast.loading({
+    duration:5000,
+    message: '加载中...',
+    forbidClick: true,
+  });
+
   return config;
 },function(error){
     // 对请求错误做些什么
@@ -32,6 +35,8 @@ instance.interceptors.response.use(function(response){
     // setTimeout(()=>{
     //     loinstance.close()
     // },1000)
+    Toast.clear()
+    
     return response;
 
 },function(error){

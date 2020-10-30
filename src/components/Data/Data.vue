@@ -35,5 +35,8 @@ export default {
     };
   },
   created() {},
+  computed: {
+    // 获取token 如果没有则显示登录页
+  },
 };
 </script>
