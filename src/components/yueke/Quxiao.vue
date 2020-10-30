@@ -1,10 +1,9 @@
 <template>
   <div>
-    <van-empty
-      description="还没有取消上课记录哦！"
-      class="custom-image"
-      image="http://localhost:8080/%E4%B8%8A%E8%AF%BE.png"
-    >
+    <van-empty description="还没有取消上课记录哦！" class="custom-image">
+      <template #image>
+        <img src="../../assets/image/上课.png" alt="" />
+      </template>
     </van-empty>
   </div>
 </template>
