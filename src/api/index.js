@@ -47,6 +47,10 @@ const Net = {
   //验证码登录
   yan(){
     return request(API.Method.Post,API.Path.YAN)
+  },
+  //修改个人信息
+  xiu(){
+    return request(API.Method.Put,API.Path.XIU)
   }
 }
 

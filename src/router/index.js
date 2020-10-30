@@ -8,6 +8,9 @@ const routes = [
   {
     path: '/',
     name: 'Home',
+    meta:{
+      title:"首页"
+    },
     component: Home,
   },
   {
@@ -49,6 +52,9 @@ const routes = [
   {
     path: '/about',
     name: 'About',
+    meta:{
+      title:"课程"
+    },
     component: () => import('../views/About.vue')
   },
   // 练习页面的考点路由
@@ -91,6 +97,9 @@ const routes = [
     //约课记录
     path: '/make',
     name: 'Make',
+    meta:{
+      title:"约课纪录"
+    },
     component: () => import('../views/Make.vue'),
   }
   ,
@@ -98,6 +107,9 @@ const routes = [
     //练习
     path: '/practice',
     name: 'Practice',
+    meta:{
+      title:"练习"
+    },
     component: () => import('../views/Practice.vue')
   }
   ,
@@ -105,6 +117,9 @@ const routes = [
     //我的
     path: '/mime',
     name: 'Mime',
+    meta:{
+title:"我的"
+    },
     component: () => import('../views/Mime.vue'),
   }
   ,
@@ -288,4 +303,11 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+//全局前置守卫
+router.beforeEach((to,from,next)=>{
+document.title=to.meta.title;
+next()
+})
+
+
 export default router

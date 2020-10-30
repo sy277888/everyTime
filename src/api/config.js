@@ -3,6 +3,7 @@ const API = {
     Method: {
         Get: 'get',
         Post: 'post',
+        Put:'put'
     },
     //定义请求地址
     Path: {
@@ -28,7 +29,9 @@ const API = {
         //首页推荐老师列表
         HomeLIST:'/api/app/teacher/info/id',
         //验证码登录
-        YAN:"/api/app/login"
+        YAN:"/api/app/login",
+        //修改个人信息
+        XIU:"/api/app/user"
     }
 }
 
