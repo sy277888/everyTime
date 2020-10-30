@@ -3,7 +3,17 @@ import axios from 'axios'
 import API from './config'
 import Vue from "vue"
 import {Toast} from "vant";
-
+import {Guid} from "../utils/guid"
+let deviceid=null;//初始化设备id
+//先获取设备id 如果有 使用之前的 如果没有获取最新的
+console.log(Guid.NewGuid().ToString("D"))
+let id= window.localStorage.getItem("deviceid")
+if(id){
+    deviceid=id
+}else{
+    deviceid=Guid.NewGuid().ToString("D")
+}
+window.localStorage.setItem("deviceid",deviceid)
 //axios 实例
 const instance  = axios.create({
     baseURL:'http://120.53.31.103:84',
@@ -19,6 +29,15 @@ instance.interceptors.request.use(function(config){
     message: '加载中...',
     forbidClick: true,
   });
+  //登录之后再次请求时，会携带token进行身份验证
+  let token=window.localStorage.getItem("token")
+  if(token){
+    config.headers.authorization=`Bearer ${token}`
+  }
+  config.headers.deviceid=deviceid
+  config.headers.devicetype="H5"
+ 
+
 
   return config;
 },function(error){

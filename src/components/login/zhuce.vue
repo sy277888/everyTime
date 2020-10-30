@@ -66,7 +66,6 @@ export default {
           type: 2,
         })
         .then((res) => {
-          // console.log(res);
           var isnew = res.data.data.is_new;
           localStorage.setItem("isnew", isnew);
           var isnew = localStorage.getItem("isnew");
@@ -100,8 +99,7 @@ export default {
             mobile: this.username,
             sms_type: "login",
           }
-        );
-         console.log(data);
+        )
         if (data.code == 200) {
           this.$toast(data.msg)
         }

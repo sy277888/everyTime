@@ -143,7 +143,7 @@ const routes = [
     path: "/per",
     name: "Per",
     component: () => import('../components/grenxinxi/PersonalInformation.vue')
-  },
+  }, 
   //昵称修改
   {
     path: "/nickname",
