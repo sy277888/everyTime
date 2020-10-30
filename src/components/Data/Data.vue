@@ -36,15 +36,5 @@ export default {
     };
   },
   created() {},
-  computed: {
-    // 获取token 如果没有则显示登录页
-    iSshow: function () {
-      var token = localStorage.getItem("token");
-      if (token) {
-        this.iSshow = !this.iSshow;
-      }
-      return;
-    },
-  },
 };
 </script>

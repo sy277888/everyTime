@@ -10,7 +10,7 @@
         <!-- <van-icon name="arrow-left" size="30px" color="gray"  @click="lefts"/> -->
       </template>
       <template #right>
-        <van-icon name="search" size="25px" color="gray"  @click="search"/>
+        <van-icon name="search" size="25px" color="gray" @click="search" />
       </template>
     </van-nav-bar>
     <!-- 选择栏 -->
@@ -42,7 +42,7 @@
       </div>
     </div>
     <!-- 如果没有token则展示请求登录页 -->
-     <van-popup v-model="show" closeable class="Solo_Prpup">
+    <van-popup v-model="show" closeable class="Solo_Prpup">
       <img
         src="https://wap.365msmk.com/img/feiji.decaf161.png"
         alt=""
@@ -90,25 +90,20 @@ export default {
         });
       }
     },
-    Onpath(){
-        this.$router.push({
-            path:'/login'
-        })
-    }
+    Onpath() {
+      this.$router.push({
+        path: "/login",
+      });
+    },
+    search() {
+      this.$router.push("/search");
+    },
   },
   created() {
     this.$Net.List().then((res) => {
       this.order = res.data.data[4].list;
       console.log(this.order);
     });
-  },
-  methods: {
-    search(){
-      this.$router.push("/search")
-    },
-    lefts(){
-         this.$router.push("/")
-    }
   },
 };
 </script>

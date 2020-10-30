@@ -5,13 +5,24 @@
       class="custom-image"
       image="http://localhost:8080/%E4%B8%8A%E8%AF%BE.png"
     >
-      <van-button   class="bottom-button"> 立即约课 </van-button>
+      <van-button   class="bottom-button" @click="Ongo"> 立即约课 </van-button>
     </van-empty>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data(){
+    return{
+
+    }
+  },
+  methods:{
+    Ongo(){
+      this.$router.push('/solo')
+    }
+  }
+};
 </script>
 
  <style scoped>
