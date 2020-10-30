@@ -21,8 +21,8 @@ const routes = [
     name: 'HomeData',
     component: () => import('../views/HomeData.vue')
   },
-   //学历日历
-{
+  //学历日历
+  {
     path: '/lenderData',
     name: 'LenderData',
     component: () => import('../views/LenderData.vue')
@@ -274,14 +274,14 @@ const routes = [
   },
   //设置密码
   {
-    path:"/shezhi",
-    name:"Shezhi",
+    path: "/shezhi",
+    name: "Shezhi",
     component: () => import('../components/mimaxiu/xiumi.vue')
   },
   //一对一辅导的搜索页
   {
-    path:"/search",
-    name:"Search",
+    path: "/search",
+    name: "Search",
     component: () => import('../views/sousuo/Search.vue')
   }
 ]
