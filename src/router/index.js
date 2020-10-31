@@ -127,6 +127,9 @@ title:"我的"
     //课程
     path: '/about',
     name: 'About',
+    meta:{
+      title:"课程"
+    },
     component: () => import('../views/About.vue')
   },
   //登录
@@ -202,6 +205,9 @@ title:"我的"
   {
     path: "/detail",
     name: "Detail",
+    meta:{
+      title:"课程详情"
+    },
     component: () => import('../components/Course/Detail.vue')
 
   },
@@ -281,6 +287,9 @@ title:"我的"
   {
     path: "/study",
     name: "Study",
+    meta:{
+      title:"学习详情"
+    },
     component: () => import('../components/Course/Study.vue')
 
   },

@@ -104,10 +104,12 @@ import { Tab } from 'vant';
                   }}&emsp;&emsp;|共{{ item.total_periods + "课时" }}</span
                 >
               </p>
-              <p class="hmwP2">
+              <p class="hmwP2 hmwbaoBm">
                 <img :src="item.teachers_list[0].teacher_avatar" alt="" /><span
                   >{{ item.teachers_list[0].teacher_name }}</span
                 >
+                <!-- 根据你有没有报名改变 -->
+                <img class="hmwBm" v-if="item.has_buy!=0" src="../assets/hmwbm.png" alt="">
               </p>
               <div class="hmwListBottom">
                 <span>{{ item.brows_num }}人已报名</span>
@@ -336,7 +338,7 @@ export default {
          course_type:'',
         }
       });
-      console.log(list.data);
+      console.log(list);
       // 筛选
       this.hmwChoose = data.data.appCourseType;
       // 主体列表
@@ -415,6 +417,7 @@ export default {
 </script>
 
 <style scoped>
+
 li {
   list-style: none;
 }
@@ -568,5 +571,16 @@ li {
   color: #44a426;
   font-size: 4.26667vw;
   font-weight: none;
+}
+/* 报名图片大小 */
+.hmw-main .hmwbaoBm{
+position: relative;
+}
+.hmw-main .hmwbaoBm .hmwBm{
+position: absolute;
+right: -0.5rem;
+bottom: 1rem;
+width: 15.73333vw !important;
+    height: 12.8vw !important;
 }
 </style>

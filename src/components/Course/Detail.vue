@@ -29,14 +29,14 @@
           <!-- 详情 -->
           <li class="hmwXQ" v-if="hmwObj.teachers_list">
             <p class="hmwP1 hmwTOP1">{{hmwObj.title}}</p>
-            <p class="hmwP2">{{hmwObj.price==0?'免费':hmwObj.price}}</p>
+            <p v-if="hmwObj.price==0" class="hmwP2">免费</p>
+            <p v-if="hmwObj.price!=0" class="hmwP2"><van-icon name="gold-coin" />{{hmwObj.price/100+'.00'}}</p>
             <p class="hmwP3">共{{hmwObj.total_periods}}课时 | {{ hmwObj.brows_num }}人已报名</p>
             <p class="hmwP3">开课时间：{{ hmwObj.start_play_date | timefnxq }} - {{
                     hmwObj.end_play_date | timefnxq
                   }}</p>
-                  <!-- <van-rate v-model="hmwSc" :count="1"/> -->
-            <van-icon class="hmwNo" v-show="!hmwSc" name="star-o" @click="hmwYes"/>
-            <van-icon class="hmwYes" v-show="hmwSc" name="star" @click="hmwNo"/>
+            <van-icon class="hmwNo" v-show="hmwSc==0" name="star-o" @click="hmwYes"/>
+            <van-icon class="hmwYes" v-show="hmwSc!=0" name="star" @click="hmwNo"/>
           </li>
           <!-- 教学团队 -->
           <li class="hmwTD">
@@ -93,6 +93,7 @@
     <!-- 底部按钮 -->
     <van-tabbar>
   <div class="hmw-foot">
+    <!-- 这个数据还有点问题，解决后用hmwIsBm -->
       <van-button v-if="!hmwBtnFlag" type="primary" block @click="hmwStudyJump()">立即报名</van-button>
       <van-button v-if="hmwBtnFlag" type="primary" block @click="hmwStudyJump()">立即学习</van-button>
     </div>
@@ -120,15 +121,21 @@ export default {
     //   二维码是否出现
       hmwShow:false,
     //   页面渲染的主数据
+    // 这个是为了拿id
     hmwObj:JSON.parse(sessionStorage.getItem('hmwXQ')),
+    hmwObjList:{},
     // 底部按钮状态（有没有登录）
     hmwBtnFlag:false,
     // 弹出层是否显示
     show: false,
     // 是否收藏
-    hmwSc:false,
+    hmwSc:0,
     // 上一个路由
-    hmwPathFrom:JSON.parse(sessionStorage.getItem("hmwPath"))
+    hmwPathFrom:JSON.parse(sessionStorage.getItem("hmwPath")),
+    // 是否报名
+    hmwIsBm:0,
+    // 关于收藏
+    hmwSCid:0,
     };
   },
   // 计算属性
@@ -152,7 +159,7 @@ export default {
     hmwDian(index){
         // // 样式的改变
         this.hmwIndex = index
-        console.log(this.hmwIndex)
+        // console.log(this.hmwIndex)
         // 获取目标的 offsetTop
       // css选择器是从 1 开始计数，我们是从 0 开始，所以要 +1
       const targetOffsetTop = document.querySelector(`.van-list>ol>li:nth-child(${index+3})`).offsetTop-50
@@ -212,12 +219,28 @@ export default {
       this.show = true;
     },
     // 点击收藏
-    hmwYes(){
-      this.hmwSc = true
+    // 收藏这块还是有点问题啊
+    async hmwYes(){
+      let hmwscYes = await this.$Net.courseXQSC({
+        course_basis_id:this.hmwSCid,
+        type: 1
+      })
+      // 成功修改样式
+      if(hmwscYes.data.code==200){
+        this.hmwSc = true
       Toast.success('收藏成功')
+      }
+      console.log(hmwscYes)
     },
     // 取消收藏
-    hmwNo(){
+    async hmwNo(){
+      // console.log(this.hmwSCid)
+      // let hmwscNo = await this.$Net.courseXQSCNO({
+      //   collect_id:this.hmwSCid
+      // })
+      // 再用原生写一次
+// let hmwscNo = await this.$axios.post(`http://120.53.31.103:84/api/app/collect/cancel`)
+      console.log(hmwscNo)
       this.hmwSc = false
       Toast('取消收藏')
     },
@@ -251,8 +274,21 @@ export default {
   // 获取详情页的数据
   async hnwGetList(){
     console.log(this.hmwObj.teachers_list[0].course_basis_id)
-    let {data} = await this.$Net.courseXQList();
-    console.log(data)
+    let id = this.hmwObj.teachers_list[0].course_basis_id
+    // 详情页面数据获取
+    let {data:list} = await this.$axios.get(`http://120.53.31.103:84/api/app/courseInfo/basis_id=${id}`)
+    // 获取课程大纲
+    // console.log(data)
+    // console.log(list.data)
+    this.hmwObjList =list.data
+    // 是否收藏
+    this.hmwSc = this.hmwObjList.info.is_collect
+    // 收藏id
+    this.hmwSCid = this.hmwObjList.info.collect_id
+    // 是否报名
+    this.hmwIsBm = this.hmwObjList.info.is_join_study
+    console.log(this.hmwObjList)
+    console.log(this.hmwObjList.info.collect_id)
   },
   // 跳转到上一个页面
   hmwJumpTo(){
@@ -270,6 +306,13 @@ export default {
     window.addEventListener('scroll', this.onScroll, false)
     // 获取一下数据
     this.hnwGetList()
+    // 如果你已经购买则改变按钮
+    console.log(this.hmwObj)
+    if(this.hmwObj.has_buy==0){
+       this.hmwBtnFlag=false
+    }else{
+      this.hmwBtnFlag=true
+    }
   },
   destroy() {
     // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
