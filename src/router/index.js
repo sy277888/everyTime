@@ -211,6 +211,16 @@ title:"我的"
     component: () => import('../components/Course/Detail.vue')
 
   },
+  //确认订单页面
+  {
+    path: "/isbuy",
+    name: "IsBuy",
+    meta:{
+      title:"确认订单"
+    },
+    component: () => import('../components/Course/IsBuy.vue')
+
+  },
   //我的特色课
   {
     path: "/xue",

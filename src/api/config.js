@@ -19,6 +19,8 @@ const API = {
         HMWSC: '/api/app/collect',
         // 取消收藏（怎么会有问题？）
         HMWSCNO: '/api/app/collect/cancel/227/1',
+        // 课程评价数据获取
+        HMWPJ: '/api/app/courseComment',
         //首页列表
         List: '/api/app/recommend/appIndex',
         //个人信息

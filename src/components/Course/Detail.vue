@@ -94,8 +94,8 @@
     <van-tabbar>
   <div class="hmw-foot">
     <!-- 这个数据还有点问题，解决后用hmwIsBm -->
-      <van-button v-if="!hmwBtnFlag" type="primary" block @click="hmwStudyJump()">立即报名</van-button>
-      <van-button v-if="hmwBtnFlag" type="primary" block @click="hmwStudyJump()">立即学习</van-button>
+      <van-button v-if="!hmwBtnFlag" type="primary" block @click="hmwStudyJump(1)">立即报名</van-button>
+      <van-button v-if="hmwBtnFlag" type="primary" block @click="hmwStudyJump(2)">立即学习</van-button>
     </div>
 </van-tabbar>
     
@@ -136,7 +136,9 @@ export default {
     hmwIsBm:0,
     // 关于收藏
     hmwSCid:0,
-    };
+    // 课程id
+    hmwId:0,
+    }
   },
   // 计算属性
   computed: {},
@@ -210,8 +212,12 @@ export default {
     }
     },
     // 立即学习点击事件
-    hmwStudyJump(){
+    hmwStudyJump(i){
+      if(i==1){
+        this.$router.push('/isbuy')
+      }else{
         this.$router.push('/study')
+      }
          document.documentElement.scrollTop =0
     },
     // 二维码弹出事件
@@ -230,7 +236,7 @@ export default {
         this.hmwSc = true
       Toast.success('收藏成功')
       }
-      console.log(hmwscYes)
+      // console.log(hmwscYes)
     },
     // 取消收藏
     async hmwNo(){
@@ -240,7 +246,7 @@ export default {
       // })
       // 再用原生写一次
 // let hmwscNo = await this.$axios.post(`http://120.53.31.103:84/api/app/collect/cancel`)
-      console.log(hmwscNo)
+      // console.log(hmwscNo)
       this.hmwSc = false
       Toast('取消收藏')
     },
@@ -287,8 +293,10 @@ export default {
     this.hmwSCid = this.hmwObjList.info.collect_id
     // 是否报名
     this.hmwIsBm = this.hmwObjList.info.is_join_study
+    // 课程id
+    this.hmwId = id
     console.log(this.hmwObjList)
-    console.log(this.hmwObjList.info.collect_id)
+    console.log(this.hmwObjList.info.id)
   },
   // 跳转到上一个页面
   hmwJumpTo(){
@@ -297,6 +305,16 @@ export default {
         path: this.hmwPathFrom.path,
         name: this.hmwPathFrom.name
       });
+  },
+  // 获取课程评价数据
+  async hmwPj(){
+    console.log(this.hmwId)
+    let list = await this.$axios.post('http://120.53.31.103:84/api/app/courseComment',{
+      id:this.hmwId,
+limit:10,
+page:1,
+    })
+    console.log(list)
   }
   },
   mounted() {
@@ -306,6 +324,7 @@ export default {
     window.addEventListener('scroll', this.onScroll, false)
     // 获取一下数据
     this.hnwGetList()
+    this.hmwPj()
     // 如果你已经购买则改变按钮
     console.log(this.hmwObj)
     if(this.hmwObj.has_buy==0){
