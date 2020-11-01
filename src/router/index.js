@@ -35,6 +35,9 @@ const routes = [
     // 一对一辅导
     path: '/solo',
     name: 'Solo',
+    meta:{
+      title:"一对一辅导"
+    },
     component: () => import('../views/Solo.vue')
   }, {
     // 一对一辅导预约页
@@ -136,48 +139,72 @@ title:"我的"
   {
     path: "/login",
     name: "Login",
+    meta:{
+      title:"登录"
+    },
     component: () => import('../components/login/login.vue'),
   },
   //找回密码
   {
     path: "/mima",
     name: "Mima",
+    meta:{
+      title:"找回密码"
+    },
     component: () => import('../components/login/zhaohui.vue')
   },
   //注册
   {
     path: "/zhu",
     name: "Zhu",
+    meta:{
+      title:"注册"
+    },
     component: () => import('../components/login/zhuce.vue')
   },
   //设置
   {
     path: "/she",
     name: "She",
+    meta:{
+      title:"设置"
+    },
     component: () => import('../components/hhs/shezhi.vue')
   },
   //个人信息 
   {
     path: "/per",
     name: "Per",
+    meta:{
+      title:"个人信息"
+    },
     component: () => import('../components/grenxinxi/PersonalInformation.vue')
   }, 
   //昵称修改
   {
     path: "/nickname",
     name: "Nickname",
+    meta:{
+      title:"修改昵称"
+    },
     component: () => import('../components/grenxinxi/Nickname.vue')
   },
   //性别的修改
   {
     path: "/sex",
     name: "Sex",
+    meta:{
+      title:"修改性别"
+    },
     component: () => import('../components/grenxinxi/Sex.vue')
   },
   //学科的修改
   {
     path: "/subject",
     name: "Subject",
+    meta:{
+      title:"修改学科"
+    },
     component: () => import('../components/grenxinxi/Subject.vue')
 
   },

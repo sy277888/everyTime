@@ -213,11 +213,18 @@ export default {
     },
     // 立即学习点击事件
     hmwStudyJump(i){
-      if(i==1){
+      // 判断一下是否登录
+      if(localStorage.getItem('token')){
+        if(i==1){
         this.$router.push('/isbuy')
       }else{
+        
         this.$router.push('/study')
       }
+      }else{
+        this.$router.push('/login')
+      }
+      
          document.documentElement.scrollTop =0
     },
     // 二维码弹出事件
@@ -285,7 +292,7 @@ export default {
     let {data:list} = await this.$axios.get(`http://120.53.31.103:84/api/app/courseInfo/basis_id=${id}`)
     // 获取课程大纲
     // console.log(data)
-    // console.log(list.data)
+    console.log(list.data)
     this.hmwObjList =list.data
     // 是否收藏
     this.hmwSc = this.hmwObjList.info.is_collect
@@ -366,12 +373,10 @@ body > div,
   align-items: center;
 }
 .hmw-center {
-  /* min-height: 4rem; */
   flex: 1;
   margin-bottom: 2.8rem;
 }
 .hmw-foot {
-  /* background: darkseagreen; */
   width: 100%;
   height: 2.8rem;
   z-index: 99999;

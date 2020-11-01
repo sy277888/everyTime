@@ -5,7 +5,7 @@ import { Tab } from 'vant';
     <div class="hmw-top">
       <van-sticky>
         <!-- 这个是用来占个位子1 -->
-        <van-nav-bar title="课程" />
+        <van-nav-bar title="特色课" />
         <!-- 导航 -->
         <div class="hmw-nav">
           <van-dropdown-menu>
