@@ -80,7 +80,7 @@ export default {
     this.$Net
       .List({
         params: {
-          teacher_id: id,
+          id: id,
         },
       })
       .then((res) => {
