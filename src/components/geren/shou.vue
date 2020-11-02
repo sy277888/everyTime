@@ -23,7 +23,7 @@ methods: {
 mounted() {
     this.$Net.cang(
         {
-            // collect_id :
+            // collect_id:
         }
     ).then(res=>{
         console.log(res);

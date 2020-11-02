@@ -286,7 +286,8 @@ export default {
         course_basis_id:this.hmwId,
         type: 1
       })
-      console.log(data)
+      localStorage.setItem("hmwId",this.hmwId)
+      console.log(hmwscYes)
       // 成功修改样式
       if(data.code==200){
         this.hmwSc = true
