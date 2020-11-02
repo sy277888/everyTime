@@ -2,6 +2,7 @@
   <div class="hmw">
     <!-- 这里是详情页面 -->
     <!-- <van-loading color="#1989fa" /> -->
+    <!-- 二维码 -->
     <van-popup v-model="show"> 
            <p>快分享给你的朋友吧</p>
          <img :src="imrUrl" />
