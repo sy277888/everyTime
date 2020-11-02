@@ -5,7 +5,12 @@ import { Tab } from 'vant';
     <div class="hmw-top">
       <van-sticky>
         <!-- 这个是用来占个位子1 -->
-        <van-nav-bar title="特色课" />
+        <!-- <van-nav-bar title="特色课" /> -->
+        <van-nav-bar title="特色课">
+  <template #right>
+    <van-icon name="search" size="22" @click="$router.push('/search')"/>
+  </template>
+</van-nav-bar>
         <!-- 导航 -->
         <div class="hmw-nav">
           <van-dropdown-menu>
@@ -586,4 +591,11 @@ bottom: 1rem;
 width: 15.73333vw !important;
     height: 12.8vw !important;
 }
+/* 搜索样式 */
+
+.hmw-top .van-nav-bar .van-icon{
+    color: #595959;
+    font-weight: bold;
+}
+
 </style>

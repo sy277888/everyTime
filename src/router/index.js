@@ -51,7 +51,7 @@ const routes = [
     name: 'Solodata',
     component: () => import('../views/Solodata.vue')
   },
-
+// 课程
   {
     path: '/about',
     name: 'About',
