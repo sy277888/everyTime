@@ -22,6 +22,18 @@ const Net = {
   courseXQList(params) {
     return request(API.Method.Get, API.Path.HMWXQ, params)
   },
+  // 设置收藏
+  courseXQSC(params) {
+    return request(API.Method.Post, API.Path.HMWSC, params)
+  },
+  // 取消收藏
+  courseXQSCNO(params) {
+    return request(API.Method.Post, API.Path.HMWSCNO, params)
+  },
+  // 课程评价数据
+  courseXQPJ(params) {
+    return request(API.Method.Post, API.Path.HMWPJ, params)
+  },
   //获取个人信息
   xuue(){
     return request(API.Method.Get,API.Path.XUE)
@@ -47,6 +59,18 @@ const Net = {
   //验证码登录
   yan(){
     return request(API.Method.Post,API.Path.YAN)
+  },
+  //修改个人信息
+  xiu(){
+    return request(API.Method.Put,API.Path.XIU)
+  },
+  //设置密码
+  she(params){
+    return request(API.Method.Post,API.Path.SHE,params)
+  },
+  //课程收藏
+  cang(){
+    return request(API.Method.Post,API.Path.CANG)
   }
 }
 

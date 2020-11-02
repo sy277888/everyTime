@@ -7,7 +7,7 @@
         <div class="waw_img">
           <div class="waw_img_title">头像</div>
           <div class="waw_img_box">
-            <img src="../../assets/头.jpg" />
+            <img :src="img" />
             <van-icon
               name="arrow"
               color="lightgray"
@@ -18,7 +18,9 @@
         <div class="waw_person">
           <div>昵称</div>
           <div class="waw_user_box">
-            <span>{{ nickName }}</span>
+            <div>
+              <span>{{ nickName }}</span>
+            </div>
             <van-icon
               name="arrow"
               color="lightgray"
@@ -51,7 +53,9 @@
         <div class="waw_person">
           <div>所在城市</div>
           <div class="waw_address_box">
-            <span>{{ Address }}</span>
+            <div>
+              <span>{{ Address }}</span>
+            </div>
             <van-icon
               name="arrow"
               color="lightgray"
@@ -62,7 +66,11 @@
         <div class="waw_person">
           <div>学科</div>
           <div class="waw_subject_box">
-            <div>化学</div>
+            <div>
+              <span v-for="(item, index) in subject" :key="index">{{
+                item
+              }}</span>
+            </div>
             <van-icon name="arrow" color="lightgray" @click="onClickSubject" />
           </div>
         </div>
@@ -115,12 +123,6 @@
 
     <!-- 学校弹出层 -->
     <van-popup v-model="showClass" position="bottom" :style="{ height: '45%' }">
-      <ul>
-        <li>一年级</li>
-        <li>二年级</li>
-        <li>大学</li>
-        <li>中专</li>
-      </ul>
     </van-popup>
   </div>
 </template>
@@ -134,10 +136,12 @@ export default {
     return {
       nickName: "", //昵称
       user: "", //手机号
-      sex: "", //性别
+      img:"",
+      sex: localStorage.getItem("sex") || "男", //性别
       time: localStorage.getItem("time") || "2000-10-10", //日期
       Address:
         localStorage.getItem("Address") || "内蒙古自治区 呼和浩特市 武川县", //地址
+      subject: JSON.parse(localStorage.getItem("result")) || ["语文"],
       showImg: false, //图片修改（默认隐藏）
       showTime: false, //日期修改（默认隐藏）
       showAddress: false, //修改地址（默认隐藏）
@@ -172,7 +176,7 @@ export default {
     };
   },
   mounted() {
-    var Nick = localStorage.getItem("value"); //读取昵称
+    var Nick = localStorage.getItem("district_name"); //读取昵称
     if (Nick) {
       this.nickName = Nick;
     }
@@ -180,10 +184,18 @@ export default {
     if (mobile) {
       this.user = mobile;
     }
-    var sex = localStorage.getItem("sex"); //读取性别
-    if (sex) {
-      this.sex = sex;
-    }
+    var id=localStorage.getItem("id")
+    this.$Net.xiu({
+      id:id
+    }).then((res) => {
+      console.log(res);
+      this.img=res.data.data.avatar;
+      console.log(this.img);
+    });
+    // var sex = localStorage.getItem("sex"); //读取性别
+    // if (sex) {
+    //   this.sex = sex;
+    // }
   },
   methods: {
     onClickChangeImg() {
@@ -247,7 +259,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style lang='scss' scoped>
 .waw_hidden {
   width: 100%;
   height: 0.5rem;
@@ -277,7 +289,7 @@ export default {
 .waw_img_box {
   width: 20%;
   height: 100%;
-  /* background: red; */
+  // background: red;
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
@@ -298,14 +310,20 @@ export default {
   border-bottom: 1px solid lightgray;
 }
 .waw_user_box {
-  width: 30%;
+  // background: red;
+  width: 80%;
   height: 100%;
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
+  div {
+    width: 90%;
+    display: inline-flex;
+    justify-content: flex-end;
+  }
 }
 .waw_mobile {
-  margin-right: 5%;
+  margin-right: 8%;
 }
 .waw_sex_box {
   width: 10%;
@@ -315,25 +333,39 @@ export default {
   align-items: center;
 }
 .waw_time_box {
-  width: 27%;
+  width: 28%;
   height: 100%;
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
 }
 .waw_address_box {
-  width: 65%;
+  width: 90%;
   height: 100%;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
+  div {
+    width: 90%;
+    display: inline-flex;
+    justify-content: flex-end;
+  }
 }
 .waw_subject_box {
-  width: 15%;
+  // background: red;
+  width: 80%;
   height: 100%;
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
+  div {
+    width: 90%;
+    display: inline-flex;
+    justify-content: flex-end;
+    span {
+      margin-left: 2%;
+    }
+  }
 }
 .waw_class_box {
   width: 27%;
@@ -348,20 +380,20 @@ export default {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-.waw_popup_wrapper {
-  width: 94%;
-  height: 100%;
-}
-.waw_popup_wrapper p {
-  width: 100%;
-  height: 33.3%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid lightgray;
-  font-size: 0.8rem;
-  color: gray;
+  .waw_popup_wrapper {
+    width: 94%;
+    height: 100%;
+    p {
+      width: 100%;
+      height: 33.3%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid lightgray;
+      font-size: 0.8rem;
+      color: gray;
+    }
+  }
 }
 .van-picker__toolbar {
   width: 100%;

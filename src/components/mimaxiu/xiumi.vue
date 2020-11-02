@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-nav-bar title="设置密码" left-arrow @click-left="onClickLeft" />
-    <van-form>
+    <van-form @submit="onLogin">
       <van-field
         @click="gao(1)"
         :class="show == 1 ? 'van-field' : 'shi'"
@@ -21,9 +21,7 @@
         :rules="[{ required: true, message: '请填写密码' }]"
       />
       <div style="margin: 16px">
-        <van-button round native-type="submit" @click="onLogin">
-          登录
-        </van-button>
+        <van-button round native-type="submit"> 登录 </van-button>
       </div>
     </van-form>
   </div>
@@ -42,26 +40,42 @@ export default {
     };
   },
   methods: {
-    onLogin() {
-        var miz=/^[A-Za-z0-9_-]+$/
-        if(this.text=="" || this.password==""){
-            return alert('内容不能为空！！')
-        }
-        if(!(miz.test(this.text) || miz.test(this.password))){
-                Toast.loading({
+    async onLogin() {
+      var miz = /^[A-Za-z0-9_-]+$/;
+      if (this.text == "" || this.password == "") {
+        return alert("内容不能为空！！");
+      }
+      if (!(miz.test(this.text) || miz.test(this.password))) {
+        Toast.loading({
           message: "密码格式不正确",
-          position:"center"
+          position: "center",
         });
-        return
-        }
-        localStorage.setItem("text",this.text);
-        localStorage.setItem("password",password);
-        var text=localStorage.getItem("text")
-        var password=localStorage.getItem("password");
-        if(text==password){
-            this.$router.push("/mime")
-        }
-        
+        return false;
+      } else if (this.text !== this.password) {
+        this.$toast({
+          message: "两次密码不一致",
+          position: "bottom",
+        });
+        return false;
+      }
+      console.log(
+        Number(localStorage.getItem("username"), localStorage.getItem("sms"))
+      );
+      var res = await this.$Net.she({
+        mobile: Number(localStorage.getItem("username")),
+        sms_code: localStorage.getItem("sms"),
+        sms_type: "getPassword",
+        password: this.text,
+      });
+      if (res.data.code == 200) {
+        this.$router.push({ path: "/mime" });
+      } else {
+        this.$toast({
+          message: res.data.msg,
+          position: "bottom",
+        });
+      }
+      console.log(res);
     },
     onClickLeft() {
       this.$router.go("-1");

@@ -27,7 +27,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style lang='scss' scoped>
 .waw_nickname_container {
   width: 100%;
   height: 100vh;
