@@ -93,6 +93,7 @@ export default {
   //     });
   // },
     mounted() {
+    console.log(this.$route.query.id);
     this.$Net.shi(this.$route.query.id).then((res) => {
       this.Homelist = res.data.data.teacher.avatar;
       this.HomelistTitle = res.data.data.teacher.real_name;
