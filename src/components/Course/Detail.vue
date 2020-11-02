@@ -178,11 +178,20 @@ export default {
   watch: {
    
   },
+  created(){
+        // 跳转按钮的显示
+// this.hmwBtnFlag = this.hmwObj.has_buy
+//     console.log(this.hmwBtnFlag)
+  },
   // 路由组件守卫
   beforeRouteEnter:(to,from,next)=>{
-    console.log(from.name,from.path)
+  //  this.hmwBtnFlag = JSON.parse(sessionStorage.getItem("hmwXQ")).has_buy
+  //  console.log(this.hmwBtnFlag)
+    // console.log(from.name,from.path)
 
-            next()
+            next(vm=>{
+                console.log(vm)
+            })
         },
   // 组件方法
   methods: {
@@ -338,7 +347,6 @@ export default {
     },
   // 获取详情页的数据
   async hnwGetList(){
-    console.log(this.hmwObj)
     let id = this.hmwObj.teachers_list[0].course_basis_id
     // 详情页面数据获取
     let {data:list} = await this.$axios.get(`http://120.53.31.103:84/api/app/courseInfo/basis_id=${id}`)
@@ -355,9 +363,7 @@ export default {
     this.hmwIsBm = this.hmwObjList.info.is_join_study
     // 课程id
     this.hmwId = id
-//     // 跳转按钮的显示
-// this.hmwBtnFlag = this.hmwObj.has_buy
-    // console.log(this.hmwBtnFlag)
+
     // console.log(this.hmwObjList.info.id)
   },
   // 跳转到上一个页面
@@ -370,11 +376,15 @@ export default {
       });
     },
   },
-  mounted() {
+  activated() {
+    this.hmwObj=JSON.parse(sessionStorage.getItem("hmwXQ"))
     document.documentElement.scrollTop = 0;
     window.addEventListener("scroll", this.scrollHandle); // 绑定页面的滚动事
     // 监听滚动事件
     window.addEventListener("scroll", this.onScroll, false);
+     this.hmwBtnFlag = JSON.parse(sessionStorage.getItem("hmwXQ")).has_buy
+   console.log(this.hmwBtnFlag)
+    // console.log(from.name,from.path)
     // 获取一下数据
     this.hnwGetList();
   },
