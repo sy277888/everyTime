@@ -15,7 +15,7 @@
       <ul class="Homelist_box">
         <li>
           <img :src="Homelist" alt="" />
-          <p>{{ HomelistTitle }}</p>
+          <p class="ho">{{ HomelistTitle }}</p>
           <p class="Homelist_box_title">
             男 8年金牌讲师 <span class="Homelist_title">已关注</span>
           </p>
@@ -85,7 +85,7 @@ export default {
       this.$router.go(-1);
     },
     //进入预约页
-    OnGo(){
+    OnGo(item){
     this.$router.push({
     path:'/homedata',
     })
@@ -135,14 +135,19 @@ body{
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 2rem;
-  margin-top: 0.4rem;
+  /* margin-top: 0.4rem; */
   margin-left: 1rem;
   float: left;
+}
+.Homelist_box .ho{
+  margin-top: 0.4rem;
 }
 .Homelist_box_title {
   font-size: 0.7rem;
   color: gray;
   margin-left: 0.3rem;
+  margin-top: 0.4rem;
+
 }
 .Homelist_title {
   font-size: 1rem;
