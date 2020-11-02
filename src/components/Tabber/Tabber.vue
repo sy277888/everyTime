@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       item: this.items,
-      Tabindex: 0 || localStorage.getItem('Tabindex'),
+      Tabindex: localStorage.getItem('Tabindex')  || 0,
     };
   },
   methods: {
@@ -36,7 +36,7 @@ export default {
        this.$router.push(temp.path);
       localStorage.setItem('Tabindex',index)
     },
-  }
+  },
   
 };
 </script>
