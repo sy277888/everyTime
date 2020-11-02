@@ -41,7 +41,7 @@
         </ul>
       </van-tab>
       <van-tab title="主讲课程" name="b">
-          <div v-for="(item,index) in date.slice(0,1)" :key="index" class="HomeLiat_Tab_A">
+          <div v-for="(item,index) in date" :key="index" class="HomeLiat_Tab_A">
              <ul>
                 <li>每时每课特级教师-自主招生冲刺讲座知识点总结————{{item.title}}</li>
                 <li class="HomeLiat_Tab_A_li">
@@ -75,12 +75,9 @@ export default {
     };
   },
     created() {
-    console.log(this.$route.query.id);
-    this.$Net.shi(this.$route.query.id).then((res) => {
-      this.Homelist = res.data.data.teacher.avatar;
-      this.HomelistTitle = res.data.data.teacher.real_name;
-      console.log(this.Homelist);
-    });
+     let  b  = this.$route
+      console.log(b)
+      
     },
   methods: {
     Onback() {
