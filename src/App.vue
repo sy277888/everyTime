@@ -56,7 +56,6 @@ export default {
   watch: {
     //利用监听属性判断全局路由
     $route(to, from) {
-      
       var token = localStorage.getItem("token");
       if (to.path == "/login") {
         if (token == null) {
@@ -76,21 +75,24 @@ export default {
         this.isShow = true;
       } else if (to.path == "/lenderData") {
         this.isShow = false;
-      }else if (to.path == "/solo") {
+      } else if (to.path == "/solo") {
         this.isShow = false;
-      }else if (to.path == "/sololist") {
+      } else if (to.path == "/sololist") {
         this.isShow = false;
-      }else if (to.path == "/solodata") {
+      } else if (to.path == "/solodata") {
         this.isShow = false;
-      }else if (to.path == "/make") {
+      } else if (to.path == "/make") {
         this.isShow = true;
       }
     },
   },
+  created() {
+    localStorage.removeItem("Tabindex");
+  },
 };
 </script>
 <style>
-*{
+* {
   margin: 0rem;
   padding: 0rem;
 }
