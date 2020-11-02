@@ -53,7 +53,7 @@
               开课时间：{{ hmwObj.start_play_date | timefnxq }} -
               {{ hmwObj.end_play_date | timefnxq }}
             </p>
-            <!-- <van-rate v-model="hmwSc" :count="1"/> -->
+            <!-- 收藏 -->
             <van-icon
               class="hmwNo"
               v-show="!hmwSc"
@@ -177,6 +177,7 @@ export default {
   computed: {},
   // 侦听器
   watch: {},
+
   // 组件方法
   methods: {
     //   nav是否显示判断事件
@@ -277,16 +278,20 @@ export default {
     // 收藏这块还是有点问题啊
     async hmwYes(){
       console.log(this.hmwId)
-      let hmwscYes = await this.$Net.courseXQSC({
+      // let {data} = await this.$axios.post('http://120.53.31.103:84/api/app/collect',{
+      //   course_basis_id:this.hmwId,
+      //   type: 1
+      // })
+      let {data} = await this.$Net.courseXQSC({
         course_basis_id:this.hmwId,
         type: 1
       })
-      console.log(hmwscYes)
+      console.log(data)
       // 成功修改样式
-      if(hmwscYes.data.code==200){
+      if(data.code==200){
         this.hmwSc = true
         // // 刷新页面
-        this.hnwGetList()
+        // this.hnwGetList()
       Toast.success('收藏成功')
     };
     },
@@ -331,11 +336,11 @@ export default {
     let {data:list} = await this.$axios.get(`http://120.53.31.103:84/api/app/courseInfo/basis_id=${id}`)
     // 获取课程大纲
     // console.log(data)
-    console.log(list.data)
+    // console.log(list.data)
     this.hmwObjList =list.data
     // 是否收藏
     this.hmwSc = this.hmwObjList.info.is_collect
-    console.log(this.hmwSc+'=================================================')
+    console.log(this.hmwSc+'=====')
     // 收藏id
     this.hmwSCid = this.hmwObjList.info.collect_id
     // 是否报名
