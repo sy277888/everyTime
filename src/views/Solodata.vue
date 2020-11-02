@@ -144,7 +144,6 @@ export default {
   text-align: center;
   border: 0.05rem solid rgb(235, 97, 0);
   margin-left: 15rem;
-  margin-top: -3rem;
   border-radius: 3rem;
   color: rgb(235, 97, 0);
 }

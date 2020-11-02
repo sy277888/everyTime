@@ -22,6 +22,18 @@ const Net = {
   courseXQList(params) {
     return request(API.Method.Get, API.Path.HMWXQ, params)
   },
+  // 设置收藏
+  courseXQSC(params) {
+    return request(API.Method.Post, API.Path.HMWSC, params)
+  },
+  // 取消收藏
+  courseXQSCNO(params) {
+    return request(API.Method.Post, API.Path.HMWSCNO, params)
+  },
+  // 课程评价数据
+  courseXQPJ(params) {
+    return request(API.Method.Post, API.Path.HMWPJ, params)
+  },
   //获取个人信息
   xuue(){
     return request(API.Method.Get,API.Path.XUE)
