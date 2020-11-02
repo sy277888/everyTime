@@ -69,6 +69,8 @@ export function request(method,url,params){
         return Get(url,params)
         case API.Method.Post:
         return Post(url,params)
+        case API.Method.Put:
+         return Put(url,params)
     }
 }
 function Get(url,params){
@@ -77,4 +79,7 @@ function Get(url,params){
 
 function Post(url,params){
     return instance.post(url,params)
+}
+function Put(url,params){
+    return instance.put(url,params)
 }

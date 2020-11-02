@@ -56,16 +56,18 @@ export default {
             type:this.type
         })
         .then((res) => {
-          console.log(res);
-          // localStorage.token = res.data.token;
+          // console.log(res);
           var token=res.data.data.remember_token;
           var mobile=res.data.data.mobile
           var sex=res.data.data.sex
+          var id=res.data.data.id;
+          localStorage.setItem("id",id)
           localStorage.setItem("token",token);
-          localStorage.setItem("username",this.username)
-          localStorage.setItem("value","admin")
+          // localStorage.setItem("username",this.username)
+          // console.log(username);
           localStorage.setItem("mobile",mobile)
           localStorage.setItem("sex",sex)
+          console.log(id);
           this.$router.push({ path: "/mime" });
         })
         .catch((err) => {

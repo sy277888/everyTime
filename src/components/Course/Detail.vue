@@ -357,12 +357,10 @@ body > div,
   align-items: center;
 }
 .hmw-center {
-  /* min-height: 4rem; */
   flex: 1;
   margin-bottom: 2.8rem;
 }
 .hmw-foot {
-  /* background: darkseagreen; */
   width: 100%;
   height: 2.8rem;
   z-index: 99999;

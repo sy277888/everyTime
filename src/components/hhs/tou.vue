@@ -4,14 +4,25 @@
     <div class="sy_top">
       <div class="sy_top1">
         <p class="sy_img">
-          <img v-show="username.length<=0" src="../../assets/头像.png" alt="" />
-          <img v-show="username.length>0" src="../../assets/头.jpg" alt="" @click="ge"><span
-          v-show="username.length<=0"
+          <img
+            v-show="district_name.length <= 0"
+            src="../../assets/头像.png"
+            alt=""
+          />
+          <img
+            v-show="district_name.length > 0"
+            :src="list.avatar"
+            alt=""
+            @click="ge"
+          /><span
+            v-show="district_name.length <= 0"
             class="s1"
             @click="denglv"
             >登录/注册</span
           >
-          <span v-show="username.length>0" class="s1" @click="ge">{{username}}</span>
+          <span v-show="district_name.length > 0" class="s1" @click="ge">{{
+            district_name
+          }}</span>
         </p>
         <button class="sy_bu" @click="quyue">去约课</button>
       </div>
@@ -23,40 +34,38 @@
 export default {
   data() {
     return {
-      username:[],
-    }
+      list: [],
+      district_name:""
+    };
   },
   methods: {
     denglv() {
       this.$router.push({ path: "/login" });
     },
-    ge(){
-      var token=localStorage.getItem("token")
-      if(token){
-this.$router.push({path:"/per"})
-      }else{
-        this.$router.push("/login")
+    ge() {
+      var district_name=localStorage.setItem("district_name",this.district_name)
+      var mobile=localStorage.setItem("mobile",this.list.mobile)
+      var token = localStorage.getItem("token");
+      if (token) {
+        this.$router.push({ path: "/per" });
+      } else {
+        this.$router.push("/login");
       }
-      
     },
-    quyue(){
-      this.$router.push({path:"/make"})
-    }
+    quyue() {
+      this.$router.push({ path: "/make" });
+    },
   },
   mounted() {
-    var user=localStorage.getItem("username");
-    if(user){
-      this.username=user
-    };
-        this.$Net.xuue({
-          params:{
-          headers:{
-            Authorization:"Bearer"+localStorage.getItem("token")
-          }
-          }
-        }).then((res) => {
-      console.log(res);
-    });
+        this.$Net
+        .xuue({
+          params: {},
+        })
+        .then((res) => {
+          console.log(res);
+          this.list = res.data.data;
+          this.district_name=res.data.data.district_name
+        });
   },
 };
 </script>
@@ -83,12 +92,12 @@ this.$router.push({path:"/per"})
 .sy_img {
   position: absolute;
   left: 1rem;
-  top:1rem
+  top: 1rem;
 }
 .sy_img img {
   width: 4.5rem;
   height: 4.5rem;
-  border-radius:50%;
+  border-radius: 50%;
 }
 .sy_img .s1 {
   position: relative;
