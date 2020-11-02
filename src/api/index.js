@@ -51,6 +51,14 @@ const Net = {
   //修改个人信息
   xiu(){
     return request(API.Method.Put,API.Path.XIU)
+  },
+  //设置密码
+  she(params){
+    return request(API.Method.Post,API.Path.SHE,params)
+  },
+  //课程收藏
+  cang(){
+    return request(API.Method.Post,API.Path.CANG)
   }
 }
 

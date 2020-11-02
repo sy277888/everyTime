@@ -121,6 +121,7 @@ export default {
       hmwShow:false,
     //   页面渲染的主数据
     hmwObj:JSON.parse(sessionStorage.getItem('hmwXQ')),
+
     // 底部按钮状态（有没有登录）
     hmwBtnFlag:false,
     // 弹出层是否显示
@@ -215,6 +216,7 @@ export default {
     hmwYes(){
       this.hmwSc = true
       Toast.success('收藏成功')
+      
     },
     // 取消收藏
     hmwNo(){
@@ -264,7 +266,7 @@ export default {
   }
   },
   mounted() {
-      document.documentElement.scrollTop =0
+    document.documentElement.scrollTop =0
     window.addEventListener('scroll', this.scrollHandle);  // 绑定页面的滚动事
      // 监听滚动事件
     window.addEventListener('scroll', this.onScroll, false)
