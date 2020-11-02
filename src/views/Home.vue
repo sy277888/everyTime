@@ -218,7 +218,7 @@ this.$router.push({
 <style  scoped>
 .Home_overall {
   width: 100%;
-  height: 130rem;
+  height: 113rem;
   background: rgb(240, 242, 245);
 }
 .Home_advice {
@@ -260,7 +260,7 @@ this.$router.push({
   
 }
 .Home_teacher li{
-/* padding: 1rem; */
+padding: 1rem;
 }
 .Home_teacher ul li img {
   width: 3rem;
@@ -356,7 +356,7 @@ font-size: 3.2vw;
 color:#b7b7b7;
 }
 .Home_course_box>div img{
-  /* margin: 0; */
+  margin: 0;
 }
 /* 底下部分 */
 .hmwJPfoot{
