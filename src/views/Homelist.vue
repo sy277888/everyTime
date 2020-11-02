@@ -99,7 +99,7 @@ export default {
       this.HomelistTitle = res.data.data.teacher.real_name;
       console.log(this.Homelist);
     });
-  },
+    },
   methods: {
     Onback() {
         //返回上一级
