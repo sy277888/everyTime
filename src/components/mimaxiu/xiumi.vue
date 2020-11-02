@@ -71,7 +71,7 @@ export default {
         this.$router.push({ path: "/mime" });
       } else {
         this.$toast({
-          message: res.msg,
+          message: res.data.msg,
           position: "bottom",
         });
       }
