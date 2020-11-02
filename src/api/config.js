@@ -43,7 +43,9 @@ const API = {
         //课程收藏
         CANG:"/api/app/collect",
         //课程取消收藏
-        CANCEL:"/api/app/collect/cancel/227/1"
+        CANCEL:"/api/app/collect/cancel/227/1",
+           //教师详情
+     SHI:"/api/app/teacher/",
     }
 }
 
