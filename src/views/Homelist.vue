@@ -15,7 +15,7 @@
       <ul class="Homelist_box">
         <li>
           <img :src="Homelist" alt="" />
-          <p>{{ HomelistTitle }}</p>
+          <p class="ho">{{ HomelistTitle }}</p>
           <p class="Homelist_box_title">
             男 8年金牌讲师 <span class="Homelist_title">已关注</span>
           </p>
@@ -41,7 +41,7 @@
         </ul>
       </van-tab>
       <van-tab title="主讲课程" name="b">
-          <div v-for="(item,index) in date.slice(0,1)" :key="index" class="HomeLiat_Tab_A">
+          <div v-for="(item,index) in date" :key="index" class="HomeLiat_Tab_A">
              <ul>
                 <li>每时每课特级教师-自主招生冲刺讲座知识点总结————{{item.title}}</li>
                 <li class="HomeLiat_Tab_A_li">
@@ -74,31 +74,10 @@ export default {
       date:[]
     };
   },
-  // created() {
-  //   let id = this.$route.query.id;
-  //   console.log(id);
-  //   this.$Net
-  //     .List({
-  //       params: {
-  //         teacher_id: id,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       this.Homelist =
-  //         res.data.data[1].list[0].teachers_list[0].teacher_avatar;
-  //       this.HomelistTitle =
-  //         res.data.data[1].list[0].teachers_list[0].teacher_name;
-  //        this.date=  res.data.data[1].list;
-  //        console.log(res.data.data[1].list)
-  //     });
-  // },
-    mounted() {
-    console.log(this.$route.query.id);
-    this.$Net.shi(this.$route.query.id).then((res) => {
-      this.Homelist = res.data.data.teacher.avatar;
-      this.HomelistTitle = res.data.data.teacher.real_name;
-      console.log(this.Homelist);
-    });
+    created() {
+     let  b  = this.$route
+      console.log(b)
+      
     },
   methods: {
     Onback() {
@@ -106,9 +85,9 @@ export default {
       this.$router.go(-1);
     },
     //进入预约页
-    OnGo(){
+    OnGo(item){
     this.$router.push({
-    path:'/homedata'
+    path:'/homedata',
     })
     }
   },
@@ -156,14 +135,19 @@ body{
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 2rem;
-  margin-top: 0.4rem;
+  /* margin-top: 0.4rem; */
   margin-left: 1rem;
   float: left;
+}
+.Homelist_box .ho{
+  margin-top: 0.4rem;
 }
 .Homelist_box_title {
   font-size: 0.7rem;
   color: gray;
   margin-left: 0.3rem;
+  margin-top: 0.4rem;
+
 }
 .Homelist_title {
   font-size: 1rem;
