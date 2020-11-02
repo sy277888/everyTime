@@ -71,6 +71,11 @@ const Net = {
   //课程收藏
   cang(){
     return request(API.Method.Post,API.Path.CANG)
+  },
+  //讲师详情
+  shi(params){
+    console.log(params);
+    return request(API.Method.Get,API.Path.SHI+params)
   }
 }
 

@@ -74,24 +74,32 @@ export default {
       date:[]
     };
   },
-  created() {
-    let id = this.$route.query.id;
-    console.log(id);
-    this.$Net
-      .List({
-        params: {
-          teacher_id: id,
-        },
-      })
-      .then((res) => {
-        this.Homelist =
-          res.data.data[1].list[0].teachers_list[0].teacher_avatar;
-        this.HomelistTitle =
-          res.data.data[1].list[0].teachers_list[0].teacher_name;
-         this.date=  res.data.data[1].list;
-         console.log(res.data.data[1].list)
-      });
-  },
+  // created() {
+  //   let id = this.$route.query.id;
+  //   console.log(id);
+  //   this.$Net
+  //     .List({
+  //       params: {
+  //         teacher_id: id,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       this.Homelist =
+  //         res.data.data[1].list[0].teachers_list[0].teacher_avatar;
+  //       this.HomelistTitle =
+  //         res.data.data[1].list[0].teachers_list[0].teacher_name;
+  //        this.date=  res.data.data[1].list;
+  //        console.log(res.data.data[1].list)
+  //     });
+  // },
+    mounted() {
+    console.log(this.$route.query.id);
+    this.$Net.shi(this.$route.query.id).then((res) => {
+      this.Homelist = res.data.data.teacher.avatar;
+      this.HomelistTitle = res.data.data.teacher.real_name;
+      console.log(this.Homelist);
+    });
+    },
   methods: {
     Onback() {
         //返回上一级

@@ -2,6 +2,7 @@
   <div class="hmw">
     <!-- 这里是详情页面 -->
     <!-- <van-loading color="#1989fa" /> -->
+    <!-- 二维码 -->
     <van-popup v-model="show"> 
            <p>快分享给你的朋友吧</p>
          <img :src="imrUrl" />
@@ -280,6 +281,7 @@ export default {
         course_basis_id:this.hmwId,
         type: 1
       })
+      localStorage.setItem("hmwId",this.hmwId)
       console.log(hmwscYes)
       // 成功修改样式
       if(hmwscYes.data.code==200){

@@ -8,8 +8,8 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    meta:{
-      title:"首页"
+    meta: {
+      title: "首页"
     },
     component: Home,
   },
@@ -35,8 +35,8 @@ const routes = [
     // 一对一辅导
     path: '/solo',
     name: 'Solo',
-    meta:{
-      title:"一对一辅导"
+    meta: {
+      title: "一对一辅导"
     },
     component: () => import('../views/Solo.vue')
   }, {
@@ -51,12 +51,12 @@ const routes = [
     name: 'Solodata',
     component: () => import('../views/Solodata.vue')
   },
-
+// 课程
   {
     path: '/about',
     name: 'About',
-    meta:{
-      title:"课程"
+    meta: {
+      title: "课程"
     },
     component: () => import('../views/About.vue')
   },
@@ -100,8 +100,8 @@ const routes = [
     //约课记录
     path: '/make',
     name: 'Make',
-    meta:{
-      title:"约课纪录"
+    meta: {
+      title: "约课纪录"
     },
     component: () => import('../views/Make.vue'),
   }
@@ -110,8 +110,8 @@ const routes = [
     //练习
     path: '/practice',
     name: 'Practice',
-    meta:{
-      title:"练习"
+    meta: {
+      title: "练习"
     },
     component: () => import('../views/Practice.vue')
   }
@@ -120,8 +120,8 @@ const routes = [
     //我的
     path: '/mime',
     name: 'Mime',
-    meta:{
-title:"我的"
+    meta: {
+      title: "我的"
     },
     component: () => import('../views/Mime.vue'),
   }
@@ -130,8 +130,8 @@ title:"我的"
     //课程
     path: '/about',
     name: 'About',
-    meta:{
-      title:"课程"
+    meta: {
+      title: "课程"
     },
     component: () => import('../views/About.vue')
   },
@@ -139,8 +139,8 @@ title:"我的"
   {
     path: "/login",
     name: "Login",
-    meta:{
-      title:"登录"
+    meta: {
+      title: "登录"
     },
     component: () => import('../components/login/login.vue'),
   },
@@ -148,8 +148,8 @@ title:"我的"
   {
     path: "/mima",
     name: "Mima",
-    meta:{
-      title:"找回密码"
+    meta: {
+      title: "找回密码"
     },
     component: () => import('../components/login/zhaohui.vue')
   },
@@ -157,8 +157,8 @@ title:"我的"
   {
     path: "/zhu",
     name: "Zhu",
-    meta:{
-      title:"注册"
+    meta: {
+      title: "注册"
     },
     component: () => import('../components/login/zhuce.vue')
   },
@@ -166,8 +166,8 @@ title:"我的"
   {
     path: "/she",
     name: "She",
-    meta:{
-      title:"设置"
+    meta: {
+      title: "设置"
     },
     component: () => import('../components/hhs/shezhi.vue')
   },
@@ -175,17 +175,17 @@ title:"我的"
   {
     path: "/per",
     name: "Per",
-    meta:{
-      title:"个人信息"
+    meta: {
+      title: "个人信息"
     },
     component: () => import('../components/grenxinxi/PersonalInformation.vue')
-  }, 
+  },
   //昵称修改
   {
     path: "/nickname",
     name: "Nickname",
-    meta:{
-      title:"修改昵称"
+    meta: {
+      title: "修改昵称"
     },
     component: () => import('../components/grenxinxi/Nickname.vue')
   },
@@ -193,8 +193,8 @@ title:"我的"
   {
     path: "/sex",
     name: "Sex",
-    meta:{
-      title:"修改性别"
+    meta: {
+      title: "修改性别"
     },
     component: () => import('../components/grenxinxi/Sex.vue')
   },
@@ -202,8 +202,8 @@ title:"我的"
   {
     path: "/subject",
     name: "Subject",
-    meta:{
-      title:"修改学科"
+    meta: {
+      title: "修改学科"
     },
     component: () => import('../components/grenxinxi/Subject.vue')
 
@@ -232,8 +232,8 @@ title:"我的"
   {
     path: "/detail",
     name: "Detail",
-    meta:{
-      title:"课程详情"
+    meta: {
+      title: "课程详情"
     },
     component: () => import('../components/Course/Detail.vue')
 
@@ -242,8 +242,8 @@ title:"我的"
   {
     path: "/isbuy",
     name: "IsBuy",
-    meta:{
-      title:"确认订单"
+    meta: {
+      title: "确认订单"
     },
     component: () => import('../components/Course/IsBuy.vue')
 
@@ -324,8 +324,8 @@ title:"我的"
   {
     path: "/study",
     name: "Study",
-    meta:{
-      title:"学习详情"
+    meta: {
+      title: "学习详情"
     },
     component: () => import('../components/Course/Study.vue')
 
@@ -350,9 +350,13 @@ const router = new VueRouter({
   routes
 })
 //全局前置守卫
-router.beforeEach((to,from,next)=>{
-document.title=to.meta.title;
-next()
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title;
+  next()
+
+  if (to.name ==='Home') {
+   window.localStorage.removeItem('Tabindex')
+  }
 })
 
 
