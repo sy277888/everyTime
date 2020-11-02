@@ -287,10 +287,11 @@ export default {
         type: 1
       })
       localStorage.setItem("hmwId",this.hmwId)
-      console.log(hmwscYes)
+      
       // 成功修改样式
       if(data.code==200){
         this.hmwSc = true
+        console.log(data)
         // // 刷新页面
         // this.hnwGetList()
       Toast.success('收藏成功')
