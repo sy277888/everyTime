@@ -163,21 +163,27 @@ export default {
       //   页面渲染的主数据
       hmwObj: JSON.parse(sessionStorage.getItem("hmwXQ")),
       // 底部按钮状态（有没有登录）
-      hmwBtnFlag: 0,
+      hmwBtnFlag: JSON.parse(sessionStorage.getItem("hmwXQ")).has_buy||0,
       // 弹出层是否显示
       show: false,
       imrUrl: "", // 图片的地址
       // 是否收藏
       hmwSc: false,
-      // 上一个路由
-      hmwPathFrom: JSON.parse(sessionStorage.getItem("hmwPath")),
+      
     };
   },
   // 计算属性
   computed: {},
   // 侦听器
-  watch: {},
+  watch: {
+   
+  },
+  // 路由组件守卫
+  beforeRouteEnter:(to,from,next)=>{
+    console.log(from.name,from.path)
 
+            next()
+        },
   // 组件方法
   methods: {
     //   nav是否显示判断事件
@@ -349,17 +355,18 @@ export default {
     this.hmwIsBm = this.hmwObjList.info.is_join_study
     // 课程id
     this.hmwId = id
-    // 跳转按钮的显示
-this.hmwBtnFlag = this.hmwObj.has_buy
-    console.log(this.hmwObjList)
+//     // 跳转按钮的显示
+// this.hmwBtnFlag = this.hmwObj.has_buy
+    // console.log(this.hmwBtnFlag)
     // console.log(this.hmwObjList.info.id)
   },
   // 跳转到上一个页面
   hmwJumpTo(){
-    console.log(this.hmwPathFrom)
+    // 上一个路由
+    let pathval = JSON.parse(sessionStorage.getItem("hmwPath"))
     this.$router.push({
-        path: this.hmwPathFrom.path,
-        name: this.hmwPathFrom.name,
+        path: pathval.path,
+        name: pathval.name,
       });
     },
   },
