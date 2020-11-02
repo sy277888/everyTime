@@ -145,11 +145,12 @@ export default {
 .Solo_list_p {
   margin-left: 1rem;
   font-size: 0.99rem;
-  line-height: 1rem;
+  margin-top: 2rem;
 }
 .Solo_list_title {
   font-size: 0.7rem;
   color: gray;
+  margin-top: 2rem;
 }
 .Solo_list_ul div {
   width: 4rem;
