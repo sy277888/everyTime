@@ -277,12 +277,7 @@ export default {
         // 刷新页面
         this.hnwGetList()
       Toast.success('收藏成功')
-      }
-    },
-    // 取消收藏
-    hmwNo() {
-      this.hmwSc = false;
-      Toast("取消收藏");
+    };
     },
     // 滚动监听器
     onScroll() {
