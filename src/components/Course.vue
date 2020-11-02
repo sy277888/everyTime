@@ -404,9 +404,12 @@ export default {
     },
     // 跳转到详情页面
     hmwJump(item){
+      console.log(item.id)
       // 保存数据到本地
       sessionStorage.setItem('hmwPath',JSON.stringify({path:'/about',name:'About'}))
       sessionStorage.setItem('hmwXQ',JSON.stringify(item))
+      // 保存id到本地
+      sessionStorage.setItem('hmwXQid',JSON.stringify(item.id))
       this.$router.push('/detail')
     }
   },

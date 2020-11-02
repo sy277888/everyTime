@@ -234,16 +234,18 @@ export default {
     // 点击收藏
     // 收藏这块还是有点问题啊
     async hmwYes(){
+      console.log(this.hmwId)
       let hmwscYes = await this.$Net.courseXQSC({
-        course_basis_id:this.hmwSCid,
+        course_basis_id:this.hmwId,
         type: 1
       })
       // 成功修改样式
       if(hmwscYes.data.code==200){
         this.hmwSc = true
+        // 刷新页面
+        this.hnwGetList()
       Toast.success('收藏成功')
       }
-      // console.log(hmwscYes)
     },
     // 取消收藏
     async hmwNo(){
@@ -296,8 +298,10 @@ export default {
     this.hmwObjList =list.data
     // 是否收藏
     this.hmwSc = this.hmwObjList.info.is_collect
+    console.log(this.hmwSc+'=================================================')
     // 收藏id
     this.hmwSCid = this.hmwObjList.info.collect_id
+    
     // 是否报名
     this.hmwIsBm = this.hmwObjList.info.is_join_study
     // 课程id
