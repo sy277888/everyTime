@@ -122,17 +122,17 @@
     <van-tabbar>
       <div class="hmw-foot">
         <van-button
-          v-if="!hmwBtnFlag"
+          v-if="hmwBtnFlag==0"
           type="primary"
           block
-          @click="hmwStudyJump()"
+          @click="hmwStudyJump(1)"
           >立即报名</van-button
         >
         <van-button
-          v-if="hmwBtnFlag"
+          v-if="hmwBtnFlag==1"
           type="primary"
           block
-          @click="hmwStudyJump()"
+          @click="hmwStudyJump(2)"
           >立即学习</van-button
         >
       </div>
@@ -162,7 +162,7 @@ export default {
       //   页面渲染的主数据
       hmwObj: JSON.parse(sessionStorage.getItem("hmwXQ")),
       // 底部按钮状态（有没有登录）
-      hmwBtnFlag: false,
+      hmwBtnFlag: 0,
       // 弹出层是否显示
       show: false,
       imrUrl: "", // 图片的地址
@@ -244,8 +244,17 @@ export default {
       }
     },
     // 立即学习点击事件
-    hmwStudyJump() {
-      this.$router.push("/study");
+    hmwStudyJump(i) {
+      if(localStorage.getItem('token')){
+        if(i==1){
+          this.$router.push("/isbuy");
+        }else{
+          this.$router.push("/study");
+        }
+      }else{
+        this.$router.push("/login");
+      }
+      
       document.documentElement.scrollTop = 0;
     },
     // 二维码弹出事件
@@ -264,14 +273,26 @@ export default {
         });
     },
     // 点击收藏
-    hmwYes() {
-      this.hmwSc = true;
-      Toast.success("收藏成功");
+    // 收藏这块还是有点问题啊
+    async hmwYes(){
+      console.log(this.hmwId)
+      let hmwscYes = await this.$Net.courseXQSC({
+        course_basis_id:this.hmwId,
+        type: 1
+      })
+      console.log(hmwscYes)
+      // 成功修改样式
+      if(hmwscYes.data.code==200){
+        this.hmwSc = true
+        // // 刷新页面
+        this.hnwGetList()
+      Toast.success('收藏成功')
+    };
     },
     // 取消收藏
-    hmwNo() {
-      this.hmwSc = false;
-      Toast("取消收藏");
+    hmwNo(){
+        this.hmwSc = false
+      Toast.success('取消收藏')
     },
     // 滚动监听器
     onScroll() {
@@ -301,16 +322,34 @@ export default {
       // console.log(this.hmwIndex)
       this.active = navIndex;
     },
-    // 获取详情页的数据
-    async hnwGetList() {
-      console.log(this.hmwObj.teachers_list[0].course_basis_id);
-      let { data } = await this.$Net.courseXQList();
-      console.log(data);
-    },
-    // 跳转到上一个页面
-    hmwJumpTo() {
-      console.log(this.hmwPathFrom);
-      this.$router.push({
+  // 获取详情页的数据
+  async hnwGetList(){
+    console.log(this.hmwObj)
+    let id = this.hmwObj.teachers_list[0].course_basis_id
+    // 详情页面数据获取
+    let {data:list} = await this.$axios.get(`http://120.53.31.103:84/api/app/courseInfo/basis_id=${id}`)
+    // 获取课程大纲
+    // console.log(data)
+    console.log(list.data)
+    this.hmwObjList =list.data
+    // 是否收藏
+    this.hmwSc = this.hmwObjList.info.is_collect
+    console.log(this.hmwSc+'=================================================')
+    // 收藏id
+    this.hmwSCid = this.hmwObjList.info.collect_id
+    // 是否报名
+    this.hmwIsBm = this.hmwObjList.info.is_join_study
+    // 课程id
+    this.hmwId = id
+    // 跳转按钮的显示
+this.hmwBtnFlag = this.hmwObj.has_buy
+    console.log(this.hmwObjList)
+    // console.log(this.hmwObjList.info.id)
+  },
+  // 跳转到上一个页面
+  hmwJumpTo(){
+    console.log(this.hmwPathFrom)
+    this.$router.push({
         path: this.hmwPathFrom.path,
         name: this.hmwPathFrom.name,
       });

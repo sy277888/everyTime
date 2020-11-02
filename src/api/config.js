@@ -37,7 +37,13 @@ const API = {
         //验证码登录
         YAN:"/api/app/login",
         //修改个人信息
-        XIU:"/api/app/user"
+        XIU:"/api/app/user",
+        //设置密码
+        SHE:"/api/app/smsCode",
+        //课程收藏
+        CANG:"/api/app/collect",
+        //课程取消收藏
+        CANCEL:"/api/app/collect/cancel/227/1"
     }
 }
 

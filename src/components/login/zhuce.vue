@@ -57,6 +57,7 @@ export default {
     denglv() {
       this.$router.push({ path: "/login" });
     },
+    //立即注册
     onLogin() {
       this.$axios
         .post("http://120.53.31.103:84/api/app/login", {
@@ -71,6 +72,8 @@ export default {
           var isnew = localStorage.getItem("isnew");
           var token = res.data.data.remember_token;
           localStorage.setItem("username", this.username);
+          localStorage.setItem("sms",this.text)
+          // localStorage.setItem("user",JSON.stringify(res.data))
           localStorage.setItem("token", token);
           if (isnew == 1) {
             this.$router.push({
@@ -81,9 +84,11 @@ export default {
           }
         });
     },
+    //高亮显示
     gao(i) {
       this.show = i;
     },
+    //获取验证码
     async add() {
       var phone = /^[1]([3-9])[0-9]{9}$/;
       if (!phone.test(this.username)) {
@@ -105,8 +110,11 @@ export default {
         }
         if(data.code==201){
           this.$toast(data.msg)
+          // alert('shabi')
         }
       }
+      sessionStorage
+      //点击验证后变成60秒的倒计时
       const TIME_COUNT = 60;
       if (!this.timer) {
         this.count = TIME_COUNT;

@@ -10,10 +10,24 @@
 
 <script>
 export default {
+    data() {
+        return {
+            
+        }
+    },
 methods: {
     onClickLeft(){
         this.$router.go("-1")
     }
+},
+mounted() {
+    this.$Net.cang(
+        {
+            // collect_id :
+        }
+    ).then(res=>{
+        console.log(res);
+    })
 },
 }
 </script>
