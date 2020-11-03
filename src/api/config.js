@@ -11,7 +11,7 @@ const API = {
         // 课程导航
         HMWFL: '/api/app/courseClassify',
         // 课程列表
-        HMWLIST: '/api/app/courseBasis?page=1&limit=10&',
+        HMWLIST: '/api/app/courseBasis?page=1&limit=100&',
         // 课程详情数据
         HMWXQ: '/api/app/courseInfo/basis_id=',
         // 课程收藏操作
