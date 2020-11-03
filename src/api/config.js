@@ -7,7 +7,6 @@ const API = {
     },
     //定义请求地址
     Path: {
-        // HMWFL: '/api/app/courseClassify',
         LOGIN: '/api/app/login',
         // 课程导航
         HMWFL: '/api/app/courseClassify',
@@ -29,11 +28,12 @@ const API = {
         TE: "/api/app/courseBasis?page=1&limit=10&",
         //我的关注
         GUAN: "/api/app/collect",
+        //
         KE: "/api/app/courseInfo/basis_id=189",
         //学习
         Xue: "/api/app/myStudy/2",
         //首页推荐老师列表
-        HomeLIST: '/api/app/teacher/info/id',
+        HomeLIST: '/api/app/teacher/',
         //验证码登录
         YAN: "/api/app/login",
         //修改个人信息
@@ -46,6 +46,7 @@ const API = {
         CANCEL: "/api/app/collect/cancel/227/1",
         //教师详情
         SHI: "/api/app/teacher/",
+     
     }
 }
 

@@ -43,8 +43,8 @@ const Net = {
     return request(API.Method.Get,API.Path.TE)
   },
   //我的关注
-  guan(){
-    return request(API.Method.Get,API.Path.GUAN)
+  guan(params){
+    return request(API.Method.Get,API.Path.GUAN,params)
   },
   ke(){
     return request(API.Method.Get,API.Path.KE)
@@ -53,8 +53,8 @@ const Net = {
     return request(API.Method.Get,API.Path.Xue)
   },
   //首页推荐老师列表详情页内容
-  HomeLIST(params){
-    return request(API.Method.Get,API.Path.HomeLIST,params)
+  HomeLIST(id){
+    return request(API.Method.Get,API.Path.HomeLIST+id)
   },
   //验证码登录
   yan(){
@@ -76,7 +76,13 @@ const Net = {
   shi(params){
     console.log(params);
     return request(API.Method.Get,API.Path.SHI+params)
-  }
+  },
+  //列表老师关关注
+  GuanZhu(params){
+    return  request(API.Method.Get,'/api/app/teacher/collect/'+params)
+  },
+  //Mime 页面  获取关注
+
 }
 
 //抛出Net
