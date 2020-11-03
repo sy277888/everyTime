@@ -177,7 +177,7 @@ export default {
         this.$router.push({
           path: "/homelist",
           query: {
-             item
+             item : JSON.stringify(item)
           }
         
         });
