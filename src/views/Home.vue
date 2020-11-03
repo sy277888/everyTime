@@ -173,13 +173,13 @@ export default {
       var token = localStorage.getItem("token");
       if ((token = !token)) {
         this.show = true;
+        console.log(item)
       } else if ((token = !token)) {
         this.$router.push({
           path: "/homelist",
           query: {
-             item : JSON.stringify(item)
+             id:item.teacher_id
           }
-        
         });
       }
     },
