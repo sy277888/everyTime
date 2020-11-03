@@ -14,11 +14,11 @@ const API = {
         // 课程列表
         HMWLIST: '/api/app/courseBasis?page=1&limit=10&',
         // 课程详情数据
-        HMWXQ: '/api/app/courseInfo/basis_id=109',
+        HMWXQ: '/api/app/courseInfo/basis_id=',
         // 课程收藏操作
         HMWSC: '/api/app/collect',
         // 取消收藏（怎么会有问题？）
-        HMWSCNO: '/api/app/collect/cancel/227/1',
+        HMWSCNO: `/api/app/collect/cancel/227/1`,
         // 课程评价数据获取
         HMWPJ: '/api/app/courseComment',
         //首页列表

@@ -93,11 +93,13 @@ export default {
     },
   },
   created() {
-    this.$Net.List().then((res) => {
-      this.HomedataImg =
-        res.data.data[1].list[0].teachers_list[0].teacher_avatar;
-      this.HomeTitle = res.data.data[1].list[0].teachers_list[0].teacher_name;
-    });
+    let item = this.$route.query.item
+    console.log(item)
+    // this.$Net.List().then((res) => {
+      this.HomedataImg =item.teacher_avatar
+    //     res.data.data[1].list[0].teachers_list[0].teacher_avatar;
+      this.HomeTitle = item.teacher_name;
+    // });
     this.timer = setInterval(() => {
       this.setNowTimes();
     }, 1000);
