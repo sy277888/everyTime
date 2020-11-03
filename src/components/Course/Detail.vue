@@ -330,14 +330,13 @@ export default {
   async hnwGetList(){
     let id = this.hmwObj.teachers_list[0].course_basis_id
     // 详情页面数据获取
-    let {data:list} = await this.$axios.get(`http://120.53.31.103:84/api/app/courseInfo/basis_id=${id}`)
+    let {data:list} = await this.$Net.HMWXQ(id)
     // 获取课程大纲
     // console.log(data)
     // console.log(list.data)
     this.hmwObjList =list.data
     // 是否收藏
     this.hmwSc = this.hmwObjList.info.is_collect
-    console.log(this.hmwSc+'=====')
     // 收藏id
     this.hmwSCid = this.hmwObjList.info.collect_id
     // 是否报名

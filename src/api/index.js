@@ -20,7 +20,7 @@ const Net = {
   },
   // 获取详情页面数据
   courseXQList(params) {
-    return request(API.Method.Get, API.Path.HMWXQ, params)
+    return request(API.Method.Get, API.Path.HMWXQ+params)
   },
   // 设置收藏
   courseXQSC(params) {
