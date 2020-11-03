@@ -163,21 +163,21 @@ export default {
       //   页面渲染的主数据
       hmwObj: JSON.parse(sessionStorage.getItem("hmwXQ")),
       // 底部按钮状态（有没有登录）
-      hmwBtnFlag: 0,
+      hmwBtnFlag: JSON.parse(sessionStorage.getItem("hmwXQ")).has_buy||0,
       // 弹出层是否显示
       show: false,
       imrUrl: "", // 图片的地址
       // 是否收藏
       hmwSc: false,
-      // 上一个路由
-      hmwPathFrom: JSON.parse(sessionStorage.getItem("hmwPath")),
+      
     };
   },
   // 计算属性
   computed: {},
   // 侦听器
-  watch: {},
-
+  watch: {
+   
+  },
   // 组件方法
   methods: {
     //   nav是否显示判断事件
@@ -328,7 +328,6 @@ export default {
     },
   // 获取详情页的数据
   async hnwGetList(){
-    console.log(this.hmwObj)
     let id = this.hmwObj.teachers_list[0].course_basis_id
     // 详情页面数据获取
     let {data:list} = await this.$axios.get(`http://120.53.31.103:84/api/app/courseInfo/basis_id=${id}`)
@@ -345,25 +344,30 @@ export default {
     this.hmwIsBm = this.hmwObjList.info.is_join_study
     // 课程id
     this.hmwId = id
-    // 跳转按钮的显示
-this.hmwBtnFlag = this.hmwObj.has_buy
-    console.log(this.hmwObjList)
+
     // console.log(this.hmwObjList.info.id)
   },
   // 跳转到上一个页面
   hmwJumpTo(){
-    console.log(this.hmwPathFrom)
+    // 上一个路由
+    let pathval = JSON.parse(sessionStorage.getItem("hmwPath"))
     this.$router.push({
-        path: this.hmwPathFrom.path,
-        name: this.hmwPathFrom.name,
+        path: pathval.path,
+        name: pathval.name,
       });
     },
   },
+  // 相当于mounted
+  // activated
   mounted() {
+    this.hmwObj=JSON.parse(sessionStorage.getItem("hmwXQ"))
     document.documentElement.scrollTop = 0;
     window.addEventListener("scroll", this.scrollHandle); // 绑定页面的滚动事
     // 监听滚动事件
     window.addEventListener("scroll", this.onScroll, false);
+     this.hmwBtnFlag = JSON.parse(sessionStorage.getItem("hmwXQ")).has_buy
+   console.log(this.hmwBtnFlag)
+    // console.log(from.name,from.path)
     // 获取一下数据
     this.hnwGetList();
   },

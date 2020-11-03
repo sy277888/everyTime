@@ -168,7 +168,8 @@ export default {
     });
   },
   methods: {
-    Onclick(item) {
+    Onclick(item) { 
+     
       var token = localStorage.getItem("token");
       if ((token = !token)) {
         this.show = true;
@@ -176,8 +177,9 @@ export default {
         this.$router.push({
           path: "/homelist",
           query: {
-            id: item.teacher_id,
-          },
+             item
+          }
+        
         });
       }
     },
@@ -208,7 +210,7 @@ export default {
       console.log(item)
       sessionStorage.setItem('hmwXQ',JSON.stringify(item))
       sessionStorage.setItem('hmwPath',JSON.stringify({path:'/',name:'Home'}))
-this.$router.push({
+      this.$router.push({
         path: "/detail"
       });
     },
@@ -266,7 +268,6 @@ padding: 1rem;
   width: 3rem;
   height: 3rem;
   border-radius: 5rem;
-  margin-top: 1rem;
   float: left;
 }
 .Home_teacher_title {
