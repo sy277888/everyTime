@@ -278,10 +278,6 @@ export default {
     // 收藏这块还是有点问题啊
     async hmwYes(){
       console.log(this.hmwId)
-      // let {data} = await this.$axios.post('http://120.53.31.103:84/api/app/collect',{
-      //   course_basis_id:this.hmwId,
-      //   type: 1
-      // })
       let {data} = await this.$Net.courseXQSC({
         course_basis_id:this.hmwId,
         type: 1
