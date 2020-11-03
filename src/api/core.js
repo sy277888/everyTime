@@ -77,7 +77,6 @@ export function request(method,url,params){
 function Get(url,params){
     return instance.get(url,params)
 }
-
 function Post(url,params){
     return instance.post(url,params)
 }
