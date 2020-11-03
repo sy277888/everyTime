@@ -90,7 +90,7 @@ import { Tab } from 'vant';
     <!-- 这里才是我要做的部分 -->
     <div class="hmw-center">
       <!-- 可滑动 -->
-      <van-list>
+      <!-- <van-list> -->
         <div class="hmw-main">
           <!-- 主体部分列表渲染 -->
           <van-list>
@@ -130,9 +130,9 @@ import { Tab } from 'vant';
             </li>
           </van-list>
         </div>
-      </van-list>
+      <!-- </van-list> -->
     </div>
-    <div class="hmw-foot"></div>
+    <div class="hmw-foot" style="margin-top:3rem;"></div>
   </div>
 </template>
 
@@ -439,6 +439,7 @@ li {
 .hmw-center {
   flex: 1;
   overflow: scroll;
+  /* padding-bottom: 4rem; */
 }
 /* 左边导航拓展样式 --------------------------------------------------------------*/
 .hmwNavLeft p {

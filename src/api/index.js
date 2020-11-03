@@ -16,7 +16,7 @@ const Net = {
   },
   // 获取课程列表的方法
   courseList(params) {
-    return request(API.Method.Get, API.Path.HMWLIST, params)
+    return request(API.Method.Get, API.Path.HMWLIST,params)
   },
   // 获取详情页面数据
   courseXQList(params) {
