@@ -178,21 +178,6 @@ export default {
   watch: {
    
   },
-  created(){
-        // 跳转按钮的显示
-// this.hmwBtnFlag = this.hmwObj.has_buy
-//     console.log(this.hmwBtnFlag)
-  },
-  // 路由组件守卫
-  beforeRouteEnter:(to,from,next)=>{
-  //  this.hmwBtnFlag = JSON.parse(sessionStorage.getItem("hmwXQ")).has_buy
-  //  console.log(this.hmwBtnFlag)
-    // console.log(from.name,from.path)
-
-            next(vm=>{
-                console.log(vm)
-            })
-        },
   // 组件方法
   methods: {
     //   nav是否显示判断事件
@@ -376,7 +361,9 @@ export default {
       });
     },
   },
-  activated() {
+  // 相当于mounted
+  // activated
+  mounted() {
     this.hmwObj=JSON.parse(sessionStorage.getItem("hmwXQ"))
     document.documentElement.scrollTop = 0;
     window.addEventListener("scroll", this.scrollHandle); // 绑定页面的滚动事

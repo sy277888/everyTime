@@ -1,6 +1,8 @@
 <template>
   <div>
-    <keep-alive> <router-view /> </keep-alive>
+    <!-- <keep-alive>  -->
+      <router-view /> 
+      <!-- </keep-alive> -->
     <!-- 传入 -->
     <Tabber :items="items" v-show="isShow" />
     <!-- 可拖拽小信封 -->
