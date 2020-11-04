@@ -50,13 +50,14 @@ export default {
   methods: {
     //取消按钮
     onCancel() {
-      this.$router.go(-1);
+      // this.$router.go(-1);
+      this.history.unshift(this.value);
+      localStorage.history = JSON.stringify(this.history);
     },
     //搜索按钮  保存本地存储 跳转至搜索结果列表页
     onSearch() {
       this.history.unshift(this.value);
       localStorage.history = JSON.stringify(this.history);
-      this.$router.go(-1);
     },
     //返回按钮
     callBack() {
@@ -64,10 +65,11 @@ export default {
     },
     //删除按钮
     del() {
-      this.$dialog.confirm({
-        title: "确认清空？",
-        message: "你确定要给你的搜索记录清空吗？？？",
-      })
+      this.$dialog
+        .confirm({
+          title: "确认清空？",
+          message: "你确定要给你的搜索记录清空吗？？？",
+        })
         .then(() => {
           // on confirm
           console.log("确认清空");
@@ -77,7 +79,6 @@ export default {
         .catch(() => {
           // on cancel
           console.log("取消清空");
-
         });
     },
   },

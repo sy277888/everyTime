@@ -83,6 +83,12 @@ export default {
         this.isShow = false;
       } else if (to.path == "/make") {
         this.isShow = true;
+      }else if (to.path == "/guan") {
+        this.isShow = false;
+      }else if (to.path == "/shou") {
+        this.isShow = false;
+      }else if (to.path == "/search") {
+        this.isShow = false;
       }
     },
   },

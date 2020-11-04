@@ -20,11 +20,11 @@
             男 8年金牌讲师
             <!-- 关注 -->
             <span class="Homelist_title" v-show="!isShow" @click="Show"
-              >关注</span
-            >
-            <span class="Homelist_title" v-show="isShow" @click="Shows"
               >已关注</span
             >
+            <span class="Homelist_title" v-show="isShow" @click="Shows"
+              >关注</span
+            > 
           </p>
         </li>
       </ul>
@@ -118,13 +118,16 @@ export default {
       console.log(data);
       if (data.code == 200) {
         this.isShow = true;
-        Toast.success("关注成功");
+        Toast.success("取消关注");
       }
     },
     async Shows() {
-      this.isShow = false;
       let id = this.$route.query.id;
       let { data } = await this.$Net.GuanZhu(id + "");
+       if (data.code == 200) {
+        this.isShow = false;
+        Toast.success("关注成功");
+      }
     },
   },
 };

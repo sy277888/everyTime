@@ -91,7 +91,7 @@ export default {
 }
 .sy_img {
   position: absolute;
-  left: 1rem;
+  left: 4rem;
   top: 1rem;
 }
 .sy_img img {
