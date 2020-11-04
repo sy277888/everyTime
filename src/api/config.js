@@ -11,13 +11,13 @@ const API = {
         // 课程导航
         HMWFL: '/api/app/courseClassify',
         // 课程列表
-        HMWLIST: '/api/app/courseBasis?page=1&limit=10&',
+        HMWLIST: '/api/app/courseBasis?page=1&limit=100&',
         // 课程详情数据
         HMWXQ: '/api/app/courseInfo/basis_id=',
         // 课程收藏操作
         HMWSC: '/api/app/collect',
         // 取消收藏（怎么会有问题？）
-        HMWSCNO: `/api/app/collect/cancel/227/1`,
+        // HMWSCNO: `/api/app/collect/cancel/227/1`,
         // 课程评价数据获取
         HMWPJ: '/api/app/courseComment',
         //首页列表
@@ -41,7 +41,7 @@ const API = {
         //设置密码
         SHE: "/api/app/smsCode",
         //课程收藏
-        CANG: "/api/app/collect",
+        CANG: "/api/app/collect?page=1&limit=10&type=1",
         //课程取消收藏
         CANCEL: "/api/app/collect/cancel/227/1",
         //教师详情

@@ -16,7 +16,7 @@ const Net = {
   },
   // 获取课程列表的方法
   courseList(params) {
-    return request(API.Method.Get, API.Path.HMWLIST, params)
+    return request(API.Method.Get, API.Path.HMWLIST,params)
   },
   // 获取详情页面数据
   courseXQList(params) {
@@ -69,8 +69,8 @@ const Net = {
     return request(API.Method.Post,API.Path.SHE,params)
   },
   //课程收藏
-  cang(){
-    return request(API.Method.Post,API.Path.CANG)
+  cang(params){
+    return request(API.Method.Get,API.Path.CANG,params)
   },
   //讲师详情
   shi(params){

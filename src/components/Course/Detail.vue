@@ -38,7 +38,7 @@
     </van-sticky>
 
     <!-- 中间部分 -->
-    <div class="hmw-center" style="background: #f0f2f5">
+    <div v-cloak class="hmw-center" style="background: #f0f2f5">
       <!-- 可滑动啥的 -->
       <van-list>
         <ol>
