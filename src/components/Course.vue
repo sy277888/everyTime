@@ -104,9 +104,9 @@
         >
           <!-- 这里必须要用v-for 当这个未定义时不渲染，这样才不会爆0的错！！！ -->
           <li
-            v-if="item.teachers_list.length>0"
+            v-if="item.teachers_list.length > 0"
             v-for="(item, index) in hmwList2"
-             :key="index"
+            :key="index"
             @click="hmwJump(item)"
           >
             <h2>{{ item.title }}</h2>
@@ -119,9 +119,7 @@
             </p>
             <p class="hmwP2 hmwbaoBm">
               <img :src="item.teachers_list[0].teacher_avatar" alt="" />
-              <span>{{
-                item.teachers_list[0].teacher_name
-              }}</span>
+              <span>{{ item.teachers_list[0].teacher_name }}</span>
               <!-- 根据你有没有报名改变 -->
               <img
                 class="hmwBm"
@@ -371,7 +369,7 @@ export default {
         // 加载状态结束
         this.loading = false;
 
-       
+
       }, 1000);
     },
     // 下拉框的显示隐藏
@@ -442,7 +440,7 @@ id = this.hmwActiveNum4
       }else{
         id = this.hmwActiveNum1+','+this.hmwActiveNum4
       }
-      
+
       // 获取数据
       this.hmwGetNav('',0,id)
       // 关闭窗口
@@ -493,7 +491,7 @@ id = this.hmwActiveNum4
       this.hmwList.forEach((item, index) => {
         if (index < 2) {
           this.hmwList2.push(item);
-        }  
+        }
       });
       console.log(this.hmwList2);
     },
@@ -613,7 +611,7 @@ li {
   /* padding-bottom: 0.2rem; */
   /* margin-bottom: 3rem; */
 }
-.hmw-main .van-list{
+.hmw-main .van-list {
   padding-bottom: 0.1rem;
 }
 .hmw-main > .van-list {
@@ -695,7 +693,7 @@ li {
   color: #595959;
   font-weight: bold;
 }
-.hmw-foot{
+.hmw-foot {
   min-height: 3rem;
 }
 </style>

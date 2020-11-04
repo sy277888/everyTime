@@ -105,7 +105,7 @@
                 <img :src="item.avatar" alt="" />
                 <div class="hmwPL-center">
                   <p class="hmwCP1">
-                    <span>{{item.nickname}}</span
+                    <span>{{ item.nickname }}</span
                     ><van-rate
                       :size="14"
                       void-color="#eee"
@@ -114,9 +114,11 @@
                       v-model="item.grade"
                     />
                   </p>
-                  <p class="hmwCP2">{{item.content}}</p>
+                  <p class="hmwCP2">{{ item.content }}</p>
                 </div>
-                <div class="hmwPL-right">{{Number(item.created_at) | timeEvaluate}}</div>
+                <div class="hmwPL-right">
+                  {{ Number(item.created_at) | timeEvaluate }}
+                </div>
               </li>
             </ul>
           </li>
@@ -252,11 +254,22 @@ export default {
         }
       }
     },
-    // 立即学习点击事件
-    hmwStudyJump(i) {
+    // 底部按钮点击事件
+    async hmwStudyJump(i) {
       if (localStorage.getItem("token")) {
         if (i == 1) {
-          this.$router.push("/isbuy");
+          //如果是立即报名
+          // 判断一下是不是免费的课程
+          if (this.hmwObj.price == 0) {//免费则调用接口直接报名
+            let {data} = await this.$Net.courseSubmit({
+               shop_id:this.hmwObj.id,
+        type:this.hmwObj.course_type
+            })
+            console.log(data)
+            Toast(data.msg);
+          } else {
+            this.$router.push("/isbuy");
+          }
         } else {
           this.$router.push("/study");
         }
