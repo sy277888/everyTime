@@ -29,7 +29,7 @@ const API = {
         //我的关注
         GUAN: "/api/app/collect",
         //
-        KE: "/api/app/courseInfo/basis_id=189",
+        KE: "/api/app/courseInfo/basis_id=",
         //学习
         Xue: "/api/app/myStudy/2",
         //首页推荐老师列表
@@ -46,7 +46,11 @@ const API = {
         CANCEL: "/api/app/collect/cancel/227/1",
         //教师详情
         SHI: "/api/app/teacher/",
-     
+        //我的学习
+        XLI:"/api/app/myStudy/3?",
+        BAO:"/api/app/order/downOrder",
+        //搜索
+        SOU:"/api/app/courseBasis?limit=10&page=1&course_type=0&keywords="
     }
 }
 

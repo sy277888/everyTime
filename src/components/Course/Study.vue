@@ -29,37 +29,45 @@
         </div>
         <!-- 列表部分 -->
         <ul>
-            <div :key="index" v-for="(item, index) in 10">
-                <li>
-                <p>
-                  <span class="hmwS1" style="">[回放]</span
-                  ><span class="hmwS2">第二讲第一课时</span>
-                </p>
-                <p class="hmwP3"><span>李青</span><span>03月16日 18:30 - 19:30</span></p>
-                <p class="hmwJD">
-                    <van-progress inactive :percentage="0" />
-          <span>已观看0%</span>
-                </p>
-              </li>
-            </div>
-              
-            </ul>
+          <div :key="index" v-for="(item, index) in 10">
+            <li>
+              <p>
+                <span class="hmwS1" style="">[回放]</span
+                ><span class="hmwS2">第二讲第一课时</span>
+              </p>
+              <p class="hmwP3">
+                <span>李青</span><span>03月16日 18:30 - 19:30</span>
+              </p>
+              <p class="hmwJD">
+                <van-progress inactive :percentage="0" />
+                <span>已观看0%</span>
+              </p>
+            </li>
+          </div>
+        </ul>
       </van-list>
     </div>
     <!-- 底部 -->
     <van-tabbar>
       <div class="hmw-foot">
-        <p @click="hmwDian">
-          <van-icon size="18" name="edit" /><span>写评论</span>
+        <p @click="show = true" >
+          <van-icon size="18" name="edit"/><span
+            >写评论</span
+          >
         </p>
         <p @click="$router.push('/detail')">
           <van-icon size="18" name="apps-o" /><span>课程详情</span>
         </p>
-        <p @click="hmwDian">
+        <p>
           <van-icon size="18" name="delete" /><span>移除列表</span>
         </p>
       </div>
     </van-tabbar>
+    <van-overlay :show="show" @click="show = false">
+      <div class="wrapper">
+        <div class="block" />
+      </div>
+    </van-overlay>
   </div>
 </template>
 
@@ -77,6 +85,7 @@ export default {
     return {
       //    底部导航
       active: 0,
+      show: false,
     };
   },
   // 计算属性
@@ -93,13 +102,11 @@ export default {
       Toast("按钮");
     },
     // 统一点击事件，只是一个效果
-    hmwDian() {
-      alert("你点了一下");
-    },
   },
 };
 </script>
 <style scoped>
+
 * {
   margin: 0;
   padding: 0;
@@ -109,6 +116,18 @@ body,
 .hmwBox {
   height: 100%;
 }
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .block {
+    width: 120px;
+    height: 120px;
+    background-color: #fff;
+  }
 /* 大体布局 */
 .hmwBox {
   display: flex;
@@ -135,33 +154,32 @@ body,
 }
 /* 主体部分----------------------------------------------------------------------------- */
 /* 主题的上半部分 */
-.hmwC-top{
-        font-size: 3.46667vw;
-    color: #595959;
-    height: 13.86667vw;
-    line-height: 13.86667vw;
-    border-bottom: 1px solid #f5f5f5;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.hmwC-top {
+  font-size: 3.46667vw;
+  color: #595959;
+  height: 13.86667vw;
+  line-height: 13.86667vw;
+  border-bottom: 1px solid #f5f5f5;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 /* 进度条 */
-.van-progress{
-    width: 14rem;
+.van-progress {
+  width: 14rem;
 }
 /* 列表部分 */
-.hmw-center ul  li {
+.hmw-center ul li {
   list-style: disc;
   color: #eb6100;
-  
 }
-.hmw-center ul>div{
+.hmw-center ul > div {
   margin: 0 1rem;
-margin-top: 1rem;
-  border: .53333vw solid #e9e9e9;
-    border-radius: 1.06667vw;
-    padding: 4vw 4vw 4vw 7vw;
-    /* width: 90%; */
+  margin-top: 1rem;
+  border: 0.53333vw solid #e9e9e9;
+  border-radius: 1.06667vw;
+  padding: 4vw 4vw 4vw 7vw;
+  /* width: 90%; */
 }
 /* span部分 */
 .hmwS1 {
@@ -186,14 +204,14 @@ margin-top: 1rem;
   color: rgba(0, 0, 0, 0.45);
 }
 /* 主体的进度条部分 */
-.hmwJD{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.hmwJD {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.hmwJD span{
-    color: #8c8c8c;
-    font-size: 0.2rem;
+.hmwJD span {
+  color: #8c8c8c;
+  font-size: 0.2rem;
 }
 /* 底部导航布局------------------------------------------------------------------------- */
 .hmw-foot p {

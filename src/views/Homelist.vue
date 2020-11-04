@@ -60,13 +60,14 @@
             </li>
           </ul>
           <!-- 底部定位 -->
-          <div class="Homelist_footer" @click="OnGo(date)">立即预约</div>
+         
         </div>
       </van-tab>
       <van-tab title="学员评价" name="c">
         <van-empty description="暂无学员评价" />
       </van-tab>
     </van-tabs>
+     <div class="Homelist_footer" @click="OnGo(date)">立即预约</div>
   </div>
 </template>
 <script>

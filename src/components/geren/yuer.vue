@@ -41,6 +41,11 @@ export default {
         }
     },
     methods: {
+        getlist(){
+            this.$Net.yue().then(res=>{
+                console.log(res);
+            })
+        },
         onClickLeft(){
             this.$router.go('-1')
         },
@@ -48,6 +53,9 @@ export default {
             this.show=i
         }
     },
+    mounted(){
+        this.getlist()
+    }
 }
 </script>
 
