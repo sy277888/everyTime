@@ -347,7 +347,7 @@ export default {
         page: 1,
       });
       this.hmwEvaluate = evaluate.data.list;
-      console.log(this.hmwEvaluate);
+      console.log(list);
       // 详情页面所有数据
       let hmwObjList = list.data;
       // 是否收藏

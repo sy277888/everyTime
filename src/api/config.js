@@ -18,6 +18,12 @@ const API = {
         HMWSC: '/api/app/collect',
         // 取消收藏（怎么会有问题？）
         // HMWSCNO: `/api/app/collect/cancel/227/1`,
+        // 立即学习
+        HMWStudy: '/api/app/myStudy/course/',
+        // 立即报名
+        HMWBuy: '/api/app/order/shopInfo',
+        // 提交订单
+        HMWSubmit: '/api/app/order/downOrder',
         // 课程评价数据获取
         HMWPJ: '/api/app/courseComment',
         //首页列表
