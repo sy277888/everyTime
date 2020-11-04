@@ -104,9 +104,9 @@
         >
           <!-- 这里必须要用v-for 当这个未定义时不渲染，这样才不会爆0的错！！！ -->
           <li
-            v-if="item.teachers_list.length>0"
+            v-if="item.teachers_list.length > 0"
             v-for="(item, index) in hmwList2"
-             :key="index"
+            :key="index"
             @click="hmwJump(item)"
           >
             <h2>{{ item.title }}</h2>
@@ -119,9 +119,7 @@
             </p>
             <p class="hmwP2 hmwbaoBm">
               <img :src="item.teachers_list[0].teacher_avatar" alt="" />
-              <span>{{
-                item.teachers_list[0].teacher_name
-              }}</span>
+              <span>{{ item.teachers_list[0].teacher_name }}</span>
               <!-- 根据你有没有报名改变 -->
               <img
                 class="hmwBm"
@@ -334,6 +332,9 @@ export default {
       finished: false,
       hmwList2: [],
       i: 1,
+      // 分类的参数id
+      hmwFlId1:0,
+      hmwFlId2:0
     };
   },
   // 计算属性
@@ -368,7 +369,7 @@ export default {
         // 加载状态结束
         this.loading = false;
 
-       
+
       }, 1000);
     },
     // 下拉框的显示隐藏
@@ -382,7 +383,7 @@ export default {
       this.$refs.item2.toggle();
     },
     // 接受导航数据,列表数据
-    async hmwGetNav(navCan = "", listCan = 0) {
+    async hmwGetNav(navCan = "", listCan = 0,attr_val_id='') {
       console.log(listCan);
       // 获取导航数据
       let { data } = await this.$Net.courseNav(navCan);
@@ -391,6 +392,7 @@ export default {
         params: {
           order_by: listCan,
           course_type: "",
+          attr_val_id
         },
       });
       console.log(list);
@@ -424,13 +426,23 @@ export default {
         this.hmwActiveNum4 = i.id;
         sessionStorage.setItem("hmwFlIndex2", i.id);
       }
-
       // 重新请求渲染页面
       // this.hmwGetNav('attr_val_id='+i.id)
       // 保存一下，页面刷新不改变样式
     },
     // 点击确认-----------------------------------------------------------
     hmwOk() {
+      var id
+      if(this.hmwActiveNum1==0){
+id = this.hmwActiveNum4
+      }else if(this.hmwActiveNum4==0){
+        id = this.hmwActiveNum1
+      }else{
+        id = this.hmwActiveNum1+','+this.hmwActiveNum4
+      }
+
+      // 获取数据
+      this.hmwGetNav('',0,id)
       // 关闭窗口
       this.onConfirm();
     },
@@ -441,6 +453,7 @@ export default {
       // this.hmwActiveNum4 = this.hmwFl[0].child
       sessionStorage.removeItem("hmwFlIndex1");
       sessionStorage.removeItem("hmwFlIndex2");
+       this.hmwGetNav()
       // 关闭窗口
       this.onConfirm();
     },
@@ -478,7 +491,7 @@ export default {
       this.hmwList.forEach((item, index) => {
         if (index < 2) {
           this.hmwList2.push(item);
-        }  
+        }
       });
       console.log(this.hmwList2);
     },
@@ -497,6 +510,7 @@ export default {
     },
   },
   mounted() {
+    // document.documentElement.scrollTop = 0;
     this.hmwGetNav();
   },
 };
@@ -597,7 +611,7 @@ li {
   /* padding-bottom: 0.2rem; */
   /* margin-bottom: 3rem; */
 }
-.hmw-main .van-list{
+.hmw-main .van-list {
   padding-bottom: 0.1rem;
 }
 .hmw-main > .van-list {
@@ -679,7 +693,7 @@ li {
   color: #595959;
   font-weight: bold;
 }
-.hmw-foot{
+.hmw-foot {
   min-height: 3rem;
 }
 </style>

@@ -83,6 +83,13 @@ export default {
         this.isShow = false;
       } else if (to.path == "/make") {
         this.isShow = true;
+      }else if (to.path == "/study") {
+      }else if (to.path == "/guan") {
+        this.isShow = false;
+      }else if (to.path == "/shou") {
+        this.isShow = false;
+      }else if (to.path == "/search") {
+        this.isShow = false;
       }
     },
   },
@@ -95,5 +102,10 @@ export default {
 * {
   margin: 0rem;
   padding: 0rem;
+}
+body,html{
+  height: 100%;
+  width: 100%;
+  /* background: #f0f2f5; */
 }
 </style>

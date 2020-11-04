@@ -251,36 +251,29 @@ export default {
         }
       }
     },
-    // 立即学习点击事件
-    hmwStudyJump() {
-      // if (localStorage.getItem("token")) {
-      //   if (i == 1) {
-      //     this.$router.push("/isbuy");
-      //   } else {
-      //     this.$router.push("/study");
-      //   }
-      // } else {
-      //   this.$router.push("/login");
-      // }
-      document.documentElement.scrollTop = 0;
-      var id = sessionStorage.getItem("hmwXQid");
-      this.$Net
-        .bao({
-          shop_id: id,
-          type: 5,
-        })
-        .then((res) => {
-          console.log(res);
-          this.$toast(res.data.msg)
-        });
-        this.hmwObjList
-    },
-    hmwStudyJumpp(){
+    // 底部按钮点击事件
+    async hmwStudyJump(i) {
       if (localStorage.getItem("token")) {
-        this.$router.push("/study")
-      }else{
-         this.$router.push("/login");
+        if (i == 1) {
+          //如果是立即报名
+          // 判断一下是不是免费的课程
+          if (this.hmwObj.price == 0) {//免费则调用接口直接报名
+            let {data} = await this.$Net.courseSubmit({
+               shop_id:this.hmwObj.id,
+        type:this.hmwObj.course_type
+            })
+            console.log(data)
+            Toast(data.msg);
+          } else {
+            this.$router.push("/isbuy");
+          }
+        } else {
+          this.$router.push("/study");
+        }
+      } else {
+        this.$router.push("/login");
       }
+       document.documentElement.scrollTop = 0;
     },
     // 二维码弹出事件
     showPopup() {
@@ -370,7 +363,7 @@ export default {
         page: 1,
       });
       this.hmwEvaluate = evaluate.data.list;
-      console.log(this.hmwEvaluate);
+      console.log(list);
       // 详情页面所有数据
       let hmwObjList = list.data;
       console.log(hmwObjList);

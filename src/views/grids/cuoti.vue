@@ -49,18 +49,18 @@ export default {
       this.$dialog
         .alert({
           //加上标题
-          message: "是否做对题目后自动移除该错题", //改变弹出框的内容
+          message: "是否要移除错题", //改变弹出框的内容
           showCancelButton: true, //展示取水按钮
         })
         .then(() => {
           //点击确认按钮后的调用
 
-          console.log("点击了确认按钮噢");
+          console.log("确认");
           this.$refs.yichu.style.color = "red";
         })
         .catch(() => {
           //点击取消按钮后的调用
-          console.log("点击了取消按钮噢");
+          console.log("取消");
           this.$refs.yichu.style.color = "";
         });
     },

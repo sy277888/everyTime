@@ -67,6 +67,7 @@ export default {
         console.log(this.date);
       });
     },
+    //搜索按钮  保存本地存储 跳转至搜索结果列表页
     del() {
       this.$dialog
         .confirm({
@@ -79,7 +80,6 @@ export default {
           localStorage.searchlist = JSON.stringify(this.list);
         })
         .catch(() => {
-          // on cancel
         });
     },
     hui(){

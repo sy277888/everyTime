@@ -1,7 +1,6 @@
 import axios from 'axios'
 //引入封装接口
 import API from './config'
-import Vue from "vue"
 import {Toast} from "vant";
 import {Guid} from "../utils/guid"
 let deviceid=null;//初始化设备id

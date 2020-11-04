@@ -4,7 +4,7 @@
     <van-sticky>
       <div class="hmw-top">
         <van-nav-bar
-          title="标题看到傻瓜八卦啊回复师傅早点睡"
+          :title="hmwStudyTop.title"
           @click-left="onClickLeft"
           @click-right="onClickRight"
         >
@@ -23,24 +23,38 @@
       <van-list>
         <!-- 主题的上部分 -->
         <div class="hmwC-top">
-          <p>共8时</p>
-          <van-progress inactive :percentage="0" />
-          <p>已学习0%</p>
+          <p>共{{ hmwStudyTop.section_num }}时</p>
+          <van-progress  
+          v-if="hmwStudyTop.progress_rate"
+            inactive
+            :percentage="Number(hmwStudyTop.progress_rate)"
+          />
+          <p>已学习{{ hmwStudyTop.progress_rate }}%</p>
         </div>
         <!-- 列表部分 -->
         <ul>
-          <div :key="index" v-for="(item, index) in 10">
+          <div :key="index" v-for="(item, index) in hmwStudyList">
             <li>
               <p>
                 <span class="hmwS1" style="">[回放]</span
-                ><span class="hmwS2">第二讲第一课时</span>
+                ><span class="hmwS2">{{
+                  item.title + item.child[0].periods_title
+                }}</span>
               </p>
               <p class="hmwP3">
-                <span>李青</span><span>03月16日 18:30 - 19:30</span>
+                <span>{{ item.child[0].teachers[0].teacher_name }}</span
+                ><span>{{
+                  item.child[0].start_play + "-" + item.child[0].end_play
+                }}</span>
               </p>
               <p class="hmwJD">
-                <van-progress inactive :percentage="0" />
-                <span>已观看0%</span>
+                <van-progress
+                  inactive
+                  :percentage="item.child[0].progress_rate"
+                />
+                <span style="font-size:0.2rem;"
+                  >已观看{{ item.child[0].progress_rate }}%</span
+                >
               </p>
             </li>
           </div>
@@ -50,10 +64,8 @@
     <!-- 底部 -->
     <van-tabbar>
       <div class="hmw-foot">
-        <p @click="show = true" >
-          <van-icon size="18" name="edit"/><span
-            >写评论</span
-          >
+        <p @click="showPopup"  >
+          <van-icon size="18" name="edit" /><span>写评论</span>
         </p>
         <p @click="$router.push('/detail')">
           <van-icon size="18" name="apps-o" /><span>课程详情</span>
@@ -63,11 +75,14 @@
         </p>
       </div>
     </van-tabbar>
-    <van-overlay :show="show" @click="show = false">
-      <div class="wrapper">
-        <div class="block" />
-      </div>
-    </van-overlay>
+    <!-- 评论弹出层 -->
+   <van-popup closeable v-model="show" @close="value=''">
+     <ul>
+       <li>星级：<van-rate style="font-size: 0.6rem;" color="#ea7a2f" v-model="startNum" /></li>
+       <li style="display:flex;"><span style="display:block;height:100%;width:3rem;">内容：</span><textarea v-model="value" name="" id="" cols="36rem" rows="5rem"></textarea></li>
+       <li style="display:flex;justify-content: center;"><van-button color="#eb6100" @click="hmwPL">发布</van-button></li>
+     </ul>
+   </van-popup>
   </div>
 </template>
 
@@ -85,7 +100,14 @@ export default {
     return {
       //    底部导航
       active: 0,
+      // 立即学习数据
+      hmwStudyList: [],
+      hmwStudyTop: {},
+
+      //  弹出框
       show: false,
+      startNum:3,//星星数量
+      value:'',//文本框内容
     };
   },
   // 计算属性
@@ -99,9 +121,31 @@ export default {
       this.$router.push("/detail");
     },
     onClickRight() {
-      Toast("按钮");
+      this.$router.push("/lenderData");
     },
     // 统一点击事件，只是一个效果
+    hmwDian() {
+      Toast.success('成功');
+    },
+    // 获取数据
+    async getList() {
+      let id = sessionStorage.getItem("hmwXQid");
+      let { data } = await this.$Net.courseStudy(id);
+      this.hmwStudyTop = data.data.course;
+      this.hmwStudyList = data.data.chapter;
+      console.log(data, this.hmwStudyList);
+    },
+    // 弹框显示
+      showPopup() {
+      this.show = true;
+    },
+    // 点击评论
+    hmwPL(){
+      Toast('已评论无法再次评论');
+    }
+  },
+  mounted() {
+    this.getList();
   },
 };
 </script>
@@ -110,6 +154,7 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  
 }
 html,
 body,
@@ -138,6 +183,7 @@ body,
   height: 11.73333vw;
   background: white;
   border-bottom: 1px solid #f5f5f5;
+  margin-bottom: 1rem;
 }
 .hmw-center {
   flex: 1;
@@ -174,7 +220,8 @@ body,
   color: #eb6100;
 }
 .hmw-center ul > div {
-  margin: 0 1rem;
+  margin-right: 1rem;
+  margin-left: 0.7rem;
   margin-top: 1rem;
   border: 0.53333vw solid #e9e9e9;
   border-radius: 1.06667vw;
@@ -230,5 +277,39 @@ body,
 }
 .van-tabbar {
   height: 9.86667vw;
+}
+
+/* 遮罩层 */
+/* 弹框样式 */
+.van-popup{
+  box-sizing: border-box;
+  padding:2rem 1rem;
+  width: 95%;
+  border-radius: 0.2rem;
+  padding-bottom: 0;
+}
+.van-popup li{
+  margin-bottom: 1.5rem;
+  font-size: 0.3rem;
+  color: #595959;
+}
+.van-popup .van-popup__close-icon{
+  font-size: 0.12rem;
+}
+.van-popup li .van-rate{
+  font-size: 0.14rem;
+}
+/* 星星 */
+.van-popup .van-rate__icon--full,.van-popup .van-rate__icon{
+font-size: 0.6rem;
+}
+textarea{
+  border-color:#ccc;
+  border-radius: 0.1rem;
+}
+.van-popup .van-button{
+  width: 6rem;
+  height: 2rem;
+  font-size: 0.14rem;
 }
 </style>
