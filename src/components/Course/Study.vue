@@ -70,7 +70,7 @@
         <p @click="$router.push('/detail')">
           <van-icon size="18" name="apps-o" /><span>课程详情</span>
         </p>
-        <p @click="hmwDian">
+        <p>
           <van-icon size="18" name="delete" /><span>移除列表</span>
         </p>
       </div>
@@ -162,7 +162,6 @@ export default {
 </script>
 <style scoped>
 
-
 * {
   margin: 0;
   padding: 0;
@@ -173,6 +172,18 @@ body,
 .hmwBox {
   height: 100%;
 }
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .block {
+    width: 120px;
+    height: 120px;
+    background-color: #fff;
+  }
 /* 大体布局 */
 .hmwBox {
   display: flex;

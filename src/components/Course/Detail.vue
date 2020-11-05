@@ -136,17 +136,17 @@
     <van-tabbar>
       <div class="hmw-foot">
         <van-button
-          v-if="hmwBtnFlag == 0"
+          v-show="this.arr == 0"
           type="primary"
           block
-          @click="hmwStudyJump(1)"
+          @click="hmwStudyJump"
           >立即报名</van-button
         >
         <van-button
-          v-if="hmwBtnFlag == 1"
+          v-show="this.arr == 1"
           type="primary"
           block
-          @click="hmwStudyJump(2)"
+          @click="hmwStudyJumpp"
           >立即学习</van-button
         >
       </div>
@@ -188,16 +188,13 @@ export default {
       hmwTeacher: [],
       // 课程评论数据
       hmwEvaluate: [],
+      arr: [],
     };
   },
-  // 计算属性
-  computed: {},
-  // 侦听器
-  watch: {},
   // 组件方法
   methods: {
     //   nav是否显示判断事件
-    scrollHandle: function(e) {
+    scrollHandle: function (e) {
       var top = e.srcElement.scrollingElement.scrollTop; // 获取页面滚动高度
       if (top > 0) {
         this.hmwFlag = true;
@@ -283,8 +280,7 @@ export default {
       } else {
         this.$router.push("/login");
       }
-
-      document.documentElement.scrollTop = 0;
+       document.documentElement.scrollTop = 0;
     },
     // 二维码弹出事件
     showPopup() {
@@ -301,9 +297,15 @@ export default {
           console.error(err);
         });
     },
+    //立即报名
+    getlistid() {
+      this.$Net.ke().then((res) => {
+        console.log(res);
+      });
+    },
     // 点击收藏
     async hmwYes() {
-      console.log(this.hmwId);
+      // console.log(this.hmwId);
       let { data } = await this.$Net.courseXQSC({
         course_basis_id: this.hmwId,
         type: 1,
@@ -360,6 +362,7 @@ export default {
       let id = this.hmwObj.teachers_list[0].course_basis_id;
       // 详情页面数据获取
       let { data: list } = await this.$Net.courseXQList(id);
+
       // 获取课程评价
       let { data: evaluate } = await this.$Net.courseXQPJ({
         id,
@@ -370,6 +373,9 @@ export default {
       console.log(list);
       // 详情页面所有数据
       let hmwObjList = list.data;
+      console.log(hmwObjList);
+      this.arr = hmwObjList.info.is_buy;
+      console.log(this.arr);
       // 是否收藏
       this.hmwSc = hmwObjList.info.is_collect;
       // console.log(this.hmwSc+'=====')
@@ -407,9 +413,17 @@ export default {
     // 监听滚动事件
     window.addEventListener("scroll", this.onScroll, false);
     this.hmwBtnFlag = JSON.parse(sessionStorage.getItem("hmwXQ")).has_buy;
-    console.log(this.hmwBtnFlag);
     // 获取一下数据
     this.hnwGetList();
+    var id = sessionStorage.getItem("hmwXQid");
+    this.$Net
+      .bao({
+        shop_id: id,
+        type: 3,
+      })
+      .then((res) => {
+        console.log(res);
+      });
   },
   destroy() {
     // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
