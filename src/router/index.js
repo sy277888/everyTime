@@ -289,7 +289,7 @@ const routes = [
     path: "/xue",
     name: "Xue",
     meta: {
-      title: "我的特色课"
+      title: "我的学习"
     },
     component: () => import('../components/geren/xuexi.vue')
   },

@@ -107,6 +107,10 @@ const Net = {
   //消息通知，获取数据
   hmwGetMsg(params) {
     return request(API.Method.Post, API.Path.hmwMsg, params)
+  },
+  // 我的学习导航
+  hmwStudyNav(params) {
+    return request(API.Method.Get, API.Path.hmwStudyNav, params)
   }
 }
 
