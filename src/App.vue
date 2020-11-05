@@ -5,6 +5,7 @@
     <Tabber :items="items" v-show="isShow" />
     <!-- 可拖拽小信封 -->
     <Web />
+    
   </div>
 </template>
 <script>
@@ -107,6 +108,8 @@ export default {
       }else if (to.path == "/drag") {
         this.isShow = false;
       }else if (to.path == "/per") {
+        this.isShow = false;
+      }else if (to.path == "/xue") {
         this.isShow = false;
       }
     },
