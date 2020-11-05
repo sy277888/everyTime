@@ -1,3 +1,4 @@
+import path from 'core-js';
 <template>
   <div>
       <van-nav-bar @click-left="onClickLeft" >
@@ -10,7 +11,7 @@
 </van-nav-bar>
 <!-- 列表部分 -->
       <div class="hmw-box">
-          <ul class="uuui" style="height:4.2rem;">
+          <ul class="uuui" style="height:4.2rem;" @click="hmwJump('课程通知')">
               <li class="uu-li">
                   <img src="../../assets/icon/信.png" alt="">
               </li>
@@ -19,7 +20,7 @@
                   <p class="uu-p">你报名的课程《李老师18号20号地理大课堂开课啦》已经有3天没有学习了，快去学习吧</p>
               </li>
           </ul>
-           <ul class="uuui">
+           <ul class="uuui" @click="hmwJump('系统通知')">
               <li class="uu-li">
                   <img src="../../assets/icon/设置.png" alt="">
               </li>
@@ -28,7 +29,7 @@
                   <p class="uu-p">暂无消息</p>
               </li>
           </ul>
-           <ul class="uuui">
+           <ul class="uuui" @click="hmwJump('订单通知')">
               <li class="uu-li">
                   <img src="../../assets/icon/gou.png" alt="">
               </li>
@@ -37,7 +38,7 @@
                   <p class="uu-p">你的课程订单《》取消成功</p>
               </li>
           </ul>
-           <ul class="uuui">
+           <ul class="uuui" @click="hmwJump('约课通知')">
               <li class="uu-li">
                   <img src="../../assets/icon/信.png" alt="">
               </li>
@@ -46,7 +47,7 @@
                   <p class="uu-p">暂无消息</p>
               </li>
           </ul>
-           <ul class="uuui" style="border:none;">
+           <ul class="uuui" style="border:none;" @click="hmwJump('考试通知')">
               <li class="uu-li">
                   <img src="../../assets/icon/写.png" alt="">
               </li>
@@ -74,6 +75,15 @@ methods: {
     async hmwGetList(){
         let {data} = await this.$Net.hmwGetMsg()
         console.log(data)
+    },
+    // 跳转到消息页面
+    hmwJump(i){
+        this.$router.push({
+            path: '/message',
+            query:{
+                title:i
+            }
+           })
     }
 },
 mounted(){
