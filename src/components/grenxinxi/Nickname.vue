@@ -3,7 +3,8 @@
     <NavTitle @onClickRight="onClickRight"></NavTitle>
     <div class="waw_nickname_box">
       <van-cell-group>
-        <van-field v-model="value" placeholder="请输入用户名" />
+        <!-- {{nickname}} -->
+        <van-field v-model="nickname" placeholder="请输入用户名" />
       </van-cell-group>
     </div>
   </div>
@@ -16,14 +17,25 @@ export default {
   },
   data() {
     return {
-      value: localStorage.getItem("value") || "admin", //昵称，默认为admin
+      nickname: "",
     };
   },
   methods: {
-    onClickRight() { //点击保存更改昵称
-      localStorage.setItem("value", this.value);
+    async onClickRight() {
+      //点击保存更改昵称
+      let res = await this.$Net.user({ nickname: this.nickname });
+      this.hhah();
       this.$router.go(-1);
     },
+    hhah() {
+      this.$Net.grren().then((res) => {
+        console.log(res);
+        this.nickname = res.data.data.nickname;
+      });
+    },
+  },
+  mounted() {
+    this.hhah();
   },
 };
 </script>

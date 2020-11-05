@@ -58,6 +58,11 @@ methods: {
         this.$router.go("-1")
     }
 },
+mounted(){
+    this.$Net.xiao().then(res=>{
+        console.log(res);
+    })
+}
 }
 </script>
 
@@ -72,7 +77,7 @@ methods: {
     height: 3rem;
     border-radius:50% ;
     position: relative;
-    top:1.3rem
+    /* top:1.3rem */
 }
 .uu-li{
     margin-left: 1rem;

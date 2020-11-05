@@ -43,7 +43,7 @@ export default {
       this.$router.push({ path: "/login" });
     },
     ge() {
-      var district_name=localStorage.setItem("district_name",this.district_name)
+      var district_name=localStorage.setItem("nickname",this.district_name)
       var mobile=localStorage.setItem("mobile",this.list.mobile)
       var token = localStorage.getItem("token");
       if (token) {
@@ -58,13 +58,13 @@ export default {
   },
   mounted() {
         this.$Net
-        .xuue({
+        .grren({
           params: {},
         })
         .then((res) => {
           console.log(res);
           this.list = res.data.data;
-          this.district_name=res.data.data.district_name
+          this.district_name=res.data.data.nickname
         });
   },
 };

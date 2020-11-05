@@ -47,9 +47,9 @@ const Net = {
     return request(API.Method.Post, API.Path.HMWPJ, params)
   },
   //获取个人信息
-  xuue() {
-    return request(API.Method.Get, API.Path.XUE)
-  },
+  // xuue() {
+  //   return request(API.Method.Get, API.Path.XUE)
+  // },
   //特色课获取
   te() {
     return request(API.Method.Get, API.Path.TE)
@@ -103,6 +103,33 @@ const Net = {
   //搜搜
   sou(params) {
     return request(API.Method.Get, API.Path.SOU + params)
+  },
+  //消息通知
+  xiao(params){
+    return request(API.Method.Post,API.Path.XIAO,params)
+  },
+  //个人信息
+  grren(){
+    return request(API.Method.Get,API.Path.GENREN)
+  },
+  //头像
+  img(params){
+    return request(API.Method.Post,API.Path.IMG,params)
+  },
+  user(params){
+    return request(API.Method.Put,API.Path.USER,params)
+  },
+  //城市
+  csi(){
+    return request(API.Method.Get,API.Path.CSI)
+  },
+  //市区
+  sq(params){
+    return request(API.Method.Get,API.Path.SQ+params)
+  },
+  //课程学习
+  kx(){
+  return request(API.Method.Get,API.Path.KX)
   }
 }
 
