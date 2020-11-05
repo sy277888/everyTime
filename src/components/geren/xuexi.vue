@@ -18,7 +18,7 @@
     <template #title>{{item.name+'('+item.num+')'}}</template>
     <ul>
       <!-- 列表部分 -->
-     <li v-for="(i,xb) in hmwList" :key="xb" v-show="i.course_type==item.type">
+     <li v-for="(i,xb) in hmwList" :key="xb" v-show="i.course_type==item.type" @click="hmwJump(i)">
        <p>{{i.title}}</p>
        <div class="hmwtime">
 <van-icon name="clock-o" size="12" color="#ccc" style="font-weight:700;"/>
@@ -64,6 +64,11 @@ export default {
     // 导航点击事件
     hmwDian(i){
       this.getList(this.hmwNav[i].type)
+    },
+    // 跳转到学习详情页面
+    hmwJump(i){
+      sessionStorage.setItem('hmwXQid',i.course_id+'')
+      this.$router.push('/study')
     }
   },
 };

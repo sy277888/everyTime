@@ -53,7 +53,7 @@ const API = {
         //我的学习
         XLI:"/api/app/myStudy/3?",
         BAO:"/api/app/order/downOrder",
-        hmwStudyNav:'/api/app/myStudy/',
+        hmwStudyNav:'/api/app/myStudy/',//我的学习页面渲染
         //搜索
         SOU:"/api/app/courseBasis?limit=10&page=1&course_type=0&keywords=",
         // 消息通知
