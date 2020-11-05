@@ -14,10 +14,7 @@
             :src="list.avatar"
             alt=""
             @click="ge"
-          /><span
-            v-show="district_name.length <= 0"
-            class="s1"
-            @click="denglv"
+          /><span v-show="district_name.length <= 0" class="s1" @click="denglv"
             >登录/注册</span
           >
           <span v-show="district_name.length > 0" class="s1" @click="ge">{{
@@ -35,7 +32,7 @@ export default {
   data() {
     return {
       list: [],
-      district_name:""
+      district_name: "",
     };
   },
   methods: {
@@ -43,8 +40,11 @@ export default {
       this.$router.push({ path: "/login" });
     },
     ge() {
-      var district_name=localStorage.setItem("district_name",this.district_name)
-      var mobile=localStorage.setItem("mobile",this.list.mobile)
+      var district_name = localStorage.setItem(
+        "district_name",
+        this.district_name
+      );
+      var mobile = localStorage.setItem("mobile", this.list.mobile);
       var token = localStorage.getItem("token");
       if (token) {
         this.$router.push({ path: "/per" });
@@ -57,15 +57,15 @@ export default {
     },
   },
   mounted() {
-        this.$Net
-        .xuue({
-          params: {},
-        })
-        .then((res) => {
-          console.log(res);
-          this.list = res.data.data;
-          this.district_name=res.data.data.district_name
-        });
+    this.$Net
+      .xuue({
+        params: {},
+      })
+      .then((res) => {
+        console.log(res);
+        this.list = res.data.data;
+        this.district_name = res.data.data.district_name;
+      });
   },
 };
 </script>
@@ -90,9 +90,11 @@ export default {
   border-radius: 5px;
 }
 .sy_img {
-  position: absolute;
-  top:2rem;
-  left: 3rem  ;
+  line-height: 10rem;
+  display: block;
+ margin-left: 3.3rem;
+  width: 9rem;
+  height: 5rem;
 }
 .sy_img img {
   width: 4.5rem;
