@@ -3,7 +3,7 @@
     <van-nav-bar title="我的学习" left-arrow @click-left="onClickLeft" />
     <div>
       <van-tabs>
-        <van-tab v-for="(item, index) in list" :title="item.title" :key="index">
+        <van-tab v-for="(item, index) in hmwNav" :title="item.name" :key="index">
           <p v-for="(item, index) in nei" :key="index">{{ item.title }}</p>
         </van-tab>
       </van-tabs>
@@ -15,6 +15,8 @@
 export default {
   data() {
     return {
+      hmwNav:[],//导航
+      hmwList:[],//列表
       nei: [],
       list: [
         {
@@ -42,28 +44,32 @@ export default {
     };
   },
   mounted() {
-    this.$Net
-      .te({
-        params: {
-          browse_base: this.base,
-        },
-      })
-      .then((res) => {
-        // console.log(res);
-        this.nei = res.data.data.list;
-        // console.log(this.nei);
-      });
-      this.$Net.xli().then(res=>{
-        console.log(res);
-      })
+    this.getList()
   },
   methods: {
     onClickLeft() {
+      //回到上一页
       this.$router.go("-1");
+    },
+    // 获取数据
+    async getList() {
+// 列表
+      let { data } = await this.$Net.te({
+        params: {
+          browse_base: this.base,
+        },
+      });
+      
+       this.nei = data.data.list;
+       console.log(this.nei)
+      // 导航
+      let { data:msg } = await this.$Net.hmwStudyNav()
+       console.log(msg.data)
+      this.hmwNav = msg.data.typeNum
+      this.hmwList = msg.data.courseList
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>
