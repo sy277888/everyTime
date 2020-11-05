@@ -3,7 +3,8 @@ const API = {
     Method: {
         Get: 'get',
         Post: 'post',
-        Put: 'put'
+        Put: 'put',
+        Del:'delete'
     },
     //定义请求地址
     Path: {

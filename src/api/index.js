@@ -26,6 +26,10 @@ const Net = {
   courseStudy(params) {
     return request(API.Method.Get, API.Path.HMWStudy+params)
   },
+  // 删除列表
+  courseDel(params) {
+    return request(API.Method.Del, API.Path.HMWStudy+params)
+  },
   // 立即报名
   courseBuy(params) {
     return request(API.Method.Post, API.Path.HMWBuy,params)
