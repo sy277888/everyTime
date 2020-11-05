@@ -34,7 +34,7 @@
         <!-- 列表部分 -->
         <ul>
           <div :key="index" v-for="(item, index) in hmwStudyList">
-            <li>
+            <li @click="hmwVideo(item)">
               <p>
                 <span class="hmwS1" style="">[回放]</span
                 ><span class="hmwS2">{{
@@ -142,6 +142,17 @@ export default {
     // 点击评论
     hmwPL(){
       Toast('已评论无法再次评论');
+    },
+    // 点击回放
+    hmwVideo(i){
+      console.log(i)
+      if(i.child[0].video_id==0){
+        Toast('回放未生成');
+      }else{
+        let id = sessionStorage.getItem("hmwXQid");
+      window.location.href = `http://120.53.31.103:84/video?id=${id}&video_id=${i.child[0].video_id}&title=回放`
+      }
+      
     }
   },
   mounted() {
