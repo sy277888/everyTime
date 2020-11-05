@@ -88,7 +88,7 @@
             <p class="hmwP1">课程大纲</p>
             <!-- 无序列表 -->
             <ul>
-              <li :key="index" v-for="(item, index) in 10">
+              <li :key="index" v-for="(item, index) in 10" @click="hmwHf">
                 <p>
                   <span class="hmwS1" style="">回放</span
                   ><span class="hmwS2">第二讲第一课时</span>
@@ -100,7 +100,8 @@
           <!-- 课程评论 -->
           <li class="hmwPL hmwSroll">
             <p class="hmwP1">课程评论</p>
-            <ul>
+            <!-- 如果有数据 -->
+            <ul v-if="hmwEvaluate.length!=0">
               <li :key="index" v-for="(item, index) in hmwEvaluate">
                 <img :src="item.avatar" alt="" />
                 <div class="hmwPL-center">
@@ -121,6 +122,12 @@
                 </div>
               </li>
             </ul>
+            <!-- 如果没有数据就显示图片 -->
+            <div v-if="hmwEvaluate.length==0" id="hmwNothing">
+               <img src="../../assets/icon/收藏.png" alt="">
+               <p>暂无评论</p>
+            </div>
+           
           </li>
         </ol>
       </van-list>
@@ -139,7 +146,7 @@
           v-show="this.arr == 1"
           type="primary"
           block
-          @click="hmwStudyJumpp"
+          @click="hmwStudyJump"
           >立即学习</van-button
         >
       </div>
@@ -393,6 +400,10 @@ export default {
         name: pathval.name,
       });
     },
+    // 点击回放功能
+    hmwHf(){
+      Toast("回放未生成");
+    }
   },
   //  activated相当于mounted
   mounted() {
@@ -421,6 +432,7 @@ export default {
 };
 </script>
 <style scoped>
+
 * {
   margin: 0;
   padding: 0;
@@ -584,6 +596,9 @@ body > div,
   padding: 0.5rem;
 }
 /* 课程讲评 */
+.hmwPL{
+  padding-bottom: 0 !important;
+}
 .hmwPL li {
   display: flex;
   justify-content: space-between;
@@ -618,6 +633,23 @@ body > div,
 /* 评分小图标样式 */
 .hmwPL .van-rate__item {
   padding-left: 0;
+}
+/* 当没有评论时 */
+#hmwNothing{
+  width: 100%;
+  height: 12rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+#hmwNothing img{
+  width: 45%;
+  height: 79%;
+}
+#hmwNothing p{
+font-size: 4vw;
+    color: #8c8c8c;
 }
 /* 底部的按钮 -----------------------------------------------------------------------------------------*/
 .hmw-foot .van-button {
