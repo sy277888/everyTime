@@ -110,7 +110,7 @@ const Net = {
   },
   // 我的学习导航
   hmwStudyNav(params) {
-    return request(API.Method.Get, API.Path.hmwStudyNav, params)
+    return request(API.Method.Get, API.Path.hmwStudyNav+params)
   }
 }
 

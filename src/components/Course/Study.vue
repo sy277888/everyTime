@@ -24,11 +24,13 @@
         <!-- 主题的上部分 -->
         <div class="hmwC-top">
           <p>共{{ hmwStudyTop.section_num }}时</p>
-          <van-progress  
+          <!-- <van-progress  
           v-if="hmwStudyTop.progress_rate"
             inactive
             :percentage="Number(hmwStudyTop.progress_rate)"
-          />
+          /> -->
+           <!-- 进度条 -->
+         <div class="hmwPercent"><span :style="{width:Number(hmwStudyTop.progress_rate)+'%'}"></span></div>
           <p>已学习{{ hmwStudyTop.progress_rate }}%</p>
         </div>
         <!-- 列表部分 -->
@@ -48,10 +50,7 @@
                 }}</span>
               </p>
               <p class="hmwJD">
-                <van-progress
-                  inactive
-                  :percentage="item.child[0].progress_rate"
-                />
+                <span class="hmwPercent" style="width:70%;"><span :style="{width:Number(hmwStudyTop.progress_rate)+'%'}"></span></span>
                 <span style="font-size:0.2rem;"
                   >已观看{{ item.child[0].progress_rate }}%</span
                 >
@@ -214,16 +213,27 @@ body,
 .hmwC-top {
   font-size: 3.46667vw;
   color: #595959;
-  height: 13.86667vw;
+  height: 13vw;
   line-height: 13.86667vw;
   border-bottom: 1px solid #f5f5f5;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-/* 进度条 */
-.van-progress {
-  width: 14rem;
+/* 进度条部分 */
+.hmwPercent{
+  width: 55%;
+  height: 0.2rem;
+  background-color: #f5f5f5;
+    position: relative;
+    border-radius: 0.14rem;
+}
+.hmwPercent>span{
+  display: block;
+  height: 100%;
+  background:#eb6100;
+ border-radius: 0.14rem;
+  /* width: 10%; */
 }
 /* 列表部分 */
 .hmw-center ul li {
