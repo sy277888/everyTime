@@ -89,7 +89,6 @@ export default {
     },
     close(index) {
       this.list.splice(index, 1);
-      // this.value.push(this.searchlist)
       localStorage.searchlist = JSON.stringify(this.list);
     },
   },

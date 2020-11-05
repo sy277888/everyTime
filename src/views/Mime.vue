@@ -54,7 +54,8 @@ export default {
 <style scoped>
 .sy_we{
   width: 100%;
-  height: 3.6rem;background: black;
+  height: 3.6rem;
+  
 }
 
 </style>

@@ -106,10 +106,11 @@ export default {
 
     //进入预约页
     OnGo(item) {
+      console.log(item)
       this.$router.push({
         path: "/homedata",
         query: {
-          item,
+          id : item.id
         },
       });
     },

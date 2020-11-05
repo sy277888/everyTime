@@ -85,7 +85,6 @@ methods: {
 }
 .ppp1{
 width: 100%;
-margin-left: 0.5rem;
 margin-top: 3rem;
 color: grey;
 }

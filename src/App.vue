@@ -90,6 +90,24 @@ export default {
         this.isShow = false;
       }else if (to.path == "/search") {
         this.isShow = false;
+      }else if (to.path == "/yuer") {
+        this.isShow = false;
+      }else if (to.path == "/hu") {
+        this.isShow = false;
+      }else if (to.path == "/you") {
+        this.isShow = false;
+      }else if (to.path == "/huiyuan") {
+        this.isShow = false;
+      }else if (to.path == "/yueke") {
+        this.isShow = false;
+      }else if (to.path == "/xiao") {
+        this.isShow = false;
+      }else if (to.path == "/yi") {
+        this.isShow = false;
+      }else if (to.path == "/drag") {
+        this.isShow = false;
+      }else if (to.path == "/per") {
+        this.isShow = false;
       }
     },
   },
