@@ -1,13 +1,23 @@
 <template>
   <div>
-    <van-nav-bar title="我的学习" left-arrow @click-left="onClickLeft" />
-    <div>
-      <van-tabs>
-        <van-tab v-for="(item, index) in hmwNav" :title="item.name" :key="index">
-          <p v-for="(item, index) in nei" :key="index">{{ item.title }}</p>
-        </van-tab>
-      </van-tabs>
-    </div>
+    <!-- 顶部 -->
+    <van-nav-bar @click-left="onClickLeft" >
+  <template #left>
+    <van-icon name="arrow-left" color=" #595959" size="18"/>
+  </template>
+  <template #title>
+    <p>我的学习</p>
+  </template>
+  <template #right>
+    <van-icon name="notes-o" color=" #595959" size="18"/>
+  </template>
+</van-nav-bar>
+<!-- 导航 -->
+    <van-tabs>
+  <van-tab :key="index" v-for="(item,index) in hmwNav" :title="item.name+'('+item.num+')'">
+    内容 {{ index }}
+  </van-tab>
+</van-tabs>
   </div>
 </template>
 
@@ -72,4 +82,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+/* 顶部 */
+.van-nav-bar p{
+    font-size: 4.8vw;
+    color: #595959;
+}
+.van-nav-bar{
+height: 11.73333vw;
+}
+
+</style>
