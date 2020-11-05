@@ -103,6 +103,10 @@ const Net = {
   //搜搜
   sou(params) {
     return request(API.Method.Get, API.Path.SOU + params)
+  },
+  //消息通知，获取数据
+  hmwGetMsg(params) {
+    return request(API.Method.Post, API.Path.hmwMsg, params)
   }
 }
 

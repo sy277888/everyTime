@@ -16,8 +16,6 @@ const API = {
         HMWXQ: '/api/app/courseInfo/basis_id=',
         // 课程收藏操作
         HMWSC: '/api/app/collect',
-        // 取消收藏（怎么会有问题？）
-        // HMWSCNO: `/api/app/collect/cancel/227/1`,
         // 立即学习
         HMWStudy: '/api/app/myStudy/course/',
         // 立即报名
@@ -56,7 +54,9 @@ const API = {
         XLI:"/api/app/myStudy/3?",
         BAO:"/api/app/order/downOrder",
         //搜索
-        SOU:"/api/app/courseBasis?limit=10&page=1&course_type=0&keywords="
+        SOU:"/api/app/courseBasis?limit=10&page=1&course_type=0&keywords=",
+        // 消息通知
+        hmwMsg:"api/app/message/classifyMessage",
     }
 }
 
