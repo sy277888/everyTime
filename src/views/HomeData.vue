@@ -27,7 +27,6 @@
         <p>
           <span class="Home_center_icon"></span>
           <span class="Homedata_center_title">选择时间</span>
-          <span class="Homedata_center_titles">（北京时间）{{ nowWeek }}</span>
         </p>
       </div>
       <!-- 底部选择时间 -->
@@ -45,9 +44,6 @@ export default {
     return {
       HomedataImg: [], //老师照片
       HomeTitle: [], //老师名字
-      timer: null,
-      nowWeek: "", //星期几
-      nowDate: "", //本地日期
       active: 1,
     };
   },
@@ -55,54 +51,13 @@ export default {
     Onback() {
       this.$router.go(-1);
     },
-    setNowTimes() {
-      let myDate = new Date();
-      // console.log(myDate)
-      let wk = myDate.getDay();
-      let yy = String(myDate.getFullYear());
-      let mm = myDate.getMonth() + 1;
-      let dd = String(
-        myDate.getDate() < 10 ? "0" + myDate.getDate() : myDate.getDate()
-      );
-      let hou = String(
-        myDate.getHours() < 10 ? "0" + myDate.getHours() : myDate.getHours()
-      );
-      let min = String(
-        myDate.getMinutes() < 10
-          ? "0" + myDate.getMinutes()
-          : myDate.getMinutes()
-      );
-      let sec = String(
-        myDate.getSeconds() < 10
-          ? "0" + myDate.getSeconds()
-          : myDate.getSeconds()
-      );
-      let weeks = [
-        "星期日",
-        "星期一",
-        "星期二",
-        "星期三",
-        "星期四",
-        "星期五",
-        "星期六",
-      ];
-      let week = weeks[wk];
-      this.nowDate = yy + "-" + mm + "-" + dd;
-      this.nowTime = hou + ":" + min + ":" + sec;
-      this.nowWeek = week;
-    },
   },
   created() {
-    let item = this.$route.query.item
-    console.log(item)
-    // this.$Net.List().then((res) => {
-      this.HomedataImg =item.teacher_avatar
-    //     res.data.data[1].list[0].teachers_list[0].teacher_avatar;
-      this.HomeTitle = item.teacher_name;
-    // });
-    this.timer = setInterval(() => {
-      this.setNowTimes();
-    }, 1000);
+    this.$Net.HomeLIST(this.$route.query.id).then((res) => {
+      this.HomedataImg = res.data.data.teacher.avatar;
+      this.HomeTitle = res.data.data.teacher.real_name;
+      console.log(res.data.data.teacher.real_name);
+    });
   },
 };
 </script>

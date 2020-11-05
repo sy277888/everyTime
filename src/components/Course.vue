@@ -101,8 +101,9 @@
           :finished="finished"
           finished-text="没有更多了"
           @load="onLoad"
+          offset=0
         >
-          <!-- 这里必须要用v-for 当这个未定义时不渲染，这样才不会爆0的错！！！ -->
+          <!-- 这里必须要用v-for 当这个未:定义时不渲染，这样才不会爆0的错！！！ -->
           <li
             v-if="item.teachers_list.length > 0"
             v-for="(item, index) in hmwList2"
@@ -467,7 +468,6 @@ id = this.hmwActiveNum4
       this.onConfirm1();
     },
     // 筛选的点击事件---------------------------------------------------------
-    // 这个应该可以有效果了,还是不行
     async HmwChoose(i, index) {
       console.log(i);
       // 点击变色
@@ -611,6 +611,7 @@ li {
   /* padding-bottom: 0.2rem; */
   /* margin-bottom: 3rem; */
 }
+/* 这个地方有问题 */
 .hmw-main .van-list {
   padding-bottom: 0.1rem;
 }

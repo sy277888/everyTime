@@ -169,7 +169,7 @@ export default {
   },
   methods: {
     Onclick(item) { 
-     
+  //  获取当前登录后的token 判断是否显示去跳转登录页
       var token = localStorage.getItem("token");
       if ((token = !token)) {
         this.show = true;
@@ -320,7 +320,7 @@ padding: 1rem;
 }
 .Home_Prpup {
   width: 18rem;
-  height: 20rem;
+  height: 18rem;
   border-radius: 1rem;
   text-align: center;
 }

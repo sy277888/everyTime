@@ -14,10 +14,7 @@
             :src="list.avatar"
             alt=""
             @click="ge"
-          /><span
-            v-show="district_name.length <= 0"
-            class="s1"
-            @click="denglv"
+          /><span v-show="district_name.length <= 0" class="s1" @click="denglv"
             >登录/注册</span
           >
           <span v-show="district_name.length > 0" class="s1" @click="ge">{{
@@ -35,7 +32,7 @@ export default {
   data() {
     return {
       list: [],
-      district_name:""
+      district_name: "",
     };
   },
   methods: {
@@ -90,19 +87,24 @@ export default {
   border-radius: 5px;
 }
 .sy_img {
-  position: absolute;
-  left: 4rem;
-  top: 1rem;
+  line-height: 5rem;
+  display: block;
+ margin-left: 3.3rem;
+  /* width: 9rem; */
+  height: 5rem;
 }
 .sy_img img {
   width: 4.5rem;
   height: 4.5rem;
   border-radius: 50%;
+  position: relative;
+  top:1rem;
+  left: -3rem;
 }
 .sy_img .s1 {
   position: relative;
-  top: -1.8rem;
-  left: 0.4rem;
+  top: -0.5rem;
+  left: -2rem;
 }
 .sy_top .sy_bu {
   width: 3.5rem;

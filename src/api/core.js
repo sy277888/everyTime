@@ -16,7 +16,7 @@ window.localStorage.setItem("deviceid",deviceid)
 //axios 实例
 const instance  = axios.create({
     baseURL:'http://120.53.31.103:84',
-    // baseURL:'https://wap.365msmk.com',
+    // baseURL:'https://www.365msmk.com',
     timeout:6000 //设置超时时间
 })
 //添加请求拦截器

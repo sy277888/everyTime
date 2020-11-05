@@ -24,17 +24,19 @@
         <!-- 主题的上部分 -->
         <div class="hmwC-top">
           <p>共{{ hmwStudyTop.section_num }}时</p>
-          <van-progress  
+          <!-- <van-progress  
           v-if="hmwStudyTop.progress_rate"
             inactive
             :percentage="Number(hmwStudyTop.progress_rate)"
-          />
+          /> -->
+           <!-- 进度条 -->
+         <div class="hmwPercent"><span :style="{width:Number(hmwStudyTop.progress_rate)+'%'}"></span></div>
           <p>已学习{{ hmwStudyTop.progress_rate }}%</p>
         </div>
         <!-- 列表部分 -->
         <ul>
           <div :key="index" v-for="(item, index) in hmwStudyList">
-            <li>
+            <li @click="hmwVideo(item)">
               <p>
                 <span class="hmwS1" style="">[回放]</span
                 ><span class="hmwS2">{{
@@ -48,10 +50,7 @@
                 }}</span>
               </p>
               <p class="hmwJD">
-                <van-progress
-                  inactive
-                  :percentage="item.child[0].progress_rate"
-                />
+                <span class="hmwPercent" style="width:70%;"><span :style="{width:Number(hmwStudyTop.progress_rate)+'%'}"></span></span>
                 <span style="font-size:0.2rem;"
                   >已观看{{ item.child[0].progress_rate }}%</span
                 >
@@ -118,7 +117,7 @@ export default {
   methods: {
     //   导航部分事件
     onClickLeft() {
-      this.$router.push("/detail");
+      this.$router.go(-1);
     },
     onClickRight() {
       this.$router.push("/lenderData");
@@ -142,6 +141,17 @@ export default {
     // 点击评论
     hmwPL(){
       Toast('已评论无法再次评论');
+    },
+    // 点击回放
+    hmwVideo(i){
+      console.log(i)
+      if(i.child[0].video_id==0){
+        Toast('回放未生成');
+      }else{
+        let id = sessionStorage.getItem("hmwXQid");
+      window.location.href = `http://120.53.31.103:84/video?id=${id}&video_id=${i.child[0].video_id}&title=回放`
+      }
+      
     }
   },
   mounted() {
@@ -203,16 +213,27 @@ body,
 .hmwC-top {
   font-size: 3.46667vw;
   color: #595959;
-  height: 13.86667vw;
+  height: 13vw;
   line-height: 13.86667vw;
   border-bottom: 1px solid #f5f5f5;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-/* 进度条 */
-.van-progress {
-  width: 14rem;
+/* 进度条部分 */
+.hmwPercent{
+  width: 55%;
+  height: 0.2rem;
+  background-color: #f5f5f5;
+    position: relative;
+    border-radius: 0.14rem;
+}
+.hmwPercent>span{
+  display: block;
+  height: 100%;
+  background:#eb6100;
+ border-radius: 0.14rem;
+  /* width: 10%; */
 }
 /* 列表部分 */
 .hmw-center ul li {

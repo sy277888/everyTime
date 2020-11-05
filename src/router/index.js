@@ -17,18 +17,27 @@ const routes = [
     //首页推荐老师详情
     path: '/homelist',
     name: 'Homelist',
+    meta: {
+      title: "老师详情"
+    },
     component: () => import('../views/Homelist.vue'),
 
   }, {
     //首页推荐老师详情预约页
     path: '/homedata',
     name: 'HomeData',
+    meta: {
+      title: "预约课程"
+    },
     component: () => import('../views/HomeData.vue')
   },
   //学历日历
   {
     path: '/lenderData',
     name: 'LenderData',
+    meta: {
+      title: "学习日历"
+    },
     component: () => import('../views/LenderData.vue')
   },
   {
@@ -43,12 +52,18 @@ const routes = [
     // 一对一辅导预约页
     path: '/sololist',
     name: 'Sololist',
+    meta: {
+      title: "预约课程"
+    },
     component: () => import('../views/Sololist.vue')
   },
   {
     // 一对一辅导详情页
     path: '/solodata',
     name: 'Solodata',
+    meta: {
+      title: "讲师详情"
+    },
     component: () => import('../views/Solodata.vue')
   },
 // 课程
@@ -64,36 +79,54 @@ const routes = [
   {
     path: '/kaodian',
     name: 'kaodian',
+    meta: {
+      title: "考点专练"
+    },
     component: () => import('../views/grids/kaodian.vue')
   },
   // 练习页面的套卷路由
   {
     path: '/taojuan',
     name: 'taojuan',
+    meta: {
+      title: "套卷练习"
+    },
     component: () => import('../views/grids/taojuan.vue')
   },
   // 练习页面的仿真练习
   {
     path: '/fangzhen',
     name: 'fangzhen',
+    meta: {
+      title: "仿真练习"
+    },
     component: () => import('../views/grids/fangzhen.vue')
   },
   // 练习页面的错题路由
   {
     path: '/cuoti',
     name: 'cuoti',
+    meta: {
+      title: "错题练习"
+    },
     component: () => import('../views/grids/cuoti.vue')
   },
   // 练习页面的测评记录路由
   {
     path: '/ceping',
     name: 'ceping',
+    meta: {
+      title: "测评纪录"
+    },
     component: () => import('../views/grids/ceping.vue')
   },
   // 练习页面的习题收藏路由
   {
     path: '/xiti',
     name: 'xiti',
+    meta: {
+      title: "习题收藏"
+    },
     component: () => import('../views/grids/xiti.vue')
   },
   {
@@ -212,6 +245,9 @@ const routes = [
   {
     path: "/drag",
     name: "Drag",
+    meta: {
+      title: "练习"
+    },
     component: () => import('../views/drage/Drag.vue')
   },
   // 练习页面击跳转第二页面
@@ -252,72 +288,117 @@ const routes = [
   {
     path: "/xue",
     name: "Xue",
+    meta: {
+      title: "我的学习"
+    },
     component: () => import('../components/geren/xuexi.vue')
   },
   //剩余学习币
   {
     path: "/yuer",
     name: "Yuer",
+    meta: {
+      title: "剩余学习币"
+    },
     component: () => import('../components/geren/yuer.vue')
   },
   //我的关注
   {
     path: "/guan",
     name: "Guan",
+    meta: {
+      title: "我的关注"
+    },
     component: () => import('../components/geren/guuanzhu.vue')
   },
   //我的收藏
   {
     path: "/shou",
     name: "Shou",
+    meta: {
+      title: "我的收藏"
+    },
     component: () => import('../components/geren/shou.vue')
   },
   //课程订单
   {
     path: "/ke",
     name: "Ke",
+    meta: {
+      title: "课程订单"
+    },
     component: () => import('../components/geren/kecheng.vue')
   },
   //会员订单
   {
     path: "/huiyuan",
     name: "Huiyuan",
+    meta: {
+      title: "会员订单"
+    },
     component: () => import('../components/geren/huiyuan.vue')
   },
   //约课订单
   {
     path: "/yueke",
     name: "Yueke",
+    meta: {
+      title: "约课订单"
+    },
     component: () => import('../components/geren/yueke.vue')
   },
   //优惠券
   {
     path: "/you",
     name: "You",
+    meta: {
+      title: "优惠券"
+    },
     component: () => import('../components/zhanghu/youhui.vue')
   },
   //我的学习卡
   {
     path: "/xu",
     name: "Xu",
+    meta: {
+      title: "我的学习卡"
+    },
     component: () => import('../components/zhanghu/xuexi.vue')
   },
   //开通会员
   {
     path: "/hu",
     name: "Hu",
+    meta: {
+      title: "开通会员"
+    },
     component: () => import('../components/zhanghu/hu.vue')
   },
   //我的消息
   {
     path: "/xiao",
     name: "Xiao",
+    meta: {
+      title: "消息中心"
+    },
     component: () => import('../components/fuwu/xiaoxi.vue')
+  },
+  //消息
+  {
+    path: "/message",
+    name: "message",
+    meta: {
+      title: "消息"
+    },
+    component: () => import('../components/fuwu/Message.vue')
   },
   //意见反馈
   {
     path: "/yi",
     name: "Yi",
+    meta: {
+      title: "意见反馈"
+    },
     component: () => import('../components/fuwu/yijian.vue')
   },
   //立即页面
@@ -334,12 +415,18 @@ const routes = [
   {
     path: "/shezhi",
     name: "Shezhi",
+    meta: {
+      title: "设置密码"
+    },
     component: () => import('../components/mimaxiu/xiumi.vue')
   },
   //一对一辅导的搜索页
   {
     path: "/search",
     name: "Search",
+    meta: {
+      title: "搜索"
+    },
     component: () => import('../views/sousuo/Search.vue')
   }
 ]
