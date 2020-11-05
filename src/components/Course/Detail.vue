@@ -146,7 +146,7 @@
           v-show="this.arr == 1"
           type="primary"
           block
-          @click="hmwStudyJumpp"
+          @click="hmwStudyJump"
           >立即学习</van-button
         >
       </div>
