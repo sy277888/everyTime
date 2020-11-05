@@ -49,10 +49,13 @@ export default {
         },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         this.nei = res.data.data.list;
-        console.log(this.nei);
+        // console.log(this.nei);
       });
+      this.$Net.xli().then(res=>{
+        console.log(res);
+      })
   },
   methods: {
     onClickLeft() {

@@ -18,6 +18,12 @@ const API = {
         HMWSC: '/api/app/collect',
         // 取消收藏（怎么会有问题？）
         // HMWSCNO: `/api/app/collect/cancel/227/1`,
+        // 立即学习
+        HMWStudy: '/api/app/myStudy/course/',
+        // 立即报名
+        HMWBuy: '/api/app/order/shopInfo',
+        // 提交订单
+        HMWSubmit: '/api/app/order/downOrder',
         // 课程评价数据获取
         HMWPJ: '/api/app/courseComment',
         //首页列表
@@ -29,7 +35,7 @@ const API = {
         //我的关注
         GUAN: "/api/app/collect",
         //
-        KE: "/api/app/courseInfo/basis_id=189",
+        KE: "/api/app/courseInfo/basis_id=",
         //学习
         Xue: "/api/app/myStudy/2",
         //首页推荐老师列表
@@ -46,7 +52,11 @@ const API = {
         CANCEL: "/api/app/collect/cancel/227/1",
         //教师详情
         SHI: "/api/app/teacher/",
-     
+        //我的学习
+        XLI:"/api/app/myStudy/3?",
+        BAO:"/api/app/order/downOrder",
+        //搜索
+        SOU:"/api/app/courseBasis?limit=10&page=1&course_type=0&keywords="
     }
 }
 
