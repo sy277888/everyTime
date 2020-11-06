@@ -142,6 +142,10 @@ const Net = {
   // 我的学习导航
   hmwStudyNav(params) {
     return request(API.Method.Get, API.Path.hmwStudyNav+params)
+  },
+  // 我的-名片渲染
+  hmwMine(params) {
+    return request(API.Method.Get, API.Path.hmwMine,params)
   }
 }
 

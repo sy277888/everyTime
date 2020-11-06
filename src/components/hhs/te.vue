@@ -2,17 +2,17 @@
   <div>
          <div class="sy_te">
       <ul @click="xuexi">
-        <li class="zu">0</li>
+        <li class="zu">{{hmwList.courses}}</li>
         <li class="te">我的特色课</li>
         <li class="li">已购买特色课程的学习</li>
       </ul>
       <ul>
-        <li class="zu" @click="tese">0</li>
+        <li class="zu" @click="tese">{{hmwList.oto}}</li>
         <li class="te">一对一辅导</li>
         <li class="li">我的一对一老师辅导</li>
       </ul>
       <ul>
-        <li class="zu" @click="yu">0</li>
+        <li class="zu" @click="yu">{{(hmwList.integral/100).toFixed(2)}}</li>
         <li class="te">剩余学习币</li>
         <li class="li">查看剩余学习币</li>
       </ul>
@@ -24,7 +24,7 @@
 export default {
 data() {
   return {
-    
+    hmwList:{}
   }
 },
 methods: {
@@ -36,8 +36,17 @@ methods: {
   },
   yu(){
 this.$router.push({path:"/yuer"})
+  },
+  // 获取接口数据
+  async getList(){
+    let {data} = await this.$Net.hmwMine()
+    this.hmwList = data.data
+    console.log(data.data)
   }
 },
+mounted(){
+  this.getList()
+}
 }
 </script>
 

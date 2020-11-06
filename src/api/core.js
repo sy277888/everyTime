@@ -46,6 +46,11 @@ instance.interceptors.request.use(function(config){
   return Promise.reject(error)
 });
 instance.interceptors.response.use(function(response){
+    // token失效处理
+    if(response.data.status==401){
+        window.localStorage.removeItem("token")
+        router.push('/')
+    }
     //对响应数据做点什么
     //接受完成后对自身服务器响应的状态码进行处理
     //收起loading控件
