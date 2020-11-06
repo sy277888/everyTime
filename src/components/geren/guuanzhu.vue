@@ -1,119 +1,105 @@
 <template>
   <div>
     <van-nav-bar title="我的关注" left-arrow @click-left="onClickLeft" />
-    <div>
-      <div class="sy-ddd">
-        <ul class="wu-sy">
-          <li><img src="../../assets/icon/avatar.jpg" alt="" /></li>
+    <div class="guanzhu_box">
+      <!-- 空状态判断 -->
+      <van-empty
+        v-show="isShow"
+        description="暂无关注"
+        image="https://wap.365msmk.com/img/empty.0d284c2e.png"
+      >
+      </van-empty>
+      <!-- 关注老师 -->
+      <div class="guanzhu" v-for="(item, index) in list" :key="index">
+        <ul>
           <li>
-            <p>毛赵燕 <span class="sp">M6</span></p>
-            <p class="pp">教学风格：尤其擅长阅读教学，...</p>
+            <img :src="item.avatar" alt="" />
+            <p class="guanzhu_p">{{ item.teacher_name }}</p>
+            <div class="van-ellipsis">{{ item.introduction }}</div>
           </li>
         </ul>
-        <button class="guanzhu">取消关注</button>
-      </div>
-      <div class="sy-ddd">
-        <ul class="wu-sy">
-          <li>
-            <img src="../../assets/icon/2019wX5ZNRNxBT1577773182.jpg" alt="" />
-          </li>
-          <li>
-            <p>文为星 <span class="sp">M20</span></p>
-            <p class="pp">文为星，江苏沐阳县人，上海市，...</p>
-          </li>
-        </ul>
-        <button class="guanzhu">取消关注</button>
-      </div>
-      <div class="sy-ddd">
-        <ul class="wu-sy">
-          <li>
-            <img src="../../assets/icon/20192TSKKmyNso1572684453.png" alt="" />
-          </li>
-          <li>
-            <p>马学斌 <span class="sp">M20</span></p>
-            <p class="pp">马学斌老师，从2004年起，专注，...</p>
-          </li>
-        </ul>
-        <button class="guanzhu">取消关注</button>
-      </div>
-      <div class="sy-ddd">
-        <ul class="wu-sy">
-          <li><img src="../../assets/icon/avatar.jpg" alt="" /></li>
-          <li>
-            <p>毛赵燕 <span class="sp">M6</span></p>
-            <p class="pp">教学风格：尤其擅长阅读教学，...</p>
-          </li>
-        </ul>
-        <button class="guanzhu">取消关注</button>
+        <span @click="SHOW(item, index)"> 已关注 </span>
       </div>
     </div>
-    <p class="mei">没有更多了</p>
   </div>
 </template>
 
 <script>
+import { Toast } from "vant";
 export default {
   data() {
     return {
       list: [],
-      type: 2,
     };
   },
-  mounted() {
-    this.$Net
-      .guan({
-        params: {
-          type: this.type,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      });
+  created() {
+    this.$Net.guan({ params: { page: 1, limit: 10, type: 2 } }).then((res) => {
+      this.list = res.data.data.list;
+      console.log(res.data.data.list);
+    });
   },
   methods: {
     onClickLeft() {
       this.$router.go("-1");
+    },
+    async SHOW(item, index) {
+      let id = item.teacher_id;
+      let { data } = await this.$Net.GuanZhu(id + "");
+      if (data.data.flag === 2) {
+        this.list.splice(index, 1);
+        Toast.success("取消关注成功");
+      }
+    },
+  },
+  computed: {
+    isShow() {
+      let show = this.list.length > 0 ? false : true;
+      return show;
     },
   },
 };
 </script>
 
 <style scoped>
-.wu-sy {
-  display: inline-flex;
-}
-.wu-sy img {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  position: relative;
-  top: 1rem;
-}
-.sy-ddd {
+.guanzhu_box {
   width: 100%;
-  height: 4rem;
-  display: inline-flex;
-  justify-content: space-around;
-  align-items: center;
+  height: 39rem;
+  background: rgb(240, 242, 245);
+  overflow: scroll;
 }
 .guanzhu {
-  width: 5rem;
-  font-size: 0.5rem;
-  background: #fdefe5;
-  border-radius: 20px;
-  color: orange;
-  border: 0px;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 1rem;
+  height: 5rem;
+  background: #fff;
+  border-radius: 0.3rem;
 }
-.pp {
-  font-size: 0.5rem;
-  color: rgb(180, 179, 179);
+.guanzhu img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 3rem;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  float: left;
 }
-.sp {
-  color: orange;
+.van-ellipsis {
+  font-size: 0.2rem;
+  margin-left: 3.5rem;
+  margin-top: rem;
+  color: grey;
 }
-.mei {
-  font-size: 0.5rem;
-  color: rgb(180, 179, 179);
+.guanzhu_p {
+  line-height: 2rem;
+}
+.guanzhu span {
+  margin-left: 15rem;
+  display: block;
+  width: 4rem;
+  height: 1.5rem;
+  background: rgb(235, 238, 254);
+  border-radius: 2rem;
+  color: rgb(235, 97, 0);
   text-align: center;
 }
 </style>

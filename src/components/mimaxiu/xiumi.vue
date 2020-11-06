@@ -64,6 +64,7 @@ export default {
       var res = await this.$Net.she({
         mobile: Number(localStorage.getItem("username")),
         sms_code: localStorage.getItem("sms"),
+        client:1,
         sms_type: "getPassword",
         password: this.text,
       });

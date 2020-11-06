@@ -1,4 +1,3 @@
-import { Tab } from 'vant';
 <template>
   <div class="hmw-box">
     <!-- 顶部 -->
@@ -7,10 +6,14 @@ import { Tab } from 'vant';
         <!-- 这个是用来占个位子1 -->
         <!-- <van-nav-bar title="特色课" /> -->
         <van-nav-bar title="特色课">
-  <template #right>
-    <van-icon name="search" size="22" @click="$router.push('/search')"/>
-  </template>
-</van-nav-bar>
+          <template #right>
+            <van-icon
+              name="search"
+              size="22"
+              @click="$router.push('/search')"
+            />
+          </template>
+        </van-nav-bar>
         <!-- 导航 -->
         <div class="hmw-nav">
           <van-dropdown-menu>
@@ -77,7 +80,7 @@ import { Tab } from 'vant';
                     v-for="(item, index) in hmwChoose"
                     span="6"
                     :class="hmwActiveNum3 == index ? 'hmwSpanActive' : ''"
-                    @click="HmwChoose(item,index)"
+                    @click="HmwChoose(item, index)"
                     ><span>{{ item.name }}</span></van-col
                   >
                 </van-row>
@@ -90,47 +93,57 @@ import { Tab } from 'vant';
     <!-- 这里才是我要做的部分 -->
     <div class="hmw-center">
       <!-- 可滑动 -->
-      <van-list>
-        <div class="hmw-main">
-          <!-- 主体部分列表渲染 -->
-          <van-list>
-            <!-- 这里必须要用v-for 当这个未定义时不渲染，这样才不会爆0的错！！！ -->
-            <li
-              v-if="item.teachers_list"
-              :key="index"
-              v-for="(item, index) in hmwList"
-              @click="hmwJump(item)"
-            >
-              <h2>{{ item.title }}</h2>
-              <p class="hmwP1">
-                <van-icon name="clock-o" /><span
-                  >{{ item.start_play_date | timefn }}~{{
-                    item.end_play_date | timefn
-                  }}&emsp;&emsp;|共{{ item.total_periods + "课时" }}</span
-                >
-              </p>
-              <p class="hmwP2 hmwbaoBm">
-                <img :src="item.teachers_list[0].teacher_avatar" alt="" /><span
-                  >{{ item.teachers_list[0].teacher_name }}</span
-                >
-                <!-- 根据你有没有报名改变 -->
-                <img class="hmwBm" v-if="item.has_buy!=0" src="../assets/hmwbm.png" alt="">
-              </p>
-              <div class="hmwListBottom">
-                <span>{{ item.brows_num }}人已报名</span>
-                <strong v-if="item.price == 0">免费</strong>
-                <strong
-                  v-if="item.price != 0"
-                  style="color: orange; display: flex; align-items: center"
-                  ><van-icon name="gold-coin" />&emsp;<span>{{
-                    item.price / 100 + ".00"
-                  }}</span></strong
-                >
-              </div>
-            </li>
-          </van-list>
-        </div>
-      </van-list>
+      <!-- <van-list> -->
+      <div class="hmw-main">
+        <!-- 主体部分列表渲染 -->
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+          offset=0
+        >
+          <!-- 这里必须要用v-for 当这个未:定义时不渲染，这样才不会爆0的错！！！ -->
+          <li
+            v-if="item.teachers_list.length > 0"
+            v-for="(item, index) in hmwList2"
+            :key="index"
+            @click="hmwJump(item)"
+          >
+            <h2>{{ item.title }}</h2>
+            <p class="hmwP1">
+              <van-icon name="clock-o" /><span
+                >{{ item.start_play_date | timefn }}~{{
+                  item.end_play_date | timefn
+                }}&emsp;&emsp;|共{{ item.total_periods + "课时" }}</span
+              >
+            </p>
+            <p class="hmwP2 hmwbaoBm">
+              <img :src="item.teachers_list[0].teacher_avatar" alt="" />
+              <span>{{ item.teachers_list[0].teacher_name }}</span>
+              <!-- 根据你有没有报名改变 -->
+              <img
+                class="hmwBm"
+                v-if="item.has_buy != 0"
+                src="../assets/hmwbm.png"
+                alt=""
+              />
+            </p>
+            <div class="hmwListBottom">
+              <span>{{ item.sales_num }}人已报名</span>
+              <strong v-if="item.price == 0">免费</strong>
+              <strong
+                v-if="item.price != 0"
+                style="color: orange; display: flex; align-items: center"
+                ><van-icon name="gold-coin" />&emsp;<span>{{
+                  item.price / 100 + ".00"
+                }}</span></strong
+              >
+            </div>
+          </li>
+        </van-list>
+      </div>
+      <!-- </van-list> -->
     </div>
     <div class="hmw-foot"></div>
   </div>
@@ -315,6 +328,14 @@ export default {
             "http://baijiayun-wangxiao.oss-cn-beijing.aliyuncs.com/uploads/avatar.jpg",
         },
       ],
+      // 下拉加载
+      loading: false,
+      finished: false,
+      hmwList2: [],
+      i: 1,
+      // 分类的参数id
+      hmwFlId1:0,
+      hmwFlId2:0
     };
   },
   // 计算属性
@@ -323,6 +344,35 @@ export default {
   watch: {},
   // 组件方法
   methods: {
+    // 下拉加载
+    onLoad() {
+      // 异步更新数据
+      // setTimeout 仅做示例，真实场景中一般为 ajax 请求
+      setTimeout(() => {
+        if(this.hmwList2.length == this.hmwList.length-1){
+           this.i++;
+          this.hmwList2.push(this.hmwList[this.i]);
+          this.finished = true;
+          return false
+        }
+         // 数据全部加载完成
+        if (this.hmwList2.length == this.hmwList.length) {
+           this.loading = false;
+          this.finished = true;
+          return false
+        }
+        for (let i = 0; i < 2; i++) {
+          this.i++;
+          this.hmwList2.push(this.hmwList[this.i]);
+        }
+        // this.finished = true;
+        console.log(this.hmwList2);
+        // 加载状态结束
+        this.loading = false;
+
+
+      }, 1000);
+    },
     // 下拉框的显示隐藏
     onConfirm() {
       this.$refs.item.toggle();
@@ -334,20 +384,35 @@ export default {
       this.$refs.item2.toggle();
     },
     // 接受导航数据,列表数据
-    async hmwGetNav(navCan = "", listCan = 0) {
-      console.log(listCan)
+    async hmwGetNav(navCan = "", listCan = 0,attr_val_id='') {
+      console.log(listCan);
+      // 获取导航数据
       let { data } = await this.$Net.courseNav(navCan);
-      let { data: list } = await this.$Net.courseList({ 
-        params:{
-         order_by:listCan,
-         course_type:'',
-        }
+      // 获取列表数据
+      let { data: list } = await this.$Net.courseList({
+        params: {
+          order_by: listCan,
+          course_type: "",
+          attr_val_id
+        },
       });
       console.log(list);
       // 筛选
       this.hmwChoose = data.data.appCourseType;
       // 主体列表
       this.hmwList = list.data.list;
+      // 初始化
+      this.hmwList2 = [];
+      this.i = 1;
+      this.finished = false;
+      // 渲染列表
+      console.log(this.hmwList);
+      this.hmwList.forEach((item, index) => {
+        if (index < 2) {
+          this.hmwList2.push(item);
+        }
+      });
+      console.log(this.hmwList2);
     },
     // 分类每一小项的点击事件-------------------------------------------
     // 当前的id和父级的id
@@ -362,13 +427,23 @@ export default {
         this.hmwActiveNum4 = i.id;
         sessionStorage.setItem("hmwFlIndex2", i.id);
       }
-
       // 重新请求渲染页面
       // this.hmwGetNav('attr_val_id='+i.id)
       // 保存一下，页面刷新不改变样式
     },
     // 点击确认-----------------------------------------------------------
     hmwOk() {
+      var id
+      if(this.hmwActiveNum1==0){
+id = this.hmwActiveNum4
+      }else if(this.hmwActiveNum4==0){
+        id = this.hmwActiveNum1
+      }else{
+        id = this.hmwActiveNum1+','+this.hmwActiveNum4
+      }
+
+      // 获取数据
+      this.hmwGetNav('',0,id)
       // 关闭窗口
       this.onConfirm();
     },
@@ -379,6 +454,7 @@ export default {
       // this.hmwActiveNum4 = this.hmwFl[0].child
       sessionStorage.removeItem("hmwFlIndex1");
       sessionStorage.removeItem("hmwFlIndex2");
+       this.hmwGetNav()
       // 关闭窗口
       this.onConfirm();
     },
@@ -386,46 +462,61 @@ export default {
     async HmwSort(i) {
       // 点击变色
       this.hmwActiveNum2 = i;
-      this.hmwGetNav('',i)
-// let { data: list } = await this.$Net.courseList({order_by:i});
+      this.hmwGetNav("", i);
+      // let { data: list } = await this.$Net.courseList({order_by:i});
       // 关闭窗口
       this.onConfirm1();
     },
     // 筛选的点击事件---------------------------------------------------------
-    // 这个应该可以有效果了,还是不行
-    async HmwChoose(i,index) {
-      console.log(i)
+    async HmwChoose(i, index) {
+      console.log(i);
       // 点击变色
       this.hmwActiveNum3 = index;
       // 关闭窗口
       this.onConfirm2();
       // 渲染
-      let { data: list } = await this.$Net.courseList({ 
-        params:{
-         course_type:i.id,
+      let { data: list } = await this.$Net.courseList({
+        params: {
+          course_type: i.id,
+        },
+      });
+      console.log(list);
+      this.hmwList = list.data.list;
+      // 初始化
+      this.hmwList2 = [];
+      this.i = 1;
+      this.finished = false;
+      // 渲染列表
+      console.log(this.hmwList);
+      this.hmwList.forEach((item, index) => {
+        if (index < 2) {
+          this.hmwList2.push(item);
         }
       });
-      this.hmwList = list.data.list;
+      console.log(this.hmwList2);
     },
     // 跳转到详情页面
-    hmwJump(item){
-      console.log(item.id)
+    hmwJump(item) {
+      console.log(item.id);
       // 保存数据到本地
-      sessionStorage.setItem('hmwPath',JSON.stringify({path:'/about',name:'About'}))
-      sessionStorage.setItem('hmwXQ',JSON.stringify(item))
+      sessionStorage.setItem(
+        "hmwPath",
+        JSON.stringify({ path: "/about", name: "About" })
+      );
+      sessionStorage.setItem("hmwXQ", JSON.stringify(item));
       // 保存id到本地
-      sessionStorage.setItem('hmwXQid',JSON.stringify(item.id))
-      this.$router.push('/detail')
-    }
+      sessionStorage.setItem("hmwXQid", JSON.stringify(item.id));
+      this.$router.push("/detail");
+    },
   },
   mounted() {
+    // document.documentElement.scrollTop = 0;
     this.hmwGetNav();
   },
 };
 </script>
 
 <style scoped>
-
 li {
   list-style: none;
 }
@@ -517,6 +608,12 @@ li {
 .hmw-main {
   background: #f0f2f5;
   height: 100%;
+  /* padding-bottom: 0.2rem; */
+  /* margin-bottom: 3rem; */
+}
+/* 这个地方有问题 */
+.hmw-main .van-list {
+  padding-bottom: 0.1rem;
 }
 .hmw-main > .van-list {
   display: flex;
@@ -581,21 +678,23 @@ li {
   font-weight: none;
 }
 /* 报名图片大小 */
-.hmw-main .hmwbaoBm{
-position: relative;
+.hmw-main .hmwbaoBm {
+  position: relative;
 }
-.hmw-main .hmwbaoBm .hmwBm{
-position: absolute;
-right: -0.5rem;
-bottom: 1rem;
-width: 15.73333vw !important;
-    height: 12.8vw !important;
+.hmw-main .hmwbaoBm .hmwBm {
+  position: absolute;
+  right: -0.5rem;
+  bottom: 1rem;
+  width: 15.73333vw !important;
+  height: 12.8vw !important;
 }
 /* 搜索样式 */
 
-.hmw-top .van-nav-bar .van-icon{
-    color: #595959;
-    font-weight: bold;
+.hmw-top .van-nav-bar .van-icon {
+  color: #595959;
+  font-weight: bold;
 }
-
+.hmw-foot {
+  min-height: 3rem;
+}
 </style>

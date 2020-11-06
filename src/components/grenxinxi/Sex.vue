@@ -23,7 +23,7 @@ export default {
   },
   data() {
       return {
-          num:localStorage.getItem("num") || 0,
+          num:localStorage.getItem("num") || 3,
           sex:localStorage.getItem("sex") || "男",
       }
   },
@@ -32,10 +32,15 @@ export default {
           this.num = num;
             if(this.num==0){
                 this.sex = "男"
-            }else{
+            }else if(this.num==1){
                 this.sex = "女"
+            }else if(this.num==3){
+                this.sex = "保密"
             }
             localStorage.setItem("num",this.num);
+            this.$Net.user({sex:this.num}).then(res=>{
+              console.log(res);
+            })
             // localStorage.setItem("sex",this.sex);
       },
       onClickChangeSex(){

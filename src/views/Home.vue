@@ -163,17 +163,17 @@ export default {
   },
   methods: {
     Onclick(item) { 
-     
+  //  获取当前登录后的token 判断是否显示去跳转登录页
       var token = localStorage.getItem("token");
       if ((token = !token)) {
         this.show = true;
+        console.log(item)
       } else if ((token = !token)) {
         this.$router.push({
           path: "/homelist",
           query: {
-             item : JSON.stringify(item)
+             id:item.teacher_id
           }
-        
         });
       }
     },
@@ -187,7 +187,7 @@ export default {
         path: "/about",
       });
     },
-    OngoB() {
+    OngoB() { 
       this.$router.push({
         path: "/lenderData",
         name: "LenderData"
@@ -196,8 +196,9 @@ export default {
     OngoC() {
       this.$router.push({
         path: "/solo",
-        name: "Solo",
-      });
+          name: "Solo",
+      
+        });
     },
     // 跳转到详情页面
     hmwJumpXQ(item){
@@ -322,7 +323,7 @@ padding: 1rem;
 }
 .Home_Prpup {
   width: 18rem;
-  height: 20rem;
+  height: 18rem;
   border-radius: 1rem;
   text-align: center;
 }

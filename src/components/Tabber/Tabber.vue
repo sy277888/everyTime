@@ -25,19 +25,18 @@ export default {
   data() {
     return {
       item: this.items,
-      Tabindex: localStorage.getItem('Tabindex')  || 0,
+      Tabindex: localStorage.getItem("Tabindex") || 0,
     };
   },
   methods: {
     Onclick(index) {
       //这里是根据下标切换 图片样式跟字体颜色 动态绑定
       this.Tabindex = index;
-       var temp = this.item[index];
-       this.$router.push(temp.path);
-      localStorage.setItem('Tabindex',index)
+      var temp = this.item[index];
+      this.$router.push(temp.path);
+      localStorage.setItem("Tabindex", index);
     },
   },
-  
 };
 </script>
 <style scoped>
@@ -55,16 +54,13 @@ export default {
   background: #fff;
 }
 .Tab_title {
-  font-size: 0.8rem;
-  font-weight: 400;
+  font-size: 0.75rem;
 }
 .title {
-  font-size: 0.8rem;
-  font-weight: 400;
+  font-size: 0.75rem;
   color: red;
 }
 .Tab_box img {
-  width: 1.6rem;
-
+  width: 1.25rem;
 }
 </style>

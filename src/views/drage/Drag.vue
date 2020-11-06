@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     onclick() {
-      this.$router.push("/");
+      this.$router.go(-1);
     },
   },
 

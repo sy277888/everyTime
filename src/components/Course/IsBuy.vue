@@ -1,5 +1,5 @@
 <template>
-<div class="hmwBox">
+<div class="hmwBox" style="height:100%;">
      <!-- 顶部 -->
     <!-- <van-sticky> -->
       <div class="hmw-top">
@@ -20,20 +20,20 @@
           <!-- 中间顶部 -->
           <div class="hmwc-top">
               <div>
-                  <p class="hmwP1">初中重点几何知识点——第八讲： 用描点法画二次函数y＝x^2的图象</p>
-                  <span>1.00</span>
+                  <p class="hmwP1">{{hmwList.title}}</p>
+                  <span>{{(hmwList.price/100).toFixed(2)}}</span>
               </div>
-              <p class="hmwP2">授课老师：马学斌</p>
+              <p class="hmwP2">授课老师：{{hmwList.teacher_name}}</p>
           </div>
           <ul>
               <li class="hmwLi1">
                   <p>优惠券</p>
-                  <p style="color:#969799;">无可用</p>
+                  <p style="color:#969799;">{{hmwList.has_coupon==0?'无可用':hmwList.has_coupon}}</p>
               </li>
-              <li class="hmwLi2">
-                  <p><span style="color:#969799;">商品金额</span><span class="hmwSpanNum"><van-icon color="orange" name="gold-coin" />&emsp;1.00</span></p>
-                  <p><span style="color:#969799;">优惠券金额</span><span class="hmwSpanNum"><van-icon color="orange" name="gold-coin" />&emsp;0</span></p>
-                  <p><span style="color:#969799;">合计</span><span class="hmwSpanNum" style="color:#eb6100;"><van-icon color="orange" name="gold-coin" />&emsp;1.00</span></p>
+              <li class="hmwLi2" v-if="hmwList.checked_coupon">
+                  <p><span style="color:#969799;">商品金额</span><span class="hmwSpanNum"><van-icon color="orange" name="gold-coin" />&emsp;{{(hmwList.price/100).toFixed(2)}}</span></p>
+                  <p><span style="color:#969799;">优惠券金额</span><span class="hmwSpanNum"><van-icon color="orange" name="gold-coin" />&emsp;{{hmwList.checked_coupon.full_reduction==0?0:(hmwList.checked_coupon.full_reduction/100).toFixed(2)}}</span></p>
+                  <p><span style="color:#969799;">合计</span><span class="hmwSpanNum" style="color:#eb6100;"><van-icon color="orange" name="gold-coin" />&emsp;{{(hmwList.order_price/100).toFixed(2)}}</span></p>
               </li>
           </ul>
       </van-list>
@@ -44,15 +44,23 @@
        <div>
            <span>实付价格</span>
            <van-icon color="orange" name="gold-coin" />
-           <p>1.00</p>
+           <p>{{(hmwList.order_price/100).toFixed(2)}}</p>
        </div>
-       <van-button type="primary" block color="#eb6100" >提交订单</van-button>
+       <van-button type="primary" block color="#eb6100" @click="showPopup">提交订单</van-button>
       </div>
     </van-tabbar>
+    <van-popup v-model="show" closeable>
+      <ul>
+        <li style="font-size: 3.2vw;">提示</li>
+        <li><van-icon name="warning" color="#eb6100" /><span>{{hmwPs}}</span></li>
+        <li><button style="margin-left:49%;" @click="show=false">取消</button> <button style="background:#409eff;color:white;" @click="$router.push('/yuer')">去充值</button></li>
+      </ul>
+    </van-popup>
 </div>
 </template>
 
 <script>
+import { Toast } from "vant";
 export default {
   // 组件名称
   name: 'demo',
@@ -62,7 +70,14 @@ export default {
   components: {},
   // 组件状态值
   data () {
-   return {}
+   return {
+    //  页面渲染数据
+     hmwList:[],
+    // 弹出框
+    show: false,
+    // 弹出框提示
+    hmwPs:''
+   }
   },
   // 计算属性
   computed: {},
@@ -73,15 +88,39 @@ export default {
     //   返回的点击事件
     onClickLeft(){
         this.$router.push('/detail')
-    }
+    },
+    // 获取渲染数据
+    async hmwgetList(){
+      let xq = JSON.parse(sessionStorage.getItem('hmwXQ'))
+      console.log(xq.id,xq.course_type)
+      let {data} = await this.$Net.courseBuy({
+        shop_id:xq.id+'',
+        type:xq.course_type
+      })
+      
+      this.hmwList = data.data.info
+      console.log(this.hmwList)
+    },
+    // 弹出框
+    async showPopup() {
+      let xq = JSON.parse(sessionStorage.getItem('hmwXQ'))
+      // 获取一下数据
+      let {data} = await this.$Net.courseSubmit({
+        shop_id:xq.id+'',
+        type:xq.course_type,
+        user_coupon_id:this.hmwList.checked_coupon.coupon_id
+      })
+      console.log(data)
+      this.hmwPs = data.msg
+      this.show = true;
+    },
   },
+  mounted(){
+    this.hmwgetList()
+  }
 }
 </script> 
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<!--使用了scoped属性之后，父组件的style样式将不会渗透到子组件中，-->
-<!--然而子组件的根节点元素会同时被设置了scoped的父css样式和设置了scoped的子css样式影响，-->
-<!--这么设计的目的是父组件可以对子组件根元素进行布局。-->
 <style scoped>
 * {
   margin: 0;
@@ -91,6 +130,7 @@ html,
 body,
 .hmwBox {
   height: 100% !important;
+  background: #f0f2f5;
 }
 /* 大体布局 */
 .hmwBox {
@@ -126,6 +166,7 @@ body,
 }
 .hmwc-top>div{
     display: flex;
+    justify-content: space-between;
     height: 4rem;
     width: 95%;
 }
@@ -183,7 +224,7 @@ ul>.hmwLi1 p{
 /* 底部 */
 .hmw-foot .van-button{
     height: 100%;
-    width: 40%;
+    width: 35%;
     font-size: 1.2rem;
 }
 .hmw-foot>div{
@@ -194,7 +235,7 @@ ul>.hmwLi1 p{
 }
 .hmw-foot>div>p{
     font-size: 1.6rem;
-    color: #e02020 !important;
+    color: #e02020;
     font-weight: 500;
 }
 .hmw-foot .van-icon{
@@ -204,5 +245,31 @@ ul>.hmwLi1 p{
         color: #8c8c8c;
     font-size: 0.75rem;
     padding-top: 0.5rem;
+}
+/* 弹出框样式 */
+.van-popup{
+  padding: 1rem;
+  width: 50%;
+  height: 4rem;
+}
+.van-popup li{
+  color: #606266;
+  font-size: 3.2vw;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 0.4rem;
+}
+.van-popup li button{
+  padding: 0 0.4rem;
+  height: 1.5rem;
+  background: white;
+  border: 0.01rem solid #ccc;
+  border-radius: 0.1rem;
+}
+/* .van-popup .van-popup__close-icon{
+  font-size: 0.12rem !important;
+} */
+.van-popup__close-icon{
+  font-size: 0.14rem !important;
 }
 </style>

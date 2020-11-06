@@ -16,7 +16,7 @@
     <div class="Sololist">
       <div v-for="(item, index) in data" :key="index" class="Sololist_top_top">
         <img :src="item.teacher_avatar" alt="" />
-        <p>{{ item.teacher_name }}</p>
+        <p class="Sololist_p_titile">{{ item.teacher_name }}</p>
         <p class="Sololist_title">金牌讲师</p>
         <div class="Sololist_but" @click="Ongo(item)">查看详情</div>
       </div>
@@ -109,12 +109,18 @@ export default {
 }
 .Sololist {
   width: 100%;
-  height: 33.7rem;
+  height: 32.7rem;
   background: gainsboro;
+}
+.Sololist_p_titile{
+  margin-top: 1rem;
+  margin-left: 4rem;
 }
 .Sololist_title {
   font-size: 0.7rem;
   color: gray;
+  margin-top: 0.5rem;
+  margin-left: 4rem;
 }
 .Sololist_but {
   width: 5rem;

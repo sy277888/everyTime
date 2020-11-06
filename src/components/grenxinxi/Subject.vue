@@ -1,6 +1,6 @@
 <template>
   <div class="waw_subject_container">
-    <NavTitle @onChangeCheck="onChangeCheck"></NavTitle>
+    <NavTitle @onClickRight="onClickRight"></NavTitle>
     <div class="waw_sub_box">
       <div class="waw_sub">
         <van-checkbox-group v-model="result" @change="onChangeCheck">
@@ -28,13 +28,21 @@ export default {
       checked: false,
     };
   },
+  mounted() {
+  this.$Net.kx().then(res=>{
+    console.log(res);
+  })
+  },
   methods: {
     onChangeCheck(item){//点击改变复选框的状态
       // console.log(item);
       this.result = item;
     },
-    onChangeCheck(){//点击保存修改完成
+    onClickRight(){//点击保存修改完成
       localStorage.setItem("result",JSON.stringify(this.result));
+      this.$Net.user({user_attr:this.result}).then(res=>{
+        console.log(res);
+      })
       this.$router.go(-1);
     }
   },

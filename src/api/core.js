@@ -1,7 +1,6 @@
 import axios from 'axios'
 //引入封装接口
 import API from './config'
-import Vue from "vue"
 import {Toast} from "vant";
 import {Guid} from "../utils/guid"
 let deviceid=null;//初始化设备id
@@ -17,7 +16,7 @@ window.localStorage.setItem("deviceid",deviceid)
 //axios 实例
 const instance  = axios.create({
     baseURL:'http://120.53.31.103:84',
-    // baseURL:'https://wap.365msmk.com',
+    // baseURL:'https://www.365msmk.com',
     timeout:6000 //设置超时时间
 })
 //添加请求拦截器
@@ -47,6 +46,11 @@ instance.interceptors.request.use(function(config){
   return Promise.reject(error)
 });
 instance.interceptors.response.use(function(response){
+    // token失效处理
+    if(response.data.status==401){
+        window.localStorage.removeItem("token")
+        router.push('/')
+    }
     //对响应数据做点什么
     //接受完成后对自身服务器响应的状态码进行处理
     //收起loading控件
@@ -77,7 +81,6 @@ export function request(method,url,params){
 function Get(url,params){
     return instance.get(url,params)
 }
-
 function Post(url,params){
     return instance.post(url,params)
 }

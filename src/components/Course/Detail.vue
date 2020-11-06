@@ -3,9 +3,9 @@
     <!-- 这里是详情页面 -->
     <!-- <van-loading color="#1989fa" /> -->
     <!-- 二维码 -->
-    <van-popup v-model="show"> 
-           <p>快分享给你的朋友吧</p>
-         <img :src="imrUrl" />
+    <van-popup v-model="show">
+      <p>快分享给你的朋友吧</p>
+      <img :src="imrUrl" />
     </van-popup>
     <!-- 吸顶试试 -->
     <van-sticky>
@@ -38,20 +38,23 @@
     </van-sticky>
 
     <!-- 中间部分 -->
-    <div class="hmw-center" style="background: #f0f2f5">
+    <div v-cloak class="hmw-center" style="background: #f0f2f5">
       <!-- 可滑动啥的 -->
       <van-list>
         <ol>
           <!-- 详情 -->
           <li class="hmwXQ" v-if="hmwObj.teachers_list">
-            <p class="hmwP1 hmwTOP1">{{ hmwObj.title }}</p>
-            <p class="hmwP2">{{ hmwObj.price == 0 ? "免费" : hmwObj.price }}</p>
-            <p class="hmwP3">
-              共{{ hmwObj.total_periods }}课时 | {{ hmwObj.brows_num }}人已报名
+            <p class="hmwP1 hmwTOP1">{{ hmwObjList.title }}</p>
+            <p class="hmwP2">
+              {{ hmwObjList.price == 0 ? "免费" : hmwObjList.price }}
             </p>
             <p class="hmwP3">
-              开课时间：{{ hmwObj.start_play_date | timefnxq }} -
-              {{ hmwObj.end_play_date | timefnxq }}
+              共{{ hmwObjList.total_periods }}课时 |
+              {{ hmwObjList.sales_num }}人已报名
+            </p>
+            <p class="hmwP3">
+              开课时间：{{ hmwObjList.start_play_date | timefnxq }} -
+              {{ hmwObjList.end_play_date | timefnxq }}
             </p>
             <!-- 收藏 -->
             <van-icon
@@ -71,9 +74,9 @@
           <li class="hmwTD">
             <p class="hmwP1">教学团队</p>
             <div>
-              <img :src="hmwObj.teachers_list[0].teacher_avatar" alt="" /><span
-                >{{ hmwObj.teachers_list[0].teacher_name }}</span
-              >
+              <img :src="hmwTeacher.teacher_avatar" alt="" /><span>{{
+                hmwTeacher.teacher_name
+              }}</span>
             </div>
           </li>
           <!-- 课程介绍 -->
@@ -85,7 +88,7 @@
             <p class="hmwP1">课程大纲</p>
             <!-- 无序列表 -->
             <ul>
-              <li :key="index" v-for="(item, index) in 10">
+              <li :key="index" v-for="(item, index) in 10" @click="hmwHf">
                 <p>
                   <span class="hmwS1" style="">回放</span
                   ><span class="hmwS2">第二讲第一课时</span>
@@ -97,24 +100,34 @@
           <!-- 课程评论 -->
           <li class="hmwPL hmwSroll">
             <p class="hmwP1">课程评论</p>
-            <ul>
-              <li :key="index" v-for="(item, index) in 10">
-                <img :src="hmwObj.teachers_list[0].teacher_avatar" alt="" />
+            <!-- 如果有数据 -->
+            <ul v-if="hmwEvaluate.length!=0">
+              <li :key="index" v-for="(item, index) in hmwEvaluate">
+                <img :src="item.avatar" alt="" />
                 <div class="hmwPL-center">
                   <p class="hmwCP1">
-                    <span>1234566789</span
+                    <span>{{ item.nickname }}</span
                     ><van-rate
                       :size="14"
                       void-color="#eee"
                       color="rgb(234, 122, 47)"
                       readonly
+                      v-model="item.grade"
                     />
                   </p>
-                  <p class="hmwCP2">好</p>
+                  <p class="hmwCP2">{{ item.content }}</p>
                 </div>
-                <div class="hmwPL-right">2020-07-15 21:32</div>
+                <div class="hmwPL-right">
+                  {{ Number(item.created_at) | timeEvaluate }}
+                </div>
               </li>
             </ul>
+            <!-- 如果没有数据就显示图片 -->
+            <div v-if="hmwEvaluate.length==0" id="hmwNothing">
+               <img src="../../assets/icon/收藏.png" alt="">
+               <p>暂无评论</p>
+            </div>
+           
           </li>
         </ol>
       </van-list>
@@ -123,17 +136,17 @@
     <van-tabbar>
       <div class="hmw-foot">
         <van-button
-          v-if="hmwBtnFlag==0"
+          v-show="this.arr == 0"
           type="primary"
           block
-          @click="hmwStudyJump(1)"
+          @click="hmwStudyJump"
           >立即报名</van-button
         >
         <van-button
-          v-if="hmwBtnFlag==1"
+          v-show="this.arr == 1"
           type="primary"
           block
-          @click="hmwStudyJump(2)"
+          @click="hmwStudyJump"
           >立即学习</van-button
         >
       </div>
@@ -163,20 +176,20 @@ export default {
       //   页面渲染的主数据
       hmwObj: JSON.parse(sessionStorage.getItem("hmwXQ")),
       // 底部按钮状态（有没有登录）
-      hmwBtnFlag: JSON.parse(sessionStorage.getItem("hmwXQ")).has_buy||0,
+      hmwBtnFlag: JSON.parse(sessionStorage.getItem("hmwXQ")).has_buy || 0,
       // 弹出层是否显示
       show: false,
       imrUrl: "", // 图片的地址
       // 是否收藏
       hmwSc: false,
-      
+      // 渲染的列表
+      hmwObjList: [],
+      // 教师团队渲染
+      hmwTeacher: [],
+      // 课程评论数据
+      hmwEvaluate: [],
+      arr: [],
     };
-  },
-  // 计算属性
-  computed: {},
-  // 侦听器
-  watch: {
-   
   },
   // 组件方法
   methods: {
@@ -245,19 +258,29 @@ export default {
         }
       }
     },
-    // 立即学习点击事件
-    hmwStudyJump(i) {
-      if(localStorage.getItem('token')){
-        if(i==1){
-          this.$router.push("/isbuy");
-        }else{
+    // 底部按钮点击事件
+    async hmwStudyJump(i) {
+      if (localStorage.getItem("token")) {
+        if (i == 1) {
+          //如果是立即报名
+          // 判断一下是不是免费的课程
+          if (this.hmwObj.price == 0) {//免费则调用接口直接报名
+            let {data} = await this.$Net.courseSubmit({
+               shop_id:this.hmwObj.id,
+        type:this.hmwObj.course_type
+            })
+            console.log(data)
+            Toast(data.msg);
+          } else {
+            this.$router.push("/isbuy");
+          }
+        } else {
           this.$router.push("/study");
         }
-      }else{
+      } else {
         this.$router.push("/login");
       }
-      
-      document.documentElement.scrollTop = 0;
+       document.documentElement.scrollTop = 0;
     },
     // 二维码弹出事件
     showPopup() {
@@ -265,38 +288,45 @@ export default {
       let url = location.href;
       console.log(url);
       QRCode.toDataURL(url)
-      //在这里拿到地址，把它赋值给data里面定义的值imrUrl
-        .then(tpian => {
+        //在这里拿到地址，把它赋值给data里面定义的值imrUrl
+        .then((tpian) => {
           console.log(tpian);
           this.imrUrl = tpian;
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     },
+    //立即报名
+    getlistid() {
+      this.$Net.ke().then((res) => {
+        console.log(res);
+      });
+    },
     // 点击收藏
-    // 收藏这块还是有点问题啊
-    async hmwYes(){
-      console.log(this.hmwId)
-      let {data} = await this.$Net.courseXQSC({
-        course_basis_id:this.hmwId,
-        type: 1
-      })
-      localStorage.setItem("hmwId",this.hmwId)
-      
+    async hmwYes() {
+      // console.log(this.hmwId);
+      let { data } = await this.$Net.courseXQSC({
+        course_basis_id: this.hmwId,
+        type: 1,
+      });
+      localStorage.setItem("hmwId", this.hmwId);
+
       // 成功修改样式
-      if(data.code==200){
-        this.hmwSc = true
-        console.log(data)
+      if (data.code == 200) {
+        this.hmwSc = true;
+        console.log(data);
         // // 刷新页面
         // this.hnwGetList()
-      Toast.success('收藏成功')
-    };
+        Toast.success("收藏成功");
+      }
     },
     // 取消收藏
-    hmwNo(){
-        this.hmwSc = false
-      Toast.success('取消收藏')
+    async hmwNo() {
+      let res = await this.$Net.courseXQSCNO(this.hmwObjList.collect_id + "");
+      console.log(res);
+      this.hmwSc = false;
+      Toast.success("取消收藏");
     },
     // 滚动监听器
     onScroll() {
@@ -326,50 +356,74 @@ export default {
       // console.log(this.hmwIndex)
       this.active = navIndex;
     },
-  // 获取详情页的数据
-  async hnwGetList(){
-    let id = this.hmwObj.teachers_list[0].course_basis_id
-    // 详情页面数据获取
-    let {data:list} = await this.$axios.get(`http://120.53.31.103:84/api/app/courseInfo/basis_id=${id}`)
-    // 获取课程大纲
-    // console.log(data)
-    // console.log(list.data)
-    this.hmwObjList =list.data
-    // 是否收藏
-    this.hmwSc = this.hmwObjList.info.is_collect
-    console.log(this.hmwSc+'=====')
-    // 收藏id
-    this.hmwSCid = this.hmwObjList.info.collect_id
-    // 是否报名
-    this.hmwIsBm = this.hmwObjList.info.is_join_study
-    // 课程id
-    this.hmwId = id
+    // 获取详情页的数据
+    async hnwGetList() {
+      // 本页面id
+      let id = this.hmwObj.teachers_list[0].course_basis_id;
+      // 详情页面数据获取
+      let { data: list } = await this.$Net.courseXQList(id);
 
-    // console.log(this.hmwObjList.info.id)
-  },
-  // 跳转到上一个页面
-  hmwJumpTo(){
-    // 上一个路由
-    let pathval = JSON.parse(sessionStorage.getItem("hmwPath"))
-    this.$router.push({
+      // 获取课程评价
+      let { data: evaluate } = await this.$Net.courseXQPJ({
+        id,
+        limit: 10,
+        page: 1,
+      });
+      this.hmwEvaluate = evaluate.data.list;
+      console.log(list);
+      // 详情页面所有数据
+      let hmwObjList = list.data;
+      console.log(hmwObjList);
+      this.arr = hmwObjList.info.is_buy;
+      console.log(this.arr);
+      // 是否收藏
+      this.hmwSc = hmwObjList.info.is_collect;
+      // console.log(this.hmwSc+'=====')
+      // 收藏id
+      this.hmwSCid = hmwObjList.info.collect_id;
+      // 是否报名
+      this.hmwIsBm = hmwObjList.info.is_join_study;
+      // 课程id
+      this.hmwId = id;
+      // info数据
+      this.hmwObjList = hmwObjList.info;
+      // 老师部分
+      this.hmwTeacher = hmwObjList.teachers[0];
+      // console.log(hmwObjList,this.hmwTeacher)
+    },
+    // 跳转到上一个页面
+    hmwJumpTo() {
+      // 上一个路由
+      let pathval = JSON.parse(sessionStorage.getItem("hmwPath"));
+      this.$router.push({
         path: pathval.path,
         name: pathval.name,
       });
     },
+    // 点击回放功能
+    hmwHf(){
+      Toast("回放未生成");
+    }
   },
-  // 相当于mounted
-  // activated
+  //  activated相当于mounted
   mounted() {
-    this.hmwObj=JSON.parse(sessionStorage.getItem("hmwXQ"))
+    this.hmwObj = JSON.parse(sessionStorage.getItem("hmwXQ"));
     document.documentElement.scrollTop = 0;
     window.addEventListener("scroll", this.scrollHandle); // 绑定页面的滚动事
     // 监听滚动事件
     window.addEventListener("scroll", this.onScroll, false);
-     this.hmwBtnFlag = JSON.parse(sessionStorage.getItem("hmwXQ")).has_buy
-   console.log(this.hmwBtnFlag)
-    // console.log(from.name,from.path)
+    this.hmwBtnFlag = JSON.parse(sessionStorage.getItem("hmwXQ")).has_buy;
     // 获取一下数据
     this.hnwGetList();
+    var id = sessionStorage.getItem("hmwXQid");
+    this.$Net
+      .bao({
+        shop_id: id,
+        type: 3,
+      })
+      .then((res) => {
+        console.log(res);
+      });
   },
   destroy() {
     // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
@@ -378,6 +432,7 @@ export default {
 };
 </script>
 <style scoped>
+
 * {
   margin: 0;
   padding: 0;
@@ -541,6 +596,9 @@ body > div,
   padding: 0.5rem;
 }
 /* 课程讲评 */
+.hmwPL{
+  padding-bottom: 0 !important;
+}
 .hmwPL li {
   display: flex;
   justify-content: space-between;
@@ -575,6 +633,23 @@ body > div,
 /* 评分小图标样式 */
 .hmwPL .van-rate__item {
   padding-left: 0;
+}
+/* 当没有评论时 */
+#hmwNothing{
+  width: 100%;
+  height: 12rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+#hmwNothing img{
+  width: 45%;
+  height: 79%;
+}
+#hmwNothing p{
+font-size: 4vw;
+    color: #8c8c8c;
 }
 /* 底部的按钮 -----------------------------------------------------------------------------------------*/
 .hmw-foot .van-button {

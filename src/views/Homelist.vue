@@ -17,7 +17,14 @@
           <img :src="Homelist" alt="" />
           <p class="ho">{{ HomelistTitle }}</p>
           <p class="Homelist_box_title">
-            男 8年金牌讲师 <span class="Homelist_title">已关注</span>
+            男 8年金牌讲师
+            <!-- 关注 -->
+            <span class="Homelist_title" v-show="!isShow" @click="Show"
+              >已关注</span
+            >
+            <span class="Homelist_title" v-show="isShow" @click="Shows"
+              >关注</span
+            > 
           </p>
         </li>
       </ul>
@@ -43,9 +50,7 @@
       <van-tab title="主讲课程" name="b">
         <div v-for="(item, index) in date" :key="index" class="HomeLiat_Tab_A">
           <ul>
-            <li>
-              每时每课特级教师-自主招生冲刺讲座知识点总结————{{ item.title }}
-            </li>
+            <li>每时每课特级教师-自主招生冲刺讲座知识点总结</li>
             <li class="HomeLiat_Tab_A_li">
               <img :src="Homelist" alt="" width="100%" />
               <p>{{ HomelistTitle }}</p>
@@ -55,45 +60,76 @@
             </li>
           </ul>
           <!-- 底部定位 -->
-          <div class="Homelist_footer" @click="OnGo(date)">立即预约</div>
+         
         </div>
       </van-tab>
       <van-tab title="学员评价" name="c">
         <van-empty description="暂无学员评价" />
       </van-tab>
     </van-tabs>
+     <div class="Homelist_footer" @click="OnGo(date)">立即预约</div>
   </div>
 </template>
 <script>
+import axios from "axios";
+import { Toast } from "vant";
 export default {
   data() {
     return {
       Homelist: [], //老师图片
       HomelistTitle: [], //老师名字
       activeName: "a", //分类切换
-      date: [],
+      date: [], //
+      isShow: false, //关注
+      teacherId: 0,
     };
   },
   created() {
-    let item = this.$route.query.item;
-    let Items = JSON.parse(item)
-     this.Homelist = Items.teacher_avatar;
-    this.HomelistTitle = Items.teacher_name;
-    this.date = Items;
+    this.$Net.HomeLIST(this.$route.query.id).then((res) => {
+      this.Homelist = res.data.data.teacher.avatar;
+      this.date = res.data.data.teacher;
+      this.HomelistTitle = res.data.data.teacher.real_name;
+      console.log(res.data.data.flag);
+
+      if (res.data.data.flag == 1) {
+        this.isShow = false;
+      } else {
+        this.isShow = true;
+      }
+    });
   },
   methods: {
     Onback() {
       //返回上一级
       this.$router.go(-1);
     },
+
     //进入预约页
     OnGo(item) {
+      console.log(item)
       this.$router.push({
         path: "/homedata",
-        query:{
-          item
-        }
+        query: {
+          id : item.id
+        },
       });
+    },
+    async Show() {
+      let id = this.$route.query.id;
+      let { data } = await this.$Net.GuanZhu(id + "");
+      console.log(data);
+      if (data.code == 200) {
+        this.isShow = true;
+        Toast.success("取消关注");
+      }
+    },
+    async Shows() {
+      let id = this.$route.query.id;
+      let { data } = await this.$Net.GuanZhu(id + "");
+       if (data.code == 200) {
+        this.isShow = false;
+        Toast.success("关注成功");
+      }
     },
   },
 };
