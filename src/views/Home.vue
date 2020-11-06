@@ -55,14 +55,24 @@
             <div>
               <img :src="item.cover_img" alt="" class="Home_course_img" />
             <p>{{ courseTitle }}</p>
+              <!-- 根据你有没有报名改变 -->
+              <img
+                class="hmwBm"
+                v-if="item.has_buy != 0"
+                src="../assets/hmwbm.png"
+                alt=""
+              />
             </div>
             
-            <p class="hmwJPfoot">
-              <span class="Home_course_title"
-                >{{ item.sales_num }}人已报名
-                <span class="Home_course_p_title"
-                  >￥{{ item.total_periods }}</span
-                ></span
+            <p class="hmwListBottom">
+              <span>{{ item.sales_num }}人已报名</span>
+              <strong v-if="item.price == 0">免费</strong>
+              <strong
+                v-if="item.price != 0"
+                style="color: orange; display: flex; align-items: center"
+                ><van-icon name="gold-coin" />&emsp;<span>{{
+                  item.price / 100 + ".00"
+                }}</span></strong
               >
             </p>
           </div>
@@ -70,7 +80,7 @@
       </div>
       <!-- 推荐课程 -->
       <p><span class="Home_probably_P"></span>推荐课程</p>
-      <div v-for="(item, index) in courses" :key="index + 'c'" @click="hmwJumpXQ(item)">
+      <div class="hmwJP" v-for="(item, index) in courses" :key="index + 'c'" @click="hmwJumpXQ(item)">
         <div class="Home_course">
           <div class="Home_course_box">
             <p class="hmwTitleJP">
@@ -79,14 +89,23 @@
             <div>
               <img :src="coursesImg" alt="" class="Home_course_img" />
             <p>{{ courseTitle }}</p>
+            <!-- 根据你有没有报名改变 -->
+              <img
+                class="hmwBm"
+                v-if="item.has_buy != 0"
+                src="../assets/hmwbm.png"
+                alt=""
+              />
             </div>
-            
-            <p class="hmwJPfoot">
-              <span class="Home_course_title"
-                >{{ item.sales_num }}人已报名
-                <span class="Home_course_p_title"
-                  >￥{{ item.total_periods }}</span
-                ></span
+             <p class="hmwListBottom">
+              <span>{{ item.sales_num }}人已报名</span>
+              <strong v-if="item.price == 0">免费</strong>
+              <strong
+                v-if="item.price != 0"
+                style="color: orange; display: flex; align-items: center"
+                ><van-icon name="gold-coin" />&emsp;<span>{{
+                  item.price / 100 + ".00"
+                }}</span></strong
               >
             </p>
           </div>
@@ -213,6 +232,17 @@ export default {
 };
 </script>
 <style  scoped>
+.hmwJP{
+  padding-bottom: 0.5rem;
+}
+/* 显示是否报名小图标样式 */
+.hmwBm{
+  position: absolute;
+  right: 0;
+  top:-1rem;
+  width: 15.73333vw;
+    height: 12.8vw;
+}
 .my-swipe{
   width: 100%;
   height: 12.5rem;
@@ -223,8 +253,12 @@ export default {
 }
 .Home_overall {
   width: 100%;
-  height: 113rem;
+  height: 100%;
   background: rgb(240, 242, 245);
+  padding-bottom: 4rem;
+}
+.Home_overall>p{
+  margin-top: 0.5rem;
 }
 .Home_advice {
   width: 100%;
@@ -287,7 +321,7 @@ padding: 1rem;
 .Home_course {
   /* box-sizing: border-box; */
   width: 81%;
-  height: 9.2rem;
+  height: 9.8rem;
   background: #fff;
   margin-left: 5%;
   margin-top: 1rem;
@@ -353,19 +387,34 @@ padding: 1rem;
 .Home_course_box>div{
   display: flex;
   align-items: center;
+  position: relative;
+ border-bottom: 0.02rem solid #eee;
+ padding-bottom: 1rem;
+ padding-top: 1rem;
 }
 .Home_course_box>div p{
   margin: 0.8rem 0 0 0.5rem;
 font-size: 3.2vw;
 color:#b7b7b7;
+
 }
 .Home_course_box>div img{
   margin: 0;
 }
 /* 底下部分 */
-.hmwJPfoot{
-  margin: 1rem 0 0 0;
-  padding-top: 0.5rem;
-  border-top: 1px solid #eee;
+.hmwListBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+.hmwListBottom > span {
+  padding-right: 2.66667vw;
+  color: rgba(0, 0, 0, 0.45);
+}
+.hmwListBottom > strong {
+  color: #44a426;
+  font-size: 4.26667vw;
+  font-weight: none;
 }
 </style>

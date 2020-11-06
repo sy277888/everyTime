@@ -46,10 +46,12 @@ export default {
     };
   },
   mounted() {
-    this.getList(this.hmwNavId)
+    // this.getList(this.hmwNavId)
+    this.getList(2)
+    this.hmwGetList(7)
   },
   created(){
-    this.getList(2)
+    
   },
   methods: {
     onClickLeft() {
@@ -73,7 +75,14 @@ export default {
     hmwJump(i){
       sessionStorage.setItem('hmwXQid',i.course_id+'')
       this.$router.push('/study')
-    }
+    },
+    // 获取导航栏数据所有看看
+    async hmwGetList(i) {
+      // 导航
+      let { data:msg } = await this.$Net.hmwStudyNav(i)
+       console.log(msg.data)
+     
+    },
   },
 };
 </script>

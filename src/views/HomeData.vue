@@ -65,7 +65,7 @@ export default {
 .Homedata_box {
   width: 100%;
   height: 41.71rem;
-  background: gainsboro;
+  background: #f0f2f5;
 }
 .Homedata_box_top {
   width: 100%;
