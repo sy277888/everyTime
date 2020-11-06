@@ -80,11 +80,11 @@ p {
   font-size: 0.5rem;
 }
 .botton {
-  margin-left: 9rem;
+  margin-left: 7.5rem;
   margin-top: 2rem;
   background-color: rgb(254, 97, 0);
   color: #fff;
-  width: 5rem;
+  width: 7.5rem;
   height: 2rem;
 }
 img{
