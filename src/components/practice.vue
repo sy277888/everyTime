@@ -33,12 +33,12 @@
     </div>
     <!-- 第三个板心 -->
     <div class="item-type-area-two">
-      <div class="item-exam">近期模考</div>
-      <div class="item-time">
-        <span  @click="show = true" :class="show == true ? 'active' : ''"
+      <p class="item-exam">近期模考</p>
+      <p class="item-time">
+        <span @click="show = true" :class="show == true ? 'active' : ''"
           >默认排序</span
         >
-        <span @click="change" :class="show == false ? 'active' : ''" >
+        <span @click="change" :class="show == false ? 'active' : ''">
           时间
           <span v-show="show == false">
             <span
@@ -49,7 +49,7 @@
             </span>
           </span>
         </span>
-      </div>
+      </p>
       <div class="item-type-area-two-img">
         <img src="../assets/image/图0.png" alt="" />
       </div>
@@ -170,28 +170,32 @@ h3 {
 /* 第二版心样式 */
 .item-type-area-two {
   width: 100%;
-  height: 14rem;
-  /* border: 1px solid #000; */
+  height: 16rem;
   background: white;
   margin-top: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 .item-exam {
   color: gray;
-  margin-left: 0.5rem;
-  margin-top: 1rem;
+  /* margin-left: 0.5rem;
+  margin-top: 1rem; */
+  padding: 0.5rem;
 }
-.active{
-  /* font-size: 0.5rem; */
-  /* margin-left: 1rem; */
+.active {
   color: red;
 }
-.iconfont{
-    font-size: 1.5rem;
-}
-.item-time {
+.iconfont {
   width: 100%;
-  height: 1rem;
+  height: 100%;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* 0000 */
+.item-time {
   display: flex;
+  font-size: 0.8rem;
   justify-content: space-between;
 }
 .item-type-area-two-img {
@@ -208,5 +212,4 @@ h3 {
   width: 100%;
   text-align: center;
 }
-
 </style>

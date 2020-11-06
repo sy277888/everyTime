@@ -46,6 +46,13 @@ const API = {
         CANCEL: "/api/app/collect/cancel/227/1",
         //教师详情
         SHI: "/api/app/teacher/",
+          // 练习页面的套卷练习
+          LIANXI: "/api/app/wap/classify",
+          // 轮播图
+          LUNBO:"/api/app/banner",
+           // 考点练习里面的题库选择
+           TIKU:"/api/app/wap/quesBank/",
+           CEP:"/api/app/examStatistics/detail"
     }
 }
 

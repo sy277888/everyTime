@@ -2,21 +2,9 @@
   <div>
     <!-- 轮播 -->
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item>
+      <van-swipe-item v-for="(item,index) in  lunbo" :key="index">
         <img
-          src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/20193KAjU2cB6h1569839562.jpg"
-          width="100%"
-        />
-      </van-swipe-item>
-      <van-swipe-item>
-        <img
-          src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/20197Cxc53hktC1569839552.jpg"
-          width="100%"
-        />
-      </van-swipe-item>
-      <van-swipe-item>
-        <img
-          src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019MGNW3BtiS91569839576.jpg"
+          :src="item.banner_img"
           width="100%"
         />
       </van-swipe-item>
@@ -153,6 +141,7 @@ export default {
       coursesImg: [], //推荐课程老师照片
       teacher: [], //明星讲师
       show: false,
+      lunbo:[]
     };
   },
   mounted() {
@@ -165,6 +154,11 @@ export default {
         res.data.data[3].list[0].teachers_list[0].teacher_avatar;
       this.teacher = res.data.data[4].list;
       console.log(this.teacher);
+    });
+    // 轮播
+      this.$Net.LUNBO().then((res) => {
+      console.log(res.data.data);
+      this.lunbo=res.data.data
     });
   },
   methods: {
@@ -218,6 +212,14 @@ export default {
 };
 </script>
 <style  scoped>
+.my-swipe{
+  width: 100%;
+  height: 12.5rem;
+}
+.my-swipe   img{
+  width: 100%;
+  height: 100%;
+}
 .Home_overall {
   width: 100%;
   height: 113rem;

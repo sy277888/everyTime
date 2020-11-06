@@ -7,6 +7,7 @@
         shape="round"
         v-model="value"
         placeholder="请输入搜索关键词"
+        @click="ser"
       />
     </div>
     <div class="exercise-footer-box">
@@ -78,6 +79,9 @@ export default {
         path:'/exercise'
       })
     },
+    ser(){
+      this.$router.push("/search")
+    }
   },
 };
 </script>

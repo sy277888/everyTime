@@ -76,7 +76,23 @@ const Net = {
   shi(params){
     console.log(params);
     return request(API.Method.Get,API.Path.SHI+params)
-  }
+  },
+    // 练习页面的套卷练习
+    LIANXI(params){
+      return  request(API.Method.Get,API.Path.LIANXI,params)
+    },
+    // 轮播
+    LUNBO(){
+      return  request(API.Method.Get,API.Path.LUNBO)
+    },
+    // 考点练习里面的题库选择
+    TIKU(params){
+      return  request(API.Method.Get,API.Path.TIKU+params)
+    },
+    // 练习页面的测评记录
+    CEP(page){
+      return  request(API.Method.Get,API.Path.LUNBO,page)
+    }
 }
 
 //抛出Net
