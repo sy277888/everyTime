@@ -61,6 +61,7 @@ mounted(){
   text-align: center;
   position: relative;
   top: -1.5rem;
+  /* margin-top: -1rem; */
 }
 .li {
   font-size: 0.5rem;
