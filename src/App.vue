@@ -115,6 +115,18 @@ export default {
         this.isShow = false;
       }else if (to.path == "/she") {
         this.isShow = false;
+      }else if (to.path == "/exercise") {
+        this.isShow = false;
+      }else if (to.path == "/taojuan") {
+        this.isShow = false;
+      }else if (to.path == "/fangzhen") {
+        this.isShow = false;
+      }else if (to.path == "/ceping") {
+        this.isShow = false;
+      }else if (to.path == "/xiti") {
+        this.isShow = false;
+      }else if (to.path == "/cuoti") {
+        this.isShow = false;
       }
     },
   },
