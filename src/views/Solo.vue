@@ -31,14 +31,18 @@
     <!-- 渲染讲师列表 -->
     <div class="Solo_list_box">
       <div v-for="(item, index) in order" :key="index" class="Solo_list">
-        <ul class="Solo_list_ul">
-          <li>
-            <img :src="item.teacher_avatar" alt="" />
-            <span class="Solo_list_p">{{ item.teacher_name }}</span>
-            <p class="Solo_list_title">8年金牌讲师</p>
-            <div @click="Ongo(item)">预约</div>
-          </li>
-        </ul>
+        <div class="Solo_list_left">
+          <img :src="item.teacher_avatar" alt="" />
+          <ul>
+            <li class="Solo_list_left_title">{{ item.teacher_name }}</li>
+            <li class="Solo_list_title">8年金牌讲师</li>
+          </ul>
+        </div>
+        <div class="Solo_list_right">
+            <div class="Solo_list_right_but" @click="Ongo(item)">
+                      预约
+            </div>
+        </div>
       </div>
     </div>
     <!-- 如果没有token则展示请求登录页 -->
@@ -128,41 +132,50 @@ export default {
   background: #fff;
   border-radius: 1rem;
   margin-top: 0.6rem;
+  line-height: 3rem;
+  display: flex;
+  justify-content: space-between;
 }
-.Solo_list_ul {
-  width: 100%;
-  height: 6rem;
+.Solo_list_left {
+  width: 3rem;
+  height: 100%;
 }
-.Solo_list_ul img {
+.Solo_list_left img {
   width: 3rem;
   height: 3rem;
-  margin-top: 1.5rem;
   border-radius: 2rem;
+  margin-top: 1.5rem;
   margin-left: 1rem;
-  border: rgb(240, 240, 240) solid 0.1rem;
   float: left;
-}
-.Solo_list_p {
-  margin-left: 1rem;
-  font-size: 0.99rem;
-  margin-top: 2rem;
 }
 .Solo_list_title {
   font-size: 0.7rem;
   color: gray;
-  margin-top: 2rem;
 }
-.Solo_list_ul div {
+.Solo_list_left_title{
+  font-size: 0.8rem;
+}
+.Solo_list_left ul{
+  width: 10rem;
+  height: 100%;
+}
+.Solo_list_right{
+  width: 50%;
+  height: 100%;
+}
+.Solo_list_right_but{
   width: 4rem;
-  height: 1.5rem;
-  border: 0.1rem solid rgb(240, 240, 240);
+  height: 2rem;
+  border-radius: 1rem;
+  border: 0.05rem solid gainsboro; 
+  margin-left: 5rem;
+  margin-top: 2rem;
   color: rgb(235, 97, 0);
-  margin-left: 14rem;
+  background: rgb(235, 238, 254);
+  line-height: 2rem;
   text-align: center;
-  margin-bottom: 3rem;
-  border-radius: 0.8rem;
-  background: gainsboro;
 }
+/* / */
 .Solo_Prpup {
   width: 18rem;
   height: 20rem;

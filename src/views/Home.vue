@@ -193,7 +193,7 @@ export default {
         path: "/about",
       });
     },
-    OngoB() {
+    OngoB() { 
       this.$router.push({
         path: "/lenderData",
         name: "LenderData"
@@ -202,8 +202,9 @@ export default {
     OngoC() {
       this.$router.push({
         path: "/solo",
-        name: "Solo",
-      });
+          name: "Solo",
+      
+        });
     },
     // 跳转到详情页面
     hmwJumpXQ(item){
