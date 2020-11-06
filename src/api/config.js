@@ -3,7 +3,8 @@ const API = {
     Method: {
         Get: 'get',
         Post: 'post',
-        Put: 'put'
+        Put: 'put',
+        Del:'delete'
     },
     //定义请求地址
     Path: {
@@ -69,6 +70,8 @@ const API = {
         KX:"/api/app/module/attribute/1?",
         // 消息通知
         hmwMsg:"api/app/message/classifyMessage",
+        // 我的页面-名片渲染
+        hmwMine:'/api/app/getUCenterInfo?'
     }
 }
 

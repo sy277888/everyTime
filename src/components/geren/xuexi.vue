@@ -42,10 +42,13 @@ export default {
     return {
       hmwNav:[],//导航
       hmwList:[],//列表
-     
+     hmwNavId:0,//导航渲染页面id
     };
   },
   mounted() {
+    this.getList(this.hmwNavId)
+  },
+  created(){
     this.getList(2)
   },
   methods: {
@@ -60,6 +63,7 @@ export default {
        console.log(msg.data)
       this.hmwNav = msg.data.typeNum
       this.hmwList = msg.data.courseList
+      this.hmwNavId = this.hmwNav[0].type
     },
     // 导航点击事件
     hmwDian(i){

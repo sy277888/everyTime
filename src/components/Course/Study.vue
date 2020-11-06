@@ -24,11 +24,6 @@
         <!-- 主题的上部分 -->
         <div class="hmwC-top">
           <p>共{{ hmwStudyTop.section_num }}时</p>
-          <!-- <van-progress  
-          v-if="hmwStudyTop.progress_rate"
-            inactive
-            :percentage="Number(hmwStudyTop.progress_rate)"
-          /> -->
            <!-- 进度条 -->
          <div class="hmwPercent"><span :style="{width:Number(hmwStudyTop.progress_rate)+'%'}"></span></div>
           <p>已学习{{ hmwStudyTop.progress_rate }}%</p>
@@ -69,7 +64,7 @@
         <p @click="$router.push('/detail')">
           <van-icon size="18" name="apps-o" /><span>课程详情</span>
         </p>
-        <p>
+        <p @click="hmwDel">
           <van-icon size="18" name="delete" /><span>移除列表</span>
         </p>
       </div>
@@ -152,6 +147,14 @@ export default {
       window.location.href = `http://120.53.31.103:84/video?id=${id}&video_id=${i.child[0].video_id}&title=回放`
       }
       
+    },
+    // 删除列表功能
+    async hmwDel(){
+      Toast.success('成功')
+      let id = sessionStorage.getItem("hmwXQid");
+      console.log(id)
+      let res = await this.$Net.courseDel(id+'')
+      this.$router.push('/xue')
     }
   },
   mounted() {

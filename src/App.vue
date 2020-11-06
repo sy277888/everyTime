@@ -111,6 +111,10 @@ export default {
         this.isShow = false;
       }else if (to.path == "/xue") {
         this.isShow = false;
+      }else if (to.path == "/ke") {
+        this.isShow = false;
+      }else if (to.path == "/she") {
+        this.isShow = false;
       }
     },
   },
