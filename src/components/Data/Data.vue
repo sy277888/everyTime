@@ -86,6 +86,7 @@ p {
   color: #fff;
   width: 5rem;
   height: 2rem;
+  font-size: 0.6rem;
 }
 img{
   margin-top: 1rem;
