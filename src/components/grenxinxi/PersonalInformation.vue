@@ -54,7 +54,13 @@
           <div>所在城市</div>
           <div class="waw_address_box">
             <div>
-              <span>{{ Address }}</span>
+              <span>{{
+                userInfoOF.province_name +
+                "-" +
+                userInfoOF.city_name +
+                "-" +
+                userInfoOF.district_name
+              }}</span>
             </div>
             <van-icon
               name="arrow"
@@ -130,25 +136,23 @@
         :area-list="areaList"
         @cancel="onClickCancel"
         @confirm="onClickConfirm"
+        @change="changeCity"
+        :value="userInfoOF.district_id + ''"
         :columns-num="3"
         :columns-placeholder="['请选择', '请选择', '请选择']"
       />
     </van-popup>
 
     <!-- 学校弹出层 -->
-       <van-popup
-      v-model="showClass"
-      position="bottom"
-      :style="{ height: '45%' }"
-    >
-    <van-picker
-      title="标题"
-      show-toolbar
-      :columns="columns"
-      @confirm="onConfirm"
-      @cancel="onCancel"
-      @change="onChange"
-    />
+    <van-popup v-model="showClass" position="bottom" :style="{ height: '45%' }">
+      <van-picker
+        title="标题"
+        show-toolbar
+        :columns="columns"
+        @confirm="onConfirm"
+        @cancel="onCancel"
+        @change="onChange"
+      />
     </van-popup>
   </div>
 </template>
@@ -161,17 +165,16 @@ export default {
   },
   data() {
     return {
-      columns: ["杭州", "宁波", "温州", "绍兴", "湖州", "嘉兴", "金华", "衢州"],
-
+      district_id: "",
+      columns: ["高一", "高二", "高三", "大一", "大二", "大三", "大四", "小学"],
       nickName: "", //昵称
       user: "", //手机号
       img: "",
       name: "", //省区
       shi: "", //市区
       qu: "", //区
-      sex: localStorage.getItem("sex") || "男", //性别
+      sex: "", //性别
       time: localStorage.getItem("time") || "2000-10-10", //日期
-      Address: localStorage.getItem("Address") || "黑龙江省 哈尔滨市 阿城区", //地址
       subject: JSON.parse(localStorage.getItem("result")) || ["语文"],
       showImg: false, //图片修改（默认隐藏）
       showTime: false, //日期修改（默认隐藏）
@@ -182,55 +185,11 @@ export default {
       currentDate: new Date(1980, 0, 1),
       areaList: {
         province_list: {},
-        city_list: {
-          110100: "北京市",
-          110200: "县",
-          120100: "天津市",
-          120200: "县",
-        },
-        county_list: {
-          110101: "东城区",
-          110102: "西城区",
-          110105: "朝阳区",
-          110106: "丰台区",
-          120101: "和平区",
-          120102: "河东区",
-          120103: "河西区",
-          120104: "南开区",
-          120105: "河北区",
-          // ....
-        },
+        city_list: {},
+        county_list: {},
       },
-      id: {},
+      userInfoOF: {},
     };
-  },
-  mounted() {
-    var Nick = localStorage.getItem("nickName"); //读取昵称
-    if (Nick) {
-      this.nickName = Nick;
-    }
-    // var mobile = localStorage.getItem("mobile"); //读取手机号
-    // if (mobile) {
-    //   this.user = mobile;
-    // }
-    // var id=localStorage.getItem("id")
-    // this.$Net.xiu({
-    //   id:id
-    // }).then((res) => {
-    //   console.log(res);
-    //   this.img=res.data.data.avatar;
-    //   console.log(this.img);
-    // });
-    // var sex = localStorage.getItem("sex"); //读取性别
-    // if (sex) {
-    //   this.sex = sex;
-    // }
-    this.$Net.sq().then((res) => {
-      console.log(this.areaList.province_list.id);
-      // console.log(res);
-    });
-    this.sheng();
-    this.userInfo();
   },
   methods: {
     onConfirm(value, index) {
@@ -242,28 +201,79 @@ export default {
     onCancel() {
       Toast("取消");
     },
+    //获取城市数据
+    async sheng() {
+      //省
+      let { data: resp } = await this.$Net.csi();
+      // console.log(resp);
+      this.areaList.province_list = this.changData(resp.data);
+      //市区
+      // console.log(this.userInfoOF);
+      let { data: resCity } = await this.$Net.csi(
+        this.userInfoOF.province_id
+          ? this.userInfoOF.province_id
+          : resp.data[0].id
+      );
+      // console.log(resCity);
+      this.areaList.city_list = this.changData(resCity.data);
+      //区县
+      console.log(this.userInfoOF.city_id);
+      let { data: resC } = await this.$Net.csi(
+        this.userInfoOF.city_id ? this.userInfoOF.city_id : resCity.data[0].id
+      );
 
-    sheng() {
-      this.$Net.csi().then((res) => {
-        let sj = {};
-        res.data.data.forEach((item) => {
-          this.$set(sj, item.id, item.area_name);
-        });
-         this.areaList.province_list = sj;
-      });
+      this.areaList.county_list = this.changData(resC.data);
+      // console.log(res);
+      // let sj = {};
+      // res.data.data.forEach((item) => {
+      //   this.$set(sj, item.id, item.area_name);
+      // });
+      // this.areaList.province_list = sj;
+      // console.log(this.areaList.province_list);
     },
-    userInfo() {
-      this.$Net.grren().then((res) => {
-        console.log(res);
-        // console.log(this.areaList.province_list);
-        this.nickName = res.data.data.nickname;
-        this.user = res.data.data.mobile;
-        this.img = res.data.data.avatar;
-        // this.sex=res.data.data.sex
-        this.name = res.data.data.province_name;
-        this.shi = res.data.data.city_name;
-        this.qu = res.data.data.district_name;
-      });
+    //当我改变省或者市或者市区时触发事件
+    async changeCity(picker, data, index) {
+      console.log(picker, data, index);
+      switch (index) {
+        case 0:
+          let { data: resp } = await this.$Net.csi(data[index].code);
+          this.areaList.city_list = this.changData(resp.data);
+          let { data: resC } = await this.$Net.csi(resp.data[0].id);
+          this.areaList.county_list = this.changData(resC.data);
+          break;
+        case 1:
+          let { data: resCounty } = await this.$Net.csi(data[index].code);
+          this.areaList.county_list = this.changData(resCounty.data);
+          break;
+      }
+    },
+    changData(arr) {
+      let obj = {};
+      for (let i = 0; i < arr.length; i++) {
+        obj[arr[i].id] = arr[i].area_name;
+      }
+      return obj;
+    },
+    //个人信息数据
+    async userInfo() {
+      let res = await this.$Net.grren();
+      console.log(res);
+      this.userInfoOF = res.data.data;
+      console.log(this.userInfoOF);
+      this.nickName = res.data.data.nickname;
+      this.user = res.data.data.mobile;
+      this.img = res.data.data.avatar;
+      this.sex = res.data.data.sex;
+      if (this.sex == 0) {
+        this.sex = "男";
+      } else if (this.num == 1) {
+        this.sex = "女";
+      } else if (this.num == 3) {
+        this.sex = "保密";
+      }
+      this.name = res.data.data.province_name;
+      this.shi = res.data.data.city_name;
+      this.qu = res.data.data.district_name;
     },
     uploadHeadImg: function () {
       this.$el.querySelector(".hiddenInput").click();
@@ -276,7 +286,7 @@ export default {
       let path = res.data.path;
       let { data: re } = await this.$Net.user({ avatar: path });
       if (re.code == 200) {
-        this.userInfo();
+        this.userInfo();//个人信息的接口数据
         this.showImg = false;
       }
     },
@@ -312,14 +322,14 @@ export default {
       var d = value.getDate() > 9 ? value.getDate() : "0" + value.getDate();
       this.time = `${y}-${m}-${d}`;
 
-      let { data } = await this.$Net.user({ birthday: this.time });
-      console.log(data);
-      if (data.code == 200) {
+      let res = await this.$Net.user({ birthday: this.time });
+      console.log(res);
+      if (res.data.code == 200) {
         localStorage.setItem("time", this.time);
         this.userInfo();
         this.showTime = false;
       } else {
-        Toast(data.msg);
+        Toast(res.data.msg);
       }
 
       // console.log(this.time);
@@ -332,15 +342,22 @@ export default {
       //隐藏地址
       this.showAddress = false;
     },
-    onClickConfirm(obj) {
+    onClickConfirm(arr) {
       //点击修改地址
-      console.log(obj);
-      this.Address = `${obj[0].name} ${obj[1].name} ${obj[2].name}`;
-      localStorage.setItem("Address", this.Address);
-      this.$Net.user().then(res=>{
-        console.log(res);
-      })
-      this.showAddress = false;
+      console.log(arr);
+      this.$Net
+        .user({
+          city_id: arr[1].code,
+          district_id: arr[2].code,
+          province_id: arr[0].code,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.data.code == 200) {
+            this.userInfo();
+            this.showAddress = false;
+          }
+        });
     },
     onClickSubject() {
       //点击学科
@@ -350,6 +367,16 @@ export default {
       //点击从选年级
       this.showClass = true;
     },
+  },
+  mounted() {
+    var Nick = localStorage.getItem("nickName"); //读取昵称
+    if (Nick) {
+      this.nickName = Nick;
+    }
+    this.userInfo();
+    setTimeout(() => {
+      this.sheng();
+    }, 500);
   },
 };
 </script>

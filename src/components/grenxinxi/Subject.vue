@@ -32,9 +32,6 @@ export default {
   this.$Net.kx().then(res=>{
     console.log(res);
   })
-  // this.$axios.get("https://www.365msmk.com/api/app/module/attribute/1?").then(res=>{
-  //   console.log(res);
-  // })
   },
   methods: {
     onChangeCheck(item){//点击改变复选框的状态

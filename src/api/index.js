@@ -120,12 +120,8 @@ const Net = {
     return request(API.Method.Put,API.Path.USER,params)
   },
   //城市
-  csi(){
-    return request(API.Method.Get,API.Path.CSI)
-  },
-  //市区
-  sq(params){
-    return request(API.Method.Get,API.Path.SQ+params)
+  csi(id=0){
+    return request(API.Method.Get,API.Path.CSI+id)
   },
   //课程学习
   kx(){

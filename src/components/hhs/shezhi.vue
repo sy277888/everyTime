@@ -15,7 +15,8 @@ export default {
     tui() {
       localStorage.removeItem("username");
       localStorage.removeItem("token");
-      this.$router.go("-1");
+      // this.$router.go("-1");
+      this.$router.push({path:"/"})
     },
     onClickLeft() {
       this.$router.go("-1");

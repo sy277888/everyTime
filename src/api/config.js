@@ -64,9 +64,7 @@ const API = {
         IMG:"/api/app/public/img",
         USER:"/api/app/user",
         //城市
-        CSI:"/api/app/sonArea/0",
-        //市区
-        SQ:"/api/app/sonArea/",
+        CSI:"/api/app/sonArea/",
         //课程和学习
         KX:"/api/app/module/attribute/1?",
         // 消息通知
