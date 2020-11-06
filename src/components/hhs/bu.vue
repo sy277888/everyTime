@@ -56,8 +56,8 @@ export default {
   width: 95%;
   height: 2.7rem;
   background: #ed741f;
-  border: 0px;
-  border-radius: 30px;
+  border: 0rem;
+  border-radius: 5rem;
   margin-left: 0.5rem;
 }
 .sy_uu {

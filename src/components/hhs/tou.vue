@@ -83,7 +83,7 @@ export default {
   width: 100%;
   height: 10.5vh;
   background: white;
-  border-radius: 5px;
+  border-radius: 1rem;
 }
 .sy_left{
   width: 50%;

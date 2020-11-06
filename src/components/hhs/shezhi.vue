@@ -32,7 +32,7 @@ export default {
   width: 20rem;
   height: 3rem;
   background-color: #ff9248;
-  margin-top: 25px;
+  margin-top: 4rem;
   color: white;
   margin-left: 1rem;
 }
