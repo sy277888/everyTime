@@ -3,7 +3,8 @@ const API = {
     Method: {
         Get: 'get',
         Post: 'post',
-        Put: 'put'
+        Put: 'put',
+        Del:'delete'
     },
     //定义请求地址
     Path: {
@@ -26,8 +27,8 @@ const API = {
         HMWPJ: '/api/app/courseComment',
         //首页列表
         List: '/api/app/recommend/appIndex',
-        //个人信息
-        XUE: '/api/app/userInfo',
+        // //个人信息
+        // XUE: '/api/app/userInfo',
         //特色课
         TE: "/api/app/courseBasis?page=1&limit=10&",
         //我的关注
@@ -53,9 +54,22 @@ const API = {
         //我的学习
         XLI:"/api/app/myStudy/3?",
         BAO:"/api/app/order/downOrder",
-        hmwStudyNav:'/api/app/myStudy/2',
+        hmwStudyNav:'/api/app/myStudy/',//我的学习页面渲染
         //搜索
         SOU:"/api/app/courseBasis?limit=10&page=1&course_type=0&keywords=",
+        //消息通知
+        XIAO:"/api/app/message/classifyMessage",
+        //个人信息
+        GENREN:"/api/app/userInfo?",
+        //头像保存
+        IMG:"/api/app/public/img",
+        USER:"/api/app/user",
+        //城市
+        CSI:"/api/app/sonArea/0",
+        //市区
+        SQ:"/api/app/sonArea/",
+        //课程和学习
+        KX:"/api/app/module/attribute/1?",
         // 消息通知
         hmwMsg:"api/app/message/classifyMessage",
     }

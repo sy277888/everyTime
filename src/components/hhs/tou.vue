@@ -40,11 +40,8 @@ export default {
       this.$router.push({ path: "/login" });
     },
     ge() {
-      var district_name = localStorage.setItem(
-        "district_name",
-        this.district_name
-      );
-      var mobile = localStorage.setItem("mobile", this.list.mobile);
+      var district_name=localStorage.setItem("nickname",this.district_name)
+      var mobile=localStorage.setItem("mobile",this.list.mobile)
       var token = localStorage.getItem("token");
       if (token) {
         this.$router.push({ path: "/per" });
@@ -57,15 +54,15 @@ export default {
     },
   },
   mounted() {
-    this.$Net
-      .xuue({
-        params: {},
-      })
-      .then((res) => {
-        console.log(res);
-        this.list = res.data.data;
-        this.district_name = res.data.data.district_name;
-      });
+        this.$Net
+        .grren({
+          params: {},
+        })
+        .then((res) => {
+          console.log(res);
+          this.list = res.data.data;
+          this.district_name=res.data.data.nickname
+        });
   },
 };
 </script>
@@ -90,21 +87,24 @@ export default {
   border-radius: 5px;
 }
 .sy_img {
-  line-height: 10rem;
+  line-height: 5rem;
   display: block;
  margin-left: 3.3rem;
-  width: 9rem;
+  /* width: 9rem; */
   height: 5rem;
 }
 .sy_img img {
   width: 4.5rem;
   height: 4.5rem;
   border-radius: 50%;
+  position: relative;
+  top:1rem;
+  left: -3rem;
 }
 .sy_img .s1 {
   position: relative;
-  top: -1.8rem;
-  left: 0.4rem;
+  top: -0.5rem;
+  left: -2rem;
 }
 .sy_top .sy_bu {
   width: 3.5rem;

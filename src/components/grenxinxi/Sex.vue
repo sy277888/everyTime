@@ -36,6 +36,9 @@ export default {
                 this.sex = "女"
             }
             localStorage.setItem("num",this.num);
+            this.$Net.user({sex:this.num}).then(res=>{
+              console.log(res);
+            })
             // localStorage.setItem("sex",this.sex);
       },
       onClickChangeSex(){

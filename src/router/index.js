@@ -383,6 +383,15 @@ const routes = [
     },
     component: () => import('../components/fuwu/xiaoxi.vue')
   },
+  //消息
+  {
+    path: "/message",
+    name: "message",
+    meta: {
+      title: "消息"
+    },
+    component: () => import('../components/fuwu/Message.vue')
+  },
   //意见反馈
   {
     path: "/yi",
