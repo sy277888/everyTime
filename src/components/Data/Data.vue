@@ -77,14 +77,20 @@ export default {
 }
 p {
   text-align: center;
+  font-size: 0.5rem;
 }
 .botton {
-  margin-left: 9rem;
+  margin-left: 7.5rem;
   margin-top: 2rem;
   background-color: rgb(254, 97, 0);
   color: #fff;
+  width: 7.5rem;
+  height: 2rem;
+  font-size: 0.6rem;
 }
 img{
-  width: 100%;
+  margin-top: 1rem;
+  width: 80%;
+  margin-left: 10%;
 }
 </style>

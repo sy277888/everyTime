@@ -4,7 +4,7 @@ const API = {
         Get: 'get',
         Post: 'post',
         Put: 'put',
-        Del:'delete'
+        Del: 'delete'
     },
     //定义请求地址
     Path: {
@@ -51,27 +51,34 @@ const API = {
         CANCEL: "/api/app/collect/cancel/227/1",
         //教师详情
         SHI: "/api/app/teacher/",
+        // 练习页面的套卷练习
+        LIANXI: "/api/app/wap/classify",
+        // 轮播图
+        LUNBO: "/api/app/banner",
+        // 考点练习里面的题库选择
+        TIKU: "/api/app/wap/quesBank/",
+        CEP: "/api/app/examStatistics/detail",
         //我的学习
-        XLI:"/api/app/myStudy/3?",
-        BAO:"/api/app/order/downOrder",
-        hmwStudyNav:'/api/app/myStudy/',//我的学习页面渲染
+        XLI: "/api/app/myStudy/3?",
+        BAO: "/api/app/order/downOrder",
+        hmwStudyNav: '/api/app/myStudy/',//我的学习页面渲染
         //搜索
-        SOU:"/api/app/courseBasis?limit=10&page=1&course_type=0&keywords=",
+        SOU: "/api/app/courseBasis?limit=10&page=1&course_type=0&keywords=",
         //消息通知
-        XIAO:"/api/app/message/classifyMessage",
+        XIAO: "/api/app/message/classifyMessage",
         //个人信息
-        GENREN:"/api/app/userInfo?",
+        GENREN: "/api/app/userInfo?",
         //头像保存
-        IMG:"/api/app/public/img",
-        USER:"/api/app/user",
+        IMG: "/api/app/public/img",
+        USER: "/api/app/user",
         //城市
-        CSI:"/api/app/sonArea/",
+        CSI: "/api/app/sonArea/",
         //课程和学习
-        KX:"/api/app/module/attribute/1?",
+        KX: "/api/app/module/attribute/1?",
         // 消息通知
-        hmwMsg:"api/app/message/classifyMessage",
+        hmwMsg: "api/app/message/classifyMessage",
         // 我的页面-名片渲染
-        hmwMine:'/api/app/getUCenterInfo?'
+        hmwMine: '/api/app/getUCenterInfo?'
     }
 }
 

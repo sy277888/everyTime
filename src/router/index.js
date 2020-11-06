@@ -428,6 +428,18 @@ const routes = [
       title: "搜索"
     },
     component: () => import('../views/sousuo/Search.vue')
+  },
+    // 练习页面的测评记录解析详情
+  {
+    path: "/cakans",
+    name: "Cakans",
+    component: () => import('../views/shoucang/Cakans.vue')
+  },
+  // 练习页面的测评记录
+  {
+    path: "/ping",
+    name: "Ping",
+    component: () => import('../views/shoucang/Ping.vue')
   }
 ]
 
