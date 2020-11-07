@@ -290,17 +290,17 @@ export default {
       QRCode.toDataURL(url)
         //在这里拿到地址，把它赋值给data里面定义的值imrUrl
         .then((tpian) => {
-          console.log(tpian);
+          // console.log(tpian);
           this.imrUrl = tpian;
         })
         .catch((err) => {
-          console.error(err);
+          // console.error(err);
         });
     },
     //立即报名
     getlistid() {
       this.$Net.ke().then((res) => {
-        console.log(res);
+        // console.log(res);
       });
     },
     // 点击收藏
@@ -324,7 +324,7 @@ export default {
     // 取消收藏
     async hmwNo() {
       let res = await this.$Net.courseXQSCNO(this.hmwObjList.collect_id + "");
-      console.log(res);
+      // console.log(res);
       this.hmwSc = false;
       Toast.success("取消收藏");
     },
@@ -370,12 +370,12 @@ export default {
         page: 1,
       });
       this.hmwEvaluate = evaluate.data.list;
-      console.log(list);
+      // console.log(list);
       // 详情页面所有数据
       let hmwObjList = list.data;
-      console.log(hmwObjList);
+      // console.log(hmwObjList);
       this.arr = hmwObjList.info.is_buy;
-      console.log(this.arr);
+      // console.log(this.arr);
       // 是否收藏
       this.hmwSc = hmwObjList.info.is_collect;
       // console.log(this.hmwSc+'=====')
@@ -422,7 +422,7 @@ export default {
         type: 3,
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
       });
   },
   destroy() {

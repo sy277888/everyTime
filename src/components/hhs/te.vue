@@ -32,7 +32,7 @@ methods: {
     this.$router.push({path:"/xue"})
   },
   tese(){
-    this.$router.push({path:"/solo"})
+    this.$router.push({path:"/make"})
   },
   yu(){
 this.$router.push({path:"/yuer"})

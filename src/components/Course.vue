@@ -366,7 +366,7 @@ export default {
           this.hmwList2.push(this.hmwList[this.i]);
         }
         // this.finished = true;
-        console.log(this.hmwList2);
+        // console.log(this.hmwList2);
         // 加载状态结束
         this.loading = false;
 
@@ -385,7 +385,7 @@ export default {
     },
     // 接受导航数据,列表数据
     async hmwGetNav(navCan = "", listCan = 0,attr_val_id='') {
-      console.log(listCan);
+      // console.log(listCan);
       // 获取导航数据
       let { data } = await this.$Net.courseNav(navCan);
       // 获取列表数据
@@ -396,7 +396,7 @@ export default {
           attr_val_id
         },
       });
-      console.log(list);
+      // console.log(list);
       // 筛选
       this.hmwChoose = data.data.appCourseType;
       // 主体列表
@@ -406,13 +406,13 @@ export default {
       this.i = 1;
       this.finished = false;
       // 渲染列表
-      console.log(this.hmwList);
+      // console.log(this.hmwList);
       this.hmwList.forEach((item, index) => {
         if (index < 2) {
           this.hmwList2.push(item);
         }
       });
-      console.log(this.hmwList2);
+      // console.log(this.hmwList2);
     },
     // 分类每一小项的点击事件-------------------------------------------
     // 当前的id和父级的id

@@ -1,11 +1,10 @@
 <template>
   <div>
-      <router-view /> 
+    <router-view />
     <!-- 传入 -->
     <Tabber :items="items" v-show="isShow" />
     <!-- 可拖拽小信封 -->
     <Web />
-    
   </div>
 </template>
 <script>
@@ -84,55 +83,55 @@ export default {
         this.isShow = false;
       } else if (to.path == "/make") {
         this.isShow = true;
-      }else if (to.path == "/study") {
-      }else if (to.path == "/guan") {
+      } else if (to.path == "/study") {
+      } else if (to.path == "/guan") {
         this.isShow = false;
-      }else if (to.path == "/shou") {
+      } else if (to.path == "/shou") {
         this.isShow = false;
-      }else if (to.path == "/search") {
+      } else if (to.path == "/search") {
         this.isShow = false;
-      }else if (to.path == "/yuer") {
+      } else if (to.path == "/yuer") {
         this.isShow = false;
-      }else if (to.path == "/hu") {
+      } else if (to.path == "/hu") {
         this.isShow = false;
-      }else if (to.path == "/you") {
+      } else if (to.path == "/you") {
         this.isShow = false;
-      }else if (to.path == "/huiyuan") {
+      } else if (to.path == "/huiyuan") {
         this.isShow = false;
-      }else if (to.path == "/yueke") {
+      } else if (to.path == "/yueke") {
         this.isShow = false;
-      }else if (to.path == "/xiao") {
+      } else if (to.path == "/xiao") {
         this.isShow = false;
-      }else if (to.path == "/yi") {
+      } else if (to.path == "/yi") {
         this.isShow = false;
-      }else if (to.path == "/drag") {
+      } else if (to.path == "/drag") {
         this.isShow = false;
-      }else if (to.path == "/per") {
+      } else if (to.path == "/per") {
         this.isShow = false;
-      }else if (to.path == "/xue") {
+      } else if (to.path == "/xue") {
         this.isShow = false;
-      }else if (to.path == "/ke") {
+      } else if (to.path == "/ke") {
         this.isShow = false;
-      }else if (to.path == "/she") {
+      } else if (to.path == "/she") {
         this.isShow = false;
-      }else if (to.path == "/exercise") {
+      } else if (to.path == "/exercise") {
         this.isShow = false;
-      }else if (to.path == "/taojuan") {
+      } else if (to.path == "/taojuan") {
         this.isShow = false;
-      }else if (to.path == "/fangzhen") {
+      } else if (to.path == "/fangzhen") {
         this.isShow = false;
-      }else if (to.path == "/ceping") {
+      } else if (to.path == "/ceping") {
         this.isShow = false;
-      }else if (to.path == "/xiti") {
+      } else if (to.path == "/xiti") {
         this.isShow = false;
-      }else if (to.path == "/cuoti") {
+      } else if (to.path == "/cuoti") {
         this.isShow = false;
+      } else if (to.path == "/practice") {
+        this.isShow = true;
       }
     },
   },
-  created() {
-
-  },
+  mounted() {},
 };
 </script>
 <style>
@@ -140,7 +139,8 @@ export default {
   margin: 0rem;
   padding: 0rem;
 }
-body,html{
+body,
+html {
   height: 100%;
   width: 100%;
   /* background: #f0f2f5; */

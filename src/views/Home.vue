@@ -172,7 +172,7 @@ export default {
       this.coursesImg =
         res.data.data[3].list[0].teachers_list[0].teacher_avatar;
       this.teacher = res.data.data[4].list;
-      console.log(this.teacher);
+      // console.log(this.teacher);
     });
     // 轮播
       this.$Net.LUNBO().then((res) => {

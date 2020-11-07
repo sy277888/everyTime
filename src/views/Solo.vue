@@ -206,7 +206,8 @@ export default {
       child: [], //年级
       childtitile: [], //学课
       data: [], //性别
-      ti:[]
+      ti:[],
+      a:[]
     };
   },
   methods: {
@@ -253,7 +254,7 @@ export default {
          path:'/solo',
          name:'Solo'
        })
-       this.order = []
+       this.order =  this.a 
          this.Dropdownrigth =false
     },
     BottonRight(){
@@ -268,6 +269,7 @@ export default {
   created() {
     this.$Net.List().then((res) => {
       this.order = res.data.data[4].list;
+      this.a = [...this.order]
       // console.log(this.order);
     });
     this.$axios.get("http://localhost:8080/name.json").then((res) => {
