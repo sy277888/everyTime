@@ -78,7 +78,9 @@ const API = {
         // 消息通知
         hmwMsg: "api/app/message/classifyMessage",
         // 我的页面-名片渲染
-        hmwMine: '/api/app/getUCenterInfo?'
+        hmwMine: '/api/app/getUCenterInfo?',
+        // 课程订单
+        hmwBuyKe:'/api/app/myOrder'
     }
 }
 

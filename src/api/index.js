@@ -161,7 +161,11 @@ const Net = {
   // 我的-名片渲染
   hmwMine(params) {
     return request(API.Method.Get, API.Path.hmwMine,params)
-  }
+  },
+  // 课程订单
+  hmwBuyKe(params) {
+    return request(API.Method.Post, API.Path.hmwBuyKe, params)
+  },
 }
 
 //抛出Net
