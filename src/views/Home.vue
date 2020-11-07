@@ -277,6 +277,9 @@ export default {
   background: #fff;
   margin-left: 0.3rem;
 }
+.Home_advice div{
+  font-size: 0.2rem;
+}
 .Hh {
   width: 100%;
   height: 5rem;

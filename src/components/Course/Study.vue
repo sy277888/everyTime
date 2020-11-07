@@ -100,7 +100,7 @@ export default {
 
       //  弹出框
       show: false,
-      startNum:3,//星星数量
+      startNum:5,//星星数量
       value:'',//文本框内容
     };
   },
@@ -134,8 +134,16 @@ export default {
       this.show = true;
     },
     // 点击评论
-    hmwPL(){
-      Toast('已评论无法再次评论');
+    async hmwPL(){
+      let {data} = await this.$Net.hmwFB({
+        content: this.value,
+course_id: sessionStorage.getItem('hmwXQid'),
+grade: this.startNum,
+type: 1
+      })
+      console.log(data)
+      Toast(data.msg);
+
     },
     // 点击回放
     hmwVideo(i){

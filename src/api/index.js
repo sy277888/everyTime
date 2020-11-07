@@ -50,10 +50,10 @@ const Net = {
   courseXQPJ(params) {
     return request(API.Method.Post, API.Path.HMWPJ, params)
   },
-  //获取个人信息
-  // xuue() {
-  //   return request(API.Method.Get, API.Path.XUE)
-  // },
+  // 发表评论
+  hmwFB(params) {
+    return request(API.Method.Post, API.Path.hmwFB, params)
+  },
   //特色课获取
   te() {
     return request(API.Method.Get, API.Path.TE)

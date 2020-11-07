@@ -80,7 +80,9 @@ const API = {
         // 我的页面-名片渲染
         hmwMine: '/api/app/getUCenterInfo?',
         // 课程订单
-        hmwBuyKe:'/api/app/myOrder'
+        hmwBuyKe:'/api/app/myOrder',
+        // 发布评论
+        hmwFB:'/api/app/myStudy/comment'
     }
 }
 
