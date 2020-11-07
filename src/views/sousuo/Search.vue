@@ -60,7 +60,13 @@ export default {
       this.$router.go("-1");
     },
     search() {
-      this.list.push(this.value);
+      console.log(222)
+      // this.list.push(this.value);
+      this.list.unshift(this.value);//添加在前面
+      // 判断不能超过五条
+      if(this.list.length>5){
+        this.list.splice(5,1)
+      }
       localStorage.searchlist = JSON.stringify(this.list);
       this.$Net.sou(this.value).then((res) => {
         this.date = res.data.data;
@@ -88,6 +94,7 @@ export default {
      })
     },
     close(index) {
+      console.log(111)
       this.list.splice(index, 1);
       localStorage.searchlist = JSON.stringify(this.list);
     },

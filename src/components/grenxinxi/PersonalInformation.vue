@@ -266,9 +266,9 @@ export default {
       this.sex = res.data.data.sex;
       if (this.sex == 0) {
         this.sex = "男";
-      } else if (this.num == 1) {
+      } else if (this.sex == 1) {
         this.sex = "女";
-      } else if (this.num == 3) {
+      } else if (this.sex == 3) {
         this.sex = "保密";
       }
       this.name = res.data.data.province_name;

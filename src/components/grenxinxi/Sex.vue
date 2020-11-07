@@ -38,6 +38,7 @@ export default {
                 this.sex = "保密"
             }
             localStorage.setItem("num",this.num);
+            localStorage.setItem("sex",this.sex);
             this.$Net.user({sex:this.num}).then(res=>{
               console.log(res);
             })

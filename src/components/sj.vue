@@ -14,13 +14,14 @@
       </li>
     </ul>
     <div class="tabCon">
-      <div
+      <!-- <div
         v-for="(itemCon, index) in tabContents"
         v-show="index == num"
         :key="index"
       >
         {{ itemCon }}
-      </div>
+      </div> -->
+      <img src="../assets/icon/收藏.png" alt="">
     </div>
   </div>
 </template>
@@ -65,6 +66,20 @@ export default {
 };
 </script>
 <style scoped>
+/* 底部图片 */
+.tabCon{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-top: 2rem;
+  }
+.tabCon>img{
+  width: 40%;
+  height: 50%;
+}
 .title {
   font-size: 0.1rem;
 }
