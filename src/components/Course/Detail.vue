@@ -139,14 +139,14 @@
           v-show="this.arr == 0"
           type="primary"
           block
-          @click="hmwStudyJump"
+          @click="hmwStudyJump(0)"
           >立即报名</van-button
         >
         <van-button
           v-show="this.arr == 1"
           type="primary"
           block
-          @click="hmwStudyJump"
+          @click="hmwStudyJump(1)"
           >立即学习</van-button
         >
       </div>
@@ -261,7 +261,7 @@ export default {
     // 底部按钮点击事件
     async hmwStudyJump(i) {
       if (localStorage.getItem("token")) {
-        if (i == 1) {
+        if (i == 0) {
           //如果是立即报名
           // 判断一下是不是免费的课程
           if (this.hmwObj.price == 0) {//免费则调用接口直接报名
