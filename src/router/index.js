@@ -66,7 +66,7 @@ const routes = [
     },
     component: () => import('../views/Solodata.vue')
   },
-// 课程
+  // 课程
   {
     path: '/about',
     name: 'About',
@@ -429,7 +429,7 @@ const routes = [
     },
     component: () => import('../views/sousuo/Search.vue')
   },
-    // 练习页面的测评记录解析详情
+  // 练习页面的测评记录解析详情
   {
     path: "/cakans",
     name: "Cakans",
@@ -452,9 +452,17 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title;
   next()
-
-  if (to.name ==='Home') {
-   window.localStorage.removeItem('Tabindex')
+  if (to.name === 'Home') {
+    window.localStorage.removeItem('Tabindex')
+  }
+  if (to.name === 'About') {
+    localStorage.setItem('Tabindex', '1')
+  } else if (to.name === 'Make') {
+    localStorage.setItem('Tabindex', '2')
+  } else if (to.name === 'Practice') {
+    localStorage.setItem('Tabindex', '3')
+  } else if (to.name === 'Practice') {
+    localStorage.setItem('Mime', '4')
   }
 })
 

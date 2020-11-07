@@ -21,41 +21,41 @@ Vue.prototype.$Rem = Rem
 import Net from './api/index'
 Vue.prototype.$Net = Net
 // 全局时间过滤器
-Vue.filter("timefn",function(originval){
+Vue.filter("timefn", function (originval) {
   const dt = new Date(originval)
 
   const yy = dt.getFullYear()
-  const mm = (dt.getMonth() +1+'' ).padStart(2,0)
-  const dd = (dt.getDate() +'' ).padStart(2,0)
-  const hh = (dt.getHours() +'' ).padStart(2,0)
-  const ff = (dt.getMinutes() +'' ).padStart(2,0)
-  const ss = (dt.getSeconds() +'' ).padStart(2,0)
+  const mm = (dt.getMonth() + 1 + '').padStart(2, 0)
+  const dd = (dt.getDate() + '').padStart(2, 0)
+  const hh = (dt.getHours() + '').padStart(2, 0)
+  const ff = (dt.getMinutes() + '').padStart(2, 0)
+  const ss = (dt.getSeconds() + '').padStart(2, 0)
 
   return `${mm}月${dd}日 ${hh}:${ff}`
 })
 // 详情页
-Vue.filter("timefnxq",function(originval){
+Vue.filter("timefnxq", function (originval) {
   const dt = new Date(originval)
 
   const yy = dt.getFullYear()
-  const mm = (dt.getMonth() +1+'' ).padStart(2,0)
-  const dd = (dt.getDate() +'' ).padStart(2,0)
-  const hh = (dt.getHours() +'' ).padStart(2,0)
-  const ff = (dt.getMinutes() +'' ).padStart(2,0)
-  const ss = (dt.getSeconds() +'' ).padStart(2,0)
+  const mm = (dt.getMonth() + 1 + '').padStart(2, 0)
+  const dd = (dt.getDate() + '').padStart(2, 0)
+  const hh = (dt.getHours() + '').padStart(2, 0)
+  const ff = (dt.getMinutes() + '').padStart(2, 0)
+  const ss = (dt.getSeconds() + '').padStart(2, 0)
 
   return `${yy}.${mm}.${dd} ${hh}:${ff}`
 })
 // 详情课程评论
-Vue.filter("timeEvaluate",function(originval){
+Vue.filter("timeEvaluate", function (originval) {
   const dt = new Date(originval)
 
   const yy = dt.getFullYear()
-  const mm = (dt.getMonth() +1+'' ).padStart(2,0)
-  const dd = (dt.getDate() +'' ).padStart(2,0)
-  const hh = (dt.getHours() +'' ).padStart(2,0)
-  const ff = (dt.getMinutes() +'' ).padStart(2,0)
-  const ss = (dt.getSeconds() +'' ).padStart(2,0)
+  const mm = (dt.getMonth() + 1 + '').padStart(2, 0)
+  const dd = (dt.getDate() + '').padStart(2, 0)
+  const hh = (dt.getHours() + '').padStart(2, 0)
+  const ff = (dt.getMinutes() + '').padStart(2, 0)
+  const ss = (dt.getSeconds() + '').padStart(2, 0)
 
   return `${yy}-${mm}-${dd} ${hh}:${ff}`
 })
@@ -63,7 +63,8 @@ Vue.filter("timeEvaluate",function(originval){
 import Router from 'vue-router'
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
-  return routerPush.call(this, location).catch(error=> error)}
+  return routerPush.call(this, location).catch(error => error)
+}
 new Vue({
   router,
   store,
